@@ -885,6 +885,11 @@
     .bg-effect {
       animation: none !important;
     }
+    .slot.slot-enter,
+    .slot.slot-exit,
+    .slot.slot-bump {
+      animation: none !important;
+    }
     .weather-fx {
       display: none !important;
     }
@@ -1208,15 +1213,43 @@
     position: relative;
     overflow: hidden;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    transition: transform .18s cubic-bezier(.2,.85,.3,1), opacity .16s ease, border-color .15s ease, box-shadow .15s ease;
+  }
+  .slot.slot-enter {
+    animation: slotEnter .28s cubic-bezier(.2,.9,.25,1) both;
+  }
+  .slot.slot-exit {
+    animation: slotExit .16s ease-in both;
+    pointer-events: none;
+  }
+  .slot.slot-bump {
+    animation: slotBump .2s ease;
+  }
+  @keyframes slotEnter {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes slotExit {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(0.88); opacity: 0; }
+  }
+  @keyframes slotBump {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.05); }
+    100% { transform: scale(1); }
   }
   .slot.empty {
     cursor: pointer;
-    transition: border-color .15s, background .15s, box-shadow .15s;
+    transition: border-color .15s, background .15s, box-shadow .15s, transform .15s ease;
   }
   .slot.empty:hover {
     border-color: var(--purple);
     background: var(--card-2);
     box-shadow: 0 0 0 1px rgba(var(--purple-rgb), 0.25);
+    transform: translateY(-1px);
+  }
+  .slot.empty:active {
+    transform: scale(0.97);
   }
   .slot .plus {
     font-size: 42px;
@@ -1224,6 +1257,10 @@
     color: var(--purple-bright);
     line-height: 1;
     user-select: none;
+    transition: transform .15s ease, color .15s ease;
+  }
+  .slot.empty:hover .plus {
+    transform: scale(1.08);
   }
   .slot .art {
     width: 62%;
@@ -1250,8 +1287,10 @@
     cursor: pointer;
     display: grid;
     place-items: center;
+    transition: transform .12s ease, background .12s ease;
   }
   .slot .qty button:hover { background: var(--purple-deep); }
+  .slot .qty button:active { transform: scale(0.88); }
   .slot .qty input {
     width: 36px;
     height: 24px;
@@ -1278,8 +1317,16 @@
     font-size: 14px;
     line-height: 1;
     display: none;
+    transition: transform .12s ease, background .12s ease, color .12s ease;
   }
   .slot.filled:hover .remove { display: grid; place-items: center; }
+  .slot .remove:hover {
+    background: #3f2a4a;
+    color: #fff;
+  }
+  .slot .remove:active {
+    transform: scale(0.88);
+  }
 
   .center {
     display: flex;
@@ -1905,6 +1952,11 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 16px;
+    transition: opacity .18s ease;
+  }
+  .suggest-list.is-pending {
+    opacity: 0.55;
+    pointer-events: none;
   }
   .suggest-card.dump {
     border-color: rgba(251, 191, 36, 0.35);
@@ -3190,7 +3242,10 @@
     position: absolute;
     left: 0;
     bottom: calc(100% + 10px);
-    width: min(300px, calc(100vw - 28px));
+    width: min(320px, calc(100vw - 28px));
+    max-height: min(70vh, 560px);
+    overflow-x: hidden;
+    overflow-y: auto;
     padding: 14px;
     border-radius: 14px;
     border: 1px solid var(--line-strong);
@@ -3208,6 +3263,69 @@
   }
   .theme-panel-label.spaced {
     margin-top: 14px;
+  }
+  .theme-fx-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    cursor: pointer;
+    user-select: none;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+  }
+  .theme-fx-toggle-top {
+    margin-top: 0;
+    margin-bottom: 4px;
+    padding-top: 0;
+    padding-bottom: 12px;
+    border-top: none;
+    border-bottom: 1px solid var(--line);
+    color: var(--text);
+  }
+  .theme-fx-toggle:hover { color: var(--text); }
+  .theme-fx-toggle input {
+    appearance: none;
+    width: 34px;
+    height: 20px;
+    margin: 0;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, 0.06);
+    position: relative;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .theme-fx-toggle input::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #c4b5d4;
+    transition: transform .15s ease, background .15s ease;
+  }
+  .theme-fx-toggle input:checked {
+    background: color-mix(in srgb, var(--purple-bright) 55%, transparent);
+    border-color: rgba(var(--purple-bright-rgb), 0.55);
+  }
+  .theme-fx-toggle input:checked::after {
+    transform: translateX(14px);
+    background: #fff;
+  }
+  body[data-fx-off="1"] .bg-ambient,
+  body[data-fx-off="1"] .bg-texture,
+  body[data-fx-off="1"] .bg-effect,
+  body[data-fx-off="1"] .weather-fx,
+  body[data-fx-off="1"] .cursor-trail,
+  body[data-fx-off="1"] .bg-cursor-glow {
+    display: none !important;
   }
   .theme-presets {
     display: flex;
@@ -3518,7 +3636,11 @@
         Themes
       </button>
       <div class="theme-panel" id="themePanel" role="dialog" aria-label="Theme settings" hidden>
-        <p class="theme-panel-label">Accent color</p>
+        <label class="theme-fx-toggle theme-fx-toggle-top" title="Hide cursor trail, animated backgrounds, textures, and weather effects">
+          <input type="checkbox" id="themeFxOff" />
+          Disable effects
+        </label>
+        <p class="theme-panel-label spaced">Accent color</p>
         <div class="theme-presets" id="themePresets" role="list">
           <button type="button" class="theme-swatch" role="listitem" data-color="#a855f7" style="--swatch:#a855f7" aria-label="Violet" title="Violet"></button>
           <button type="button" class="theme-swatch" role="listitem" data-color="#f43f5e" style="--swatch:#f43f5e" aria-label="Rose" title="Rose"></button>
@@ -3724,6 +3846,7 @@
   const VARIANT_KEY = 'lunix-mm2-bg-variant';
   const TEXTURE_KEY = 'lunix-mm2-bg-texture';
   const EFFECT_KEY = 'lunix-mm2-bg-effect';
+  const FX_OFF_KEY = 'lunix-mm2-fx-off';
   const DEFAULT_THEME = '#a855f7';
   const DEFAULT_VARIANT = 'aurora';
   const DEFAULT_TEXTURE = 'none';
@@ -3802,6 +3925,7 @@
   const variantBtns = Array.from(document.querySelectorAll('#themeVariants .theme-variant'));
   const textureBtns = Array.from(document.querySelectorAll('#themeTextures .theme-variant'));
   const effectBtns = Array.from(document.querySelectorAll('#themeEffects .theme-variant'));
+  const fxOffToggle = document.getElementById('themeFxOff');
   if (!btn || !panel) return;
 
   let activeShiftHex = '';
@@ -4188,6 +4312,17 @@
     return e;
   }
 
+  function applyFxOff(on, { persist = true } = {}) {
+    const off = !!on;
+    if (off) body.setAttribute('data-fx-off', '1');
+    else body.removeAttribute('data-fx-off');
+    if (fxOffToggle) fxOffToggle.checked = off;
+    if (persist) {
+      try { localStorage.setItem(FX_OFF_KEY, off ? '1' : '0'); } catch (_) {}
+    }
+    return off;
+  }
+
   function openPanel() {
     panel.hidden = false;
     btn.setAttribute('aria-expanded', 'true');
@@ -4232,6 +4367,9 @@
   effectBtns.forEach((el) => {
     el.addEventListener('click', () => applyEffect(el.dataset.effect || 'none'));
   });
+  if (fxOffToggle) {
+    fxOffToggle.addEventListener('change', () => applyFxOff(!!fxOffToggle.checked));
+  }
 
   if (advBtn && adv) {
     advBtn.addEventListener('click', () => {
@@ -4268,6 +4406,7 @@
   let savedVariant = DEFAULT_VARIANT;
   let savedTexture = DEFAULT_TEXTURE;
   let savedEffect = DEFAULT_EFFECT;
+  let savedFxOff = false;
   try {
     const raw = localStorage.getItem(THEME_KEY);
     if (raw && hexToRgb(raw)) saved = raw;
@@ -4293,6 +4432,8 @@
     } else if (tr && TEXTURES.includes(tr)) {
       savedTexture = tr;
     }
+    const fx = localStorage.getItem(FX_OFF_KEY);
+    if (fx === '1') savedFxOff = true;
   } catch (_) {}
   applyTheme(saved, {
     persist: false,
@@ -4303,6 +4444,7 @@
   applyVariant(savedVariant, { persist: false });
   applyTexture(savedTexture, { persist: false });
   applyEffect(savedEffect, { persist: false });
+  applyFxOff(savedFxOff, { persist: false });
 })();
 
 (function initAmbient() {
@@ -4311,6 +4453,9 @@
   const trailRoot = document.getElementById('cursorTrail');
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  function fxOff() {
+    return document.body.getAttribute('data-fx-off') === '1';
+  }
   function rand(min, max) {
     return min + Math.random() * (max - min);
   }
@@ -4329,6 +4474,7 @@
     el.style.animationDelay = delay + 's';
   }
   function reshuffle() {
+    if (fxOff()) return;
     blobs.forEach(placeBlob);
   }
   reshuffle();
@@ -4354,6 +4500,7 @@
   let hovering = false;
 
   window.addEventListener('mousemove', (e) => {
+    if (fxOff()) return;
     mx = e.clientX;
     my = e.clientY;
     hovering = true;
@@ -4377,6 +4524,11 @@
   });
 
   function tick() {
+    if (fxOff()) {
+      glow.classList.remove('on');
+      requestAnimationFrame(tick);
+      return;
+    }
     smx += (mx - smx) * 0.12;
     smy += (my - smy) * 0.12;
     glow.style.transform = 'translate3d(' + smx + 'px,' + smy + 'px,0)';
@@ -4421,6 +4573,7 @@
     return min + Math.random() * (max - min);
   }
   function effect() {
+    if (document.body.getAttribute('data-fx-off') === '1') return '';
     return document.body.getAttribute('data-bg-effect') || '';
   }
 
@@ -4703,6 +4856,22 @@ function takeSnapshot() {
   };
 }
 
+function snapKey(snap) {
+  const sideKey = (arr) => arr.map((e) => (e ? e.id + ':' + e.qty : '-')).join(',');
+  const listKey = (arr) => arr.map((e) => e.id + ':' + e.qty).join(',');
+  const histKey = Array.isArray(snap.invHistory)
+    ? String(snap.invHistory.length) + ':' + (snap.invHistory.length ? snap.invHistory[snap.invHistory.length - 1].t : 0)
+    : '0';
+  return (
+    sideKey(snap.your) + '|' +
+    sideKey(snap.their) + '|' +
+    listKey(snap.inv) + '|' +
+    listKey(snap.targets) + '|' +
+    listKey(snap.dumpList) + '|' +
+    histKey
+  );
+}
+
 function updateUndoRedoBtns() {
   undoBtn.disabled = histPos <= 0;
   redoBtn.disabled = histPos < 0 || histPos >= histStack.length - 1;
@@ -4711,10 +4880,12 @@ function updateUndoRedoBtns() {
 function commitHistory() {
   if (histQuiet) return;
   const snap = takeSnapshot();
-  if (histPos >= 0 && JSON.stringify(histStack[histPos]) === JSON.stringify(snap)) {
+  const key = snapKey(snap);
+  if (histPos >= 0 && histStack[histPos] && histStack[histPos]._key === key) {
     updateUndoRedoBtns();
     return;
   }
+  snap._key = key;
   histStack = histStack.slice(0, histPos + 1);
   histStack.push(snap);
   if (histStack.length > HISTORY_MAX) histStack.shift();
@@ -5186,6 +5357,7 @@ function loadDumpIntoYourOffer(item) {
   const existing = state.your.find((e) => e && e.id === item.id);
   if (existing) {
     existing.qty = Math.min(99, existing.qty + 1);
+    existing._bump = true;
   } else {
     const idx = firstEmpty('your');
     if (idx === -1) {
@@ -5198,12 +5370,12 @@ function loadDumpIntoYourOffer(item) {
       value: item.value,
       image: item.image,
       qty: 1,
+      _enter: true,
     };
   }
   state.lowerCycle = null;
   state.higherCycle = null;
-  render();
-  commitHistory();
+  renderTradeOnly();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -5455,76 +5627,146 @@ function firstEmpty(side) {
   return state[side].findIndex((x) => !x);
 }
 
-function renderSide(side, grid) {
-  grid.innerHTML = '';
-  for (let i = 0; i < SLOTS; i++) {
-    const entry = state[side][i];
-    const slot = document.createElement('div');
-    slot.className = 'slot ' + (entry ? 'filled' : 'empty');
-
-    if (!entry) {
-      slot.innerHTML = '<div class="plus">+</div>';
-      slot.addEventListener('click', () => openPicker(side));
-    } else {
-      const img = entry.image
-        ? '<img class="art" src="' + entry.image + '" alt="" loading="lazy" referrerpolicy="no-referrer" />'
-        : '<div class="art" style="display:grid;place-items:center;color:#9aa3b2;font-size:11px">No img</div>';
-      slot.innerHTML =
-        '<button class="remove" type="button" title="Remove">×</button>' +
-        img +
-        '<div class="qty">' +
-          '<button type="button" data-act="dec">−</button>' +
-          '<input type="number" min="1" max="99" value="' + entry.qty + '" />' +
-          '<button type="button" data-act="inc">+</button>' +
-        '</div>';
-
-      slot.querySelector('.remove').addEventListener('click', (e) => {
-        e.stopPropagation();
-        state[side][i] = null;
-        render();
-        commitHistory();
-      });
-      slot.querySelector('[data-act="dec"]').addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (entry.qty <= 1) {
-          state[side][i] = null;
-        } else {
-          entry.qty -= 1;
-        }
-        render();
-        commitHistory();
-      });
-      slot.querySelector('[data-act="inc"]').addEventListener('click', (e) => {
-        e.stopPropagation();
-        entry.qty = Math.min(99, entry.qty + 1);
-        render();
-        commitHistory();
-      });
-      const input = slot.querySelector('input');
-      input.addEventListener('click', (e) => e.stopPropagation());
-      input.addEventListener('change', () => {
-        let n = parseInt(input.value, 10);
-        if (!Number.isFinite(n) || n < 1) n = 1;
-        entry.qty = Math.min(99, n);
-        render();
-        commitHistory();
-      });
-      slot.addEventListener('click', (e) => {
-        if (e.target.closest('.qty') || e.target.closest('.remove')) return;
-        const full = byId[entry.id];
-        if (full) openDetail(full);
-      });
-      slot.addEventListener('contextmenu', (e) => {
-        e.preventDefault();
-        state[side][i] = null;
-        render();
-        commitHistory();
-      });
-      slot.title = 'Click for details · Right-click to remove';
-      slot.style.cursor = 'pointer';
-    }
-    grid.appendChild(slot);
+function removeTradeEntry(side, index, slotEl) {
+  const finish = () => {
+    state[side][index] = null;
+    paintTradeSlot(side, index);
+    updateHeader();
+    updateTradeCaution();
+    updateGenOfferBtn();
+    commitHistoryDeferred();
+  };
+  if (!slotEl || (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+    finish();
+    return;
   }
+  if (slotEl.classList.contains('slot-exit')) return;
+  slotEl.classList.add('slot-exit');
+  window.setTimeout(finish, 160);
+}
+
+function bumpTradeTotals() {
+  updateHeader();
+  updateTradeCaution();
+  updateGenOfferBtn();
+  commitHistoryDeferred();
+}
+
+function paintTradeSlot(side, index) {
+  const grid = side === 'your' ? yourGrid : theirGrid;
+  if (!grid) return;
+  while (grid.children.length < SLOTS) {
+    const placeholder = document.createElement('div');
+    placeholder.className = 'slot empty';
+    grid.appendChild(placeholder);
+  }
+  const next = buildTradeSlotEl(side, index);
+  const prev = grid.children[index];
+  if (prev) grid.replaceChild(next, prev);
+  else grid.appendChild(next);
+}
+
+function paintTradeBoards(opts) {
+  opts = opts || {};
+  // Prefer surgical updates when only a few slots changed; full rebuild is fine for loads/resets
+  if (opts.full || yourGrid.children.length !== SLOTS || theirGrid.children.length !== SLOTS) {
+    renderSide('your', yourGrid);
+    renderSide('their', theirGrid);
+  } else {
+    for (let i = 0; i < SLOTS; i++) {
+      paintTradeSlot('your', i);
+      paintTradeSlot('their', i);
+    }
+  }
+  updateHeader();
+  updateTradeCaution();
+  updateGenOfferBtn();
+}
+
+function buildTradeSlotEl(side, i) {
+  const entry = state[side][i];
+  const slot = document.createElement('div');
+  slot.className = 'slot ' + (entry ? 'filled' : 'empty');
+  slot.dataset.side = side;
+  slot.dataset.index = String(i);
+  if (entry && entry._enter) {
+    slot.classList.add('slot-enter');
+    delete entry._enter;
+  } else if (entry && entry._bump) {
+    slot.classList.add('slot-bump');
+    delete entry._bump;
+  }
+
+  if (!entry) {
+    slot.innerHTML = '<div class="plus">+</div>';
+    slot.addEventListener('click', () => openPicker(side));
+    return slot;
+  }
+
+  const img = entry.image
+    ? '<img class="art" src="' + entry.image + '" alt="" decoding="async" referrerpolicy="no-referrer" />'
+    : '<div class="art" style="display:grid;place-items:center;color:#9aa3b2;font-size:11px">No img</div>';
+  slot.innerHTML =
+    '<button class="remove" type="button" title="Remove">×</button>' +
+    img +
+    '<div class="qty">' +
+      '<button type="button" data-act="dec">−</button>' +
+      '<input type="number" min="1" max="99" value="' + entry.qty + '" />' +
+      '<button type="button" data-act="inc">+</button>' +
+    '</div>';
+
+  const input = slot.querySelector('input');
+  const bumpQtyUi = () => {
+    input.value = entry.qty;
+    slot.classList.remove('slot-bump');
+    void slot.offsetWidth;
+    slot.classList.add('slot-bump');
+    bumpTradeTotals();
+  };
+
+  slot.querySelector('.remove').addEventListener('click', (e) => {
+    e.stopPropagation();
+    removeTradeEntry(side, i, slot);
+  });
+  slot.querySelector('[data-act="dec"]').addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (entry.qty <= 1) {
+      removeTradeEntry(side, i, slot);
+      return;
+    }
+    entry.qty -= 1;
+    bumpQtyUi();
+  });
+  slot.querySelector('[data-act="inc"]').addEventListener('click', (e) => {
+    e.stopPropagation();
+    entry.qty = Math.min(99, entry.qty + 1);
+    bumpQtyUi();
+  });
+  input.addEventListener('click', (e) => e.stopPropagation());
+  input.addEventListener('change', () => {
+    let n = parseInt(input.value, 10);
+    if (!Number.isFinite(n) || n < 1) n = 1;
+    entry.qty = Math.min(99, n);
+    bumpQtyUi();
+  });
+  slot.addEventListener('click', (e) => {
+    if (e.target.closest('.qty') || e.target.closest('.remove')) return;
+    const full = byId[entry.id];
+    if (full) openDetail(full);
+  });
+  slot.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    removeTradeEntry(side, i, slot);
+  });
+  slot.title = 'Click for details · Right-click to remove';
+  slot.style.cursor = 'pointer';
+  return slot;
+}
+
+function renderSide(side, grid) {
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < SLOTS; i++) frag.appendChild(buildTradeSlotEl(side, i));
+  grid.replaceChildren(frag);
 }
 
 function invTotal() {
@@ -7286,15 +7528,16 @@ function applySuggestion(gives, gets) {
   state.your = Array(SLOTS).fill(null);
   state.their = Array(SLOTS).fill(null);
   stackEntries(gives).slice(0, SLOTS).forEach((entry, i) => {
+    entry._enter = true;
     state.your[i] = entry;
   });
   stackEntries(gets).slice(0, SLOTS).forEach((entry, i) => {
+    entry._enter = true;
     state.their[i] = entry;
   });
   state.lowerCycle = null;
   state.higherCycle = null;
-  render();
-  commitHistory();
+  renderTradeOnly();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -7542,19 +7785,19 @@ function collectOfferCombos(filterFn, opts) {
 function applyYourOfferCombo(combo) {
   state.your = Array(SLOTS).fill(null);
   stackEntries(combo).slice(0, SLOTS).forEach((entry, i) => {
+    entry._enter = true;
     state.your[i] = entry;
   });
-  render();
-  commitHistory();
+  renderTradeOnly();
 }
 
 function applyTheirOfferCombo(combo) {
   state.their = Array(SLOTS).fill(null);
   stackEntries(combo).slice(0, SLOTS).forEach((entry, i) => {
+    entry._enter = true;
     state.their[i] = entry;
   });
-  render();
-  commitHistory();
+  renderTradeOnly();
 }
 
 /** Build catalog receive packages near a target value (for when only Your Offer is filled). */
@@ -7939,9 +8182,12 @@ function suggestionKey(idea) {
   return idea.gives.map((i) => i.id).sort().join('+') + '>' + idea.gets.map((i) => i.id).sort().join('+');
 }
 
-function renderSuggestions() {
-  renderTargets();
-  renderDumpList();
+function renderSuggestions(opts) {
+  opts = opts || {};
+  if (opts.lists !== false) {
+    renderTargets();
+    renderDumpList();
+  }
   const ideas = buildSuggestions();
   const dumpIdeas = buildDumpTradeIdeas();
   suggestList.innerHTML = '';
@@ -8000,15 +8246,70 @@ function renderSuggestions() {
   suggestList.appendChild(frag);
 }
 
-function render() {
-  renderSide('your', yourGrid);
-  renderSide('their', theirGrid);
-  updateHeader();
-  updateTradeCaution();
-  updateInvPanel();
-  renderSuggestions();
+let suggestTimer = 0;
+let suggestListsPending = false;
+let suggestIdleHandle = 0;
+function scheduleSuggestions(opts) {
+  opts = opts || {};
+  if (opts.lists !== false) suggestListsPending = true;
   updateGenOfferBtn();
   updateTradeHistBadge();
+  if (suggestList) suggestList.classList.add('is-pending');
+  if (suggestTimer) clearTimeout(suggestTimer);
+  if (suggestIdleHandle && window.cancelIdleCallback) {
+    window.cancelIdleCallback(suggestIdleHandle);
+    suggestIdleHandle = 0;
+  }
+  const run = () => {
+    suggestTimer = 0;
+    suggestIdleHandle = 0;
+    const lists = suggestListsPending;
+    suggestListsPending = false;
+    renderSuggestions({ lists });
+    if (suggestList) suggestList.classList.remove('is-pending');
+  };
+  // Wait for input to settle, then run off the critical path
+  suggestTimer = window.setTimeout(() => {
+    suggestTimer = 0;
+    if (window.requestIdleCallback) {
+      suggestIdleHandle = window.requestIdleCallback(run, { timeout: 600 });
+    } else {
+      suggestTimer = window.setTimeout(run, 0);
+    }
+  }, 220);
+}
+
+let histCommitQueued = false;
+function commitHistoryDeferred() {
+  if (histQuiet || histCommitQueued) return;
+  histCommitQueued = true;
+  requestAnimationFrame(() => {
+    histCommitQueued = false;
+    commitHistory();
+  });
+}
+
+function renderTradeOnly() {
+  paintTradeBoards({ full: true });
+  commitHistoryDeferred();
+}
+
+function render(opts) {
+  opts = opts || {};
+  if (opts.board !== false) {
+    paintTradeBoards({ full: true });
+  }
+  if (opts.inv !== false) updateInvPanel();
+  // Suggestions depend on inventory / targets / dump — NOT the offer boards.
+  // Never rebuild them on trade-slot add/remove (that was freezing the UI).
+  const needSuggest = opts.suggestions === true || (opts.suggestions !== false && opts.inv !== false);
+  if (needSuggest) {
+    const lists = opts.lists != null ? !!opts.lists : true;
+    scheduleSuggestions({ lists });
+  } else {
+    updateGenOfferBtn();
+    updateTradeHistBadge();
+  }
 }
 
 function openPicker(side) {
@@ -8281,6 +8582,7 @@ function placeOne(side, item) {
   const existing = state[side].find((e) => e && e.id === item.id);
   if (existing) {
     existing.qty = Math.min(99, existing.qty + 1);
+    existing._bump = true;
     return true;
   }
   const idx = firstEmpty(side);
@@ -8291,8 +8593,19 @@ function placeOne(side, item) {
     value: item.value,
     image: item.image,
     qty: 1,
+    _enter: true,
   };
   return true;
+}
+
+function afterItemChange(side, keepOpen) {
+  if (!keepOpen) closePicker();
+  if (side === 'inv' || side === 'targets' || side === 'dump') {
+    render();
+    commitHistory();
+  } else {
+    renderTradeOnly();
+  }
 }
 
 function addItem(item, keepOpen) {
@@ -8309,9 +8622,7 @@ function addItem(item, keepOpen) {
       }
       return;
     }
-    if (!keepOpen) closePicker();
-    render();
-    commitHistory();
+    afterItemChange(side, keepOpen);
     return;
   }
   if (memberIds) {
@@ -8330,9 +8641,7 @@ function addItem(item, keepOpen) {
         }
         return;
       }
-      if (!keepOpen) closePicker();
-      render();
-      commitHistory();
+      afterItemChange(side, keepOpen);
       return;
     }
     if (side !== 'inv' && side !== 'targets' && side !== 'dump') {
@@ -8347,16 +8656,12 @@ function addItem(item, keepOpen) {
           );
           return;
         }
-        if (!keepOpen) closePicker();
-        render();
-        commitHistory();
+        afterItemChange(side, keepOpen);
         return;
       }
     }
     for (const part of parts) placeOne(side, part);
-    if (!keepOpen) closePicker();
-    render();
-    commitHistory();
+    afterItemChange(side, keepOpen);
     return;
   }
 
@@ -8364,9 +8669,7 @@ function addItem(item, keepOpen) {
     if (side !== 'inv' && side !== 'targets' && side !== 'dump') alert('That offer is full (4 unique items — stacks share a slot).');
     return;
   }
-  if (!keepOpen) closePicker();
-  render();
-  commitHistory();
+  afterItemChange(side, keepOpen);
 }
 
 document.getElementById('modalClose').addEventListener('click', closePicker);
@@ -8466,8 +8769,7 @@ document.getElementById('resetBtn').addEventListener('click', () => {
   state.their = Array(SLOTS).fill(null);
   state.lowerCycle = null;
   state.higherCycle = null;
-  render();
-  commitHistory();
+  renderTradeOnly();
 });
 document.getElementById('genOfferBtn').addEventListener('click', generateOfferAgainstTheir);
 document.getElementById('genReceiveBtn').addEventListener('click', generateReceiveFromYours);
