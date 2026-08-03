@@ -1487,6 +1487,20 @@ def main() -> None:
   .verdict.fair {{ color: var(--purple-bright); }}
   .verdict.win {{ color: var(--green); }}
   .verdict.loss {{ color: var(--red); }}
+  .trade-outlook {{
+    margin: 6px auto 0;
+    min-height: 1.35em;
+    font-size: 12px;
+    font-weight: 650;
+    line-height: 1.35;
+    color: var(--muted);
+    text-align: center;
+    max-width: 280px;
+  }}
+  .trade-outlook.good {{ color: var(--green-soft); }}
+  .trade-outlook.bad {{ color: #f87171; }}
+  .trade-outlook.warn {{ color: #fbbf24; }}
+  .trade-outlook.fair {{ color: var(--muted); }}
   .trade-caution {{
     display: none;
     margin: 12px 0 0;
@@ -4008,6 +4022,7 @@ def main() -> None:
       <div class="meter-wrap">
         <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
         <p class="verdict fair" id="verdict">—</p>
+        <p class="trade-outlook fair" id="tradeOutlook" aria-live="polite"></p>
       </div>
       <div class="value-box">
         <div class="num" id="theirValue">0</div>
@@ -5268,6 +5283,7 @@ const yourValueEl = document.getElementById('yourValue');
 const theirValueEl = document.getElementById('theirValue');
 const meterFill = document.getElementById('meterFill');
 const verdictEl = document.getElementById('verdict');
+const tradeOutlookEl = document.getElementById('tradeOutlook');
 const modal = document.getElementById('modal');
 const modalBody = document.getElementById('modalBody');
 const modalList = document.getElementById('modalList');
@@ -6128,6 +6144,133 @@ function sideTotal(side) {{
   }}, 0);
 }}
 
+const OUTLOOK_SCORE = {{
+  fire: 3,
+  rise2: 2,
+  rise: 1,
+  flat: 0,
+  drop: -1,
+  drop2: -2,
+  caution: -3,
+}};
+
+/** Value-weighted trend score for a trade side (higher = more likely to rise). */
+function sideTrendScore(side) {{
+  let weighted = 0;
+  let total = 0;
+  let counted = 0;
+  for (const entry of state[side]) {{
+    if (!entry) continue;
+    const item = byId[entry.id];
+    if (!item) continue;
+    const qty = entry.qty || 1;
+    const w = Math.max(0, (item.value || 0) * qty);
+    const outlook = itemOutlook(item);
+    weighted += (OUTLOOK_SCORE[outlook] || 0) * Math.max(w, 1);
+    total += Math.max(w, 1);
+    counted += 1;
+  }}
+  if (!counted) return {{ score: 0, count: 0, hot: 0, cold: 0 }};
+  let hot = 0;
+  let cold = 0;
+  for (const entry of state[side]) {{
+    if (!entry) continue;
+    const item = byId[entry.id];
+    if (!item) continue;
+    const outlook = itemOutlook(item);
+    if (outlook === 'fire' || outlook === 'rise2') hot += 1;
+    if (outlook === 'caution' || outlook === 'drop2') cold += 1;
+  }}
+  return {{ score: weighted / total, count: counted, hot, cold }};
+}}
+
+function describeTradeOutlook(yours, theirs) {{
+  const yourSide = sideTrendScore('your');
+  const theirSide = sideTrendScore('their');
+  if (!yourSide.count && !theirSide.count) {{
+    return {{ text: '', cls: 'fair' }};
+  }}
+  if (!yourSide.count || !theirSide.count) {{
+    return {{ text: 'Add both sides to judge the trade', cls: 'fair' }};
+  }}
+
+  const trendEdge = theirSide.score - yourSide.score; // + = you receive stronger trends
+  const valueDiff = theirs - yours;
+  const valuePct = yours > 0 ? (valueDiff / yours) * 100 : (valueDiff > 0 ? 100 : -100);
+
+  // Receiving clear droppers is always a warning
+  if (theirSide.cold > 0 && theirSide.cold >= theirSide.hot) {{
+    if (valueDiff > yours * 0.08) {{
+      return {{
+        text: 'Value looks up, but you\\'re taking items likely to drop',
+        cls: 'warn',
+      }};
+    }}
+    return {{
+      text: 'Risky — items you\\'re getting look likely to fall',
+      cls: 'bad',
+    }};
+  }}
+
+  // Giving fire/risers for flat/droppers
+  if (yourSide.hot > 0 && theirSide.hot === 0 && trendEdge < -0.6) {{
+    return {{
+      text: 'Weak on trends — you\\'d be giving away stronger risers',
+      cls: 'bad',
+    }};
+  }}
+
+  if (trendEdge >= 1.1) {{
+    if (valueDiff >= -0.5) {{
+      return {{ text: 'Strong take — their side looks hotter on trends', cls: 'good' }};
+    }}
+    return {{ text: 'Trends favor you, even if value is a bit short', cls: 'good' }};
+  }}
+
+  if (trendEdge >= 0.45) {{
+    if (valueDiff >= -0.5) {{
+      return {{ text: 'Good trade — you\\'re receiving the better trends', cls: 'good' }};
+    }}
+    return {{ text: 'Trends lean your way; value is slightly against you', cls: 'fair' }};
+  }}
+
+  if (trendEdge <= -1.1) {{
+    if (valueDiff > yours * 0.1) {{
+      return {{ text: 'Value win, but trends lean against you', cls: 'warn' }};
+    }}
+    return {{ text: 'Poor on trends — their items look colder', cls: 'bad' }};
+  }}
+
+  if (trendEdge <= -0.45) {{
+    if (valueDiff > yours * 0.08) {{
+      return {{ text: 'Okay for value, but trends slightly favor them', cls: 'warn' }};
+    }}
+    return {{ text: 'Trends slightly favor their side', cls: 'warn' }};
+  }}
+
+  // Trends roughly even — lean on value
+  if (Math.abs(valueDiff) < 0.5) {{
+    return {{ text: 'Even trade — value and trends look balanced', cls: 'fair' }};
+  }}
+  if (valuePct >= 5) {{
+    return {{ text: 'Solid on value; trends look about even', cls: 'good' }};
+  }}
+  if (valuePct <= -5) {{
+    return {{ text: 'Value is against you; trends don\\'t offset it', cls: 'bad' }};
+  }}
+  if (valueDiff > 0) {{
+    return {{ text: 'Slight value edge for you; trends are flat', cls: 'fair' }};
+  }}
+  return {{ text: 'Slight value edge against you; trends are flat', cls: 'fair' }};
+}}
+
+function updateTradeOutlook(yours, theirs) {{
+  if (!tradeOutlookEl) return;
+  const tip = describeTradeOutlook(yours, theirs);
+  tradeOutlookEl.className = 'trade-outlook ' + (tip.cls || 'fair');
+  tradeOutlookEl.textContent = tip.text || '';
+}}
+
 function updateHeader() {{
   const yours = sideTotal('your');
   const theirs = sideTotal('their');
@@ -6145,6 +6288,7 @@ function updateHeader() {{
     verdictEl.classList.add('fair');
     verdictEl.textContent = '—';
     meterFill.style.background = 'linear-gradient(90deg, var(--purple-deep), var(--purple-bright))';
+    updateTradeOutlook(0, 0);
     return;
   }}
 
@@ -6165,6 +6309,7 @@ function updateHeader() {{
     verdictEl.textContent = '-' + fmt(abs);
     meterFill.style.background = 'var(--red)';
   }}
+  updateTradeOutlook(yours, theirs);
 }}
 
 function updateTradeCaution() {{
