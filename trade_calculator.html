@@ -1589,19 +1589,9 @@
   }
   .trade-hist-card-side {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 6px;
+    align-items: center;
+    justify-content: flex-end;
   }
-  .trade-hist-card .mark {
-    font-size: 22px;
-    font-weight: 900;
-    line-height: 1;
-    opacity: 0.85;
-  }
-  .trade-hist-card .mark.win { color: var(--green-soft); }
-  .trade-hist-card .mark.loss { color: #f87171; }
-  .trade-hist-card .mark.fair { color: var(--muted); font-size: 16px; }
   .trade-hist-pill {
     display: inline-flex;
     align-items: center;
@@ -1779,7 +1769,7 @@
     display: flex;
     flex-direction: column;
     gap: 3px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
     color: var(--muted);
     font-variant-numeric: tabular-nums;
@@ -1787,6 +1777,11 @@
   .trade-hist-item-card .vals strong {
     color: var(--text);
     font-weight: 800;
+  }
+  .trade-hist-item-card .vals .was {
+    text-decoration: line-through;
+    opacity: 0.65;
+    font-weight: 700;
   }
   .trade-hist-item-card .vals .up { color: var(--green-soft); }
   .trade-hist-item-card .vals .down { color: #f87171; }
@@ -1873,6 +1868,9 @@
     font-weight: 700;
     color: var(--muted);
   }
+  .trade-hist-summary .mid .hint.win { color: var(--green-soft); }
+  .trade-hist-summary .mid .hint.loss { color: #f87171; }
+  .trade-hist-summary .mid .hint.fair { color: var(--muted); }
   @media (max-width: 860px) {
     .trade-hist-body {
       grid-template-columns: 1fr;
@@ -5455,6 +5453,17 @@ function itemChangeAbs(item) {
   return parseChangeAbs(item.change, item.value, itemChangePct(item));
 }
 
+/** Unix seconds of the most recent history value change (0 if unknown). */
+function itemLastChangeAt(item) {
+  const hist = itemValueHistory(item);
+  for (let i = hist.length - 1; i >= 1; i--) {
+    if (Math.abs(hist[i].v - hist[i - 1].v) < 0.05) continue;
+    if (Number.isFinite(hist[i].t)) return hist[i].t;
+  }
+  const last = hist.length ? hist[hist.length - 1] : null;
+  return last && Number.isFinite(last.t) ? last.t : 0;
+}
+
 function historyRiseScore(item) {
   const hist = itemValueHistory(item);
   if (hist.length >= 3) {
@@ -5649,12 +5658,15 @@ function renderTrendsPanel() {
     item,
     pct: itemChangePct(item),
     abs: itemChangeAbs(item),
+    changedAt: itemLastChangeAt(item),
   }));
 
   const raises = scored.filter((r) => r.abs > 0.05 || r.pct > 0.05)
-    .sort((a, b) => b.abs - a.abs || b.pct - a.pct).slice(0, 6);
+    .sort((a, b) => b.changedAt - a.changedAt || b.abs - a.abs || b.pct - a.pct)
+    .slice(0, 6);
   const drops = scored.filter((r) => r.abs < -0.05 || r.pct < -0.05)
-    .sort((a, b) => a.abs - b.abs || a.pct - b.pct).slice(0, 6);
+    .sort((a, b) => b.changedAt - a.changedAt || a.abs - b.abs || a.pct - b.pct)
+    .slice(0, 6);
 
   if (!raises.length) raisesEl.innerHTML = '<div class="trends-empty">No recent raises.</div>';
   else raises.forEach((r) => raisesEl.appendChild(renderTrendRow(r.item, signedFmt(r.abs), 'up', {
@@ -6405,28 +6417,12 @@ function openPrevTrade(tr) {
   prevTradeModal.classList.add('open');
 }
 
-function tradeHistPct(delta, base) {
-  if (!Number.isFinite(delta) || !Number.isFinite(base) || Math.abs(base) < 0.5) return '';
-  const pct = (delta / Math.abs(base)) * 100;
-  if (!Number.isFinite(pct)) return '';
-  return ' (' + (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%)';
-}
-
 function tradeHistItemCard(entry) {
   const item = byId[entry.id];
   const name = item ? item.name : entry.id;
   const image = item ? item.image : '';
   const qty = entry.qty || 1;
-  const thenUnit = Number.isFinite(entry.value) ? entry.value : 0;
-  const nowUnit = item ? item.value : 0;
-  const thenV = thenUnit * qty;
-  const nowV = nowUnit * qty;
-  const delta = nowV - thenV;
-  let deltaHtml = '';
-  if (Math.abs(delta) >= 0.5) {
-    const cls = delta > 0 ? 'up' : 'down';
-    deltaHtml = '<span class="' + cls + '">' + signedFmt(delta) + tradeHistPct(delta, thenV) + '</span>';
-  }
+  const value = (Number.isFinite(entry.value) ? entry.value : 0) * qty;
   const art = image
     ? '<img src="' + image + '" alt="" loading="lazy" referrerpolicy="no-referrer" />'
     : '<div class="noimg">?</div>';
@@ -6435,12 +6431,8 @@ function tradeHistItemCard(entry) {
   card.innerHTML =
     '<div class="art-wrap">' + art + '</div>' +
     '<div class="iname" title="' + name + '">' + name + '</div>' +
-    '<div class="qty">×' + qty + '</div>' +
-    '<div class="vals">' +
-      '<span>then <strong>' + fmt(thenV) + '</strong></span>' +
-      '<span>now <strong>' + fmt(nowV) + '</strong></span>' +
-      (deltaHtml ? '<span>' + deltaHtml + '</span>' : '') +
-    '</div>';
+    (qty > 1 ? '<div class="qty">×' + qty + '</div>' : '') +
+    '<div class="vals"><strong>' + fmt(value) + '</strong></div>';
   if (item) {
     card.addEventListener('click', () => openDetail(item));
   }
@@ -6460,7 +6452,7 @@ function fillTradeHistCards(container, side) {
 
 function tradeMatchesFilter(tr, q) {
   if (!q) return true;
-  const bits = [formatFullDate(tr.t), tr.source === 'inventory' ? 'inventory' : 'offer'];
+  const bits = [formatFullDate(tr.t)];
   for (const e of tr.your.concat(tr.their)) {
     const item = byId[e.id];
     bits.push(e.id);
@@ -6473,104 +6465,44 @@ function renderTradeHistDetail(tr, idx) {
   if (!tradeHistDetail) return;
   if (!tr) {
     tradeHistDetail.innerHTML =
-      '<div class="trade-hist-detail-empty">Select a trade from the list<br/>to see items you gave and received.</div>';
+      '<div class="trade-hist-detail-empty">Select a trade to view it.</div>';
     return;
   }
-
-  const yourNow = sideValueNow(tr.your);
-  const theirNow = sideValueNow(tr.their);
-  const netNow = theirNow - yourNow;
-  const hindsight = netNow - tr.net;
-  const yourGain = yourNow - tr.yourTotal;
-  const theirGain = theirNow - tr.theirTotal;
-  const fromInv = tr.source === 'inventory';
-
-  const hCls = netClass(hindsight);
-  const hText = Math.abs(hindsight) < 0.5
-    ? 'Even vs then'
-    : (hindsight > 0 ? 'Better ' : 'Worse ') + signedFmt(hindsight) + tradeHistPct(hindsight, Math.abs(tr.net) || tr.yourTotal || 1);
-
-  const netArrow = (n) => {
-    if (!Number.isFinite(n) || Math.abs(n) < 0.5) return '· ';
-    return n > 0 ? '↑ ' : '↓ ';
-  };
 
   tradeHistDetail.innerHTML =
     '<div class="trade-hist-detail-head">' +
       '<div>' +
-        '<h4>' + (fromInv ? 'Inferred trade' : 'Completed trade') + '</h4>' +
-        '<p class="sub">' + formatFullDate(tr.t) +
-          (fromInv ? ' · From inventory snapshot' : ' · Offer Completed') +
-        '</p>' +
+        '<h4>' + formatFullDate(tr.t) + '</h4>' +
       '</div>' +
       '<div class="trade-hist-detail-actions" data-actions></div>' +
     '</div>' +
     '<div class="trade-hist-summary">' +
       '<div class="box">' +
         '<div class="num">' + fmt(tr.yourTotal) + '</div>' +
-        '<div class="label">YOU GAVE · THEN</div>' +
-        '<div class="sub">now <strong>' + fmt(yourNow) + '</strong></div>' +
+        '<div class="label">GAVE</div>' +
       '</div>' +
       '<div class="mid">' +
-        '<p class="verdict ' + netClass(tr.net) + '">' + netArrow(tr.net) + 'Net ' + netLabel(tr.net) + '</p>' +
-        '<p class="verdict ' + netClass(netNow) + '" style="font-size:15px;margin-top:6px">' +
-          netArrow(netNow) + 'Now ' + netLabel(netNow) +
-        '</p>' +
-        '<div class="hint hindsight ' + hCls + '">' + hText + '</div>' +
+        '<p class="verdict ' + netClass(tr.net) + '">' + netLabel(tr.net) + '</p>' +
+        '<div class="hint">Net</div>' +
       '</div>' +
       '<div class="box">' +
         '<div class="num">' + fmt(tr.theirTotal) + '</div>' +
-        '<div class="label">YOU GOT · THEN</div>' +
-        '<div class="sub">now <strong>' + fmt(theirNow) + '</strong></div>' +
+        '<div class="label">GOT</div>' +
       '</div>' +
     '</div>' +
-    '<div class="trade-hist-section" data-section="gave">' +
-      '<div class="trade-hist-section-top">' +
-        '<h5>Items you gave</h5>' +
-        '<div class="trade-hist-section-totals">' +
-          '<span>Then <strong>' + fmt(tr.yourTotal) + '</strong></span>' +
-          '<span>Now <strong>' + fmt(yourNow) + '</strong></span>' +
-        '</div>' +
-      '</div>' +
+    '<div class="trade-hist-section">' +
+      '<div class="trade-hist-section-top"><h5>Gave</h5></div>' +
       '<div class="trade-hist-cards" data-cards="your"></div>' +
-      '<div class="trade-hist-banners">' +
-        '<span class="trade-hist-banner ' + netClass(-yourGain) + '">' +
-          netArrow(-yourGain) + 'Gave side ' + signedFmt(yourGain) + tradeHistPct(yourGain, tr.yourTotal) +
-        '</span>' +
-        '<span class="trade-hist-banner ' + netClass(tr.net) + '">' +
-          netArrow(tr.net) + 'Trade net ' + netLabel(tr.net) +
-        '</span>' +
-      '</div>' +
     '</div>' +
-    '<div class="trade-hist-section" data-section="got">' +
-      '<div class="trade-hist-section-top">' +
-        '<h5>Items you received</h5>' +
-        '<div class="trade-hist-section-totals">' +
-          '<span>Then <strong>' + fmt(tr.theirTotal) + '</strong></span>' +
-          '<span>Now <strong>' + fmt(theirNow) + '</strong></span>' +
-        '</div>' +
-      '</div>' +
+    '<div class="trade-hist-section">' +
+      '<div class="trade-hist-section-top"><h5>Got</h5></div>' +
       '<div class="trade-hist-cards" data-cards="their"></div>' +
-      '<div class="trade-hist-banners">' +
-        '<span class="trade-hist-banner ' + netClass(theirGain) + '">' +
-          netArrow(theirGain) + 'Got side ' + signedFmt(theirGain) + tradeHistPct(theirGain, tr.theirTotal) +
-        '</span>' +
-        '<span class="trade-hist-banner ' + netClass(netNow) + '">' +
-          netArrow(netNow) + 'Now net ' + netLabel(netNow) +
-        '</span>' +
-      '</div>' +
     '</div>';
 
   fillTradeHistCards(tradeHistDetail.querySelector('[data-cards="your"]'), tr.your);
   fillTradeHistCards(tradeHistDetail.querySelector('[data-cards="their"]'), tr.their);
 
   const actionsEl = tradeHistDetail.querySelector('[data-actions]');
-  const showBtn = document.createElement('button');
-  showBtn.type = 'button';
-  showBtn.textContent = 'Open board view';
-  showBtn.addEventListener('click', () => openPrevTrade(tr));
-  actionsEl.appendChild(showBtn);
-
   const delBtn = document.createElement('button');
   delBtn.type = 'button';
   delBtn.textContent = 'Remove';
@@ -6623,17 +6555,6 @@ function renderTradeHistory() {
     if (firstVisible < 0) firstVisible = i;
     if (i === tradeHistSelectedIdx) selectedVisible = true;
 
-    const yourNow = sideValueNow(tr.your);
-    const theirNow = sideValueNow(tr.their);
-    const netNow = theirNow - yourNow;
-    const hindsight = netNow - tr.net;
-    const yourGain = yourNow - tr.yourTotal;
-    const theirGain = theirNow - tr.theirTotal;
-    const fromInv = tr.source === 'inventory';
-    const markCls = netClass(tr.net);
-    const mark =
-      markCls === 'win' ? '+' : markCls === 'loss' ? '−' : '·';
-
     const card = document.createElement('button');
     card.type = 'button';
     card.className = 'trade-hist-card' + (i === tradeHistSelectedIdx ? ' active' : '');
@@ -6641,18 +6562,9 @@ function renderTradeHistory() {
     card.innerHTML =
       '<div class="trade-hist-card-main">' +
         '<span class="when">' + formatFullDate(tr.t) + '</span>' +
-        '<span class="status">Completed' +
-          (fromInv ? ' · <span class="src">From inventory</span>' : '') +
-        '</span>' +
       '</div>' +
       '<div class="trade-hist-card-side">' +
-        '<span class="mark ' + markCls + '">' + mark + '</span>' +
         '<span class="trade-hist-pill ' + netClass(tr.net) + '">' + signedFmt(tr.net) + '</span>' +
-        '<span class="trade-hist-pill ' + netClass(theirGain) + '">Got ' + signedFmt(theirGain) + '</span>' +
-        '<span class="trade-hist-pill ' + netClass(-yourGain) + '">Gave ' + signedFmt(yourGain) + '</span>' +
-        (Math.abs(hindsight) >= 0.5
-          ? '<span class="trade-hist-pill ' + netClass(hindsight) + '">Now ' + signedFmt(hindsight) + '</span>'
-          : '') +
       '</div>';
     card.addEventListener('click', () => selectTradeHistory(i));
     frag.appendChild(card);
