@@ -1220,9 +1220,31 @@ def main() -> None:
     font-size: 0.95em;
     line-height: 1;
     vertical-align: baseline;
+    font-weight: 800;
   }}
   .name-mark.hot {{
     filter: drop-shadow(0 0 4px rgba(251, 146, 60, 0.55));
+  }}
+  .name-mark.rise,
+  .name-mark.rise2 {{
+    color: var(--green-soft);
+    filter: drop-shadow(0 0 3px rgba(52, 211, 153, 0.4));
+  }}
+  .name-mark.rise2 {{
+    letter-spacing: -0.12em;
+  }}
+  .name-mark.flat {{
+    color: #94a3b8;
+    opacity: 0.85;
+    font-weight: 700;
+  }}
+  .name-mark.drop,
+  .name-mark.drop2 {{
+    color: #f87171;
+    filter: drop-shadow(0 0 3px rgba(248, 113, 113, 0.4));
+  }}
+  .name-mark.drop2 {{
+    letter-spacing: -0.12em;
   }}
   .name-mark.caution {{
     color: #facc15;
@@ -5420,7 +5442,6 @@ function openDetail(item) {{
   dName.className = 'iname';
   dName.innerHTML = itemNameHtml(item, {{
     className: 'iname-label',
-    caution: !!itemDropSignal(item),
   }});
   document.getElementById('dValue').textContent = fmt(item.value);
   document.getElementById('dStability').textContent = dash(item.stability);
@@ -5842,6 +5863,66 @@ function itemDropSignal(item) {{
   return {{ score, why, pct, lost, majorDrop, dropsInLast4 }};
 }}
 
+function historyDropScore(item) {{
+  const hist = itemValueHistory(item);
+  if (hist.length >= 3) {{
+    let drops = 0;
+    for (let i = 1; i < hist.length; i++) {{
+      if (hist[i].v < hist[i - 1].v - 0.05) drops += 1;
+      else if (hist[i].v > hist[i - 1].v + 0.05) drops -= 1;
+    }}
+    const net = hist[hist.length - 1].v - hist[0].v;
+    return drops + (net < 0 ? 1.5 : 0);
+  }}
+  const pct = itemChangePct(item);
+  return pct < 0 ? Math.abs(pct) / 2 : 0;
+}}
+
+/**
+ * Outlook mark next to item names:
+ * fire / rise2 / rise / flat / drop / drop2 / caution
+ */
+function itemOutlook(item) {{
+  if (!item) return 'flat';
+  const drop = itemDropSignal(item);
+  const rise = historyRiseScore(item);
+  const fall = historyDropScore(item);
+  const pct = itemChangePct(item);
+  const move = itemLastValueMove(item);
+  const lastAbs = move && Number.isFinite(move.abs) ? move.abs : 0;
+  const stab = item.stability;
+  const trending = itemIsHot(item);
+
+  // Drop side wins when a clear drop signal exists
+  if (drop) {{
+    if (drop.score >= 10 || (drop.majorDrop && drop.dropsInLast4 >= 3)) return 'caution';
+    if (drop.score >= 6 || drop.majorDrop || drop.dropsInLast4 >= 3) return 'drop2';
+    return 'drop';
+  }}
+
+  if (trending) return 'fire';
+  if (rise >= 4.5 || (pct >= 3 && rise >= 2) || (stab === 'Doing Well' && pct >= 1.5)) return 'fire';
+  if (rise >= 3 || pct >= 1.5 || ((stab === 'Doing Well' || stab === 'Underpaid For') && pct > 0.4)) {{
+    return 'rise2';
+  }}
+  if (rise >= 1.5 || pct > 0.25 || lastAbs > 0.05) return 'rise';
+
+  if (fall >= 3 || pct <= -1.5 || lastAbs < -Math.max(25, item.value * 0.03)) return 'drop2';
+  if (fall >= 1.5 || pct < -0.25 || lastAbs < -0.05) return 'drop';
+
+  return 'flat';
+}}
+
+const OUTLOOK_MARK = {{
+  fire: {{ cls: 'hot', glyph: '🔥', title: 'Very likely to raise' }},
+  rise2: {{ cls: 'rise2', glyph: '↑↑', title: 'Likely to raise' }},
+  rise: {{ cls: 'rise', glyph: '↑', title: 'May raise' }},
+  flat: {{ cls: 'flat', glyph: '─', title: 'Hard to predict' }},
+  drop: {{ cls: 'drop', glyph: '↓', title: 'May drop' }},
+  drop2: {{ cls: 'drop2', glyph: '↓↓', title: 'Likely to drop' }},
+  caution: {{ cls: 'caution', glyph: '⚠', title: 'Very likely to drop' }},
+}};
+
 function loadDumpIntoYourOffer(item) {{
   if (!item) return;
   // Prefer stacking onto existing slot; otherwise use an empty unique slot
@@ -5877,14 +5958,18 @@ const TRENDING_IDS = new Set(
 function itemNameHtml(item, opts) {{
   opts = opts || {{}};
   const chroma = item && (item.rarity === 'Chroma' || isChromaSet(item));
-  const hot = !!opts.hot;
+  const outlook = opts.outlook || itemOutlook(item);
+  const hot = outlook === 'fire' || !!opts.hot;
   // Chroma rainbow wins over fire gradient when both apply
   let cls = opts.className || 'name';
   if (chroma) cls += ' chroma-name';
   else if (hot) cls += ' hot-name';
   let marks = '';
-  if (hot) marks += '<span class="name-mark hot" aria-hidden="true">🔥</span>';
-  if (opts.caution) marks += '<span class="name-mark caution" aria-hidden="true">⚠</span>';
+  if (opts.marks !== false) {{
+    const mark = OUTLOOK_MARK[outlook] || OUTLOOK_MARK.flat;
+    marks = '<span class="name-mark ' + mark.cls + '" title="' + mark.title + '" aria-label="' + mark.title + '">' +
+      mark.glyph + '</span>';
+  }}
   const safe = String((item && item.name) || '—');
   return '<span class="' + cls + '">' + safe + '</span>' + marks;
 }}
@@ -5929,7 +6014,7 @@ function renderInvDumpTips() {{
       : '<div class="noimg">?</div>';
     row.innerHTML =
       art +
-      '<div><div class="dump-title">' + itemNameHtml(tip.item, {{ className: 'name', caution: true }}) + '</div>' +
+      '<div><div class="dump-title">' + itemNameHtml(tip.item, {{ className: 'name' }}) + '</div>' +
       '<div class="why">' + tip.sig.why + '</div></div>';
     const btn = document.createElement('button');
     btn.type = 'button';
@@ -5964,8 +6049,6 @@ function renderTrendRow(item, pctLabel, pctClass, opts) {{
     art +
     '<div><div class="tname-wrap">' + itemNameHtml(item, {{
       className: 'tname',
-      hot: !!opts.hot,
-      caution: !!opts.caution,
     }}) + '</div>' +
     '<div class="tmeta">' + metaBits.join(' · ') + '</div></div>' +
     '<div class="tpct ' + pctClass + '">' + pctLabel + '</div>';
@@ -7434,8 +7517,6 @@ function updateInvPanel() {{
       art +
       '<div><div class="name-line">' + itemNameHtml(item, {{
         className: 'name',
-        hot: itemIsHot(item),
-        caution: !!itemDropSignal(item),
       }}) + '</div>' +
       '<div class="meta">' + fmt(item.value * entry.qty) + '</div></div>' +
       '<div class="qty">' +
@@ -7552,8 +7633,6 @@ function namesLine(items) {{
 function namesRichHtml(items) {{
   return items.map((item) => itemNameHtml(item, {{
     className: 'name-piece',
-    hot: itemIsHot(item),
-    caution: !!itemDropSignal(item),
   }})).join('<span class="name-sep"> + </span>');
 }}
 
@@ -8943,8 +9022,6 @@ function renderQuickResults() {{
       art +
       '<div><div class="name-line">' + itemNameHtml(item, {{
         className: 'name',
-        hot: itemIsHot(item),
-        caution: !!itemDropSignal(item),
       }}) + '</div>' +
       '<div class="meta">' + item.id + ' · ' + rarityLabel(item) + demand + '</div>' +
       '<div class="val">' + fmt(item.value) + '</div></div>' +
@@ -9001,8 +9078,6 @@ function renderPickerMine() {{
       art +
       '<div><div class="name-line">' + itemNameHtml(item, {{
         className: 'name',
-        hot: itemIsHot(item),
-        caution: !!itemDropSignal(item),
       }}) + '</div>' +
       '<div class="meta">×' + entry.qty + ' · ' + fmt(item.value) + '</div></div>';
     row.title = 'Add to offer';
@@ -9043,8 +9118,6 @@ function renderPicker() {{
         art +
         '<div><div class="name-line">' + itemNameHtml(item, {{
           className: 'name',
-          hot: itemIsHot(item),
-          caution: !!itemDropSignal(item),
         }}) + '</div>' +
         '<div class="meta">' + item.id + ' · ' + rarityLabel(item) + demand + members + '</div></div>' +
         '<div class="val">' + fmt(item.value) + '</div>';
