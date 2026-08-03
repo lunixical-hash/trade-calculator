@@ -5767,15 +5767,27 @@ function itemChangeAbs(item) {{
   return parseChangeAbs(item.change, item.value, itemChangePct(item));
 }}
 
-/** Unix seconds of the most recent history value change (0 if unknown). */
-function itemLastChangeAt(item) {{
+/**
+ * Most recent value move from item history (preferred), else SV change fields.
+ * abs = signed absolute change, changedAt = unix seconds (0 if unknown).
+ */
+function itemLastValueMove(item) {{
   const hist = itemValueHistory(item);
   for (let i = hist.length - 1; i >= 1; i--) {{
-    if (Math.abs(hist[i].v - hist[i - 1].v) < 0.05) continue;
-    if (Number.isFinite(hist[i].t)) return hist[i].t;
+    const delta = hist[i].v - hist[i - 1].v;
+    if (Math.abs(delta) < 0.05) continue;
+    const prev = hist[i - 1].v;
+    return {{
+      abs: delta,
+      pct: prev > 0 ? (delta / prev) * 100 : 0,
+      changedAt: Number.isFinite(hist[i].t) ? hist[i].t : 0,
+    }};
   }}
-  const last = hist.length ? hist[hist.length - 1] : null;
-  return last && Number.isFinite(last.t) ? last.t : 0;
+  return {{
+    abs: itemChangeAbs(item),
+    pct: itemChangePct(item),
+    changedAt: 0,
+  }};
 }}
 
 function historyRiseScore(item) {{
@@ -5944,6 +5956,10 @@ function renderTrendRow(item, pctLabel, pctClass, opts) {{
   const art = item.image
     ? '<img src="' + item.image + '" alt="" loading="lazy" referrerpolicy="no-referrer" />'
     : '<div class="noimg">?</div>';
+  const when = opts.when ? formatChartDate(opts.when, true) : '';
+  const metaBits = [fmt(item.value)];
+  if (when) metaBits.push(when);
+  else if (item.stability) metaBits.push(item.stability);
   btn.innerHTML =
     art +
     '<div><div class="tname-wrap">' + itemNameHtml(item, {{
@@ -5951,7 +5967,7 @@ function renderTrendRow(item, pctLabel, pctClass, opts) {{
       hot: !!opts.hot,
       caution: !!opts.caution,
     }}) + '</div>' +
-    '<div class="tmeta">' + fmt(item.value) + (item.stability ? ' · ' + item.stability : '') + '</div></div>' +
+    '<div class="tmeta">' + metaBits.join(' · ') + '</div></div>' +
     '<div class="tpct ' + pctClass + '">' + pctLabel + '</div>';
   btn.addEventListener('click', () => openDetail(item));
   return btn;
@@ -5968,28 +5984,29 @@ function renderTrendsPanel() {{
   const elite = CATALOG.filter((item) => (
     item && item.value >= 250 && SUGGEST_RARITIES.has(item.rarity)
   ));
-  const scored = elite.map((item) => ({{
-    item,
-    pct: itemChangePct(item),
-    abs: itemChangeAbs(item),
-    changedAt: itemLastChangeAt(item),
-  }}));
+  const scored = elite.map((item) => {{
+    const move = itemLastValueMove(item);
+    return {{ item, pct: move.pct, abs: move.abs, changedAt: move.changedAt }};
+  }});
 
-  const raises = scored.filter((r) => r.abs > 0.05 || r.pct > 0.05)
+  // Newest value moves first (not largest).
+  const raises = scored.filter((r) => r.abs > 0.05)
     .sort((a, b) => b.changedAt - a.changedAt || b.abs - a.abs || b.pct - a.pct)
     .slice(0, 6);
-  const drops = scored.filter((r) => r.abs < -0.05 || r.pct < -0.05)
+  const drops = scored.filter((r) => r.abs < -0.05)
     .sort((a, b) => b.changedAt - a.changedAt || a.abs - b.abs || a.pct - b.pct)
     .slice(0, 6);
 
   if (!raises.length) raisesEl.innerHTML = '<div class="trends-empty">No recent raises.</div>';
   else raises.forEach((r) => raisesEl.appendChild(renderTrendRow(r.item, signedFmt(r.abs), 'up', {{
     hot: itemIsHot(r.item),
+    when: r.changedAt,
   }})));
 
   if (!drops.length) dropsEl.innerHTML = '<div class="trends-empty">No recent drops.</div>';
   else drops.forEach((r) => dropsEl.appendChild(renderTrendRow(r.item, signedFmt(r.abs), 'down', {{
     caution: !!itemDropSignal(r.item),
+    when: r.changedAt,
   }})));
 
   // Constantly rising: history streak + SV trending + stability
