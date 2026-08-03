@@ -1,0 +1,479 @@
+SV name  |  value  |  closest game ID  |  score  |  alternates
+====================================================================================================
+Alex [Alex]  |  4.0  |  ???  |  -  |  -
+Alien Set [AlienSet]  |  3250.0  |  ???  |  -  |  -
+Alienbeam [Alienbeam]  |  1875.0  |  ???  |  -  |  -
+America [America]  |  7.0  |  ???  |  -  |  -
+Amerilaser [Amerilaser]  |  22.0  |  ???  |  -  |  -
+Apocalypse (Gun) [ChromaApocalypseGun]  |  3.0  |  ???  |  -  |  -
+Arctic (Gun) [ChromaArcticGun]  |  10.0  |  ???  |  -  |  -
+Asteroid [Asteroid]  |  2.0  |  AsteroidKnife  |  0.92  |  -
+Aurora (Gun) [ChromaAuroraGun]  |  55.0  |  ???  |  -  |  -
+Aurora (Knife) [ChromaAuroraKnife]  |  3.0  |  ???  |  -  |  -
+Aurora Set (Legend.) [AuroraSetLegend]  |  58.0  |  ???  |  -  |  -
+Aurora Set (Rare) [AuroraSetRare]  |  9.0  |  ???  |  -  |  -
+Australis [Australis]  |  145.0  |  ???  |  -  |  -
+Bat [Bat]  |  120.0  |  Bats  |  0.857  |  Bat Swarm(0.85), Bats2024(0.85), Bats_K_2024(0.85)
+Bat Set [BatSet]  |  153.0  |  Bats  |  0.85  |  -
+Bats [Bats]  |  2.0  |  Bats  |  1.0  |  Bat Swarm(0.85), Bats2024(0.85), Bats_K_2024(0.85)
+Bats (2020) [Bats2020]  |  3.0  |  Bats2024  |  0.875  |  Bats(0.85), Bats_K_2024(0.824), Bats_K_2025(0.824)
+Bats (Gun) [ChromaBatsGun]  |  1.0  |  Bats  |  0.92  |  -
+Bats (Knife) [ChromaBatsKnife]  |  190.0  |  Bats  |  0.92  |  -
+Bats Set [BatsSet]  |  191.0  |  Bats  |  0.92  |  -
+Battleaxe [Battleaxe]  |  12.0  |  ???  |  -  |  -
+Battleaxe II [BattleaxeII]  |  17.0  |  ???  |  -  |  -
+Batwing [Batwing]  |  42.0  |  ???  |  -  |  -
+Bauble [Bauble]  |  825.0  |  ???  |  -  |  -
+Bauble Set [BaubleSet]  |  852.0  |  ???  |  -  |  -
+Beach [Beach]  |  35.0  |  BeachBalls2023  |  0.85  |  BeachBalls2024(0.85), BeachBalls2024_Box(0.85), BeachBalls2025(0.85)
+Bioblade [Bioblade]  |  8.0  |  ???  |  -  |  -
+Blaster [Blaster]  |  17.0  |  ???  |  -  |  -
+Blizzard [Blizzard]  |  260.0  |  ???  |  -  |  -
+Blizzard Set [BlizzardSet]  |  520.0  |  ???  |  -  |  -
+Blood [Blood]  |  8.0  |  ???  |  -  |  -
+Bloom [Bloom]  |  400.0  |  ???  |  -  |  -
+Bloom Set [BloomSet]  |  810.0  |  ???  |  -  |  -
+Blossom [Blossom]  |  1290.0  |  ???  |  -  |  -
+Blue Elite [BlueElite]  |  3.0  |  ???  |  -  |  -
+Blue Scratch [BlueScratch]  |  2.0  |  ???  |  -  |  -
+Blue Seer [BlueSeer]  |  3.0  |  ???  |  -  |  -
+Boneblade [Boneblade]  |  7.0  |  ???  |  -  |  -
+Bones [Bones]  |  240.0  |  Bones  |  1.0  |  Bones_K_2024(0.85), SkellyBones(0.85), SkellyBones2020(0.85)
+Borealis [Borealis]  |  150.0  |  ???  |  -  |  -
+Borealis Set [BorealisSet]  |  295.0  |  ???  |  -  |  -
+Bow Set [BowSet]  |  410.0  |  ???  |  -  |  -
+Brains [Brains]  |  155.0  |  ???  |  -  |  -
+Branches [Branches]  |  50.0  |  ???  |  -  |  -
+Bringer Set [BringerSet]  |  66.0  |  ???  |  -  |  -
+Broken [Broken]  |  7.0  |  Bokeh  |  0.727  |  -
+Bunnies [Bunnies]  |  4.0  |  ???  |  -  |  -
+C. Constellation [CConstellation]  |  27000.0  |  ???  |  -  |  -
+C. Elderwood Blade [CElderwoodBlade]  |  37.0  |  ???  |  -  |  -
+C. Traveler's Gun [CTravelersGun]  |  220000.0  |  Traveler's Gun  |  0.96  |  TravelerGun(0.917), Traveler's Axe(0.72)
+C. Vampire's Gun [CVampiresGun]  |  29000.0  |  Vampire  |  0.85  |  -
+Candleflame [Candleflame]  |  33.0  |  Candle  |  0.85  |  -
+Candy [Candy]  |  80.0  |  Candy  |  1.0  |  CandyKnife(0.92), Candy Bucket(0.85), Candy Corn(0.85)
+Candy Corn (2019) [CandyCorn2019]  |  10.0  |  Candy  |  0.85  |  Candy Corn(0.85), CandyCorn_G_2024(0.815), CandyCorn_G_2025(0.815)
+Candy Set [CandySet]  |  112.0  |  Candy  |  0.92  |  CandyKnife(0.92), Candy Bucket(0.737)
+Candy Swirl (Gun) [ChromaCandySwirlGun]  |  3.0  |  Candy  |  0.85  |  -
+Candy Swirl (Knife) [ChromaCandySwirlKnife]  |  1.0  |  Candy  |  0.85  |  CandyKnife(0.8)
+Candy Swirl Set [CandySwirlSet]  |  4.0  |  Candy  |  0.85  |  -
+CandyCorn (2017) [CandyCorn2017]  |  22.0  |  Candy  |  0.85  |  Candy Corn(0.85), CandyCorn_G_2024(0.815), CandyCorn_G_2025(0.815)
+Cane (Knife) [ChromaCaneKnife]  |  650.0  |  CandyKnife  |  0.842  |  -
+Cavern (Gun) [ChromaCavernGun]  |  1.0  |  ???  |  -  |  -
+Cavern (Knife) [ChromaCavernKnife]  |  7.0  |  CandyKnife  |  0.762  |  -
+Cavern Set [CavernSet]  |  8.0  |  ???  |  -  |  -
+Celestial [Celestial]  |  2025.0  |  ???  |  -  |  -
+Celestial Set [CelestialSet]  |  4725.0  |  ???  |  -  |  -
+Chill [Chill]  |  10.0  |  ???  |  -  |  -
+Chroma Alien Set [ChromaAlienSet]  |  36750.0  |  ???  |  -  |  -
+Chroma Alienbeam [ChromaAlienbeam]  |  24000.0  |  ???  |  -  |  -
+Chroma Bauble [ChromaBauble]  |  34000.0  |  ???  |  -  |  -
+Chroma Bauble Set [ChromaBaubleSet]  |  35800.0  |  ???  |  -  |  -
+Chroma Blizzard [ChromaBlizzard]  |  8000.0  |  ???  |  -  |  -
+Chroma Blizzard Set [ChromaBlizzardSet]  |  12250.0  |  ???  |  -  |  -
+Chroma Boneblade [ChromaBoneblade]  |  22.0  |  ???  |  -  |  -
+Chroma Bringer Set [ChromaBringerSet]  |  125.0  |  ???  |  -  |  -
+Chroma Candleflame [ChromaCandleflame]  |  40.0  |  Candle  |  0.85  |  -
+Chroma Cookiecane [ChromaCookiecane]  |  32.0  |  Cookie  |  0.85  |  -
+Chroma Darkbringer [ChromaDarkbringer]  |  65.0  |  ???  |  -  |  -
+Chroma Deathshard [ChromaDeathshard]  |  35.0  |  ???  |  -  |  -
+Chroma Ever Set [ChromaEverSet]  |  127000.0  |  ???  |  -  |  -
+Chroma Evergreen [ChromaEvergreen]  |  52000.0  |  ???  |  -  |  -
+Chroma Evergun [ChromaEvergun]  |  75000.0  |  ???  |  -  |  -
+Chroma Fang [ChromaFang]  |  32.0  |  ???  |  -  |  -
+Chroma Fire Bat [ChromaFireBat]  |  3.0  |  ???  |  -  |  -
+Chroma Fire Bear [ChromaFireBear]  |  3.0  |  ???  |  -  |  -
+Chroma Fire Bunny [ChromaFireBunny]  |  3.0  |  ???  |  -  |  -
+Chroma Fire Cat [ChromaFireCat]  |  3.0  |  Fire Cat  |  0.85  |  -
+Chroma Fire Dog [ChromaFireDog]  |  3.0  |  ???  |  -  |  -
+Chroma Fire Fox [ChromaFireFox]  |  3.0  |  ???  |  -  |  -
+Chroma Fire Pig [ChromaFirePig]  |  3.0  |  ???  |  -  |  -
+Chroma Gemstone [ChromaGemstone]  |  32.0  |  ???  |  -  |  -
+Chroma Gingerblade [ChromaGingerblade]  |  27.0  |  ???  |  -  |  -
+Chroma Heart Wand [ChromaHeartWand]  |  4250.0  |  ???  |  -  |  -
+Chroma Heat [ChromaHeat]  |  28.0  |  ???  |  -  |  -
+Chroma Laser [ChromaLaser]  |  40.0  |  ???  |  -  |  -
+Chroma Lightbringer [ChromaLightbringer]  |  60.0  |  ???  |  -  |  -
+Chroma Luger [ChromaLuger]  |  50.0  |  ???  |  -  |  -
+Chroma Ornament [ChromaOrnament]  |  1800.0  |  ???  |  -  |  -
+Chroma Pet Set [ChromaPetSet]  |  21.0  |  ???  |  -  |  -
+Chroma Raygun [ChromaRaygun]  |  12750.0  |  ???  |  -  |  -
+Chroma Saw [ChromaSaw]  |  23.0  |  ???  |  -  |  -
+Chroma Seer [ChromaSeer]  |  28.0  |  ???  |  -  |  -
+Chroma Shark [ChromaShark]  |  32.0  |  ???  |  -  |  -
+Chroma Slasher [ChromaSlasher]  |  32.0  |  ???  |  -  |  -
+Chroma Slasher Set [ChromaSlasherSet]  |  72.0  |  ???  |  -  |  -
+Chroma Snow Dagger [ChromaSnowDagger]  |  4250.0  |  ???  |  -  |  -
+Chroma Snow Set [ChromaSnowSet]  |  12750.0  |  ???  |  -  |  -
+Chroma Snowcannon [ChromaSnowcannon]  |  8500.0  |  ???  |  -  |  -
+Chroma Snowstorm [ChromaSnowstorm]  |  4250.0  |  ???  |  -  |  -
+Chroma Sun Set [ChromaSunSet]  |  21500.0  |  Sunset  |  0.85  |  -
+Chroma Sunrise [ChromaSunrise]  |  13250.0  |  Sunrise  |  0.85  |  -
+Chroma Sunset [ChromaSunset]  |  8250.0  |  Sunset  |  0.85  |  -
+Chroma Sweet [ChromaSweet]  |  2200.0  |  ???  |  -  |  -
+Chroma Sweet Set [ChromaSweetSet]  |  4700.0  |  ???  |  -  |  -
+Chroma Swirly Gun [ChromaSwirlyGun]  |  38.0  |  ???  |  -  |  -
+Chroma Tides [ChromaTides]  |  27.0  |  ???  |  -  |  -
+Chroma Treat [ChromaTreat]  |  2500.0  |  ???  |  -  |  -
+Chroma Watergun [ChromaWatergun]  |  3400.0  |  ???  |  -  |  -
+Chroma Weapon Set [ChromaWeaponSet]  |  535.0  |  ???  |  -  |  -
+Chromatic (Knife) [ChromaChromaticKnife]  |  1.0  |  ???  |  -  |  -
+Class - Common [ClassCommon]  |  750.0  |  ???  |  -  |  -
+Class - Legendary [ClassLegendary]  |  25.0  |  ???  |  -  |  -
+Class - Rare [ClassRare]  |  55.0  |  ???  |  -  |  -
+Class - Uncommon [ClassUncommon]  |  425.0  |  ???  |  -  |  -
+Clockwork [Clockwork]  |  10.0  |  ???  |  -  |  -
+Coal (Knife) [ChromaCoalKnife]  |  15.0  |  Coal  |  0.92  |  CandyKnife(0.737)
+Collectible Set [CollectibleSet]  |  71.0  |  ???  |  -  |  -
+Colored Seer Set [ColoredSeerSet]  |  16.0  |  ???  |  -  |  -
+Combat II [CombatII]  |  10.0  |  ???  |  -  |  -
+Constellation [Constellation]  |  2700.0  |  ???  |  -  |  -
+Cookie Set [CookieSet]  |  25.0  |  Cookie  |  0.92  |  -
+Cookieblade [Cookieblade]  |  3.0  |  Cookie  |  0.92  |  -
+Cookiecane [Cookiecane]  |  13.0  |  Cookie  |  0.85  |  -
+Corl [Corl]  |  4.0  |  Coal  |  0.75  |  -
+Corrupt [Corrupt]  |  470.0  |  ???  |  -  |  -
+Corrupt Set [CorruptSet]  |  510.0  |  ???  |  -  |  -
+Cotton Candy [CottonCandy]  |  40.0  |  Candy  |  0.85  |  -
+Cowboy [Cowboy]  |  4.0  |  ???  |  -  |  -
+Dark Set [DarkSet]  |  3225.0  |  ???  |  -  |  -
+Dark Set (Rare) [DarkSetRare]  |  76.0  |  ???  |  -  |  -
+Darkbringer [Darkbringer]  |  33.0  |  ???  |  -  |  -
+Darkgun [Darkgun]  |  1.0  |  ???  |  -  |  -
+Darkknife [Darkknife]  |  75.0  |  ???  |  -  |  -
+Darkshot [Darkshot]  |  1625.0  |  ???  |  -  |  -
+Darksword [Darksword]  |  1600.0  |  ???  |  -  |  -
+Deathshard [Deathshard]  |  13.0  |  ???  |  -  |  -
+Denis [Denis]  |  4.0  |  ???  |  -  |  -
+Dungeon [Dungeon]  |  300.0  |  ???  |  -  |  -
+Ecto [Ecto]  |  20.0  |  ???  |  -  |  -
+Eggblade [Eggblade]  |  5.0  |  ???  |  -  |  -
+Elderwood Blade [ElderwoodBlade]  |  33.0  |  ???  |  -  |  -
+Elderwood Revolver [ElderwoodRevolver]  |  33.0  |  ???  |  -  |  -
+Elderwood Scythe [ElderwoodScythe]  |  38.0  |  ???  |  -  |  -
+Elderwood Set [ElderwoodSet]  |  71.0  |  ???  |  -  |  -
+Elf (2018) [Elf2018]  |  8.0  |  ???  |  -  |  -
+Elf (Knife) [ChromaElfKnife]  |  17.0  |  EliteKnife  |  0.778  |  -
+Energized (Gun) [ChromaEnergizedGun]  |  2.0  |  Energized  |  0.92  |  Energized_G_2025(0.769)
+Eternal [Eternal]  |  7.0  |  ???  |  -  |  -
+Eternal II [EternalII]  |  7.0  |  ???  |  -  |  -
+Eternal III [EternalIII]  |  8.0  |  ???  |  -  |  -
+Eternal IV [EternalIV]  |  8.0  |  ???  |  -  |  -
+Eternal Set [EternalSet]  |  43.0  |  ???  |  -  |  -
+Eternalcane [Eternalcane]  |  13.0  |  ???  |  -  |  -
+Eternalcane Set [EternalcaneSet]  |  26.0  |  ???  |  -  |  -
+Euro [Euro]  |  4.0  |  ???  |  -  |  -
+Ever Set [EverSet]  |  5950.0  |  ???  |  -  |  -
+Evergreen [Evergreen]  |  2500.0  |  ???  |  -  |  -
+Evergun [Evergun]  |  3450.0  |  ???  |  -  |  -
+Eye Set [EyeSet]  |  8.0  |  ???  |  -  |  -
+Fang [Fang]  |  10.0  |  ???  |  -  |  -
+Flames [Flames]  |  5.0  |  ???  |  -  |  -
+Flora [Flora]  |  410.0  |  ???  |  -  |  -
+Floral (Knife) [ChromaFloralKnife]  |  10.0  |  ???  |  -  |  -
+Flowerwood [Flowerwood]  |  260.0  |  ???  |  -  |  -
+Flowerwood Gun [FlowerwoodGun]  |  265.0  |  ???  |  -  |  -
+Flowerwood Set [FlowerwoodSet]  |  525.0  |  ???  |  -  |  -
+Frostbite [Frostbite]  |  7.0  |  ???  |  -  |  -
+Frosted (Knife) [ChromaFrostedKnife]  |  30.0  |  AsteroidKnife  |  0.72  |  -
+Frostfade (Knife) [ChromaFrostfadeKnife]  |  2.0  |  ???  |  -  |  -
+Frostsaber [Frostsaber]  |  10.0  |  ???  |  -  |  -
+Frozen (Gun) [ChromaFrozenGun]  |  3.0  |  ???  |  -  |  -
+Frozen (Knife) [ChromaFrozenKnife]  |  1.0  |  ???  |  -  |  -
+Frozen Set [FrozenSet]  |  4.0  |  ???  |  -  |  -
+Full Bringer Set [FullBringerSet]  |  191.0  |  ???  |  -  |  -
+Full Chroma Set [FullChromaSet]  |  555.0  |  ???  |  -  |  -
+Full Colored Seer Set [FullColoredSeerSet]  |  44.0  |  ???  |  -  |  -
+Full Elderwood Set [FullElderwoodSet]  |  104.0  |  ???  |  -  |  -
+Full Elite Set [FullEliteSet]  |  6.0  |  ???  |  -  |  -
+Full Ice Set [FullIceSet]  |  258.0  |  ???  |  -  |  -
+Full Luger Set [FullLugerSet]  |  181.0  |  ???  |  -  |  -
+Full Swirly Set [FullSwirlySet]  |  68.0  |  ???  |  -  |  -
+Gemstone [Gemstone]  |  15.0  |  Gravestone  |  0.778  |  -
+Ghastly (Gun) [ChromaGhastlyGun]  |  5.0  |  ???  |  -  |  -
+Ghost [Ghost]  |  8.0  |  Ghosts  |  0.909  |  Ghosts2023(0.85), Ghosts2024(0.85), Ghosts_K_2024(0.85)
+Ghost (Gun) [ChromaGhostGun]  |  2.0  |  ???  |  -  |  -
+Ghost (Knife) [ChromaGhostKnife]  |  5.0  |  ???  |  -  |  -
+Ghost Set [GhostSet]  |  7.0  |  Ghosts  |  0.857  |  -
+Ghostblade [Ghostblade]  |  7.0  |  ???  |  -  |  -
+Ghostfire [Ghostfire]  |  8.0  |  ???  |  -  |  -
+Ghosty [Ghosty]  |  3.0  |  Ghosts  |  0.833  |  -
+Ghoulish [Ghoulish]  |  100.0  |  ???  |  -  |  -
+Gifts (Knife) [ChromaGiftsKnife]  |  90.0  |  Gift  |  0.85  |  -
+Ginger (Gun) [ChromaGingerGun]  |  5.0  |  ???  |  -  |  -
+Ginger Luger [GingerLuger]  |  17.0  |  ???  |  -  |  -
+Ginger Set (Godly) [GingerSetGodly]  |  30.0  |  ???  |  -  |  -
+Gingerblade [Gingerblade]  |  13.0  |  ???  |  -  |  -
+Gingerbread [Gingerbread]  |  1.0  |  ???  |  -  |  -
+Gingerbread (Gun) [ChromaGingerbreadGun]  |  1.0  |  ???  |  -  |  -
+Gingerbread (Knife) [ChromaGingerbreadKnife]  |  75.0  |  ???  |  -  |  -
+Gingerbread Set [GingerbreadSet]  |  76.0  |  ???  |  -  |  -
+Gingermint [Gingermint]  |  12.0  |  ???  |  -  |  -
+Gingerscope [Gingerscope]  |  17750.0  |  ???  |  -  |  -
+Glitch1 [Glitch1]  |  70.0  |  ???  |  -  |  -
+Glitch2 [Glitch2]  |  45.0  |  ???  |  -  |  -
+Golden [Golden]  |  4.0  |  ???  |  -  |  -
+Gothic (Gun) [ChromaGothicGun]  |  7.0  |  ???  |  -  |  -
+Grave (Gun) [ChromaGraveGun]  |  2.0  |  TravelerGun  |  0.737  |  -
+Grave (Knife) [ChromaGraveKnife]  |  1.0  |  ???  |  -  |  -
+Grave Set [GraveSet]  |  3.0  |  Gravestone  |  0.778  |  -
+Green Elite [GreenElite]  |  3.0  |  ???  |  -  |  -
+Green Luger [GreenLuger]  |  23.0  |  ???  |  -  |  -
+Green Marble [GreenMarble]  |  2.0  |  ???  |  -  |  -
+Grind [Grind]  |  2.0  |  ???  |  -  |  -
+Hallow Set [HallowSet]  |  50.0  |  Halloween  |  0.778  |  -
+Hallow's Blade [HallowsBlade]  |  8.0  |  ???  |  -  |  -
+Hallow's Edge [HallowsEdge]  |  8.0  |  Halloween  |  0.8  |  -
+Hallowgun [Hallowgun]  |  20.0  |  Halloween  |  0.778  |  -
+Hallowscythe [Hallowscythe]  |  30.0  |  ???  |  -  |  -
+Handsaw [Handsaw]  |  8.0  |  ???  |  -  |  -
+Harvester [Harvester]  |  250.0  |  ???  |  -  |  -
+Haunted (Gun) [ChromaHauntedGun]  |  1.0  |  Haunted  |  0.92  |  -
+Haunted (Knife) [ChromaHauntedKnife]  |  1.0  |  Haunted  |  0.92  |  CandyKnife(0.727), AsteroidKnife(0.72)
+Haunted Set [HauntedSet]  |  2.0  |  Haunted  |  0.92  |  -
+Hazard (Gun) [ChromaHazardGun]  |  3.0  |  ???  |  -  |  -
+Heart Wand [HeartWand]  |  340.0  |  ???  |  -  |  -
+Heartblade [Heartblade]  |  65.0  |  ???  |  -  |  -
+Heat [Heat]  |  10.0  |  ???  |  -  |  -
+Holly (Gun) [ChromaHollyGun]  |  1.0  |  ???  |  -  |  -
+Ice Dragon [IceDragon]  |  7.0  |  ???  |  -  |  -
+Ice Set [IceSet]  |  98.0  |  ???  |  -  |  -
+Ice Shard [IceShard]  |  7.0  |  ???  |  -  |  -
+Icebeam [Icebeam]  |  18.0  |  Ice Cream  |  0.8  |  IceCream(0.8)
+Iceblaster [Iceblaster]  |  33.0  |  ???  |  -  |  -
+Icebreaker [Icebreaker]  |  65.0  |  ???  |  -  |  -
+Icecracker [Icecracker]  |  1.0  |  ???  |  -  |  -
+Icedriller [Icedriller]  |  5.0  |  ???  |  -  |  -
+Icedriller Set [IcedrillerSet]  |  6.0  |  ???  |  -  |  -
+Iceflake [Iceflake]  |  15.0  |  ???  |  -  |  -
+Iceflake Set [IceflakeSet]  |  33.0  |  ???  |  -  |  -
+Icepiercer [Icepiercer]  |  160.0  |  ???  |  -  |  -
+Icewing [Icewing]  |  13.0  |  ???  |  -  |  -
+Icicles (Gun) [ChromaIciclesGun]  |  5.0  |  ???  |  -  |  -
+Indy [Indy]  |  2.0  |  Indy  |  1.0  |  -
+Infected (Gun) [ChromaInfectedGun]  |  3.0  |  ???  |  -  |  -
+Jack [Jack]  |  3.0  |  ???  |  -  |  -
+JD [JD]  |  28.0  |  ???  |  -  |  -
+Jinglegun [Jinglegun]  |  13.0  |  ???  |  -  |  -
+Lantern [Lantern]  |  2.0  |  Lantern2024  |  0.85  |  Villager's Lantern(0.85)
+Laser [Laser]  |  22.0  |  ???  |  -  |  -
+Latte (Gun) [ChromaLatteGun]  |  155.0  |  Latte  |  0.92  |  -
+Latte (Knife) [ChromaLatteKnife]  |  155.0  |  Latte  |  0.92  |  EliteKnife(0.8)
+Latte Set [LatteSet]  |  310.0  |  Latte  |  0.92  |  LastReset(0.824)
+Lightbringer [Lightbringer]  |  33.0  |  ???  |  -  |  -
+Lights (Gun) [ChromaLightsGun]  |  2.0  |  Lights  |  0.92  |  -
+Lights (Knife) [ChromaLightsKnife]  |  1.0  |  Lights  |  0.92  |  EliteKnife(0.762)
+Lights Set [LightsSet]  |  3.0  |  Lights  |  0.92  |  -
+Logchopper [Logchopper]  |  18.0  |  ???  |  -  |  -
+Logchopper Set [LogchopperSet]  |  31.0  |  ???  |  -  |  -
+Luger [Luger]  |  40.0  |  ???  |  -  |  -
+Luger Set [LugerSet]  |  131.0  |  ???  |  -  |  -
+Lugercane [Lugercane]  |  13.0  |  ???  |  -  |  -
+Magma [Magma]  |  3.0  |  ???  |  -  |  -
+Magma (Gun) [ChromaMagmaGun]  |  17.0  |  ???  |  -  |  -
+Makeshift [Makeshift]  |  33.0  |  ???  |  -  |  -
+Makeshift (Knife) [ChromaMakeshiftKnife]  |  45.0  |  ???  |  -  |  -
+Marble Set [MarbleSet]  |  4.0  |  MarbleEgg  |  0.778  |  -
+Meltdown [Meltdown]  |  2.0  |  ???  |  -  |  -
+Minty [Minty]  |  13.0  |  ???  |  -  |  -
+Monster [Monster]  |  1.0  |  ???  |  -  |  -
+Moonlight [Moonlight]  |  1.0  |  ???  |  -  |  -
+Moons [Moons]  |  1.0  |  ???  |  -  |  -
+Mummified [Mummified]  |  15.0  |  ???  |  -  |  -
+Mummy (2017) [Mummy2017]  |  7.0  |  ???  |  -  |  -
+Mummy (Gun) [ChromaMummyGun]  |  2.0  |  ???  |  -  |  -
+Mummy (Knife) [ChromaMummyKnife]  |  1.0  |  ???  |  -  |  -
+Mummy Set [MummySet]  |  3.0  |  ???  |  -  |  -
+Nebula [Nebula]  |  13.0  |  ???  |  -  |  -
+Nightblade [Nightblade]  |  20.0  |  ???  |  -  |  -
+Nightsky [Nightsky]  |  5.0  |  Nightsky  |  1.0  |  Nightsky2025(0.85)
+Ocean [Ocean]  |  280.0  |  ???  |  -  |  -
+Ocean Set [OceanSet]  |  555.0  |  ???  |  -  |  -
+Old Glory [OldGlory]  |  15.0  |  ???  |  -  |  -
+Old Glory Set [OldGlorySet]  |  37.0  |  ???  |  -  |  -
+Ollie [Ollie]  |  7.0  |  ???  |  -  |  -
+Orange Marble [OrangeMarble]  |  2.0  |  ???  |  -  |  -
+Orange Seer [OrangeSeer]  |  2.0  |  ???  |  -  |  -
+Ornament [Ornament]  |  27.0  |  Ornaments  |  0.941  |  -
+Pals Set [PalsSet]  |  20.0  |  ???  |  -  |  -
+Pearl [Pearl]  |  90.0  |  ???  |  -  |  -
+Pearl Set [PearlSet]  |  185.0  |  ???  |  -  |  -
+Pearlshine [Pearlshine]  |  95.0  |  ???  |  -  |  -
+Peppermint [Peppermint]  |  4.0  |  Peppermint  |  1.0  |  Peppermint_K_2025(0.85)
+Phantom [Phantom]  |  35.0  |  ???  |  -  |  -
+Phaser [Phaser]  |  5.0  |  Haste  |  0.727  |  -
+Pine (Knife) [ChromaPineKnife]  |  85.0  |  EliteKnife  |  0.737  |  -
+Pixel [Pixel]  |  17.0  |  ???  |  -  |  -
+Plasma Set [PlasmaSet]  |  33.0  |  ???  |  -  |  -
+Plasmabeam [Plasmabeam]  |  18.0  |  ???  |  -  |  -
+Plasmablade [Plasmablade]  |  15.0  |  ???  |  -  |  -
+Potion (2017) [Potion2017]  |  3.0  |  ???  |  -  |  -
+Potion (Gun) [ChromaPotionGun]  |  2.0  |  ???  |  -  |  -
+Potion (Knife) [ChromaPotionKnife]  |  2.0  |  ???  |  -  |  -
+Potion Set [PotionSet]  |  4.0  |  ???  |  -  |  -
+Prince [Prince]  |  6.0  |  ???  |  -  |  -
+Prism [Prism]  |  12.0  |  ???  |  -  |  -
+Prismatic [Prismatic]  |  7.0  |  ???  |  -  |  -
+Pumpkin (2019) [Pumpkin2019]  |  12.0  |  Pumpkin  |  0.85  |  Pumpkin2025(0.818)
+Pumpkin Pie [PumpkinPie]  |  2.0  |  Pumpkin  |  0.85  |  -
+Pumpkin Set [PumpkinSet]  |  404.0  |  Pumpkin  |  0.92  |  -
+Pumpkin Set (2019) [PumpkinSet2019]  |  9.0  |  Pumpkin  |  0.85  |  Pumpkin2025(0.72)
+Pumpkin Set (2020) [PumpkinSet2020]  |  48.0  |  Pumpkin  |  0.85  |  Pumpkin2025(0.8)
+Pumpkin Set (2021) [PumpkinSet2021]  |  40.0  |  Pumpkin  |  0.85  |  Pumpkin2025(0.8)
+Pumpking [Pumpking]  |  7.0  |  Pumpkin  |  0.933  |  Pumpkin2025(0.737)
+Purple Seer [PurpleSeer]  |  3.0  |  ???  |  -  |  -
+Rainbow [Rainbow]  |  410.0  |  Rainbows  |  0.933  |  Rainbows2025(0.85), Rainbows20255(0.85)
+Rainbow Gun [RainbowGun]  |  420.0  |  Rainbows  |  0.778  |  -
+Rainbow Set [RainbowSet]  |  830.0  |  Rainbows  |  0.889  |  Rainbows2025(0.727)
+Raygun [Raygun]  |  1375.0  |  ???  |  -  |  -
+Red Fire [RedFire]  |  1.0  |  ???  |  -  |  -
+Red Luger [RedLuger]  |  38.0  |  ???  |  -  |  -
+Red Scratch [RedScratch]  |  4.0  |  ???  |  -  |  -
+Red Seer [RedSeer]  |  3.0  |  ???  |  -  |  -
+RIP [RIP]  |  17.0  |  ???  |  -  |  -
+Sakura [Sakura]  |  1280.0  |  ???  |  -  |  -
+Sakura Set [SakuraSet]  |  2570.0  |  ???  |  -  |  -
+Santa's Magic [SantasMagic]  |  3.0  |  Santa  |  0.85  |  -
+Santa's Set (Legend.) [SantasSetLegend]  |  6.0  |  Santa  |  0.85  |  -
+Santa's Spirit [SantasSpirit]  |  3.0  |  Santa  |  0.85  |  SantasList(0.727)
+Saw [Saw]  |  7.0  |  ???  |  -  |  -
+Scratch Set [ScratchSet]  |  6.0  |  ???  |  -  |  -
+Seer [Seer]  |  3.0  |  ???  |  -  |  -
+Shadow [Shadow]  |  6.0  |  ???  |  -  |  -
+Shark [Shark]  |  20.0  |  Sharky_K_20247  |  0.85  |  -
+Sidewinder [Sidewinder]  |  7.0  |  ???  |  -  |  -
+Silent Night (Gun) [ChromaSilentNightGun]  |  12.0  |  ???  |  -  |  -
+Silent Night (Knife) [ChromaSilentNightKnife]  |  50.0  |  ???  |  -  |  -
+Silent Night Set [SilentNightSet]  |  62.0  |  ???  |  -  |  -
+Skate Set [SkateSet]  |  30.0  |  ???  |  -  |  -
+Sketchy [Sketchy]  |  4.0  |  ???  |  -  |  -
+Skool [Skool]  |  8.0  |  ???  |  -  |  -
+Skulls [Skulls]  |  4.0  |  ???  |  -  |  -
+Slashed [Slashed]  |  1.0  |  ???  |  -  |  -
+Slasher [Slasher]  |  15.0  |  ???  |  -  |  -
+Slasher Set [SlasherSet]  |  37.0  |  LastReset  |  0.737  |  -
+Slime (Gun) [ChromaSlimeGun]  |  1.0  |  ???  |  -  |  -
+Slime (Knife) [ChromaSlimeKnife]  |  2.0  |  EliteKnife  |  0.8  |  -
+Slime Set [SlimeSet]  |  3.0  |  ???  |  -  |  -
+Slimy [Slimy]  |  15.0  |  ???  |  -  |  -
+Small Set (103) [SmallSet103]  |  1265.0  |  ???  |  -  |  -
+Small Set (107) [SmallSet107]  |  1295.0  |  ???  |  -  |  -
+Snakebite (Gun) [ChromaSnakebiteGun]  |  1.0  |  ???  |  -  |  -
+Snakebite (Knife) [ChromaSnakebiteKnife]  |  3.0  |  EliteKnife  |  0.75  |  SunsetKnife(0.72)
+Snakebite Set [SnakebiteSet]  |  4.0  |  ???  |  -  |  -
+Snow Dagger [SnowDagger]  |  255.0  |  ???  |  -  |  -
+Snow Set [SnowSet]  |  1105.0  |  Sunset  |  0.769  |  -
+Snowcannon [Snowcannon]  |  850.0  |  ???  |  -  |  -
+Snowflake [Snowflake]  |  5.0  |  Snowflake  |  1.0  |  Snowflake2021(0.85)
+Snowflake (Knife) [ChromaSnowflakeKnife]  |  50.0  |  Snowflake  |  0.92  |  -
+Snowflakes [Snowflakes]  |  10.0  |  Snowflake  |  0.947  |  Snowflake2021(0.783)
+Snowflakes (Gun) [ChromaSnowflakesGun]  |  25.0  |  Snowflake  |  0.85  |  -
+Snowman (Gun) [ChromaSnowmanGun]  |  3.0  |  ???  |  -  |  -
+Snowstorm [Snowstorm]  |  260.0  |  ???  |  -  |  -
+Soul [Soul]  |  570.0  |  ???  |  -  |  -
+Soul Set [SoulSet]  |  1130.0  |  Sunset  |  0.769  |  -
+Sparkle Set [SparkleSet]  |  127.0  |  Sparkle1  |  0.778  |  Sparkle2(0.778), Sparkle4(0.778), Sparkle5(0.778)
+Sparkle1 [Sparkle1]  |  3.0  |  Sparkle1  |  1.0  |  Sparkle10(0.941), Sparkle2(0.875), Sparkle4(0.875)
+Sparkle10 [Sparkle10]  |  20.0  |  Sparkle10  |  1.0  |  Sparkle1(0.941), Sparkle2(0.824), Sparkle4(0.824)
+Sparkle2 [Sparkle2]  |  3.0  |  Sparkle2  |  1.0  |  Sparkle1(0.875), Sparkle4(0.875), Sparkle5(0.875)
+Sparkle3 [Sparkle3]  |  3.0  |  Sparkle1  |  0.875  |  Sparkle2(0.875), Sparkle4(0.875), Sparkle5(0.875)
+Sparkle4 [Sparkle4]  |  10.0  |  Sparkle4  |  1.0  |  Sparkle1(0.875), Sparkle2(0.875), Sparkle5(0.875)
+Sparkle5 [Sparkle5]  |  8.0  |  Sparkle5  |  1.0  |  Sparkle1(0.875), Sparkle2(0.875), Sparkle4(0.875)
+Sparkle6 [Sparkle6]  |  12.0  |  Sparkle6  |  1.0  |  Sparkle1(0.875), Sparkle2(0.875), Sparkle4(0.875)
+Sparkle7 [Sparkle7]  |  18.0  |  Sparkle7  |  1.0  |  Sparkle1(0.875), Sparkle2(0.875), Sparkle4(0.875)
+Sparkle8 [Sparkle8]  |  20.0  |  Sparkle8  |  1.0  |  Sparkle1(0.875), Sparkle2(0.875), Sparkle4(0.875)
+Sparkle9 [Sparkle9]  |  30.0  |  Sparkle9  |  1.0  |  Sparkle1(0.875), Sparkle2(0.875), Sparkle4(0.875)
+Spectral (Gun) [ChromaSpectralGun]  |  3.0  |  ???  |  -  |  -
+Spectral (Knife) [ChromaSpectralKnife]  |  60.0  |  ???  |  -  |  -
+Spectral Set [SpectralSet]  |  63.0  |  ???  |  -  |  -
+Spectre [Spectre]  |  35.0  |  ???  |  -  |  -
+Spectre Set [SpectreSet]  |  70.0  |  LastReset  |  0.737  |  -
+Spider [Spider]  |  10.0  |  ???  |  -  |  -
+Spirit [Spirit]  |  560.0  |  ???  |  -  |  -
+Splitter [Splitter]  |  3.0  |  ???  |  -  |  -
+Starry [Starry]  |  5.0  |  Starry  |  1.0  |  Starry_K_2026(0.85)
+Starry (Gun) [ChromaStarryGun]  |  27.0  |  Starry  |  0.92  |  -
+Stars (Knife) [ChromaStarsKnife]  |  2.0  |  ???  |  -  |  -
+Steel (Gun) [ChromaSteelGun]  |  8.0  |  ???  |  -  |  -
+Sub [Sub]  |  4.0  |  ???  |  -  |  -
+Sugar [Sugar]  |  32.0  |  ???  |  -  |  -
+Sun [Sun]  |  3.0  |  Sunset  |  0.92  |  DoorsUnlocked(0.85), Sunbeams(0.85), Sunbeams2024(0.85)
+Sun Set [SunSet]  |  1750.0  |  Sunset  |  1.0  |  SunsetGun(0.85), SunsetKnife(0.85), Sunrise(0.769)
+Sunrise [Sunrise]  |  1125.0  |  Sunrise  |  1.0  |  Sunset(0.769)
+Sunrise [SunriseGun]  |  1125.0  |  Sunrise  |  1.0  |  SunsetGun(0.842), Sunset(0.769)
+Sunrise [SunriseKnife]  |  1125.0  |  Sunrise  |  1.0  |  SunsetKnife(0.87), Sunset(0.769)
+Sunset [Sunset]  |  625.0  |  Sunset  |  1.0  |  SunsetGun(0.85), SunsetKnife(0.85), Sunrise(0.769)
+Sunset [SunsetGun]  |  625.0  |  Sunset  |  1.0  |  SunsetGun(1.0), SunsetKnife(0.92), Sunrise(0.769)
+Sunset [SunsetKnife]  |  625.0  |  Sunset  |  1.0  |  SunsetKnife(1.0), SunsetGun(0.92), Sunrise(0.769)
+Sweater (Knife) [ChromaSweaterKnife]  |  60.0  |  EliteKnife  |  0.727  |  AsteroidKnife(0.72)
+Sweet [Sweet]  |  155.0  |  SweetBundleEffect  |  0.85  |  SweetEffect26(0.85)
+Sweet Set [SweetSet]  |  315.0  |  ???  |  -  |  -
+Swirl [Swirl]  |  27.0  |  ???  |  -  |  -
+Swirly Axe [SwirlyAxe]  |  38.0  |  ???  |  -  |  -
+Swirly Blade [SwirlyBlade]  |  12.0  |  ???  |  -  |  -
+Swirly Gun [SwirlyGun]  |  18.0  |  ???  |  -  |  -
+Swirly Set [SwirlySet]  |  56.0  |  ???  |  -  |  -
+Tailslide [Tailslide]  |  8.0  |  ???  |  -  |  -
+Tides [Tides]  |  10.0  |  ???  |  -  |  -
+Toxic (Gun) [ChromaToxicGun]  |  2.0  |  ???  |  -  |  -
+Toxic (Knife) [ChromaToxicKnife]  |  7.0  |  XboxKnife  |  0.737  |  -
+Toxic Set [ToxicSet]  |  9.0  |  ???  |  -  |  -
+Traveler (Gun) [ChromaTravelerGun]  |  60.0  |  TravelerGun  |  1.0  |  Traveler's Gun(0.957), TravelerAxe(0.92)
+Traveler (Knife) [ChromaTravelerKnife]  |  3.0  |  TravelerAxe  |  0.92  |  TravelerGun(0.92), Traveler's Axe(0.72), Traveler's Gun(0.72)
+Traveler Set [TravelerSet]  |  63.0  |  TravelerAxe  |  0.92  |  TravelerGun(0.92), Traveler's Axe(0.87), Traveler's Gun(0.783)
+Traveler's Axe [TravelersAxe]  |  8100.0  |  Traveler's Axe  |  1.0  |  TravelerAxe(0.957), Traveler's Gun(0.92)
+Traveler's Axe [TravelerAxe]  |  8100.0  |  Traveler's Axe  |  1.0  |  TravelerAxe(1.0), Traveler's Gun(0.92), TravelerGun(0.92)
+Traveler's Gun [TravelersGun]  |  5400.0  |  Traveler's Gun  |  1.0  |  TravelerGun(0.957), Traveler's Axe(0.92)
+Traveler's Gun [TravelerGun]  |  5400.0  |  Traveler's Gun  |  1.0  |  TravelerGun(1.0), Traveler's Axe(0.92), TravelerAxe(0.92)
+Traveler's Set [TravelersSet]  |  13500.0  |  Traveler's Axe  |  0.92  |  Traveler's Gun(0.92), TravelerAxe(0.783)
+Treat [Treat]  |  160.0  |  Treats  |  0.909  |  Treats2025(0.85)
+Tree (2021) [Tree2021]  |  2.0  |  ???  |  -  |  -
+Turkey [Turkey]  |  2450.0  |  ???  |  -  |  -
+Vampire [Vampire]  |  1.0  |  Vampire  |  1.0  |  VampireRadio2024(0.85), Vampiric(0.8)
+Vampire (Gun) [ChromaVampireGun]  |  55.0  |  Vampire  |  0.92  |  -
+Vampire (Knife) [ChromaVampireKnife]  |  3.0  |  Vampire  |  0.92  |  -
+Vampire Set (Legend.) [VampireSetLegend]  |  58.0  |  Vampire  |  0.85  |  -
+Vampire Set (Rare) [VampireSetRare]  |  4.0  |  Vampire  |  0.85  |  -
+Vampire's Axe [VampiresAxe]  |  1225.0  |  Vampire  |  0.85  |  -
+Vampire's Edge [VampiresEdge]  |  15.0  |  Vampire  |  0.85  |  -
+Vampire's Gun [VampireGun]  |  1875.0  |  Vampire  |  0.92  |  -
+Vampire's Set [VampiresSet]  |  3100.0  |  Vampire  |  0.85  |  -
+Vintage Set [VintageSet]  |  59.0  |  ???  |  -  |  -
+Virtual [Virtual]  |  13.0  |  ???  |  -  |  -
+Virtual Set [VirtualSet]  |  30.0  |  ???  |  -  |  -
+Void [Void]  |  12.0  |  Void  |  1.0  |  VoidRbxEffect(0.85)
+Watcher (Gun) [ChromaWatcherGun]  |  25.0  |  ???  |  -  |  -
+Watergun [Watergun]  |  250.0  |  ???  |  -  |  -
+Waves [Waves]  |  275.0  |  Leaves  |  0.727  |  -
+Webbed (Gun) [ChromaWebbedGun]  |  25.0  |  ???  |  -  |  -
+Webs [Webs]  |  3.0  |  ???  |  -  |  -
+Winter's Edge [WintersEdge]  |  5.0  |  ???  |  -  |  -
+Witched [Witched]  |  3.0  |  ???  |  -  |  -
+Wolf [Wolf]  |  1.0  |  ???  |  -  |  -
+Wraith (Knife) [ChromaWraithKnife]  |  3.0  |  ???  |  -  |  -
+Wrap (Gun) [ChromaWrapGun]  |  5.0  |  ???  |  -  |  -
+Wrap (Knife) [ChromaWrapKnife]  |  5.0  |  ???  |  -  |  -
+Wrap Set [WrapSet]  |  10.0  |  ???  |  -  |  -
+Wrapped (Gun) [ChromaWrappedGun]  |  25.0  |  ???  |  -  |  -
+Wrapping Paper Set [WrappingPaperSet]  |  14.0  |  ???  |  -  |  -
+Xeno Set [XenoSet]  |  540.0  |  Xeno  |  0.92  |  -
+Xenoknife [Xenoknife]  |  270.0  |  Xeno  |  0.92  |  XboxKnife(0.778)
+Xenoshot [Xenoshot]  |  270.0  |  Xeno  |  0.85  |  -
+Xmas [Xmas]  |  7.0  |  ???  |  -  |  -
+Yellow Seer [YellowSeer]  |  2.0  |  ???  |  -  |  -
+Zombie [Zombie]  |  7.0  |  ???  |  -  |  -
+Zombie (2023) [Zombie2023]  |  3.0  |  ???  |  -  |  -
+Zombie (Gun) [ChromaZombieGun]  |  5.0  |  ???  |  -  |  -
+Zombie (Knife) [ChromaZombieKnife]  |  1.0  |  ???  |  -  |  -
+Zombie Set [ZombieSet]  |  6.0  |  ???  |  -  |  -
+Zombified [Zombified]  |  40.0  |  ???  |  -  |  -
+Zombified (Gun) [ChromaZombifiedGun]  |  15.0  |  ???  |  -  |  -
+Zombified (Knife) [ChromaZombifiedKnife]  |  115.0  |  ???  |  -  |  -
+Zombified Set [ZombifiedSet]  |  130.0  |  ???  |  -  |  -
+
+Known corrections to apply:
+  SunsetGun  -> Sunrise value (svId Sunrise)
+  SunsetKnife -> Sunset value (svId Sunset)
+
+Game IDs considered: 371 (Owned keys: 50)

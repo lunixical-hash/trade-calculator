@@ -1,0 +1,5611 @@
+{
+  "note": "For each row: svDisplay/svId are Supreme Values. bestGameId is the closest game inventory ID guess. Set confirmedGameId to the real game ID (or leave blank if wrong). Known tip from you: SunsetGun->Sunrise, SunsetKnife->Sunset.",
+  "knownCorrections": {
+    "SunsetGun": "Sunrise",
+    "SunsetKnife": "Sunset"
+  },
+  "svCount": 471,
+  "gameIdCount": 371,
+  "ownedOnlyCount": 50,
+  "matches": [
+    {
+      "svId": "Alex",
+      "svDisplay": "Alex",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "AlienSet",
+      "svDisplay": "Alien Set",
+      "value": 3250.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Alienbeam",
+      "svDisplay": "Alienbeam",
+      "value": 1875.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "America",
+      "svDisplay": "America",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Amerilaser",
+      "svDisplay": "Amerilaser",
+      "value": 22.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaApocalypseGun",
+      "svDisplay": "Apocalypse (Gun)",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaArcticGun",
+      "svDisplay": "Arctic (Gun)",
+      "value": 10.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Asteroid",
+      "svDisplay": "Asteroid",
+      "value": 2.0,
+      "bestGameId": "AsteroidKnife",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaAuroraGun",
+      "svDisplay": "Aurora (Gun)",
+      "value": 55.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaAuroraKnife",
+      "svDisplay": "Aurora (Knife)",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "AuroraSetLegend",
+      "svDisplay": "Aurora Set (Legend.)",
+      "value": 58.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "AuroraSetRare",
+      "svDisplay": "Aurora Set (Rare)",
+      "value": 9.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Australis",
+      "svDisplay": "Australis",
+      "value": 145.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Bat",
+      "svDisplay": "Bat",
+      "value": 120.0,
+      "bestGameId": "Bats",
+      "bestScore": 0.857,
+      "alternates": [
+        {
+          "gameId": "Bat Swarm",
+          "score": 0.85
+        },
+        {
+          "gameId": "Bats2024",
+          "score": 0.85
+        },
+        {
+          "gameId": "Bats_K_2024",
+          "score": 0.85
+        },
+        {
+          "gameId": "Bats_K_2025",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BatSet",
+      "svDisplay": "Bat Set",
+      "value": 153.0,
+      "bestGameId": "Bats",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Bats",
+      "svDisplay": "Bats",
+      "value": 2.0,
+      "bestGameId": "Bats",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Bat Swarm",
+          "score": 0.85
+        },
+        {
+          "gameId": "Bats2024",
+          "score": 0.85
+        },
+        {
+          "gameId": "Bats_K_2024",
+          "score": 0.85
+        },
+        {
+          "gameId": "Bats_K_2025",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Bats2020",
+      "svDisplay": "Bats (2020)",
+      "value": 3.0,
+      "bestGameId": "Bats2024",
+      "bestScore": 0.875,
+      "alternates": [
+        {
+          "gameId": "Bats",
+          "score": 0.85
+        },
+        {
+          "gameId": "Bats_K_2024",
+          "score": 0.824
+        },
+        {
+          "gameId": "Bats_K_2025",
+          "score": 0.824
+        },
+        {
+          "gameId": "Cats2025",
+          "score": 0.75
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaBatsGun",
+      "svDisplay": "Bats (Gun)",
+      "value": 1.0,
+      "bestGameId": "Bats",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaBatsKnife",
+      "svDisplay": "Bats (Knife)",
+      "value": 190.0,
+      "bestGameId": "Bats",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BatsSet",
+      "svDisplay": "Bats Set",
+      "value": 191.0,
+      "bestGameId": "Bats",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Battleaxe",
+      "svDisplay": "Battleaxe",
+      "value": 12.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BattleaxeII",
+      "svDisplay": "Battleaxe II",
+      "value": 17.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Batwing",
+      "svDisplay": "Batwing",
+      "value": 42.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Bauble",
+      "svDisplay": "Bauble",
+      "value": 825.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BaubleSet",
+      "svDisplay": "Bauble Set",
+      "value": 852.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Beach",
+      "svDisplay": "Beach",
+      "value": 35.0,
+      "bestGameId": "BeachBalls2023",
+      "bestScore": 0.85,
+      "alternates": [
+        {
+          "gameId": "BeachBalls2024",
+          "score": 0.85
+        },
+        {
+          "gameId": "BeachBalls2024_Box",
+          "score": 0.85
+        },
+        {
+          "gameId": "BeachBalls2025",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Bioblade",
+      "svDisplay": "Bioblade",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Blaster",
+      "svDisplay": "Blaster",
+      "value": 17.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Blizzard",
+      "svDisplay": "Blizzard",
+      "value": 260.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BlizzardSet",
+      "svDisplay": "Blizzard Set",
+      "value": 520.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Blood",
+      "svDisplay": "Blood",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Bloom",
+      "svDisplay": "Bloom",
+      "value": 400.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BloomSet",
+      "svDisplay": "Bloom Set",
+      "value": 810.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Blossom",
+      "svDisplay": "Blossom",
+      "value": 1290.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BlueElite",
+      "svDisplay": "Blue Elite",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BlueScratch",
+      "svDisplay": "Blue Scratch",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BlueSeer",
+      "svDisplay": "Blue Seer",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Boneblade",
+      "svDisplay": "Boneblade",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Bones",
+      "svDisplay": "Bones",
+      "value": 240.0,
+      "bestGameId": "Bones",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Bones_K_2024",
+          "score": 0.85
+        },
+        {
+          "gameId": "SkellyBones",
+          "score": 0.85
+        },
+        {
+          "gameId": "SkellyBones2020",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Borealis",
+      "svDisplay": "Borealis",
+      "value": 150.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BorealisSet",
+      "svDisplay": "Borealis Set",
+      "value": 295.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BowSet",
+      "svDisplay": "Bow Set",
+      "value": 410.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Brains",
+      "svDisplay": "Brains",
+      "value": 155.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Branches",
+      "svDisplay": "Branches",
+      "value": 50.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "BringerSet",
+      "svDisplay": "Bringer Set",
+      "value": 66.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Broken",
+      "svDisplay": "Broken",
+      "value": 7.0,
+      "bestGameId": "Bokeh",
+      "bestScore": 0.727,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Bunnies",
+      "svDisplay": "Bunnies",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CConstellation",
+      "svDisplay": "C. Constellation",
+      "value": 27000.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CElderwoodBlade",
+      "svDisplay": "C. Elderwood Blade",
+      "value": 37.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CTravelersGun",
+      "svDisplay": "C. Traveler's Gun",
+      "value": 220000.0,
+      "bestGameId": "Traveler's Gun",
+      "bestScore": 0.96,
+      "alternates": [
+        {
+          "gameId": "TravelerGun",
+          "score": 0.917
+        },
+        {
+          "gameId": "Traveler's Axe",
+          "score": 0.72
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CVampiresGun",
+      "svDisplay": "C. Vampire's Gun",
+      "value": 29000.0,
+      "bestGameId": "Vampire",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Candleflame",
+      "svDisplay": "Candleflame",
+      "value": 33.0,
+      "bestGameId": "Candle",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Candy",
+      "svDisplay": "Candy",
+      "value": 80.0,
+      "bestGameId": "Candy",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "CandyKnife",
+          "score": 0.92
+        },
+        {
+          "gameId": "Candy Bucket",
+          "score": 0.85
+        },
+        {
+          "gameId": "Candy Corn",
+          "score": 0.85
+        },
+        {
+          "gameId": "CandyBucket2025",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CandyCorn2019",
+      "svDisplay": "Candy Corn (2019)",
+      "value": 10.0,
+      "bestGameId": "Candy",
+      "bestScore": 0.85,
+      "alternates": [
+        {
+          "gameId": "Candy Corn",
+          "score": 0.85
+        },
+        {
+          "gameId": "CandyCorn_G_2024",
+          "score": 0.815
+        },
+        {
+          "gameId": "CandyCorn_G_2025",
+          "score": 0.815
+        },
+        {
+          "gameId": "CandyCorn_K_2025",
+          "score": 0.815
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CandySet",
+      "svDisplay": "Candy Set",
+      "value": 112.0,
+      "bestGameId": "Candy",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "CandyKnife",
+          "score": 0.92
+        },
+        {
+          "gameId": "Candy Bucket",
+          "score": 0.737
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaCandySwirlGun",
+      "svDisplay": "Candy Swirl (Gun)",
+      "value": 3.0,
+      "bestGameId": "Candy",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaCandySwirlKnife",
+      "svDisplay": "Candy Swirl (Knife)",
+      "value": 1.0,
+      "bestGameId": "Candy",
+      "bestScore": 0.85,
+      "alternates": [
+        {
+          "gameId": "CandyKnife",
+          "score": 0.8
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CandySwirlSet",
+      "svDisplay": "Candy Swirl Set",
+      "value": 4.0,
+      "bestGameId": "Candy",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CandyCorn2017",
+      "svDisplay": "CandyCorn (2017)",
+      "value": 22.0,
+      "bestGameId": "Candy",
+      "bestScore": 0.85,
+      "alternates": [
+        {
+          "gameId": "Candy Corn",
+          "score": 0.85
+        },
+        {
+          "gameId": "CandyCorn_G_2024",
+          "score": 0.815
+        },
+        {
+          "gameId": "CandyCorn_G_2025",
+          "score": 0.815
+        },
+        {
+          "gameId": "CandyCorn_K_2025",
+          "score": 0.815
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaCaneKnife",
+      "svDisplay": "Cane (Knife)",
+      "value": 650.0,
+      "bestGameId": "CandyKnife",
+      "bestScore": 0.842,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaCavernGun",
+      "svDisplay": "Cavern (Gun)",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaCavernKnife",
+      "svDisplay": "Cavern (Knife)",
+      "value": 7.0,
+      "bestGameId": "CandyKnife",
+      "bestScore": 0.762,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CavernSet",
+      "svDisplay": "Cavern Set",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Celestial",
+      "svDisplay": "Celestial",
+      "value": 2025.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CelestialSet",
+      "svDisplay": "Celestial Set",
+      "value": 4725.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Chill",
+      "svDisplay": "Chill",
+      "value": 10.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaAlienSet",
+      "svDisplay": "Chroma Alien Set",
+      "value": 36750.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaAlienbeam",
+      "svDisplay": "Chroma Alienbeam",
+      "value": 24000.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaBauble",
+      "svDisplay": "Chroma Bauble",
+      "value": 34000.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaBaubleSet",
+      "svDisplay": "Chroma Bauble Set",
+      "value": 35800.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaBlizzard",
+      "svDisplay": "Chroma Blizzard",
+      "value": 8000.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaBlizzardSet",
+      "svDisplay": "Chroma Blizzard Set",
+      "value": 12250.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaBoneblade",
+      "svDisplay": "Chroma Boneblade",
+      "value": 22.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaBringerSet",
+      "svDisplay": "Chroma Bringer Set",
+      "value": 125.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaCandleflame",
+      "svDisplay": "Chroma Candleflame",
+      "value": 40.0,
+      "bestGameId": "Candle",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaCookiecane",
+      "svDisplay": "Chroma Cookiecane",
+      "value": 32.0,
+      "bestGameId": "Cookie",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaDarkbringer",
+      "svDisplay": "Chroma Darkbringer",
+      "value": 65.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaDeathshard",
+      "svDisplay": "Chroma Deathshard",
+      "value": 35.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaEverSet",
+      "svDisplay": "Chroma Ever Set",
+      "value": 127000.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaEvergreen",
+      "svDisplay": "Chroma Evergreen",
+      "value": 52000.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaEvergun",
+      "svDisplay": "Chroma Evergun",
+      "value": 75000.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFang",
+      "svDisplay": "Chroma Fang",
+      "value": 32.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFireBat",
+      "svDisplay": "Chroma Fire Bat",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFireBear",
+      "svDisplay": "Chroma Fire Bear",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFireBunny",
+      "svDisplay": "Chroma Fire Bunny",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFireCat",
+      "svDisplay": "Chroma Fire Cat",
+      "value": 3.0,
+      "bestGameId": "Fire Cat",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFireDog",
+      "svDisplay": "Chroma Fire Dog",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFireFox",
+      "svDisplay": "Chroma Fire Fox",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFirePig",
+      "svDisplay": "Chroma Fire Pig",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGemstone",
+      "svDisplay": "Chroma Gemstone",
+      "value": 32.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGingerblade",
+      "svDisplay": "Chroma Gingerblade",
+      "value": 27.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaHeartWand",
+      "svDisplay": "Chroma Heart Wand",
+      "value": 4250.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaHeat",
+      "svDisplay": "Chroma Heat",
+      "value": 28.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaLaser",
+      "svDisplay": "Chroma Laser",
+      "value": 40.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaLightbringer",
+      "svDisplay": "Chroma Lightbringer",
+      "value": 60.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaLuger",
+      "svDisplay": "Chroma Luger",
+      "value": 50.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaOrnament",
+      "svDisplay": "Chroma Ornament",
+      "value": 1800.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaPetSet",
+      "svDisplay": "Chroma Pet Set",
+      "value": 21.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaRaygun",
+      "svDisplay": "Chroma Raygun",
+      "value": 12750.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSaw",
+      "svDisplay": "Chroma Saw",
+      "value": 23.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSeer",
+      "svDisplay": "Chroma Seer",
+      "value": 28.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaShark",
+      "svDisplay": "Chroma Shark",
+      "value": 32.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSlasher",
+      "svDisplay": "Chroma Slasher",
+      "value": 32.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSlasherSet",
+      "svDisplay": "Chroma Slasher Set",
+      "value": 72.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSnowDagger",
+      "svDisplay": "Chroma Snow Dagger",
+      "value": 4250.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSnowSet",
+      "svDisplay": "Chroma Snow Set",
+      "value": 12750.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSnowcannon",
+      "svDisplay": "Chroma Snowcannon",
+      "value": 8500.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSnowstorm",
+      "svDisplay": "Chroma Snowstorm",
+      "value": 4250.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSunSet",
+      "svDisplay": "Chroma Sun Set",
+      "value": 21500.0,
+      "bestGameId": "Sunset",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSunrise",
+      "svDisplay": "Chroma Sunrise",
+      "value": 13250.0,
+      "bestGameId": "Sunrise",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSunset",
+      "svDisplay": "Chroma Sunset",
+      "value": 8250.0,
+      "bestGameId": "Sunset",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSweet",
+      "svDisplay": "Chroma Sweet",
+      "value": 2200.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSweetSet",
+      "svDisplay": "Chroma Sweet Set",
+      "value": 4700.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSwirlyGun",
+      "svDisplay": "Chroma Swirly Gun",
+      "value": 38.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaTides",
+      "svDisplay": "Chroma Tides",
+      "value": 27.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaTreat",
+      "svDisplay": "Chroma Treat",
+      "value": 2500.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaWatergun",
+      "svDisplay": "Chroma Watergun",
+      "value": 3400.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaWeaponSet",
+      "svDisplay": "Chroma Weapon Set",
+      "value": 535.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaChromaticKnife",
+      "svDisplay": "Chromatic (Knife)",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ClassCommon",
+      "svDisplay": "Class - Common",
+      "value": 750.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ClassLegendary",
+      "svDisplay": "Class - Legendary",
+      "value": 25.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ClassRare",
+      "svDisplay": "Class - Rare",
+      "value": 55.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ClassUncommon",
+      "svDisplay": "Class - Uncommon",
+      "value": 425.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Clockwork",
+      "svDisplay": "Clockwork",
+      "value": 10.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaCoalKnife",
+      "svDisplay": "Coal (Knife)",
+      "value": 15.0,
+      "bestGameId": "Coal",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "CandyKnife",
+          "score": 0.737
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CollectibleSet",
+      "svDisplay": "Collectible Set",
+      "value": 71.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ColoredSeerSet",
+      "svDisplay": "Colored Seer Set",
+      "value": 16.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CombatII",
+      "svDisplay": "Combat II",
+      "value": 10.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Constellation",
+      "svDisplay": "Constellation",
+      "value": 2700.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CookieSet",
+      "svDisplay": "Cookie Set",
+      "value": 25.0,
+      "bestGameId": "Cookie",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Cookieblade",
+      "svDisplay": "Cookieblade",
+      "value": 3.0,
+      "bestGameId": "Cookie",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Cookiecane",
+      "svDisplay": "Cookiecane",
+      "value": 13.0,
+      "bestGameId": "Cookie",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Corl",
+      "svDisplay": "Corl",
+      "value": 4.0,
+      "bestGameId": "Coal",
+      "bestScore": 0.75,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Corrupt",
+      "svDisplay": "Corrupt",
+      "value": 470.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CorruptSet",
+      "svDisplay": "Corrupt Set",
+      "value": 510.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "CottonCandy",
+      "svDisplay": "Cotton Candy",
+      "value": 40.0,
+      "bestGameId": "Candy",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Cowboy",
+      "svDisplay": "Cowboy",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "DarkSet",
+      "svDisplay": "Dark Set",
+      "value": 3225.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "DarkSetRare",
+      "svDisplay": "Dark Set (Rare)",
+      "value": 76.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Darkbringer",
+      "svDisplay": "Darkbringer",
+      "value": 33.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Darkgun",
+      "svDisplay": "Darkgun",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Darkknife",
+      "svDisplay": "Darkknife",
+      "value": 75.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Darkshot",
+      "svDisplay": "Darkshot",
+      "value": 1625.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Darksword",
+      "svDisplay": "Darksword",
+      "value": 1600.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Deathshard",
+      "svDisplay": "Deathshard",
+      "value": 13.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Denis",
+      "svDisplay": "Denis",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Dungeon",
+      "svDisplay": "Dungeon",
+      "value": 300.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Ecto",
+      "svDisplay": "Ecto",
+      "value": 20.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Eggblade",
+      "svDisplay": "Eggblade",
+      "value": 5.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ElderwoodBlade",
+      "svDisplay": "Elderwood Blade",
+      "value": 33.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ElderwoodRevolver",
+      "svDisplay": "Elderwood Revolver",
+      "value": 33.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ElderwoodScythe",
+      "svDisplay": "Elderwood Scythe",
+      "value": 38.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ElderwoodSet",
+      "svDisplay": "Elderwood Set",
+      "value": 71.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Elf2018",
+      "svDisplay": "Elf (2018)",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaElfKnife",
+      "svDisplay": "Elf (Knife)",
+      "value": 17.0,
+      "bestGameId": "EliteKnife",
+      "bestScore": 0.778,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaEnergizedGun",
+      "svDisplay": "Energized (Gun)",
+      "value": 2.0,
+      "bestGameId": "Energized",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "Energized_G_2025",
+          "score": 0.769
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Eternal",
+      "svDisplay": "Eternal",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "EternalII",
+      "svDisplay": "Eternal II",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "EternalIII",
+      "svDisplay": "Eternal III",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "EternalIV",
+      "svDisplay": "Eternal IV",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "EternalSet",
+      "svDisplay": "Eternal Set",
+      "value": 43.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Eternalcane",
+      "svDisplay": "Eternalcane",
+      "value": 13.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "EternalcaneSet",
+      "svDisplay": "Eternalcane Set",
+      "value": 26.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Euro",
+      "svDisplay": "Euro",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "EverSet",
+      "svDisplay": "Ever Set",
+      "value": 5950.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Evergreen",
+      "svDisplay": "Evergreen",
+      "value": 2500.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Evergun",
+      "svDisplay": "Evergun",
+      "value": 3450.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "EyeSet",
+      "svDisplay": "Eye Set",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Fang",
+      "svDisplay": "Fang",
+      "value": 10.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Flames",
+      "svDisplay": "Flames",
+      "value": 5.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Flora",
+      "svDisplay": "Flora",
+      "value": 410.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFloralKnife",
+      "svDisplay": "Floral (Knife)",
+      "value": 10.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Flowerwood",
+      "svDisplay": "Flowerwood",
+      "value": 260.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "FlowerwoodGun",
+      "svDisplay": "Flowerwood Gun",
+      "value": 265.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "FlowerwoodSet",
+      "svDisplay": "Flowerwood Set",
+      "value": 525.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Frostbite",
+      "svDisplay": "Frostbite",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFrostedKnife",
+      "svDisplay": "Frosted (Knife)",
+      "value": 30.0,
+      "bestGameId": "AsteroidKnife",
+      "bestScore": 0.72,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFrostfadeKnife",
+      "svDisplay": "Frostfade (Knife)",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Frostsaber",
+      "svDisplay": "Frostsaber",
+      "value": 10.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFrozenGun",
+      "svDisplay": "Frozen (Gun)",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaFrozenKnife",
+      "svDisplay": "Frozen (Knife)",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "FrozenSet",
+      "svDisplay": "Frozen Set",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "FullBringerSet",
+      "svDisplay": "Full Bringer Set",
+      "value": 191.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "FullChromaSet",
+      "svDisplay": "Full Chroma Set",
+      "value": 555.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "FullColoredSeerSet",
+      "svDisplay": "Full Colored Seer Set",
+      "value": 44.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "FullElderwoodSet",
+      "svDisplay": "Full Elderwood Set",
+      "value": 104.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "FullEliteSet",
+      "svDisplay": "Full Elite Set",
+      "value": 6.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "FullIceSet",
+      "svDisplay": "Full Ice Set",
+      "value": 258.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "FullLugerSet",
+      "svDisplay": "Full Luger Set",
+      "value": 181.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "FullSwirlySet",
+      "svDisplay": "Full Swirly Set",
+      "value": 68.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Gemstone",
+      "svDisplay": "Gemstone",
+      "value": 15.0,
+      "bestGameId": "Gravestone",
+      "bestScore": 0.778,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGhastlyGun",
+      "svDisplay": "Ghastly (Gun)",
+      "value": 5.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Ghost",
+      "svDisplay": "Ghost",
+      "value": 8.0,
+      "bestGameId": "Ghosts",
+      "bestScore": 0.909,
+      "alternates": [
+        {
+          "gameId": "Ghosts2023",
+          "score": 0.85
+        },
+        {
+          "gameId": "Ghosts2024",
+          "score": 0.85
+        },
+        {
+          "gameId": "Ghosts_K_2024",
+          "score": 0.85
+        },
+        {
+          "gameId": "RbxGhostGiven",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGhostGun",
+      "svDisplay": "Ghost (Gun)",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGhostKnife",
+      "svDisplay": "Ghost (Knife)",
+      "value": 5.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "GhostSet",
+      "svDisplay": "Ghost Set",
+      "value": 7.0,
+      "bestGameId": "Ghosts",
+      "bestScore": 0.857,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Ghostblade",
+      "svDisplay": "Ghostblade",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Ghostfire",
+      "svDisplay": "Ghostfire",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Ghosty",
+      "svDisplay": "Ghosty",
+      "value": 3.0,
+      "bestGameId": "Ghosts",
+      "bestScore": 0.833,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Ghoulish",
+      "svDisplay": "Ghoulish",
+      "value": 100.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGiftsKnife",
+      "svDisplay": "Gifts (Knife)",
+      "value": 90.0,
+      "bestGameId": "Gift",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGingerGun",
+      "svDisplay": "Ginger (Gun)",
+      "value": 5.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "GingerLuger",
+      "svDisplay": "Ginger Luger",
+      "value": 17.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "GingerSetGodly",
+      "svDisplay": "Ginger Set (Godly)",
+      "value": 30.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Gingerblade",
+      "svDisplay": "Gingerblade",
+      "value": 13.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Gingerbread",
+      "svDisplay": "Gingerbread",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGingerbreadGun",
+      "svDisplay": "Gingerbread (Gun)",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGingerbreadKnife",
+      "svDisplay": "Gingerbread (Knife)",
+      "value": 75.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "GingerbreadSet",
+      "svDisplay": "Gingerbread Set",
+      "value": 76.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Gingermint",
+      "svDisplay": "Gingermint",
+      "value": 12.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Gingerscope",
+      "svDisplay": "Gingerscope",
+      "value": 17750.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Glitch1",
+      "svDisplay": "Glitch1",
+      "value": 70.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Glitch2",
+      "svDisplay": "Glitch2",
+      "value": 45.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Golden",
+      "svDisplay": "Golden",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGothicGun",
+      "svDisplay": "Gothic (Gun)",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGraveGun",
+      "svDisplay": "Grave (Gun)",
+      "value": 2.0,
+      "bestGameId": "TravelerGun",
+      "bestScore": 0.737,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaGraveKnife",
+      "svDisplay": "Grave (Knife)",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "GraveSet",
+      "svDisplay": "Grave Set",
+      "value": 3.0,
+      "bestGameId": "Gravestone",
+      "bestScore": 0.778,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "GreenElite",
+      "svDisplay": "Green Elite",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "GreenLuger",
+      "svDisplay": "Green Luger",
+      "value": 23.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "GreenMarble",
+      "svDisplay": "Green Marble",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Grind",
+      "svDisplay": "Grind",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "HallowSet",
+      "svDisplay": "Hallow Set",
+      "value": 50.0,
+      "bestGameId": "Halloween",
+      "bestScore": 0.778,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "HallowsBlade",
+      "svDisplay": "Hallow's Blade",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "HallowsEdge",
+      "svDisplay": "Hallow's Edge",
+      "value": 8.0,
+      "bestGameId": "Halloween",
+      "bestScore": 0.8,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Hallowgun",
+      "svDisplay": "Hallowgun",
+      "value": 20.0,
+      "bestGameId": "Halloween",
+      "bestScore": 0.778,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Hallowscythe",
+      "svDisplay": "Hallowscythe",
+      "value": 30.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Handsaw",
+      "svDisplay": "Handsaw",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Harvester",
+      "svDisplay": "Harvester",
+      "value": 250.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaHauntedGun",
+      "svDisplay": "Haunted (Gun)",
+      "value": 1.0,
+      "bestGameId": "Haunted",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaHauntedKnife",
+      "svDisplay": "Haunted (Knife)",
+      "value": 1.0,
+      "bestGameId": "Haunted",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "CandyKnife",
+          "score": 0.727
+        },
+        {
+          "gameId": "AsteroidKnife",
+          "score": 0.72
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "HauntedSet",
+      "svDisplay": "Haunted Set",
+      "value": 2.0,
+      "bestGameId": "Haunted",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaHazardGun",
+      "svDisplay": "Hazard (Gun)",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "HeartWand",
+      "svDisplay": "Heart Wand",
+      "value": 340.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Heartblade",
+      "svDisplay": "Heartblade",
+      "value": 65.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Heat",
+      "svDisplay": "Heat",
+      "value": 10.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaHollyGun",
+      "svDisplay": "Holly (Gun)",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "IceDragon",
+      "svDisplay": "Ice Dragon",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "IceSet",
+      "svDisplay": "Ice Set",
+      "value": 98.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "IceShard",
+      "svDisplay": "Ice Shard",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Icebeam",
+      "svDisplay": "Icebeam",
+      "value": 18.0,
+      "bestGameId": "Ice Cream",
+      "bestScore": 0.8,
+      "alternates": [
+        {
+          "gameId": "IceCream",
+          "score": 0.8
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Iceblaster",
+      "svDisplay": "Iceblaster",
+      "value": 33.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Icebreaker",
+      "svDisplay": "Icebreaker",
+      "value": 65.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Icecracker",
+      "svDisplay": "Icecracker",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Icedriller",
+      "svDisplay": "Icedriller",
+      "value": 5.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "IcedrillerSet",
+      "svDisplay": "Icedriller Set",
+      "value": 6.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Iceflake",
+      "svDisplay": "Iceflake",
+      "value": 15.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "IceflakeSet",
+      "svDisplay": "Iceflake Set",
+      "value": 33.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Icepiercer",
+      "svDisplay": "Icepiercer",
+      "value": 160.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Icewing",
+      "svDisplay": "Icewing",
+      "value": 13.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaIciclesGun",
+      "svDisplay": "Icicles (Gun)",
+      "value": 5.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Indy",
+      "svDisplay": "Indy",
+      "value": 2.0,
+      "bestGameId": "Indy",
+      "bestScore": 1.0,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaInfectedGun",
+      "svDisplay": "Infected (Gun)",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Jack",
+      "svDisplay": "Jack",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "JD",
+      "svDisplay": "JD",
+      "value": 28.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Jinglegun",
+      "svDisplay": "Jinglegun",
+      "value": 13.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Lantern",
+      "svDisplay": "Lantern",
+      "value": 2.0,
+      "bestGameId": "Lantern2024",
+      "bestScore": 0.85,
+      "alternates": [
+        {
+          "gameId": "Villager's Lantern",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Laser",
+      "svDisplay": "Laser",
+      "value": 22.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaLatteGun",
+      "svDisplay": "Latte (Gun)",
+      "value": 155.0,
+      "bestGameId": "Latte",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaLatteKnife",
+      "svDisplay": "Latte (Knife)",
+      "value": 155.0,
+      "bestGameId": "Latte",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "EliteKnife",
+          "score": 0.8
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "LatteSet",
+      "svDisplay": "Latte Set",
+      "value": 310.0,
+      "bestGameId": "Latte",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "LastReset",
+          "score": 0.824
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Lightbringer",
+      "svDisplay": "Lightbringer",
+      "value": 33.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaLightsGun",
+      "svDisplay": "Lights (Gun)",
+      "value": 2.0,
+      "bestGameId": "Lights",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaLightsKnife",
+      "svDisplay": "Lights (Knife)",
+      "value": 1.0,
+      "bestGameId": "Lights",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "EliteKnife",
+          "score": 0.762
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "LightsSet",
+      "svDisplay": "Lights Set",
+      "value": 3.0,
+      "bestGameId": "Lights",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Logchopper",
+      "svDisplay": "Logchopper",
+      "value": 18.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "LogchopperSet",
+      "svDisplay": "Logchopper Set",
+      "value": 31.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Luger",
+      "svDisplay": "Luger",
+      "value": 40.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "LugerSet",
+      "svDisplay": "Luger Set",
+      "value": 131.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Lugercane",
+      "svDisplay": "Lugercane",
+      "value": 13.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Magma",
+      "svDisplay": "Magma",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaMagmaGun",
+      "svDisplay": "Magma (Gun)",
+      "value": 17.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Makeshift",
+      "svDisplay": "Makeshift",
+      "value": 33.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaMakeshiftKnife",
+      "svDisplay": "Makeshift (Knife)",
+      "value": 45.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "MarbleSet",
+      "svDisplay": "Marble Set",
+      "value": 4.0,
+      "bestGameId": "MarbleEgg",
+      "bestScore": 0.778,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Meltdown",
+      "svDisplay": "Meltdown",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Minty",
+      "svDisplay": "Minty",
+      "value": 13.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Monster",
+      "svDisplay": "Monster",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Moonlight",
+      "svDisplay": "Moonlight",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Moons",
+      "svDisplay": "Moons",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Mummified",
+      "svDisplay": "Mummified",
+      "value": 15.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Mummy2017",
+      "svDisplay": "Mummy (2017)",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaMummyGun",
+      "svDisplay": "Mummy (Gun)",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaMummyKnife",
+      "svDisplay": "Mummy (Knife)",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "MummySet",
+      "svDisplay": "Mummy Set",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Nebula",
+      "svDisplay": "Nebula",
+      "value": 13.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Nightblade",
+      "svDisplay": "Nightblade",
+      "value": 20.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Nightsky",
+      "svDisplay": "Nightsky",
+      "value": 5.0,
+      "bestGameId": "Nightsky",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Nightsky2025",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Ocean",
+      "svDisplay": "Ocean",
+      "value": 280.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "OceanSet",
+      "svDisplay": "Ocean Set",
+      "value": 555.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "OldGlory",
+      "svDisplay": "Old Glory",
+      "value": 15.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "OldGlorySet",
+      "svDisplay": "Old Glory Set",
+      "value": 37.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Ollie",
+      "svDisplay": "Ollie",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "OrangeMarble",
+      "svDisplay": "Orange Marble",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "OrangeSeer",
+      "svDisplay": "Orange Seer",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Ornament",
+      "svDisplay": "Ornament",
+      "value": 27.0,
+      "bestGameId": "Ornaments",
+      "bestScore": 0.941,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "PalsSet",
+      "svDisplay": "Pals Set",
+      "value": 20.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Pearl",
+      "svDisplay": "Pearl",
+      "value": 90.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "PearlSet",
+      "svDisplay": "Pearl Set",
+      "value": 185.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Pearlshine",
+      "svDisplay": "Pearlshine",
+      "value": 95.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Peppermint",
+      "svDisplay": "Peppermint",
+      "value": 4.0,
+      "bestGameId": "Peppermint",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Peppermint_K_2025",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Phantom",
+      "svDisplay": "Phantom",
+      "value": 35.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Phaser",
+      "svDisplay": "Phaser",
+      "value": 5.0,
+      "bestGameId": "Haste",
+      "bestScore": 0.727,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaPineKnife",
+      "svDisplay": "Pine (Knife)",
+      "value": 85.0,
+      "bestGameId": "EliteKnife",
+      "bestScore": 0.737,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Pixel",
+      "svDisplay": "Pixel",
+      "value": 17.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "PlasmaSet",
+      "svDisplay": "Plasma Set",
+      "value": 33.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Plasmabeam",
+      "svDisplay": "Plasmabeam",
+      "value": 18.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Plasmablade",
+      "svDisplay": "Plasmablade",
+      "value": 15.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Potion2017",
+      "svDisplay": "Potion (2017)",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaPotionGun",
+      "svDisplay": "Potion (Gun)",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaPotionKnife",
+      "svDisplay": "Potion (Knife)",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "PotionSet",
+      "svDisplay": "Potion Set",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Prince",
+      "svDisplay": "Prince",
+      "value": 6.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Prism",
+      "svDisplay": "Prism",
+      "value": 12.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Prismatic",
+      "svDisplay": "Prismatic",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Pumpkin2019",
+      "svDisplay": "Pumpkin (2019)",
+      "value": 12.0,
+      "bestGameId": "Pumpkin",
+      "bestScore": 0.85,
+      "alternates": [
+        {
+          "gameId": "Pumpkin2025",
+          "score": 0.818
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "PumpkinPie",
+      "svDisplay": "Pumpkin Pie",
+      "value": 2.0,
+      "bestGameId": "Pumpkin",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "PumpkinSet",
+      "svDisplay": "Pumpkin Set",
+      "value": 404.0,
+      "bestGameId": "Pumpkin",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "PumpkinSet2019",
+      "svDisplay": "Pumpkin Set (2019)",
+      "value": 9.0,
+      "bestGameId": "Pumpkin",
+      "bestScore": 0.85,
+      "alternates": [
+        {
+          "gameId": "Pumpkin2025",
+          "score": 0.72
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "PumpkinSet2020",
+      "svDisplay": "Pumpkin Set (2020)",
+      "value": 48.0,
+      "bestGameId": "Pumpkin",
+      "bestScore": 0.85,
+      "alternates": [
+        {
+          "gameId": "Pumpkin2025",
+          "score": 0.8
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "PumpkinSet2021",
+      "svDisplay": "Pumpkin Set (2021)",
+      "value": 40.0,
+      "bestGameId": "Pumpkin",
+      "bestScore": 0.85,
+      "alternates": [
+        {
+          "gameId": "Pumpkin2025",
+          "score": 0.8
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Pumpking",
+      "svDisplay": "Pumpking",
+      "value": 7.0,
+      "bestGameId": "Pumpkin",
+      "bestScore": 0.933,
+      "alternates": [
+        {
+          "gameId": "Pumpkin2025",
+          "score": 0.737
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "PurpleSeer",
+      "svDisplay": "Purple Seer",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Rainbow",
+      "svDisplay": "Rainbow",
+      "value": 410.0,
+      "bestGameId": "Rainbows",
+      "bestScore": 0.933,
+      "alternates": [
+        {
+          "gameId": "Rainbows2025",
+          "score": 0.85
+        },
+        {
+          "gameId": "Rainbows20255",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "RainbowGun",
+      "svDisplay": "Rainbow Gun",
+      "value": 420.0,
+      "bestGameId": "Rainbows",
+      "bestScore": 0.778,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "RainbowSet",
+      "svDisplay": "Rainbow Set",
+      "value": 830.0,
+      "bestGameId": "Rainbows",
+      "bestScore": 0.889,
+      "alternates": [
+        {
+          "gameId": "Rainbows2025",
+          "score": 0.727
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Raygun",
+      "svDisplay": "Raygun",
+      "value": 1375.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "RedFire",
+      "svDisplay": "Red Fire",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "RedLuger",
+      "svDisplay": "Red Luger",
+      "value": 38.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "RedScratch",
+      "svDisplay": "Red Scratch",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "RedSeer",
+      "svDisplay": "Red Seer",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "RIP",
+      "svDisplay": "RIP",
+      "value": 17.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sakura",
+      "svDisplay": "Sakura",
+      "value": 1280.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SakuraSet",
+      "svDisplay": "Sakura Set",
+      "value": 2570.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SantasMagic",
+      "svDisplay": "Santa's Magic",
+      "value": 3.0,
+      "bestGameId": "Santa",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SantasSetLegend",
+      "svDisplay": "Santa's Set (Legend.)",
+      "value": 6.0,
+      "bestGameId": "Santa",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SantasSpirit",
+      "svDisplay": "Santa's Spirit",
+      "value": 3.0,
+      "bestGameId": "Santa",
+      "bestScore": 0.85,
+      "alternates": [
+        {
+          "gameId": "SantasList",
+          "score": 0.727
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Saw",
+      "svDisplay": "Saw",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ScratchSet",
+      "svDisplay": "Scratch Set",
+      "value": 6.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Seer",
+      "svDisplay": "Seer",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Shadow",
+      "svDisplay": "Shadow",
+      "value": 6.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Shark",
+      "svDisplay": "Shark",
+      "value": 20.0,
+      "bestGameId": "Sharky_K_20247",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sidewinder",
+      "svDisplay": "Sidewinder",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSilentNightGun",
+      "svDisplay": "Silent Night (Gun)",
+      "value": 12.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSilentNightKnife",
+      "svDisplay": "Silent Night (Knife)",
+      "value": 50.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SilentNightSet",
+      "svDisplay": "Silent Night Set",
+      "value": 62.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SkateSet",
+      "svDisplay": "Skate Set",
+      "value": 30.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sketchy",
+      "svDisplay": "Sketchy",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Skool",
+      "svDisplay": "Skool",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Skulls",
+      "svDisplay": "Skulls",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Slashed",
+      "svDisplay": "Slashed",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Slasher",
+      "svDisplay": "Slasher",
+      "value": 15.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SlasherSet",
+      "svDisplay": "Slasher Set",
+      "value": 37.0,
+      "bestGameId": "LastReset",
+      "bestScore": 0.737,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSlimeGun",
+      "svDisplay": "Slime (Gun)",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSlimeKnife",
+      "svDisplay": "Slime (Knife)",
+      "value": 2.0,
+      "bestGameId": "EliteKnife",
+      "bestScore": 0.8,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SlimeSet",
+      "svDisplay": "Slime Set",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Slimy",
+      "svDisplay": "Slimy",
+      "value": 15.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SmallSet103",
+      "svDisplay": "Small Set (103)",
+      "value": 1265.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SmallSet107",
+      "svDisplay": "Small Set (107)",
+      "value": 1295.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSnakebiteGun",
+      "svDisplay": "Snakebite (Gun)",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSnakebiteKnife",
+      "svDisplay": "Snakebite (Knife)",
+      "value": 3.0,
+      "bestGameId": "EliteKnife",
+      "bestScore": 0.75,
+      "alternates": [
+        {
+          "gameId": "SunsetKnife",
+          "score": 0.72
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SnakebiteSet",
+      "svDisplay": "Snakebite Set",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SnowDagger",
+      "svDisplay": "Snow Dagger",
+      "value": 255.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SnowSet",
+      "svDisplay": "Snow Set",
+      "value": 1105.0,
+      "bestGameId": "Sunset",
+      "bestScore": 0.769,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Snowcannon",
+      "svDisplay": "Snowcannon",
+      "value": 850.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Snowflake",
+      "svDisplay": "Snowflake",
+      "value": 5.0,
+      "bestGameId": "Snowflake",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Snowflake2021",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSnowflakeKnife",
+      "svDisplay": "Snowflake (Knife)",
+      "value": 50.0,
+      "bestGameId": "Snowflake",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Snowflakes",
+      "svDisplay": "Snowflakes",
+      "value": 10.0,
+      "bestGameId": "Snowflake",
+      "bestScore": 0.947,
+      "alternates": [
+        {
+          "gameId": "Snowflake2021",
+          "score": 0.783
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSnowflakesGun",
+      "svDisplay": "Snowflakes (Gun)",
+      "value": 25.0,
+      "bestGameId": "Snowflake",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSnowmanGun",
+      "svDisplay": "Snowman (Gun)",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Snowstorm",
+      "svDisplay": "Snowstorm",
+      "value": 260.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Soul",
+      "svDisplay": "Soul",
+      "value": 570.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SoulSet",
+      "svDisplay": "Soul Set",
+      "value": 1130.0,
+      "bestGameId": "Sunset",
+      "bestScore": 0.769,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SparkleSet",
+      "svDisplay": "Sparkle Set",
+      "value": 127.0,
+      "bestGameId": "Sparkle1",
+      "bestScore": 0.778,
+      "alternates": [
+        {
+          "gameId": "Sparkle2",
+          "score": 0.778
+        },
+        {
+          "gameId": "Sparkle4",
+          "score": 0.778
+        },
+        {
+          "gameId": "Sparkle5",
+          "score": 0.778
+        },
+        {
+          "gameId": "Sparkle6",
+          "score": 0.778
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sparkle1",
+      "svDisplay": "Sparkle1",
+      "value": 3.0,
+      "bestGameId": "Sparkle1",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Sparkle10",
+          "score": 0.941
+        },
+        {
+          "gameId": "Sparkle2",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle4",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle5",
+          "score": 0.875
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sparkle10",
+      "svDisplay": "Sparkle10",
+      "value": 20.0,
+      "bestGameId": "Sparkle10",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Sparkle1",
+          "score": 0.941
+        },
+        {
+          "gameId": "Sparkle2",
+          "score": 0.824
+        },
+        {
+          "gameId": "Sparkle4",
+          "score": 0.824
+        },
+        {
+          "gameId": "Sparkle5",
+          "score": 0.824
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sparkle2",
+      "svDisplay": "Sparkle2",
+      "value": 3.0,
+      "bestGameId": "Sparkle2",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Sparkle1",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle4",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle5",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle6",
+          "score": 0.875
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sparkle3",
+      "svDisplay": "Sparkle3",
+      "value": 3.0,
+      "bestGameId": "Sparkle1",
+      "bestScore": 0.875,
+      "alternates": [
+        {
+          "gameId": "Sparkle2",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle4",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle5",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle6",
+          "score": 0.875
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sparkle4",
+      "svDisplay": "Sparkle4",
+      "value": 10.0,
+      "bestGameId": "Sparkle4",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Sparkle1",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle2",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle5",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle6",
+          "score": 0.875
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sparkle5",
+      "svDisplay": "Sparkle5",
+      "value": 8.0,
+      "bestGameId": "Sparkle5",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Sparkle1",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle2",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle4",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle6",
+          "score": 0.875
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sparkle6",
+      "svDisplay": "Sparkle6",
+      "value": 12.0,
+      "bestGameId": "Sparkle6",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Sparkle1",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle2",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle4",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle5",
+          "score": 0.875
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sparkle7",
+      "svDisplay": "Sparkle7",
+      "value": 18.0,
+      "bestGameId": "Sparkle7",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Sparkle1",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle2",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle4",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle5",
+          "score": 0.875
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sparkle8",
+      "svDisplay": "Sparkle8",
+      "value": 20.0,
+      "bestGameId": "Sparkle8",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Sparkle1",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle2",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle4",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle5",
+          "score": 0.875
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sparkle9",
+      "svDisplay": "Sparkle9",
+      "value": 30.0,
+      "bestGameId": "Sparkle9",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Sparkle1",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle2",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle4",
+          "score": 0.875
+        },
+        {
+          "gameId": "Sparkle5",
+          "score": 0.875
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSpectralGun",
+      "svDisplay": "Spectral (Gun)",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSpectralKnife",
+      "svDisplay": "Spectral (Knife)",
+      "value": 60.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SpectralSet",
+      "svDisplay": "Spectral Set",
+      "value": 63.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Spectre",
+      "svDisplay": "Spectre",
+      "value": 35.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SpectreSet",
+      "svDisplay": "Spectre Set",
+      "value": 70.0,
+      "bestGameId": "LastReset",
+      "bestScore": 0.737,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Spider",
+      "svDisplay": "Spider",
+      "value": 10.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Spirit",
+      "svDisplay": "Spirit",
+      "value": 560.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Splitter",
+      "svDisplay": "Splitter",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Starry",
+      "svDisplay": "Starry",
+      "value": 5.0,
+      "bestGameId": "Starry",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Starry_K_2026",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaStarryGun",
+      "svDisplay": "Starry (Gun)",
+      "value": 27.0,
+      "bestGameId": "Starry",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaStarsKnife",
+      "svDisplay": "Stars (Knife)",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSteelGun",
+      "svDisplay": "Steel (Gun)",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sub",
+      "svDisplay": "Sub",
+      "value": 4.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sugar",
+      "svDisplay": "Sugar",
+      "value": 32.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sun",
+      "svDisplay": "Sun",
+      "value": 3.0,
+      "bestGameId": "Sunset",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "DoorsUnlocked",
+          "score": 0.85
+        },
+        {
+          "gameId": "Sunbeams",
+          "score": 0.85
+        },
+        {
+          "gameId": "Sunbeams2024",
+          "score": 0.85
+        },
+        {
+          "gameId": "Sunbeams20245",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SunSet",
+      "svDisplay": "Sun Set",
+      "value": 1750.0,
+      "bestGameId": "Sunset",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "SunsetGun",
+          "score": 0.85
+        },
+        {
+          "gameId": "SunsetKnife",
+          "score": 0.85
+        },
+        {
+          "gameId": "Sunrise",
+          "score": 0.769
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sunrise",
+      "svDisplay": "Sunrise",
+      "value": 1125.0,
+      "bestGameId": "Sunrise",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Sunset",
+          "score": 0.769
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SunriseGun",
+      "svDisplay": "Sunrise",
+      "value": 1125.0,
+      "bestGameId": "Sunrise",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "SunsetGun",
+          "score": 0.842
+        },
+        {
+          "gameId": "Sunset",
+          "score": 0.769
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SunriseKnife",
+      "svDisplay": "Sunrise",
+      "value": 1125.0,
+      "bestGameId": "Sunrise",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "SunsetKnife",
+          "score": 0.87
+        },
+        {
+          "gameId": "Sunset",
+          "score": 0.769
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sunset",
+      "svDisplay": "Sunset",
+      "value": 625.0,
+      "bestGameId": "Sunset",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "SunsetGun",
+          "score": 0.85
+        },
+        {
+          "gameId": "SunsetKnife",
+          "score": 0.85
+        },
+        {
+          "gameId": "Sunrise",
+          "score": 0.769
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SunsetGun",
+      "svDisplay": "Sunset",
+      "value": 625.0,
+      "bestGameId": "Sunset",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "SunsetGun",
+          "score": 1.0
+        },
+        {
+          "gameId": "SunsetKnife",
+          "score": 0.92
+        },
+        {
+          "gameId": "Sunrise",
+          "score": 0.769
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SunsetKnife",
+      "svDisplay": "Sunset",
+      "value": 625.0,
+      "bestGameId": "Sunset",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "SunsetKnife",
+          "score": 1.0
+        },
+        {
+          "gameId": "SunsetGun",
+          "score": 0.92
+        },
+        {
+          "gameId": "Sunrise",
+          "score": 0.769
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaSweaterKnife",
+      "svDisplay": "Sweater (Knife)",
+      "value": 60.0,
+      "bestGameId": "EliteKnife",
+      "bestScore": 0.727,
+      "alternates": [
+        {
+          "gameId": "AsteroidKnife",
+          "score": 0.72
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Sweet",
+      "svDisplay": "Sweet",
+      "value": 155.0,
+      "bestGameId": "SweetBundleEffect",
+      "bestScore": 0.85,
+      "alternates": [
+        {
+          "gameId": "SweetEffect26",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SweetSet",
+      "svDisplay": "Sweet Set",
+      "value": 315.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Swirl",
+      "svDisplay": "Swirl",
+      "value": 27.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SwirlyAxe",
+      "svDisplay": "Swirly Axe",
+      "value": 38.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SwirlyBlade",
+      "svDisplay": "Swirly Blade",
+      "value": 12.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SwirlyGun",
+      "svDisplay": "Swirly Gun",
+      "value": 18.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "SwirlySet",
+      "svDisplay": "Swirly Set",
+      "value": 56.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Tailslide",
+      "svDisplay": "Tailslide",
+      "value": 8.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Tides",
+      "svDisplay": "Tides",
+      "value": 10.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaToxicGun",
+      "svDisplay": "Toxic (Gun)",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaToxicKnife",
+      "svDisplay": "Toxic (Knife)",
+      "value": 7.0,
+      "bestGameId": "XboxKnife",
+      "bestScore": 0.737,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ToxicSet",
+      "svDisplay": "Toxic Set",
+      "value": 9.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaTravelerGun",
+      "svDisplay": "Traveler (Gun)",
+      "value": 60.0,
+      "bestGameId": "TravelerGun",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "Traveler's Gun",
+          "score": 0.957
+        },
+        {
+          "gameId": "TravelerAxe",
+          "score": 0.92
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaTravelerKnife",
+      "svDisplay": "Traveler (Knife)",
+      "value": 3.0,
+      "bestGameId": "TravelerAxe",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "TravelerGun",
+          "score": 0.92
+        },
+        {
+          "gameId": "Traveler's Axe",
+          "score": 0.72
+        },
+        {
+          "gameId": "Traveler's Gun",
+          "score": 0.72
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "TravelerSet",
+      "svDisplay": "Traveler Set",
+      "value": 63.0,
+      "bestGameId": "TravelerAxe",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "TravelerGun",
+          "score": 0.92
+        },
+        {
+          "gameId": "Traveler's Axe",
+          "score": 0.87
+        },
+        {
+          "gameId": "Traveler's Gun",
+          "score": 0.783
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "TravelersAxe",
+      "svDisplay": "Traveler's Axe",
+      "value": 8100.0,
+      "bestGameId": "Traveler's Axe",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "TravelerAxe",
+          "score": 0.957
+        },
+        {
+          "gameId": "Traveler's Gun",
+          "score": 0.92
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "TravelerAxe",
+      "svDisplay": "Traveler's Axe",
+      "value": 8100.0,
+      "bestGameId": "Traveler's Axe",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "TravelerAxe",
+          "score": 1.0
+        },
+        {
+          "gameId": "Traveler's Gun",
+          "score": 0.92
+        },
+        {
+          "gameId": "TravelerGun",
+          "score": 0.92
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "TravelersGun",
+      "svDisplay": "Traveler's Gun",
+      "value": 5400.0,
+      "bestGameId": "Traveler's Gun",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "TravelerGun",
+          "score": 0.957
+        },
+        {
+          "gameId": "Traveler's Axe",
+          "score": 0.92
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "TravelerGun",
+      "svDisplay": "Traveler's Gun",
+      "value": 5400.0,
+      "bestGameId": "Traveler's Gun",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "TravelerGun",
+          "score": 1.0
+        },
+        {
+          "gameId": "Traveler's Axe",
+          "score": 0.92
+        },
+        {
+          "gameId": "TravelerAxe",
+          "score": 0.92
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "TravelersSet",
+      "svDisplay": "Traveler's Set",
+      "value": 13500.0,
+      "bestGameId": "Traveler's Axe",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "Traveler's Gun",
+          "score": 0.92
+        },
+        {
+          "gameId": "TravelerAxe",
+          "score": 0.783
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Treat",
+      "svDisplay": "Treat",
+      "value": 160.0,
+      "bestGameId": "Treats",
+      "bestScore": 0.909,
+      "alternates": [
+        {
+          "gameId": "Treats2025",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Tree2021",
+      "svDisplay": "Tree (2021)",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Turkey",
+      "svDisplay": "Turkey",
+      "value": 2450.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Vampire",
+      "svDisplay": "Vampire",
+      "value": 1.0,
+      "bestGameId": "Vampire",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "VampireRadio2024",
+          "score": 0.85
+        },
+        {
+          "gameId": "Vampiric",
+          "score": 0.8
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaVampireGun",
+      "svDisplay": "Vampire (Gun)",
+      "value": 55.0,
+      "bestGameId": "Vampire",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaVampireKnife",
+      "svDisplay": "Vampire (Knife)",
+      "value": 3.0,
+      "bestGameId": "Vampire",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "VampireSetLegend",
+      "svDisplay": "Vampire Set (Legend.)",
+      "value": 58.0,
+      "bestGameId": "Vampire",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "VampireSetRare",
+      "svDisplay": "Vampire Set (Rare)",
+      "value": 4.0,
+      "bestGameId": "Vampire",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "VampiresAxe",
+      "svDisplay": "Vampire's Axe",
+      "value": 1225.0,
+      "bestGameId": "Vampire",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "VampiresEdge",
+      "svDisplay": "Vampire's Edge",
+      "value": 15.0,
+      "bestGameId": "Vampire",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "VampireGun",
+      "svDisplay": "Vampire's Gun",
+      "value": 1875.0,
+      "bestGameId": "Vampire",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "VampiresSet",
+      "svDisplay": "Vampire's Set",
+      "value": 3100.0,
+      "bestGameId": "Vampire",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "VintageSet",
+      "svDisplay": "Vintage Set",
+      "value": 59.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Virtual",
+      "svDisplay": "Virtual",
+      "value": 13.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "VirtualSet",
+      "svDisplay": "Virtual Set",
+      "value": 30.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Void",
+      "svDisplay": "Void",
+      "value": 12.0,
+      "bestGameId": "Void",
+      "bestScore": 1.0,
+      "alternates": [
+        {
+          "gameId": "VoidRbxEffect",
+          "score": 0.85
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaWatcherGun",
+      "svDisplay": "Watcher (Gun)",
+      "value": 25.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Watergun",
+      "svDisplay": "Watergun",
+      "value": 250.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Waves",
+      "svDisplay": "Waves",
+      "value": 275.0,
+      "bestGameId": "Leaves",
+      "bestScore": 0.727,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaWebbedGun",
+      "svDisplay": "Webbed (Gun)",
+      "value": 25.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Webs",
+      "svDisplay": "Webs",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "WintersEdge",
+      "svDisplay": "Winter's Edge",
+      "value": 5.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Witched",
+      "svDisplay": "Witched",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Wolf",
+      "svDisplay": "Wolf",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaWraithKnife",
+      "svDisplay": "Wraith (Knife)",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaWrapGun",
+      "svDisplay": "Wrap (Gun)",
+      "value": 5.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaWrapKnife",
+      "svDisplay": "Wrap (Knife)",
+      "value": 5.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "WrapSet",
+      "svDisplay": "Wrap Set",
+      "value": 10.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaWrappedGun",
+      "svDisplay": "Wrapped (Gun)",
+      "value": 25.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "WrappingPaperSet",
+      "svDisplay": "Wrapping Paper Set",
+      "value": 14.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "XenoSet",
+      "svDisplay": "Xeno Set",
+      "value": 540.0,
+      "bestGameId": "Xeno",
+      "bestScore": 0.92,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Xenoknife",
+      "svDisplay": "Xenoknife",
+      "value": 270.0,
+      "bestGameId": "Xeno",
+      "bestScore": 0.92,
+      "alternates": [
+        {
+          "gameId": "XboxKnife",
+          "score": 0.778
+        }
+      ],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Xenoshot",
+      "svDisplay": "Xenoshot",
+      "value": 270.0,
+      "bestGameId": "Xeno",
+      "bestScore": 0.85,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Xmas",
+      "svDisplay": "Xmas",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "YellowSeer",
+      "svDisplay": "Yellow Seer",
+      "value": 2.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Zombie",
+      "svDisplay": "Zombie",
+      "value": 7.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Zombie2023",
+      "svDisplay": "Zombie (2023)",
+      "value": 3.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaZombieGun",
+      "svDisplay": "Zombie (Gun)",
+      "value": 5.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaZombieKnife",
+      "svDisplay": "Zombie (Knife)",
+      "value": 1.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ZombieSet",
+      "svDisplay": "Zombie Set",
+      "value": 6.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "Zombified",
+      "svDisplay": "Zombified",
+      "value": 40.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaZombifiedGun",
+      "svDisplay": "Zombified (Gun)",
+      "value": 15.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ChromaZombifiedKnife",
+      "svDisplay": "Zombified (Knife)",
+      "value": 115.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    },
+    {
+      "svId": "ZombifiedSet",
+      "svDisplay": "Zombified Set",
+      "value": 130.0,
+      "bestGameId": null,
+      "bestScore": null,
+      "alternates": [],
+      "needsReview": true,
+      "confirmedGameId": ""
+    }
+  ],
+  "unmatchedGameIdsSample": [
+    "Abduction",
+    "Abduction_K_2025",
+    "Alien Plush",
+    "AlienPlushie",
+    "Arragement",
+    "Bat Swarm",
+    "Bats_K_2024",
+    "Bats_K_2025",
+    "BeachBalls2024",
+    "BeachBalls2024_Box",
+    "BeachBalls2025",
+    "Bokeh2025",
+    "Bones_K_2024",
+    "Bunny Toy",
+    "Bunny2024",
+    "Bunny20244",
+    "Burn",
+    "Butterflies_G_20254",
+    "CamoEgg",
+    "Candies2019",
+    "Candies2022",
+    "Candies2023",
+    "Candies2024",
+    "Candies2025",
+    "Candle2024",
+    "Candy Bucket",
+    "Candy Corn",
+    "CandyBucket2025",
+    "CandyCorn_G_2024",
+    "CandyCorn_G_2025",
+    "CandyCorn_K_2025",
+    "Carrot_G_20243",
+    "Carrot_K_20243",
+    "Carrots_K_20251",
+    "CashEgg",
+    "Cat Eyes",
+    "CatChroma",
+    "Cats",
+    "Cats2025",
+    "Chick_K_20252",
+    "Chocolate Milk",
+    "ChocolateMilk",
+    "Christmas",
+    "Christmas2018",
+    "Christmas2019",
+    "Christmas2020",
+    "Christmas2021",
+    "Christmas2022",
+    "Christmas2023",
+    "Christmas2024",
+    "Christmas2025",
+    "ChristmasTree2018",
+    "Clownfish_K_20242",
+    "Coal2025",
+    "Coconut",
+    "Coconut2024",
+    "Coconut20243",
+    "Coffee2025",
+    "CoinBag",
+    "CommonEffect",
+    "CommonEgg2024",
+    "CommonEgg20242",
+    "CommonEgg2025",
+    "CommonEgg20252",
+    "CommonShards",
+    "ConstructionEgg2025",
+    "Cookie2023",
+    "Cracks",
+    "Cracks_K_2021",
+    "Crafted",
+    "CurrentlyLoggedIn",
+    "CurrentSaveTime",
+    "CurrentTier",
+    "Cursed",
+    "Cursed2024",
+    "dab",
+    "Dab",
+    "DailyCoins",
+    "Day",
+    "DeathEffect",
+    "Decorated_K_20253",
+    "Default Gun",
+    "Default Knife",
+    "DefaultGun",
+    "DefaultKnife",
+    "DiamondEgg2025",
+    "DoctorEgg2025",
+    "DoorsUnlocked",
+    "Dual Wield",
+    "Easter2023",
+    "Easter2024",
+    "Easter2025",
+    "eclipsisPrizeSound",
+    "Egg Toy '24",
+    "Egg Toy '25",
+    "Eggs2023",
+    "Eggs2024",
+    "Eggs2025",
+    "Eliminations",
+    "Elite-ify",
+    "EliteEffect",
+    "ElitePet",
+    "EliteRadio",
+    "Elitey",
+    "Elitify",
+    "Energized_G_2025",
+    "Escapes",
+    "EventTotal",
+    "ExperimentEgg2025",
+    "Fake Gun",
+    "FakeBomb",
+    "FakeGun",
+    "Fall",
+    "Fall_G_2025",
+    "Fireflies",
+    "Firefly Jar",
+    "FireplaceEgg",
+    "Flaming Knife",
+    "Floatie_G_20244",
+    "Fragile_G_20231",
+    "GG Sign",
+    "GGSign",
+    "Ghosts2023",
+    "Ghosts2024",
+    "Ghosts_K_2024",
+    "GiftInventory",
+    "GiftInventory2019",
+    "GiftInventory2020",
+    "GiftInventory2021",
+    "GiftInventory2022",
+    "GiftsGiven",
+    "GiftsGiven2019",
+    "GiftsGiven2020",
+    "GiftsGiven2021",
+    "GiftsGiven2022",
+    "Gravestone2024",
+    "Halloween2018",
+    "Halloween2019",
+    "Halloween2020",
+    "Halloween2020ScaryMode",
+    "Halloween2021",
+    "Halloween2022",
+    "Halloween2023",
+    "Halloween2023Key",
+    "Halloween2024",
+    "Halloween2025",
+    "HauntedHouse_K_2025",
+    "Heartbreak",
+    "Heartbreak_G_2026",
+    "Heartify",
+    "Hearts2023",
+    "High Tech",
+    "HighTech",
+    "Hologram",
+    "Hologram_G_2025",
+    "HospitalEgg",
+    "HW2018Rewareded",
+    "IceCream",
+    "IceCream2025",
+    "IN A MINUTE",
+    "ItemPacks",
+    "ItemShowcase",
+    "Kraken",
+    "Kraken_K_2024",
+    "Leaves_G_2024",
+    "LegendaryEffect",
+    "Level10",
+    "Level100",
+    "Level20",
+    "Level30",
+    "Level40",
+    "Level50",
+    "Level60",
+    "Level70",
+    "Level80",
+    "Level90",
+    "LevelBadges",
+    "Life in an Elevator",
+    "Lights2025",
+    "Lights_G_2025",
+    "Loud Shooting",
+    "Love_K_20231",
+    "MagicBook2024",
+    "Meadow_G_20253",
+    "MedicEgg",
+    "MilitaryEgg2025",
+    "ModLog",
+    "MurdererWins",
+    "NewXP",
+    "Nightsky2025",
+    "Ninja",
+    "ninja",
+    "Ninja Rest",
+    "ny thg tr tru",
+    "OfficeEgg2025",
+    "PaintingEgg",
+    "Penguin",
+    "Penguin_K_2025",
+    "Peppermint_K_2025",
+    "Pixie Dust"
+  ]
+}

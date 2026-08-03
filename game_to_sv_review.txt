@@ -1,0 +1,119 @@
+GAME ID  =>  closest SV name [svId] (value) score | alternates
+Fill in what is correct. Known: SunsetGun=>Sunrise, SunsetKnife=>Sunset
+==============================================================================================================
+
+--- OWNED (items seen in real inventories on your dump) ---
+
+Abduction_K_2025  =>  ??? [?] = None (None)  |  -
+Bats_K_2024  =>  Bat [Bat] = 120.0 (0.84)  |  Bats[Bats]=2.0(0.84), Bats (2020)[Bats2020]=3.0(0.824)
+Bats_K_2025  =>  Bat [Bat] = 120.0 (0.84)  |  Bats[Bats]=2.0(0.84), Bats (2020)[Bats2020]=3.0(0.824)
+Bones_K_2024  =>  Bones [Bones] = 240.0 (0.84)  |  -
+Candy  =>  Candy [Candy] = 80.0 (1.0)  |  Candy Set[CandySet]=112.0(0.9), Candy Corn (2019)[CandyCorn2019]=10.0(0.84), Candy Swirl (Gun)[ChromaCandySwirlGun]=3.0(0.84)
+CandyCorn_G_2024  =>  Candy [Candy] = 80.0 (0.84)  |  Candy Corn (2019)[CandyCorn2019]=10.0(0.815), CandyCorn (2017)[CandyCorn2017]=22.0(0.815)
+CandyCorn_G_2025  =>  Candy [Candy] = 80.0 (0.84)  |  Candy Corn (2019)[CandyCorn2019]=10.0(0.815), CandyCorn (2017)[CandyCorn2017]=22.0(0.815)
+CandyCorn_K_2025  =>  Candy [Candy] = 80.0 (0.84)  |  Candy Corn (2019)[CandyCorn2019]=10.0(0.815), CandyCorn (2017)[CandyCorn2017]=22.0(0.815)
+Cracks_K_2021  =>  ??? [?] = None (None)  |  -
+DefaultGun  =>  ??? [?] = None (None)  |  -
+DefaultKnife  =>  ??? [?] = None (None)  |  -
+Energized_G_2025  =>  Energized (Gun) [ChromaEnergizedGun] = 2.0 (0.769)  |  -
+Fall_G_2025  =>  ??? [?] = None (None)  |  -
+Ghosts_K_2024  =>  Ghost [Ghost] = 8.0 (0.84)  |  -
+HauntedHouse_K_2025  =>  ??? [?] = None (None)  |  -
+Heartbreak_G_2026  =>  ??? [?] = None (None)  |  -
+HighTech  =>  ??? [?] = None (None)  |  -
+Hologram_G_2025  =>  ??? [?] = None (None)  |  -
+Indy  =>  Indy [Indy] = 2.0 (1.0)  |  -
+Kraken_K_2024  =>  ??? [?] = None (None)  |  -
+Leaves_G_2024  =>  ??? [?] = None (None)  |  -
+Lights_G_2025  =>  ??? [?] = None (None)  |  -
+Penguin_K_2025  =>  ??? [?] = None (None)  |  -
+Peppermint_K_2025  =>  Peppermint [Peppermint] = 4.0 (0.84)  |  -
+PumpkinPatch_K_2025  =>  ??? [?] = None (None)  |  -
+Santa_G_2023  =>  ??? [?] = None (None)  |  -
+Snowball_K_2025  =>  ??? [?] = None (None)  |  -
+Sparkle1  =>  Sparkle1 [Sparkle1] = 3.0 (1.0)  |  Sparkle10[Sparkle10]=20.0(0.941), Sparkle2[Sparkle2]=3.0(0.875), Sparkle3[Sparkle3]=3.0(0.875)
+Sparkle10  =>  Sparkle10 [Sparkle10] = 20.0 (1.0)  |  Sparkle1[Sparkle1]=3.0(0.941), Sparkle2[Sparkle2]=3.0(0.824), Sparkle3[Sparkle3]=3.0(0.824)
+Sparkle2  =>  Sparkle2 [Sparkle2] = 3.0 (1.0)  |  Sparkle1[Sparkle1]=3.0(0.875), Sparkle3[Sparkle3]=3.0(0.875), Sparkle4[Sparkle4]=10.0(0.875)
+Sparkle4  =>  Sparkle4 [Sparkle4] = 10.0 (1.0)  |  Sparkle1[Sparkle1]=3.0(0.875), Sparkle2[Sparkle2]=3.0(0.875), Sparkle3[Sparkle3]=3.0(0.875)
+Sparkle5  =>  Sparkle5 [Sparkle5] = 8.0 (1.0)  |  Sparkle1[Sparkle1]=3.0(0.875), Sparkle2[Sparkle2]=3.0(0.875), Sparkle3[Sparkle3]=3.0(0.875)
+Sparkle6  =>  Sparkle6 [Sparkle6] = 12.0 (1.0)  |  Sparkle1[Sparkle1]=3.0(0.875), Sparkle2[Sparkle2]=3.0(0.875), Sparkle3[Sparkle3]=3.0(0.875)
+Sparkle7  =>  Sparkle7 [Sparkle7] = 18.0 (1.0)  |  Sparkle1[Sparkle1]=3.0(0.875), Sparkle2[Sparkle2]=3.0(0.875), Sparkle3[Sparkle3]=3.0(0.875)
+Sparkle8  =>  Sparkle8 [Sparkle8] = 20.0 (1.0)  |  Sparkle1[Sparkle1]=3.0(0.875), Sparkle2[Sparkle2]=3.0(0.875), Sparkle3[Sparkle3]=3.0(0.875)
+Sparkle9  =>  Sparkle9 [Sparkle9] = 30.0 (1.0)  |  Sparkle1[Sparkle1]=3.0(0.875), Sparkle2[Sparkle2]=3.0(0.875), Sparkle3[Sparkle3]=3.0(0.875)
+Starry_K_2026  =>  Starry [Starry] = 5.0 (0.84)  |  -
+Stickers_G_2024  =>  ??? [?] = None (None)  |  -
+StickersH_K_2025  =>  ??? [?] = None (None)  |  -
+StickersX_G_2025  =>  ??? [?] = None (None)  |  -
+SunsetGun  =>  Sunrise [SunsetGun] = 1125.0 (1.0)  |  Sunset[SunsetKnife]=625.0(0.9), Sunrise[SunriseGun]=1125.0(0.842), Sun[Sun]=3.0(0.84)
+SunsetKnife  =>  Sunset [SunsetKnife] = 625.0 (1.0)  |  Sunrise[SunsetGun]=1125.0(0.9), Sunset[SunriseKnife]=625.0(0.87), Sun[Sun]=3.0(0.84)
+TravelerAxe  =>  Traveler's Axe [TravelerAxe] = 8100.0 (1.0)  |  Traveler's Axe[TravelersAxe]=8100.0(0.957), Traveler (Gun)[ChromaTravelerGun]=60.0(0.9), Traveler (Knife)[ChromaTravelerKnife]=3.0(0.9)
+TravelerGun  =>  Traveler (Gun) [ChromaTravelerGun] = 60.0 (1.0)  |  Traveler's Gun[TravelerGun]=5400.0(1.0), Traveler's Gun[TravelersGun]=5400.0(0.957), C. Traveler's Gun[CTravelersGun]=220000.0(0.917)
+UFOs_G_2025  =>  ??? [?] = None (None)  |  -
+WitchBrew_K_2024  =>  ??? [?] = None (None)  |  -
+Xeno_G_2025  =>  ??? [?] = None (None)  |  -
+Xeno_K_2025  =>  ??? [?] = None (None)  |  -
+
+--- OTHER GAME-LIKE IDS (filtered) ---
+
+AsteroidKnife  =>  Asteroid [Asteroid] = 2.0 (0.9)
+Bat Swarm  =>  Bat [Bat] = 120.0 (0.84)
+Bats  =>  Bats [Bats] = 2.0 (1.0)
+Bats2024  =>  Bats (2020) [Bats2020] = 3.0 (0.875)
+BeachBalls2023  =>  Beach [Beach] = 35.0 (0.84)
+BeachBalls2024  =>  Beach [Beach] = 35.0 (0.84)
+BeachBalls2024_Box  =>  Beach [Beach] = 35.0 (0.84)
+BeachBalls2025  =>  Beach [Beach] = 35.0 (0.84)
+Bones  =>  Bones [Bones] = 240.0 (1.0)
+Candle  =>  Candleflame [Candleflame] = 33.0 (0.84)
+Candy Bucket  =>  Candy [Candy] = 80.0 (0.84)
+Candy Corn  =>  Candy [Candy] = 80.0 (0.84)
+CandyBucket2025  =>  Candy [Candy] = 80.0 (0.84)
+CandyKnife  =>  Candy [Candy] = 80.0 (0.9)
+Coal  =>  Coal (Knife) [ChromaCoalKnife] = 15.0 (0.9)
+Cookie  =>  Cookie Set [CookieSet] = 25.0 (0.9)
+DoorsUnlocked  =>  Sun [Sun] = 3.0 (0.84)
+Energized  =>  Energized (Gun) [ChromaEnergizedGun] = 2.0 (0.9)
+Fire Cat  =>  Chroma Fire Cat [ChromaFireCat] = 3.0 (0.84)
+Ghosts  =>  Ghost [Ghost] = 8.0 (0.909)
+Ghosts2023  =>  Ghost [Ghost] = 8.0 (0.84)
+Ghosts2024  =>  Ghost [Ghost] = 8.0 (0.84)
+Gift  =>  Gifts (Knife) [ChromaGiftsKnife] = 90.0 (0.84)
+Haunted  =>  Haunted (Gun) [ChromaHauntedGun] = 1.0 (0.9)
+Lantern2024  =>  Lantern [Lantern] = 2.0 (0.84)
+Latte  =>  Latte (Gun) [ChromaLatteGun] = 155.0 (0.9)
+Lights  =>  Lights (Gun) [ChromaLightsGun] = 2.0 (0.9)
+Nightsky  =>  Nightsky [Nightsky] = 5.0 (1.0)
+Nightsky2025  =>  Nightsky [Nightsky] = 5.0 (0.84)
+Ornaments  =>  Ornament [Ornament] = 27.0 (0.941)
+Peppermint  =>  Peppermint [Peppermint] = 4.0 (1.0)
+Pumpkin  =>  Pumpking [Pumpking] = 7.0 (0.933)
+Rainbows  =>  Rainbow [Rainbow] = 410.0 (0.933)
+Rainbows2025  =>  Rainbow [Rainbow] = 410.0 (0.84)
+Rainbows20255  =>  Rainbow [Rainbow] = 410.0 (0.84)
+RBBattleKnife2020  =>  Bat [Bat] = 120.0 (0.84)
+RbxGhostGiven  =>  Ghost [Ghost] = 8.0 (0.84)
+Santa  =>  Santa's Magic [SantasMagic] = 3.0 (0.84)
+Sharky_K_20247  =>  Shark [Shark] = 20.0 (0.84)
+SkellyBones  =>  Bones [Bones] = 240.0 (0.84)
+SkellyBones2020  =>  Bones [Bones] = 240.0 (0.84)
+Snowflake  =>  Snowflake [Snowflake] = 5.0 (1.0)
+Snowflake2021  =>  Snowflake [Snowflake] = 5.0 (0.84)
+Starry  =>  Starry [Starry] = 5.0 (1.0)
+Sunbeams  =>  Sun [Sun] = 3.0 (0.84)
+Sunbeams2024  =>  Sun [Sun] = 3.0 (0.84)
+Sunbeams20245  =>  Sun [Sun] = 3.0 (0.84)
+Sunny_G_20254  =>  Sun [Sun] = 3.0 (0.84)
+Sunrise  =>  Sunrise [Sunrise] = 1125.0 (1.0)
+Sunset  =>  Sun Set [SunSet] = 1750.0 (1.0)
+SweetBundleEffect  =>  Sweet [Sweet] = 155.0 (0.84)
+SweetEffect26  =>  Sweet [Sweet] = 155.0 (0.84)
+Traveler's Axe  =>  Traveler's Axe [TravelersAxe] = 8100.0 (1.0)
+Traveler's Gun  =>  Traveler's Gun [TravelersGun] = 5400.0 (1.0)
+Treats  =>  Treat [Treat] = 160.0 (0.909)
+Treats2025  =>  Treat [Treat] = 160.0 (0.84)
+Vampire  =>  Vampire [Vampire] = 1.0 (1.0)
+VampireRadio2024  =>  Vampire [Vampire] = 1.0 (0.84)
+Villager's Lantern  =>  Lantern [Lantern] = 2.0 (0.84)
+Void  =>  Void [Void] = 12.0 (1.0)
+VoidRbxEffect  =>  Void [Void] = 12.0 (0.84)
+Xeno  =>  Xeno Set [XenoSet] = 540.0 (0.9)

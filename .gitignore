@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+dist/
+build/
+.venv/
+venv/
+env/
+
+# Secrets / local env
+.env
+.env.*
+!.env.example
+*.pem
+credentials.json
+secrets.json
+
+# Local logs / scratch
+scrape_log.txt
+*.log
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Playwright / browser caches (if ever placed in-repo)
+.playwright/
+playwright-report/
+test-results/
