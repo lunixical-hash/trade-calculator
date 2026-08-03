@@ -25,13 +25,13 @@ Values are sourced from [Supreme Values](https://supremevalues.com/mm2/).
 If Pages is enabled on this repo (Settings → Pages → Deploy from branch **main** / root `/`):
 
 ```
-https://<your-github-username>.github.io/mm2-values-scraper/
+https://lunixical-hash.github.io/mm2-values-scraper/
 ```
 
 That serves `index.html`, which redirects to the calculator. Direct link:
 
 ```
-https://<your-github-username>.github.io/mm2-values-scraper/trade_calculator.html
+https://lunixical-hash.github.io/mm2-values-scraper/trade_calculator.html
 ```
 
 See [Publish to GitHub](#publish-to-github) below to turn Pages on.
