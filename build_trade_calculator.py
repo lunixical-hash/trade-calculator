@@ -1786,273 +1786,419 @@ def main() -> None:
     display: none;
   }}
 
-  /* Trade history modal */
+  /* Trade history modal — split list + detail */
+  .graph-modal.trade-hist-modal {{
+    width: min(1180px, 98vw);
+    height: min(92vh, 900px);
+  }}
   .trade-hist-body {{
     flex: 1;
     min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(280px, 340px) minmax(0, 1fr);
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+  }}
+  .trade-hist-sidebar {{
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    padding: 18px 20px 20px;
-    overflow: hidden;
+    min-height: 0;
+    border-right: 1px solid var(--line);
+    background: rgba(0, 0, 0, 0.18);
+  }}
+  .trade-hist-sidebar-head {{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px 14px 12px;
+    border-bottom: 1px solid var(--line);
+    flex-shrink: 0;
   }}
   .trade-hist-meta {{
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 16px;
-    font-size: 13px;
+    gap: 8px 14px;
+    font-size: 12px;
     color: var(--muted);
-    flex-shrink: 0;
   }}
   .trade-hist-meta strong {{
     color: var(--text);
     font-weight: 800;
   }}
+  .trade-hist-filter {{
+    width: 100%;
+    border: 1px solid var(--line-strong);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 10px 12px;
+  }}
+  .trade-hist-filter::placeholder {{ color: var(--muted); }}
+  .trade-hist-filter:focus {{
+    outline: none;
+    border-color: var(--purple);
+    box-shadow: 0 0 0 2px rgba(var(--purple-rgb), 0.25);
+  }}
   .trade-hist-list {{
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 8px;
     overflow: auto;
     flex: 1;
     min-height: 0;
-    padding-right: 4px;
+    padding: 12px;
   }}
   .trade-hist-empty {{
     padding: 36px 16px;
     text-align: center;
     color: var(--muted);
     font-size: 14px;
+    line-height: 1.45;
   }}
   .trade-hist-card {{
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    background: rgba(255,255,255,0.02);
-    overflow: hidden;
-    flex-shrink: 0;
-  }}
-  .trade-hist-card.open {{
-    border-color: rgba(var(--purple-rgb), 0.55);
-    box-shadow: 0 0 0 1px rgba(var(--purple-rgb), 0.2);
-  }}
-  .trade-hist-top {{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 14px 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 8px 12px;
+    padding: 12px 12px 12px 14px;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.03);
     cursor: pointer;
-    width: 100%;
-    border: none;
-    background: transparent;
+    text-align: left;
     color: inherit;
     font: inherit;
-    text-align: left;
+    width: 100%;
+    transition: background .15s ease, border-color .15s ease;
   }}
-  .trade-hist-top:hover {{
-    background: rgba(var(--purple-rgb), 0.08);
+  .trade-hist-card:hover {{
+    background: rgba(var(--purple-rgb), 0.1);
   }}
-  .trade-hist-head-main {{
+  .trade-hist-card.active {{
+    background: rgba(var(--purple-rgb), 0.18);
+    border-color: rgba(var(--purple-rgb), 0.55);
+    box-shadow: inset 3px 0 0 var(--purple-bright);
+  }}
+  .trade-hist-card-main {{
     display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
   }}
-  .trade-hist-top .when {{
-    font-size: 14px;
+  .trade-hist-card .when {{
+    font-size: 13px;
     font-weight: 800;
     line-height: 1.3;
   }}
-  .trade-hist-top .hindsight {{
-    font-size: 16px;
-    font-weight: 800;
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-  }}
-  .trade-hist-top .hindsight.win {{ color: var(--green-soft); }}
-  .trade-hist-top .hindsight.loss {{ color: #f87171; }}
-  .trade-hist-top .hindsight.fair {{ color: var(--muted); }}
-  .trade-hist-head-sub {{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px;
-  }}
-  .trade-hist-pill {{
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 9px;
-    border-radius: 999px;
-    border: 1px solid var(--line);
-    background: rgba(255,255,255,0.03);
+  .trade-hist-card .status {{
     font-size: 12px;
     font-weight: 700;
     color: var(--muted);
+  }}
+  .trade-hist-card .status .src {{
+    color: #fcd34d;
+  }}
+  .trade-hist-card-side {{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+  }}
+  .trade-hist-card .mark {{
+    font-size: 22px;
+    font-weight: 900;
+    line-height: 1;
+    opacity: 0.85;
+  }}
+  .trade-hist-card .mark.win {{ color: var(--green-soft); }}
+  .trade-hist-card .mark.loss {{ color: #f87171; }}
+  .trade-hist-card .mark.fair {{ color: var(--muted); font-size: 16px; }}
+  .trade-hist-pill {{
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.03);
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--muted);
     font-variant-numeric: tabular-nums;
+    white-space: nowrap;
   }}
   .trade-hist-pill.win {{
     color: var(--green-soft);
     border-color: rgba(52, 211, 153, 0.35);
-    background: rgba(52, 211, 153, 0.08);
+    background: rgba(52, 211, 153, 0.1);
   }}
   .trade-hist-pill.loss {{
     color: #f87171;
     border-color: rgba(248, 113, 113, 0.35);
-    background: rgba(248, 113, 113, 0.08);
+    background: rgba(248, 113, 113, 0.1);
   }}
-  .trade-hist-pill.from-inv {{
-    color: #fcd34d;
-    border-color: rgba(251, 191, 36, 0.4);
-    background: rgba(251, 191, 36, 0.1);
-  }}
-  .trade-hist-pill.chev {{
-    margin-left: auto;
-    color: var(--purple-bright);
-    border-color: rgba(var(--purple-rgb), 0.35);
-  }}
-  .trade-hist-compare {{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    width: 100%;
-  }}
-  .trade-hist-compare .col {{
+  .trade-hist-detail {{
     display: flex;
     flex-direction: column;
-    gap: 2px;
-    padding: 8px 10px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    background: rgba(0,0,0,0.18);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-  }}
-  .trade-hist-compare .col .label {{
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    color: var(--purple-bright);
-  }}
-  .trade-hist-compare .col .line strong {{
-    color: var(--text);
-    font-weight: 800;
-  }}
-  .trade-hist-compare .col .net.win {{ color: var(--green-soft); }}
-  .trade-hist-compare .col .net.loss {{ color: #f87171; }}
-  .trade-hist-compare .col .net.fair {{ color: var(--muted); }}
-  .trade-hist-body-inner {{
-    display: none;
-    border-top: 1px solid var(--line);
-    padding: 14px 16px 16px;
-  }}
-  .trade-hist-card.open .trade-hist-body-inner {{
-    display: block;
-  }}
-  .trade-hist-sides {{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin-bottom: 12px;
-  }}
-  .trade-hist-side h5 {{
-    margin: 0 0 8px;
-    font-size: 11px;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    color: var(--muted);
-  }}
-  .trade-hist-items {{
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    max-height: min(36vh, 280px);
+    min-height: 0;
     overflow: auto;
+    padding: 18px 20px 22px;
+    background:
+      radial-gradient(700px 320px at 80% -10%, rgba(var(--purple-rgb), 0.14), transparent 60%),
+      linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%);
   }}
-  .trade-hist-row {{
-    display: grid;
-    grid-template-columns: 40px 1fr;
-    grid-template-rows: auto auto;
-    column-gap: 10px;
-    row-gap: 2px;
-    align-items: center;
-    padding: 8px;
-    border-radius: 10px;
-    border: 1px solid var(--line);
-    background: rgba(255,255,255,0.02);
-  }}
-  .trade-hist-row img, .trade-hist-row .noimg {{
-    grid-row: 1 / 3;
-    width: 40px;
-    height: 40px;
-    border-radius: 8px;
-    object-fit: contain;
-    background: #0d0b14;
-  }}
-  .trade-hist-row .noimg {{
-    display: grid;
-    place-items: center;
+  .trade-hist-detail-empty {{
+    margin: auto;
+    text-align: center;
     color: var(--muted);
-    font-size: 12px;
-    font-weight: 700;
+    font-size: 14px;
+    padding: 40px 20px;
   }}
-  .trade-hist-row .name {{
-    font-size: 13px;
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }}
-  .trade-hist-row .detail {{
-    font-size: 11px;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-  }}
-  .trade-hist-row .detail strong {{
-    color: var(--text);
-  }}
-  .trade-hist-row .detail .up {{ color: var(--green-soft); }}
-  .trade-hist-row .detail .down {{ color: #f87171; }}
-  .trade-hist-actions {{
+  .trade-hist-detail-head {{
     display: flex;
-    gap: 8px;
     flex-wrap: wrap;
-    padding: 0 16px 14px;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
   }}
-  .trade-hist-actions.inner {{
-    padding: 0;
-    margin-top: 4px;
-  }}
-  .trade-hist-actions button {{
-    border: 1px solid var(--line-strong);
-    background: transparent;
+  .trade-hist-detail-head h4 {{
+    margin: 0 0 4px;
+    font-size: 18px;
+    font-weight: 800;
     color: var(--text);
-    font: inherit;
+  }}
+  .trade-hist-detail-head .sub {{
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+  }}
+  .trade-hist-detail-actions {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }}
+  .trade-hist-detail-actions button {{
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.04);
+    color: var(--muted);
+    font-family: inherit;
     font-weight: 700;
     font-size: 12px;
     padding: 8px 12px;
-    border-radius: 10px;
+    border-radius: 9px;
     cursor: pointer;
   }}
-  .trade-hist-actions button.show-prev {{
-    border-color: rgba(var(--purple-rgb), 0.55);
-    color: var(--purple-bright);
-    background: rgba(var(--purple-rgb), 0.14);
+  .trade-hist-detail-actions button:hover {{
+    color: #fecaca;
+    border-color: rgba(248, 113, 113, 0.45);
+  }}
+  .trade-hist-section {{
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    margin-bottom: 14px;
+  }}
+  .trade-hist-section:last-child {{ margin-bottom: 0; }}
+  .trade-hist-section-top {{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 14px;
+  }}
+  .trade-hist-section-top h5 {{
+    margin: 0;
+    font-size: 13px;
     font-weight: 800;
-    flex: 1;
-    min-width: 140px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--purple-bright);
   }}
-  .trade-hist-actions button.show-prev:hover {{
-    border-color: var(--purple);
-    color: #fff;
-    background: rgba(var(--purple-rgb), 0.28);
+  .trade-hist-section-totals {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
   }}
-  .trade-hist-actions button.remove-trade:hover {{
-    border-color: var(--red);
-    color: #f87171;
+  .trade-hist-section-totals strong {{
+    color: var(--text);
+    font-weight: 800;
   }}
-  @media (max-width: 720px) {{
-    .trade-hist-sides {{ grid-template-columns: 1fr; }}
-    .trade-hist-compare {{ grid-template-columns: 1fr; }}
+  .trade-hist-cards {{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }}
+  .trade-hist-item-card {{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.03);
+    min-width: 0;
+  }}
+  .trade-hist-item-card.clickable {{
+    cursor: pointer;
+  }}
+  .trade-hist-item-card.clickable:hover {{
+    border-color: rgba(var(--purple-rgb), 0.55);
+    background: rgba(var(--purple-rgb), 0.08);
+  }}
+  .trade-hist-item-card .art-wrap {{
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    border-radius: 10px;
+    background: #0d0b14;
+    overflow: hidden;
+  }}
+  .trade-hist-item-card img,
+  .trade-hist-item-card .noimg {{
+    width: 72%;
+    height: 72%;
+    object-fit: contain;
+  }}
+  .trade-hist-item-card .noimg {{
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-weight: 800;
+  }}
+  .trade-hist-item-card .iname {{
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.25;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 2.5em;
+  }}
+  .trade-hist-item-card .qty {{
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+  }}
+  .trade-hist-item-card .vals {{
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }}
+  .trade-hist-item-card .vals strong {{
+    color: var(--text);
+    font-weight: 800;
+  }}
+  .trade-hist-item-card .vals .up {{ color: var(--green-soft); }}
+  .trade-hist-item-card .vals .down {{ color: #f87171; }}
+  .trade-hist-banners {{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 14px;
+  }}
+  .trade-hist-banner {{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+    border: 1px solid transparent;
+  }}
+  .trade-hist-banner.win {{
+    color: var(--green-soft);
+    background: rgba(52, 211, 153, 0.12);
+    border-color: rgba(52, 211, 153, 0.35);
+  }}
+  .trade-hist-banner.loss {{
+    color: #fecaca;
+    background: rgba(248, 113, 113, 0.14);
+    border-color: rgba(248, 113, 113, 0.4);
+  }}
+  .trade-hist-banner.fair {{
+    color: var(--muted);
+    background: rgba(255,255,255,0.04);
+    border-color: var(--line);
+  }}
+  .trade-hist-summary {{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.03);
+  }}
+  .trade-hist-summary .box {{
+    text-align: center;
+  }}
+  .trade-hist-summary .box .num {{
+    font-size: 22px;
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }}
+  .trade-hist-summary .box .label {{
+    margin-top: 2px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }}
+  .trade-hist-summary .box .sub {{
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+  }}
+  .trade-hist-summary .box .sub strong {{ color: var(--text); }}
+  .trade-hist-summary .mid {{
+    text-align: center;
+    min-width: 110px;
+  }}
+  .trade-hist-summary .mid .verdict {{
+    margin: 0;
+    font-size: 18px;
+    font-weight: 800;
+  }}
+  .trade-hist-summary .mid .verdict.win {{ color: var(--green-soft); }}
+  .trade-hist-summary .mid .verdict.loss {{ color: #f87171; }}
+  .trade-hist-summary .mid .verdict.fair {{ color: var(--muted); }}
+  .trade-hist-summary .mid .hint {{
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+  }}
+  @media (max-width: 860px) {{
+    .trade-hist-body {{
+      grid-template-columns: 1fr;
+      grid-template-rows: minmax(220px, 38%) minmax(0, 1fr);
+    }}
+    .trade-hist-sidebar {{
+      border-right: none;
+      border-bottom: 1px solid var(--line);
+    }}
+    .trade-hist-summary {{
+      grid-template-columns: 1fr;
+    }}
   }}
 
   /* Previous trade preview modal */
@@ -4026,17 +4172,23 @@ def main() -> None:
   </div>
 
   <div class="graph-backdrop" id="tradeHistModal" role="dialog" aria-modal="true">
-    <div class="graph-modal">
+    <div class="graph-modal trade-hist-modal">
       <div class="graph-head">
         <h3>Trade history</h3>
         <button class="modal-close" id="tradeHistClose" type="button" aria-label="Close">×</button>
       </div>
       <div class="trade-hist-body">
-        <div class="trade-hist-meta">
-          <span>Saved trades: <strong id="tradeHistCount">0</strong></span>
-          <span>Cap: <strong>40</strong></span>
-        </div>
-        <div class="trade-hist-list" id="tradeHistList"></div>
+        <aside class="trade-hist-sidebar">
+          <div class="trade-hist-sidebar-head">
+            <div class="trade-hist-meta">
+              <span>Saved: <strong id="tradeHistCount">0</strong></span>
+              <span>Cap: <strong>40</strong></span>
+            </div>
+            <input class="trade-hist-filter" id="tradeHistFilter" type="search" placeholder="Filter trades" autocomplete="off" />
+          </div>
+          <div class="trade-hist-list" id="tradeHistList"></div>
+        </aside>
+        <section class="trade-hist-detail" id="tradeHistDetail"></section>
       </div>
     </div>
   </div>
@@ -5134,8 +5286,12 @@ const redoBtn = document.getElementById('redoBtn');
 const tradeHistBtn = document.getElementById('tradeHistBtn');
 const tradeHistModal = document.getElementById('tradeHistModal');
 const tradeHistList = document.getElementById('tradeHistList');
+const tradeHistDetail = document.getElementById('tradeHistDetail');
+const tradeHistFilter = document.getElementById('tradeHistFilter');
 const tradeHistCountEl = document.getElementById('tradeHistCount');
 const tradeHistBadge = document.getElementById('tradeHistBadge');
+let tradeHistSelectedIdx = -1;
+let tradeHistFilterText = '';
 const prevTradeModal = document.getElementById('prevTradeModal');
 const prevTradeTitle = document.getElementById('prevTradeTitle');
 const prevTradeMeta = document.getElementById('prevTradeMeta');
@@ -6563,159 +6719,270 @@ function openPrevTrade(tr) {{
   prevTradeModal.classList.add('open');
 }}
 
-function tradeHistItemRow(entry) {{
+function tradeHistPct(delta, base) {{
+  if (!Number.isFinite(delta) || !Number.isFinite(base) || Math.abs(base) < 0.5) return '';
+  const pct = (delta / Math.abs(base)) * 100;
+  if (!Number.isFinite(pct)) return '';
+  return ' (' + (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%)';
+}}
+
+function tradeHistItemCard(entry) {{
   const item = byId[entry.id];
   const name = item ? item.name : entry.id;
   const image = item ? item.image : '';
-  const thenV = (Number.isFinite(entry.value) ? entry.value : 0) * (entry.qty || 1);
+  const qty = entry.qty || 1;
+  const thenUnit = Number.isFinite(entry.value) ? entry.value : 0;
   const nowUnit = item ? item.value : 0;
-  const nowV = nowUnit * (entry.qty || 1);
+  const thenV = thenUnit * qty;
+  const nowV = nowUnit * qty;
   const delta = nowV - thenV;
   let deltaHtml = '';
   if (Math.abs(delta) >= 0.5) {{
     const cls = delta > 0 ? 'up' : 'down';
-    deltaHtml = ' · <span class="' + cls + '">' + signedFmt(delta) + '</span>';
+    deltaHtml = '<span class="' + cls + '">' + signedFmt(delta) + tradeHistPct(delta, thenV) + '</span>';
   }}
   const art = image
     ? '<img src="' + image + '" alt="" loading="lazy" referrerpolicy="no-referrer" />'
     : '<div class="noimg">?</div>';
-  const line = document.createElement('div');
-  line.className = 'trade-hist-row';
-  line.innerHTML =
-    art +
-    '<div class="name" title="' + name + '">' + name + '</div>' +
-    '<div class="detail">×' + (entry.qty || 1) +
-      ' · then <strong>' + fmt(thenV) + '</strong>' +
-      ' · now <strong>' + fmt(nowV) + '</strong>' + deltaHtml +
+  const card = document.createElement('div');
+  card.className = 'trade-hist-item-card' + (item ? ' clickable' : '');
+  card.innerHTML =
+    '<div class="art-wrap">' + art + '</div>' +
+    '<div class="iname" title="' + name + '">' + name + '</div>' +
+    '<div class="qty">×' + qty + '</div>' +
+    '<div class="vals">' +
+      '<span>then <strong>' + fmt(thenV) + '</strong></span>' +
+      '<span>now <strong>' + fmt(nowV) + '</strong></span>' +
+      (deltaHtml ? '<span>' + deltaHtml + '</span>' : '') +
     '</div>';
-  return line;
+  if (item) {{
+    card.addEventListener('click', () => openDetail(item));
+  }}
+  return card;
+}}
+
+function fillTradeHistCards(container, side) {{
+  container.innerHTML = '';
+  if (!side.length) {{
+    container.innerHTML = '<div class="trade-hist-empty" style="padding:18px 8px">No items</div>';
+    return;
+  }}
+  const frag = document.createDocumentFragment();
+  for (const e of side) frag.appendChild(tradeHistItemCard(e));
+  container.appendChild(frag);
+}}
+
+function tradeMatchesFilter(tr, q) {{
+  if (!q) return true;
+  const bits = [formatFullDate(tr.t), tr.source === 'inventory' ? 'inventory' : 'offer'];
+  for (const e of tr.your.concat(tr.their)) {{
+    const item = byId[e.id];
+    bits.push(e.id);
+    if (item) bits.push(item.name);
+  }}
+  return bits.join(' ').toLowerCase().includes(q);
+}}
+
+function renderTradeHistDetail(tr, idx) {{
+  if (!tradeHistDetail) return;
+  if (!tr) {{
+    tradeHistDetail.innerHTML =
+      '<div class="trade-hist-detail-empty">Select a trade from the list<br/>to see items you gave and received.</div>';
+    return;
+  }}
+
+  const yourNow = sideValueNow(tr.your);
+  const theirNow = sideValueNow(tr.their);
+  const netNow = theirNow - yourNow;
+  const hindsight = netNow - tr.net;
+  const yourGain = yourNow - tr.yourTotal;
+  const theirGain = theirNow - tr.theirTotal;
+  const fromInv = tr.source === 'inventory';
+
+  const hCls = netClass(hindsight);
+  const hText = Math.abs(hindsight) < 0.5
+    ? 'Even vs then'
+    : (hindsight > 0 ? 'Better ' : 'Worse ') + signedFmt(hindsight) + tradeHistPct(hindsight, Math.abs(tr.net) || tr.yourTotal || 1);
+
+  const netArrow = (n) => {{
+    if (!Number.isFinite(n) || Math.abs(n) < 0.5) return '· ';
+    return n > 0 ? '↑ ' : '↓ ';
+  }};
+
+  tradeHistDetail.innerHTML =
+    '<div class="trade-hist-detail-head">' +
+      '<div>' +
+        '<h4>' + (fromInv ? 'Inferred trade' : 'Completed trade') + '</h4>' +
+        '<p class="sub">' + formatFullDate(tr.t) +
+          (fromInv ? ' · From inventory snapshot' : ' · Offer Completed') +
+        '</p>' +
+      '</div>' +
+      '<div class="trade-hist-detail-actions" data-actions></div>' +
+    '</div>' +
+    '<div class="trade-hist-summary">' +
+      '<div class="box">' +
+        '<div class="num">' + fmt(tr.yourTotal) + '</div>' +
+        '<div class="label">YOU GAVE · THEN</div>' +
+        '<div class="sub">now <strong>' + fmt(yourNow) + '</strong></div>' +
+      '</div>' +
+      '<div class="mid">' +
+        '<p class="verdict ' + netClass(tr.net) + '">' + netArrow(tr.net) + 'Net ' + netLabel(tr.net) + '</p>' +
+        '<p class="verdict ' + netClass(netNow) + '" style="font-size:15px;margin-top:6px">' +
+          netArrow(netNow) + 'Now ' + netLabel(netNow) +
+        '</p>' +
+        '<div class="hint hindsight ' + hCls + '">' + hText + '</div>' +
+      '</div>' +
+      '<div class="box">' +
+        '<div class="num">' + fmt(tr.theirTotal) + '</div>' +
+        '<div class="label">YOU GOT · THEN</div>' +
+        '<div class="sub">now <strong>' + fmt(theirNow) + '</strong></div>' +
+      '</div>' +
+    '</div>' +
+    '<div class="trade-hist-section" data-section="gave">' +
+      '<div class="trade-hist-section-top">' +
+        '<h5>Items you gave</h5>' +
+        '<div class="trade-hist-section-totals">' +
+          '<span>Then <strong>' + fmt(tr.yourTotal) + '</strong></span>' +
+          '<span>Now <strong>' + fmt(yourNow) + '</strong></span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="trade-hist-cards" data-cards="your"></div>' +
+      '<div class="trade-hist-banners">' +
+        '<span class="trade-hist-banner ' + netClass(-yourGain) + '">' +
+          netArrow(-yourGain) + 'Gave side ' + signedFmt(yourGain) + tradeHistPct(yourGain, tr.yourTotal) +
+        '</span>' +
+        '<span class="trade-hist-banner ' + netClass(tr.net) + '">' +
+          netArrow(tr.net) + 'Trade net ' + netLabel(tr.net) +
+        '</span>' +
+      '</div>' +
+    '</div>' +
+    '<div class="trade-hist-section" data-section="got">' +
+      '<div class="trade-hist-section-top">' +
+        '<h5>Items you received</h5>' +
+        '<div class="trade-hist-section-totals">' +
+          '<span>Then <strong>' + fmt(tr.theirTotal) + '</strong></span>' +
+          '<span>Now <strong>' + fmt(theirNow) + '</strong></span>' +
+        '</div>' +
+      '</div>' +
+      '<div class="trade-hist-cards" data-cards="their"></div>' +
+      '<div class="trade-hist-banners">' +
+        '<span class="trade-hist-banner ' + netClass(theirGain) + '">' +
+          netArrow(theirGain) + 'Got side ' + signedFmt(theirGain) + tradeHistPct(theirGain, tr.theirTotal) +
+        '</span>' +
+        '<span class="trade-hist-banner ' + netClass(netNow) + '">' +
+          netArrow(netNow) + 'Now net ' + netLabel(netNow) +
+        '</span>' +
+      '</div>' +
+    '</div>';
+
+  fillTradeHistCards(tradeHistDetail.querySelector('[data-cards="your"]'), tr.your);
+  fillTradeHistCards(tradeHistDetail.querySelector('[data-cards="their"]'), tr.their);
+
+  const actionsEl = tradeHistDetail.querySelector('[data-actions]');
+  const showBtn = document.createElement('button');
+  showBtn.type = 'button';
+  showBtn.textContent = 'Open board view';
+  showBtn.addEventListener('click', () => openPrevTrade(tr));
+  actionsEl.appendChild(showBtn);
+
+  const delBtn = document.createElement('button');
+  delBtn.type = 'button';
+  delBtn.textContent = 'Remove';
+  delBtn.addEventListener('click', () => {{
+    if (!confirm('Remove this trade from history?')) return;
+    closePrevTrade();
+    const removed = state.tradeHistory[idx];
+    if (removed && removed.source === 'inventory' && removed.key) {{
+      dismissTradeKey(removed.key);
+    }}
+    state.tradeHistory.splice(idx, 1);
+    if (tradeHistSelectedIdx === idx) tradeHistSelectedIdx = -1;
+    else if (tradeHistSelectedIdx > idx) tradeHistSelectedIdx -= 1;
+    persistTradeHistory();
+    renderTradeHistory();
+  }});
+  actionsEl.appendChild(delBtn);
+}}
+
+function selectTradeHistory(idx) {{
+  tradeHistSelectedIdx = idx;
+  const tr = idx >= 0 ? state.tradeHistory[idx] : null;
+  tradeHistList.querySelectorAll('.trade-hist-card').forEach((el) => {{
+    el.classList.toggle('active', Number(el.dataset.idx) === idx);
+  }});
+  renderTradeHistDetail(tr, idx);
 }}
 
 function renderTradeHistory() {{
   updateTradeHistBadge();
   tradeHistList.innerHTML = '';
+  const q = (tradeHistFilterText || '').trim().toLowerCase();
+
   if (!state.tradeHistory.length) {{
     tradeHistList.innerHTML =
       '<div class="trade-hist-empty">No saved trades yet.<br/>' +
       'Complete a trade with <strong>Offer Completed</strong>, or save inventory ' +
       'snapshots (before/after a trade) so we can infer one.</div>';
+    renderTradeHistDetail(null, -1);
     return;
   }}
 
   const frag = document.createDocumentFragment();
-  let firstCard = null;
+  let firstVisible = -1;
+  let selectedVisible = false;
+
   for (let i = state.tradeHistory.length - 1; i >= 0; i--) {{
     const tr = state.tradeHistory[i];
+    if (!tradeMatchesFilter(tr, q)) continue;
+    if (firstVisible < 0) firstVisible = i;
+    if (i === tradeHistSelectedIdx) selectedVisible = true;
+
     const yourNow = sideValueNow(tr.your);
     const theirNow = sideValueNow(tr.their);
     const netNow = theirNow - yourNow;
     const hindsight = netNow - tr.net;
     const yourGain = yourNow - tr.yourTotal;
     const theirGain = theirNow - tr.theirTotal;
-
-    const card = document.createElement('div');
-    card.className = 'trade-hist-card';
-    if (!firstCard) firstCard = card;
-
-    const hCls = netClass(hindsight);
-    const hText = Math.abs(hindsight) < 0.5
-      ? 'Even vs then'
-      : (hindsight > 0 ? 'Better ' : 'Worse ') + signedFmt(hindsight);
-
     const fromInv = tr.source === 'inventory';
+    const markCls = netClass(tr.net);
+    const mark =
+      markCls === 'win' ? '+' : markCls === 'loss' ? '−' : '·';
+
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'trade-hist-card' + (i === tradeHistSelectedIdx ? ' active' : '');
+    card.dataset.idx = String(i);
     card.innerHTML =
-      '<button class="trade-hist-top" type="button">' +
-        '<div class="trade-hist-head-main">' +
-          '<span class="when">' + formatFullDate(tr.t) + '</span>' +
-          '<span class="hindsight ' + hCls + '">' + hText + '</span>' +
-        '</div>' +
-        '<div class="trade-hist-compare">' +
-          '<div class="col">' +
-            '<span class="label">THEN</span>' +
-            '<span class="line">You <strong>' + fmt(tr.yourTotal) + '</strong> · Them <strong>' + fmt(tr.theirTotal) + '</strong></span>' +
-            '<span class="net ' + netClass(tr.net) + '">Net ' + netLabel(tr.net) + '</span>' +
-          '</div>' +
-          '<div class="col">' +
-            '<span class="label">NOW</span>' +
-            '<span class="line">You <strong>' + fmt(yourNow) + '</strong> · Them <strong>' + fmt(theirNow) + '</strong></span>' +
-            '<span class="net ' + netClass(netNow) + '">Net ' + netLabel(netNow) + '</span>' +
-          '</div>' +
-        '</div>' +
-        '<div class="trade-hist-head-sub">' +
-          (fromInv ? '<span class="trade-hist-pill from-inv">From inventory</span>' : '') +
-          '<span class="trade-hist-pill ' + netClass(theirGain) + '">Got ' + signedFmt(theirGain) + '</span>' +
-          '<span class="trade-hist-pill ' + netClass(-yourGain) + '">Gave ' + signedFmt(yourGain) + '</span>' +
-          '<span class="trade-hist-pill chev">Show items</span>' +
-        '</div>' +
-      '</button>' +
-      '<div class="trade-hist-actions" data-actions></div>' +
-      '<div class="trade-hist-body-inner">' +
-        '<div class="trade-hist-sides">' +
-          '<div class="trade-hist-side">' +
-            '<h5>YOUR OFFER</h5>' +
-            '<div class="trade-hist-items" data-side="your"></div>' +
-          '</div>' +
-          '<div class="trade-hist-side">' +
-            '<h5>THEIR OFFER</h5>' +
-            '<div class="trade-hist-items" data-side="their"></div>' +
-          '</div>' +
-        '</div>' +
+      '<div class="trade-hist-card-main">' +
+        '<span class="when">' + formatFullDate(tr.t) + '</span>' +
+        '<span class="status">Completed' +
+          (fromInv ? ' · <span class="src">From inventory</span>' : '') +
+        '</span>' +
+      '</div>' +
+      '<div class="trade-hist-card-side">' +
+        '<span class="mark ' + markCls + '">' + mark + '</span>' +
+        '<span class="trade-hist-pill ' + netClass(tr.net) + '">' + signedFmt(tr.net) + '</span>' +
+        '<span class="trade-hist-pill ' + netClass(theirGain) + '">Got ' + signedFmt(theirGain) + '</span>' +
+        '<span class="trade-hist-pill ' + netClass(-yourGain) + '">Gave ' + signedFmt(yourGain) + '</span>' +
+        (Math.abs(hindsight) >= 0.5
+          ? '<span class="trade-hist-pill ' + netClass(hindsight) + '">Now ' + signedFmt(hindsight) + '</span>'
+          : '') +
       '</div>';
-
-    const yourItemsEl = card.querySelector('[data-side="your"]');
-    const theirItemsEl = card.querySelector('[data-side="their"]');
-    for (const e of tr.your) yourItemsEl.appendChild(tradeHistItemRow(e));
-    for (const e of tr.their) theirItemsEl.appendChild(tradeHistItemRow(e));
-
-    const actionsEl = card.querySelector('[data-actions]');
-    const showBtn = document.createElement('button');
-    showBtn.type = 'button';
-    showBtn.className = 'show-prev';
-    showBtn.textContent = 'Show previous trade';
-    showBtn.addEventListener('click', (e) => {{
-      e.stopPropagation();
-      openPrevTrade(tr);
-    }});
-    actionsEl.appendChild(showBtn);
-
-    const delBtn = document.createElement('button');
-    delBtn.type = 'button';
-    delBtn.className = 'remove-trade';
-    delBtn.textContent = 'Remove';
-    delBtn.addEventListener('click', (e) => {{
-      e.stopPropagation();
-      if (!confirm('Remove this trade from history?')) return;
-      closePrevTrade();
-      const removed = state.tradeHistory[i];
-      if (removed && removed.source === 'inventory' && removed.key) {{
-        dismissTradeKey(removed.key);
-      }}
-      state.tradeHistory.splice(i, 1);
-      persistTradeHistory();
-      renderTradeHistory();
-    }});
-    actionsEl.appendChild(delBtn);
-
-    const chev = card.querySelector('.trade-hist-pill.chev');
-    card.querySelector('.trade-hist-top').addEventListener('click', () => {{
-      const open = card.classList.toggle('open');
-      if (chev) chev.textContent = open ? 'Hide items' : 'Show items';
-      tradeHistList.querySelectorAll('.trade-hist-card.open').forEach((other) => {{
-        if (other === card) return;
-        other.classList.remove('open');
-        const otherChev = other.querySelector('.trade-hist-pill.chev');
-        if (otherChev) otherChev.textContent = 'Show items';
-      }});
-    }});
-
+    card.addEventListener('click', () => selectTradeHistory(i));
     frag.appendChild(card);
   }}
-  tradeHistList.appendChild(frag);
-  if (firstCard) {{
-    firstCard.classList.add('open');
-    const chev = firstCard.querySelector('.trade-hist-pill.chev');
-    if (chev) chev.textContent = 'Hide items';
+
+  if (!frag.childNodes.length) {{
+    tradeHistList.innerHTML =
+      '<div class="trade-hist-empty">No trades match your filter.</div>';
+    renderTradeHistDetail(null, -1);
+    return;
   }}
+
+  tradeHistList.appendChild(frag);
+
+  const pick = selectedVisible ? tradeHistSelectedIdx : firstVisible;
+  selectTradeHistory(pick);
 }}
 
 function loadInv() {{
@@ -9097,6 +9364,12 @@ if (tradeHistModal) {{
   document.getElementById('tradeHistClose').addEventListener('click', closeTradeHistory);
   tradeHistModal.addEventListener('click', (e) => {{
     if (e.target === tradeHistModal) closeTradeHistory();
+  }});
+}}
+if (tradeHistFilter) {{
+  tradeHistFilter.addEventListener('input', () => {{
+    tradeHistFilterText = tradeHistFilter.value || '';
+    renderTradeHistory();
   }});
 }}
 if (prevTradeModal) {{
