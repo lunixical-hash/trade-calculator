@@ -1,6 +1,6 @@
 # Lunix's AI Trade Assistant
 
-MM2 values scraper (Supreme Values) plus a browser-based trade calculator — **Lunix's AI Trade Assistant**.
+Trade calculator for Murder Mystery 2 values (scraped from Supreme Values) — **Lunix's AI Trade Assistant**.
 
 | Artifact | Purpose |
 |---|---|
@@ -8,6 +8,9 @@ MM2 values scraper (Supreme Values) plus a browser-based trade calculator — **
 | `build_trade_calculator.py` | Rebuilds `trade_calculator.html` from that JSON |
 | `trade_calculator.html` | Standalone calculator (open in any browser) |
 | `calculator_overlay.py` | Optional always-on-top Windows overlay |
+
+**Repo:** https://github.com/lunixical-hash/trade-calculator  
+**Live site:** https://lunixical-hash.github.io/trade-calculator/
 
 Values are sourced from [Supreme Values](https://supremevalues.com/mm2/).
 
@@ -22,19 +25,15 @@ Values are sourced from [Supreme Values](https://supremevalues.com/mm2/).
 
 ### Option B — GitHub Pages (one-click)
 
-If Pages is enabled on this repo (Settings → Pages → Deploy from branch **main** / root `/`):
-
 ```
-https://lunixical-hash.github.io/mm2-values-scraper/
+https://lunixical-hash.github.io/trade-calculator/
 ```
 
 That serves `index.html`, which redirects to the calculator. Direct link:
 
 ```
-https://lunixical-hash.github.io/mm2-values-scraper/trade_calculator.html
+https://lunixical-hash.github.io/trade-calculator/trade_calculator.html
 ```
-
-See [Publish to GitHub](#publish-to-github) below to turn Pages on.
 
 ### Option C — Windows overlay
 
@@ -51,7 +50,7 @@ python calculator_overlay.py
 ### Setup (once)
 
 ```powershell
-cd path\to\mm2-values-scraper
+cd path\to\trade-calculator
 python -m pip install -r requirements.txt
 python -m playwright install chromium
 ```
@@ -103,43 +102,34 @@ Left = website name, right = exact MM2 inventory name.
 
 ## Publish to GitHub
 
-This project is meant to be pushed as a normal public repo so others can clone it or use Pages.
-
 ### Create the repo and push (first time)
 
 ```powershell
-# From the project folder (git must be on PATH)
 git init
 git add .
 git commit -m "Add Lunix's AI Trade Assistant scraper and calculator"
-
-# Create a public GitHub repo and push (GitHub CLI)
-gh repo create mm2-values-scraper --public --source=. --remote=origin --push
+gh repo create trade-calculator --public --source=. --remote=origin --push
 ```
 
 Without `gh`, create an empty repo on github.com, then:
 
 ```powershell
-git remote add origin https://github.com/<your-username>/mm2-values-scraper.git
+git remote add origin https://github.com/lunixical-hash/trade-calculator.git
 git branch -M main
 git push -u origin main
 ```
-
-If push asks for login, complete auth in the browser / credential helper — this environment cannot finish auth for you.
 
 ### Enable GitHub Pages
 
 **UI:** Repo → **Settings** → **Pages** → Source: **Deploy from a branch** → Branch: `main` → Folder: `/ (root)` → Save.
 
-**CLI** (after the repo exists):
+**CLI:**
 
 ```powershell
-gh api repos/<your-username>/mm2-values-scraper/pages -X POST -f build_type=legacy -f source[branch]=main -f source[path]=/
+gh api repos/lunixical-hash/trade-calculator/pages -X POST -f build_type=legacy -f source[branch]=main -f source[path]=/
 ```
 
-Wait a minute, then open:
-
-`https://<your-username>.github.io/mm2-values-scraper/`
+Live URL: `https://lunixical-hash.github.io/trade-calculator/`
 
 ---
 
