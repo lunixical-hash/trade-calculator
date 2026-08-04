@@ -8000,6 +8000,97 @@ function reasonBits(gives, gets) {{
   return bits.slice(0, 4).join(' · ') || 'Stronger performance signals';
 }}
 
+/** Tight value band — MM2 offers rarely clear big listed gaps. Biased so you rarely lose. */
+function suggestionValueOk(gv, tv, opts) {{
+  opts = opts || {{}};
+  if (gv < 1 || tv < 1) return false;
+  const loose = !!opts.loose;
+  const diff = tv - gv;
+  const pct = (diff / gv) * 100;
+  const minPct = loose ? -2.2 : -1.2;
+  const maxPct = loose ? 5.5 : 4;
+  if (pct < minPct || pct > maxPct) return false;
+  const absCap = Math.max(gv * (loose ? 0.055 : 0.04), loose ? 60 : 35);
+  if (Math.abs(diff) > absCap && Math.abs(pct) > 1.8) return false;
+  return true;
+}}
+
+/** Prefer real offer shapes: 1v1, 1v2, 2v1, 2v2, etc. — not lopsided piles. */
+function suggestionShapeOk(gives, gets) {{
+  const gu = uniqueCount(gives);
+  const tu = uniqueCount(gets);
+  if (gu < 1 || tu < 1) return false;
+  if (Math.abs(gu - tu) > 2) return false;
+  if ((gu === 1 && tu >= 4) || (tu === 1 && gu >= 4)) return false;
+  return true;
+}}
+
+/** Headliner values should be in the same ballpark for clean trades. */
+function suggestionBalanceOk(gives, gets) {{
+  const gv = comboValue(gives);
+  const tv = comboValue(gets);
+  const gMax = Math.max.apply(null, gives.map((i) => i.value));
+  const tMax = Math.max.apply(null, gets.map((i) => i.value));
+  if (gives.length === 1 && gets.length === 1) {{
+    const r = tMax / Math.max(gMax, 1);
+    return r >= 0.94 && r <= 1.06;
+  }}
+  if (gets.length === 1 && gives.length >= 2) {{
+    return Math.abs(tMax - gv) / gv <= 0.055;
+  }}
+  if (gives.length === 1 && gets.length >= 2) {{
+    return Math.abs(gMax - tv) / gMax <= 0.055;
+  }}
+  // Multi vs multi: biggest pieces shouldn't be wildly mismatched
+  const headRatio = tMax / Math.max(gMax, 1);
+  return headRatio >= 0.45 && headRatio <= 2.2;
+}}
+
+function suggestionReceivesCold(gets) {{
+  for (const item of gets) {{
+    const o = itemOutlook(item);
+    if (o === 'caution' || o === 'drop2') return true;
+    if (itemDropSignal(item)) return true;
+  }}
+  return false;
+}}
+
+function scoreSuggestionPair(gives, gets, opts) {{
+  opts = opts || {{}};
+  const gv = comboValue(gives);
+  const tv = comboValue(gets);
+  const valueDiff = tv - gv;
+  const pct = gv > 0 ? (valueDiff / gv) * 100 : 0;
+  const giveWant = comboWant(gives);
+  const getWant = comboWant(gets);
+  const edge = getWant - giveWant;
+  const trendEdge = comboOutlookAvg(gets) - comboOutlookAvg(gives);
+  const gu = uniqueCount(gives);
+  const tu = uniqueCount(gets);
+
+  let score = 0;
+  // Fairness first
+  score += Math.max(0, 4.5 - Math.abs(pct)) * 1.8;
+  if (pct >= -0.3 && pct <= 2.5) score += 3.2;
+  if (pct > 0) score += 1.1;
+  if (pct < -0.5) score -= Math.abs(pct) * 1.4;
+
+  score += edge * 1.35;
+  score += trendEdge * 6;
+  if (Math.abs(gu - tu) <= 1) score += 1.1;
+  else score -= 0.8;
+  if (gu === 1 && tu === 1) score += 1.6;
+
+  const targetHits = opts.targetHits || 0;
+  const hotHits = opts.hotHits || 0;
+  if (opts.hasTargets) score += targetHits * 2.6 + (targetHits === tu ? 1 : 0);
+  score += opts.autoHot ? hotHits * 0.5 : hotHits * 0.12;
+
+  // Soft prefer dumping colder inventory
+  if (comboOutlookAvg(gives) < 0) score += 0.8;
+  return score;
+}}
+
 function uniqueCount(items) {{
   return new Set(items.map((item) => item.id)).size;
 }}
@@ -8196,7 +8287,11 @@ function buildSuggestions() {{
   const hasTargets = targetUnits.length > 0;
 
   const poolAll = CATALOG.filter((item) => (
-    SUGGEST_RARITIES.has(item.rarity) && item.value >= 1
+    SUGGEST_RARITIES.has(item.rarity)
+    && item.value >= 1
+    && !itemDropSignal(item)
+    && itemOutlook(item) !== 'caution'
+    && itemOutlook(item) !== 'drop2'
   )).sort((a, b) => wantScore(b) - wantScore(a));
   const fillers = poolAll.slice(0, 28);
 
@@ -8261,31 +8356,37 @@ function buildSuggestions() {{
       let best = null;
       for (const gets of getCombos) {{
         if (uniqueCount(gets) > SLOTS) continue;
-        // Multi-item trades only (skip pure 1v1) unless aiming at a target
-        if (gives.length === 1 && gets.length === 1 && !hasTargets) continue;
         if (gets.some((item) => giveIds.has(item.id))) continue;
         if (hasTargets && gives.some((item) => targetUnits.some((t) => t.id === item.id))) continue;
+        if (!suggestionShapeOk(gives, gets)) continue;
+        if (suggestionReceivesCold(gets)) continue;
         const tv = comboValue(gets);
-        const valueDiff = tv - gv;
-        const ratio = tv / gv;
-        const maxUnder = Math.min(gv * 0.015, 200);
-        if (valueDiff < -maxUnder) continue;
-        if (ratio > 1.12) continue;
+        if (!suggestionValueOk(gv, tv, {{ loose: hasTargets }})) continue;
+        if (!suggestionBalanceOk(gives, gets)) continue;
+
         const getWant = comboWant(gets);
         const edge = getWant - giveWant;
-        const minEdge = hasTargets ? 0.15 : 0.85;
-        if (edge < minEdge && !(hasTargets && valueDiff >= 0 && edge > -0.5)) continue;
-        if (!hasTargets && giveWant >= 4.8 && edge < 1.6) continue;
-        const valueSlack = valueDiff / gv;
+        const trendEdge = comboOutlookAvg(gets) - comboOutlookAvg(gives);
+        // Still want a reason beyond pure value, but allow near-even fair swaps
+        const valueDiff = tv - gv;
+        const nearEven = Math.abs(valueDiff) <= Math.max(gv * 0.02, 30);
+        if (!hasTargets) {{
+          if (edge < -0.35 && trendEdge < 0.25 && !nearEven) continue;
+          if (giveWant >= 5 && edge < 0.35 && trendEdge < 0.4) continue;
+        }} else if (edge < -0.8 && valueDiff < 0 && trendEdge < 0) {{
+          continue;
+        }}
+
         const targetHits = hasTargets
           ? gets.filter((item) => targetUnits.some((t) => t.id === item.id)).length
           : 0;
         const hotHits = gets.filter((item) => itemIsHot(item) || isHotRisingTarget(item)).length;
-        const targetBonus = hasTargets ? targetHits * 2.8 + (targetHits === uniqueCount(gets) ? 1.2 : 0) : 0;
-        const hotBonus = state.autoTargetHot ? hotHits * 0.55 : hotHits * 0.15;
-        const multiBonus = (uniqueCount(gives) + uniqueCount(gets) >= 3) ? 0.35 : 0.15;
-        const fairBonus = valueDiff >= 0 ? 1.25 : -0.8;
-        const score = edge * 2.3 + valueSlack * 8 + multiBonus + fairBonus + targetBonus + hotBonus + (uniqueCount(gets) > 1 ? 0.2 : 0);
+        const score = scoreSuggestionPair(gives, gets, {{
+          hasTargets,
+          targetHits,
+          hotHits,
+          autoHot: !!state.autoTargetHot,
+        }});
         if (!best || score > best.score) {{
           best = {{ gives: gives.slice(), gets: gets.slice(), score, edge, gv, tv, targetHits, hotHits }};
         }}
@@ -8402,15 +8503,19 @@ function buildDumpTradeIdeas() {{
     for (const gets of getCombos) {{
       if (uniqueCount(gets) > SLOTS) continue;
       if (gets.some((item) => giveIds.has(item.id))) continue;
+      if (!suggestionShapeOk(gives, gets)) continue;
+      if (suggestionReceivesCold(gets)) continue;
       const tv = comboValue(gets);
-      const valueDiff = tv - gv;
-      if (valueDiff < -Math.min(gv * 0.02, 150)) continue;
-      if (tv / gv > 1.14) continue;
+      if (!suggestionValueOk(gv, tv, {{ loose: true }})) continue;
+      if (!suggestionBalanceOk(gives, gets)) continue;
       const getWant = comboWant(gets);
       const giveWant = comboWant(gives);
       const edge = getWant - giveWant;
-      if (edge < 0.4 && valueDiff < 0) continue;
-      const score = dumpScore * 1.4 + edge * 2 + (valueDiff / gv) * 6 + (valueDiff >= 0 ? 1.5 : 0);
+      const trendEdge = comboOutlookAvg(gets) - comboOutlookAvg(gives);
+      if (edge < 0.15 && trendEdge < 0.35 && tv < gv) continue;
+      const score = dumpScore * 1.35
+        + scoreSuggestionPair(gives, gets, {{}})
+        + trendEdge * 2;
       if (!best || score > best.score) {{
         best = {{
           gives: gives.slice(),
