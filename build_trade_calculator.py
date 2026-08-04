@@ -5842,6 +5842,27 @@ function historyRiseScore(item) {{
   return pct > 0 ? pct / 2 : 0;
 }}
 
+/** Consecutive up-moves at the end of history (0 if last step wasn't a raise). */
+function historyRiseStreak(item) {{
+  const hist = itemValueHistory(item);
+  let streak = 0;
+  for (let i = hist.length - 1; i >= 1; i--) {{
+    if (hist[i].v > hist[i - 1].v + 0.05) streak += 1;
+    else break;
+  }}
+  return streak;
+}}
+
+/** Count of clear raises across the whole series. */
+function historyRiseCount(item) {{
+  const hist = itemValueHistory(item);
+  let rises = 0;
+  for (let i = 1; i < hist.length; i++) {{
+    if (hist[i].v > hist[i - 1].v + 0.05) rises += 1;
+  }}
+  return rises;
+}}
+
 /** Higher = more confidently dropping / worth trading off. */
 function itemDropSignal(item) {{
   if (!item || item.value < 1) return null;
@@ -5908,6 +5929,8 @@ function itemOutlook(item) {{
   const lastAbs = move && Number.isFinite(move.abs) ? move.abs : 0;
   const stab = item.stability;
   const trending = itemIsHot(item);
+  const streak = historyRiseStreak(item);
+  const riseCount = historyRiseCount(item);
 
   // Drop side wins when a clear drop signal exists
   if (drop) {{
@@ -5916,12 +5939,28 @@ function itemOutlook(item) {{
     return 'drop';
   }}
 
-  if (trending) return 'fire';
-  if (rise >= 4.5 || (pct >= 3 && rise >= 2) || (stab === 'Doing Well' && pct >= 1.5)) return 'fire';
-  if (rise >= 3 || pct >= 1.5 || ((stab === 'Doing Well' || stab === 'Underpaid For') && pct > 0.4)) {{
+  // 🔥 = strong, sustained heat — not a couple of small raises
+  const strongStab = stab === 'Doing Well' || stab === 'Underpaid For';
+  const fire =
+    (streak >= 4 && riseCount >= 4 && (pct >= 1.5 || rise >= 4))
+    || (streak >= 3 && riseCount >= 5 && rise >= 5 && pct >= 2)
+    || (trending && streak >= 3 && riseCount >= 4 && rise >= 4.5 && pct >= 1.5)
+    || (rise >= 6.5 && riseCount >= 5 && pct >= 2.5 && (strongStab || trending))
+    || (pct >= 6 && riseCount >= 4 && streak >= 3 && rise >= 5);
+  if (fire) return 'fire';
+
+  // ↑↑ = likely rising, but not locked-in fire
+  if (
+    rise >= 3.5
+    || (streak >= 3 && riseCount >= 3 && pct >= 1)
+    || (pct >= 2 && rise >= 2.5)
+    || (trending && (rise >= 2.5 || pct >= 1.2 || streak >= 2))
+    || (strongStab && pct > 0.8 && rise >= 2)
+  ) {{
     return 'rise2';
   }}
-  if (rise >= 1.5 || pct > 0.25 || lastAbs > 0.05) return 'rise';
+
+  if (rise >= 1.5 || pct > 0.25 || lastAbs > 0.05 || streak >= 1) return 'rise';
 
   if (fall >= 3 || pct <= -1.5 || lastAbs < -Math.max(25, item.value * 0.03)) return 'drop2';
   if (fall >= 1.5 || pct < -0.25 || lastAbs < -0.05) return 'drop';
@@ -5930,7 +5969,7 @@ function itemOutlook(item) {{
 }}
 
 const OUTLOOK_MARK = {{
-  fire: {{ cls: 'hot', glyph: '🔥', title: 'Very likely to raise' }},
+  fire: {{ cls: 'hot', glyph: '🔥', title: 'Very likely to raise (strong sustained climb)' }},
   rise2: {{ cls: 'rise2', glyph: '↑↑', title: 'Likely to raise' }},
   rise: {{ cls: 'rise', glyph: '↑', title: 'May raise' }},
   flat: {{ cls: 'flat', glyph: '─', title: 'Hard to predict' }},
