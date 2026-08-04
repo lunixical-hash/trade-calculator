@@ -7519,6 +7519,71 @@ function comboWant(items) {
   return items.reduce((sum, item) => sum + wantScore(item), 0) / items.length;
 }
 
+/** Value-weighted outlook (−3…+3). High = hotter / rising. */
+function comboOutlookAvg(items) {
+  if (!items.length) return 0;
+  let weighted = 0;
+  let total = 0;
+  for (const item of items) {
+    const w = Math.max(item.value || 0, 1);
+    weighted += (OUTLOOK_SCORE[itemOutlook(item)] || 0) * w;
+    total += w;
+  }
+  return total ? weighted / total : 0;
+}
+
+/**
+ * Score a package YOU would give to match their side.
+ * Biased toward slight underpay and dumping colder items (not your 🔥s).
+ */
+function scoreOfferPackage(combo, theirValue) {
+  const v = comboValue(combo);
+  if (theirValue < 1) return -1e9;
+  const overPct = ((v - theirValue) / theirValue) * 100;
+  const target = theirValue * 0.985; // prefer ~1.5% under
+  let score = -Math.abs(v - target) * 1.15;
+
+  // Soft under is good; overpay is expensive
+  if (overPct <= 0.3) score += 18 - Math.min(12, Math.abs(overPct) * 0.8);
+  else if (overPct <= 2) score -= overPct * 14;
+  else if (overPct <= 3.5) score -= 28 + (overPct - 2) * 22;
+  else score -= 70 + (overPct - 3.5) * 40;
+
+  // Prefer offering colder / flatter items; penalize giving heat
+  const heat = comboOutlookAvg(combo);
+  score -= heat * 22;
+  score -= comboWant(combo) * 1.5;
+
+  // Tiny preference for fewer unique slots when values are close
+  score -= uniqueCount(combo) * 0.4;
+  return score;
+}
+
+/**
+ * Score a package you would RECEIVE for your offer.
+ * Avoid value losses; prefer hotter trends on their side.
+ */
+function scoreReceivePackage(combo, yourValue, hasTarget) {
+  const v = comboValue(combo);
+  if (yourValue < 1) return -1e9;
+  const gainPct = ((v - yourValue) / yourValue) * 100;
+  const target = yourValue * 1.02;
+  let score = -Math.abs(v - target);
+
+  if (gainPct >= -0.4) score += 24 + Math.min(10, gainPct * 0.9);
+  else if (gainPct >= -2) score -= Math.abs(gainPct) * 16;
+  else score -= 40 + Math.abs(gainPct) * 12;
+
+  // Cap ridiculous overpay receives (unlikely packages)
+  if (gainPct > 12) score -= (gainPct - 12) * 3;
+
+  const heat = comboOutlookAvg(combo);
+  score += heat * 20;
+  score += comboWant(combo) * 2.2;
+  if (hasTarget) score += 35;
+  return score;
+}
+
 function comboAvgChange(items) {
   if (!items.length) return 0;
   return items.reduce((sum, item) => sum + parseChangePct(item.change), 0) / items.length;
@@ -8408,22 +8473,19 @@ function generateReceiveFromYours() {
     return;
   }
 
-  // Good trade for you: near equal to slightly over what you give
-  const minFair = yourValue * 0.97;
-  const maxFair = yourValue * 1.08;
+  // Prefer even-to-slight win; avoid taking real losses
+  const minFair = yourValue * 0.995;
+  const maxFair = yourValue * 1.1;
   let pool = all.filter((row) => row.v >= minFair && row.v <= maxFair);
   if (!pool.length) {
-    pool = all.filter((row) => row.v >= yourValue * 0.9 && row.v <= yourValue * 1.12);
+    pool = all.filter((row) => row.v >= yourValue * 0.97 && row.v <= yourValue * 1.12);
   }
   if (!pool.length) pool = all.slice();
 
   pool.sort((a, b) => {
-    // Prefer target hits, then closest value (slightly over yours), then want score
-    if (a.hasTarget !== b.hasTarget) return a.hasTarget ? -1 : 1;
-    const da = Math.abs(a.v - yourValue * 1.02);
-    const db = Math.abs(b.v - yourValue * 1.02);
-    if (Math.abs(da - db) > 0.5) return da - db;
-    if (b.want !== a.want) return b.want - a.want;
+    const sa = scoreReceivePackage(a.combo, yourValue, a.hasTarget);
+    const sb = scoreReceivePackage(b.combo, yourValue, b.hasTarget);
+    if (Math.abs(sa - sb) > 0.01) return sb - sa;
     return b.v - a.v;
   });
 
@@ -8447,17 +8509,24 @@ function generateOfferAgainstTheir() {
     return;
   }
 
-  const maxFair = theirValue * 1.12;
+  // Keep offers tight — avoid big overpays on generate
+  const maxPay = theirValue * 1.035;
   const breakOpts = offerBreakOpts();
 
-  let all = collectOfferCombos((combo, v) => v <= maxFair, breakOpts);
+  let all = collectOfferCombos((combo, v) => v <= maxPay, breakOpts);
   if (!all.length && !state.avoidSetBreaks) {
-    all = collectOfferCombos((combo, v) => v <= maxFair, { allowBreakSets: true });
+    all = collectOfferCombos((combo, v) => v <= maxPay, { allowBreakSets: true });
   }
   if (!all.length) {
-    let fallback = collectOfferCombos(null, breakOpts);
+    let fallback = collectOfferCombos((combo, v) => v <= theirValue * 1.08, breakOpts);
     if (!fallback.length && !state.avoidSetBreaks) {
-      fallback = collectOfferCombos(null, { allowBreakSets: true });
+      fallback = collectOfferCombos((combo, v) => v <= theirValue * 1.08, { allowBreakSets: true });
+    }
+    if (!fallback.length) {
+      fallback = collectOfferCombos(null, breakOpts);
+      if (!fallback.length && !state.avoidSetBreaks) {
+        fallback = collectOfferCombos(null, { allowBreakSets: true });
+      }
     }
     if (!fallback.length) {
       alert(state.avoidSetBreaks
@@ -8465,26 +8534,24 @@ function generateOfferAgainstTheir() {
         : 'No offer combos available from My Items.');
       return;
     }
-    fallback.sort((a, b) => {
-      const da = Math.abs(a.v - theirValue);
-      const db = Math.abs(b.v - theirValue);
-      if (da !== db) return da - db;
-      return b.v - a.v;
-    });
+    fallback.sort((a, b) => scoreOfferPackage(b.combo, theirValue) - scoreOfferPackage(a.combo, theirValue));
     state.lowerCycle = null;
     state.higherCycle = null;
     applyYourOfferCombo(fallback[0].combo);
     return;
   }
 
-  // Prefer fair/near offers first; if all are under, still use the best (highest) you can give
-  const minFair = theirValue * 0.97;
-  const fair = all.filter((row) => row.v >= minFair);
-  const pool = fair.length ? fair : all;
+  // Prefer under/equal offers first; only then tiny overpays still under maxPay
+  const underOrEven = all.filter((row) => row.v <= theirValue * 1.005);
+  const pool = underOrEven.length ? underOrEven : all;
 
   pool.sort((a, b) => {
-    if (b.v !== a.v) return b.v - a.v;
-    return b.want - a.want;
+    const sa = scoreOfferPackage(a.combo, theirValue);
+    const sb = scoreOfferPackage(b.combo, theirValue);
+    if (Math.abs(sa - sb) > 0.01) return sb - sa;
+    // Tie-break: lower offer value (more biased to you), then colder dump
+    if (Math.abs(a.v - b.v) > 0.5) return a.v - b.v;
+    return comboOutlookAvg(a.combo) - comboOutlookAvg(b.combo);
   });
 
   state.lowerCycle = null;
@@ -8504,10 +8571,13 @@ function rebuildLowerCycle(theirValue, yourValue) {
   if (!list.length && !state.avoidSetBreaks) {
     list = collectOfferCombos(filterFn, { allowBreakSets: true });
   }
-  // Highest remaining value first, then step down through every trade
+  // Highest remaining value first, prefer colder dumps when close
   list.sort((a, b) => {
-    if (b.v !== a.v) return b.v - a.v;
-    return b.want - a.want;
+    if (Math.abs(b.v - a.v) > 0.5) return b.v - a.v;
+    const oa = comboOutlookAvg(a.combo);
+    const ob = comboOutlookAvg(b.combo);
+    if (Math.abs(oa - ob) > 0.05) return oa - ob;
+    return scoreOfferPackage(b.combo, theirValue) - scoreOfferPackage(a.combo, theirValue);
   });
   state.lowerCycle = {
     theirKey: theirSideKey(),
@@ -8570,7 +8640,7 @@ function generateLowerOffer() {
 }
 
 function rebuildHigherCycle(theirValue, yourValue) {
-  const maxPay = theirValue * 1.18;
+  const maxPay = theirValue * 1.06;
   const filterFn = (combo, v) => {
     if (v <= yourValue + 0.5) return false;
     if (v > maxPay) return false;
@@ -8580,10 +8650,13 @@ function rebuildHigherCycle(theirValue, yourValue) {
   if (!list.length && !state.avoidSetBreaks) {
     list = collectOfferCombos(filterFn, { allowBreakSets: true });
   }
-  // Cheapest upgrade first, then step up
+  // Cheapest upgrade first, prefer colder dumps
   list.sort((a, b) => {
-    if (a.v !== b.v) return a.v - b.v;
-    return b.want - a.want;
+    if (Math.abs(a.v - b.v) > 0.5) return a.v - b.v;
+    const oa = comboOutlookAvg(a.combo);
+    const ob = comboOutlookAvg(b.combo);
+    if (Math.abs(oa - ob) > 0.05) return oa - ob;
+    return scoreOfferPackage(b.combo, theirValue) - scoreOfferPackage(a.combo, theirValue);
   });
   state.higherCycle = {
     theirKey: theirSideKey(),
