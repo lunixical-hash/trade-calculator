@@ -2843,56 +2843,72 @@ def main() -> None:
     gap: 2px;
     flex: 1;
   }}
-  .inv-dump {{
+  .inv-advice {{
     display: none;
+    flex-direction: column;
+    gap: 10px;
+  }}
+  .inv-advice.show {{ display: flex; }}
+  .inv-advice-block {{
+    display: flex;
     flex-direction: column;
     gap: 8px;
     padding: 10px;
     border-radius: 12px;
-    border: 1px solid rgba(248, 113, 113, 0.35);
+    border: 1px solid var(--line);
+    background: rgba(255,255,255,0.03);
+  }}
+  .inv-advice-block.off {{
+    border-color: rgba(248, 113, 113, 0.35);
     background: rgba(248, 113, 113, 0.08);
   }}
-  .inv-dump.show {{ display: flex; }}
-  .inv-dump-head {{
+  .inv-advice-block.aim {{
+    border-color: rgba(52, 211, 153, 0.35);
+    background: rgba(52, 211, 153, 0.08);
+  }}
+  .inv-advice-head {{
     font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: #f87171;
   }}
-  .inv-dump-row {{
+  .inv-advice-block.off .inv-advice-head {{ color: #f87171; }}
+  .inv-advice-block.aim .inv-advice-head {{ color: var(--green-soft); }}
+  .inv-advice-row {{
     display: grid;
     grid-template-columns: 32px 1fr auto;
     gap: 8px;
     align-items: center;
   }}
-  .inv-dump-row img, .inv-dump-row .noimg {{
+  .inv-advice-row img, .inv-advice-row .noimg {{
     width: 32px;
     height: 32px;
     object-fit: contain;
     border-radius: 7px;
     background: #0d0b14;
   }}
-  .inv-dump-row .noimg {{
+  .inv-advice-row .noimg {{
     display: grid;
     place-items: center;
     color: var(--muted);
     font-size: 9px;
   }}
-  .inv-dump-row .name {{
+  .inv-advice-row .name {{
     font-size: 12px;
     font-weight: 700;
     line-height: 1.2;
   }}
-  .inv-dump-row .why {{
+  .inv-advice-row .why {{
     font-size: 10px;
-    color: #fca5a5;
+    color: var(--muted);
     margin-top: 2px;
+    line-height: 1.3;
   }}
-  .inv-dump-row button {{
-    border: 1px solid rgba(248, 113, 113, 0.55);
+  .inv-advice-block.off .inv-advice-row .why {{ color: #fca5a5; }}
+  .inv-advice-row button {{
+    border: 1px solid var(--line);
     background: transparent;
-    color: #fca5a5;
+    color: var(--muted);
     font: inherit;
     font-weight: 700;
     font-size: 11px;
@@ -2901,9 +2917,17 @@ def main() -> None:
     cursor: pointer;
     white-space: nowrap;
   }}
-  .inv-dump-row button:hover {{
-    background: rgba(248, 113, 113, 0.15);
-    color: #fecaca;
+  .inv-advice-block.off .inv-advice-row button {{
+    border-color: rgba(248, 113, 113, 0.55);
+    color: #fca5a5;
+  }}
+  .inv-advice-block.aim .inv-advice-row button {{
+    border-color: rgba(52, 211, 153, 0.45);
+    color: var(--green-soft);
+  }}
+  .inv-advice-row button:hover {{
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
   }}
   .inv-empty {{
     padding: 28px 10px;
@@ -4175,7 +4199,7 @@ def main() -> None:
       <button class="save" id="invSaveBtn" type="button">Save</button>
       <button id="invGraphBtn" type="button">Graph</button>
     </div>
-    <div class="inv-dump" id="invDumpTips"></div>
+    <div class="inv-advice" id="invDumpTips"></div>
     <div class="inv-list" id="invList"></div>
     <button class="inv-clear" id="invClearBtn" type="button">Clear all</button>
   </aside>
@@ -6099,50 +6123,131 @@ function renderInvDumpTips() {{
   invDumpTips.classList.remove('show');
   if (!state.inv.length) return;
 
-  const tips = [];
+  const ownedIds = new Set(state.inv.filter(Boolean).map((e) => e.id));
+  const ownedValues = state.inv
+    .map((e) => byId[e && e.id])
+    .filter(Boolean)
+    .map((item) => item.value)
+    .filter((v) => v >= 1)
+    .sort((a, b) => a - b);
+  const midValue = ownedValues.length
+    ? ownedValues[Math.floor(ownedValues.length / 2)]
+    : 0;
+
+  // --- Trade off ---
+  const offTips = [];
   for (const entry of state.inv) {{
     if (!entry) continue;
     const item = byId[entry.id];
-    if (!item) continue;
+    if (!item || !SUGGEST_RARITIES.has(item.rarity)) continue;
+    const outlook = itemOutlook(item);
     const sig = itemDropSignal(item);
-    if (!sig) continue;
-    tips.push({{ item, entry, sig }});
+    let score = 0;
+    let why = '';
+    if (sig) {{
+      score = 20 + sig.score;
+      why = sig.why || 'dropping';
+    }} else if (outlook === 'caution') {{
+      score = 18;
+      why = 'very likely to drop';
+    }} else if (outlook === 'drop2') {{
+      score = 12;
+      why = 'likely to drop';
+    }} else if (outlook === 'drop') {{
+      score = 7;
+      why = 'may drop';
+    }} else if (item.stability === 'Receding') {{
+      score = 6;
+      why = 'receding';
+    }} else {{
+      continue;
+    }}
+    offTips.push({{ item, entry, score, why }});
   }}
-  tips.sort((a, b) => b.sig.score - a.sig.score || a.sig.lost - b.sig.lost);
-  const top = tips.slice(0, 3);
-  if (!top.length) return;
+  offTips.sort((a, b) => b.score - a.score || b.item.value - a.item.value);
+  const topOff = offTips.slice(0, 3);
 
+  // --- Aim for ---
+  const aimTips = [];
+  for (const item of CATALOG) {{
+    if (!item || !SUGGEST_RARITIES.has(item.rarity) || item.value < 1) continue;
+    if (ownedIds.has(item.id)) continue;
+    if (itemDropSignal(item)) continue;
+    const outlook = itemOutlook(item);
+    let score = 0;
+    let why = '';
+    if (outlook === 'fire') {{
+      score = 18;
+      why = 'strong sustained climb';
+    }} else if (outlook === 'rise2' || isHotRisingTarget(item)) {{
+      score = 12 + (itemIsHot(item) ? 3 : 0);
+      why = itemIsHot(item) ? 'hot / rising' : 'likely to raise';
+    }} else if (outlook === 'rise' && itemChangePct(item) >= 0.8) {{
+      score = 6;
+      why = 'may raise';
+    }} else {{
+      continue;
+    }}
+    // Prefer targets near what you already own (realistic to trade into)
+    if (midValue > 0) {{
+      const ratio = item.value / midValue;
+      if (ratio < 0.35 || ratio > 3.2) score *= 0.35;
+      else if (ratio >= 0.7 && ratio <= 1.6) score += 2.5;
+    }}
+    score += Math.min(4, itemChangePct(item) * 0.4);
+    aimTips.push({{ item, score, why }});
+  }}
+  aimTips.sort((a, b) => b.score - a.score || b.item.value - a.item.value);
+  const topAim = aimTips.slice(0, 3);
+
+  if (!topOff.length && !topAim.length) return;
   invDumpTips.classList.add('show');
-  const head = document.createElement('div');
-  head.className = 'inv-dump-head';
-  head.textContent = 'Trade these off';
-  invDumpTips.appendChild(head);
 
-  for (const tip of top) {{
-    const row = document.createElement('div');
-    row.className = 'inv-dump-row';
-    const art = tip.item.image
-      ? '<img src="' + tip.item.image + '" alt="" loading="lazy" referrerpolicy="no-referrer" />'
-      : '<div class="noimg">?</div>';
-    row.innerHTML =
-      art +
-      '<div><div class="dump-title">' + itemNameHtml(tip.item, {{ className: 'name' }}) + '</div>' +
-      '<div class="why">' + tip.sig.why + '</div></div>';
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.textContent = 'Offer';
-    btn.addEventListener('click', (e) => {{
-      e.stopPropagation();
-      loadDumpIntoYourOffer(tip.item);
-    }});
-    row.appendChild(btn);
-    row.addEventListener('click', (e) => {{
-      if (e.target === btn) return;
-      openDetail(tip.item);
-    }});
-    row.style.cursor = 'pointer';
-    invDumpTips.appendChild(row);
+  function appendBlock(kind, title, rows, actionLabel, onAction) {{
+    if (!rows.length) return;
+    const block = document.createElement('div');
+    block.className = 'inv-advice-block ' + kind;
+    const head = document.createElement('div');
+    head.className = 'inv-advice-head';
+    head.textContent = title;
+    block.appendChild(head);
+    for (const tip of rows) {{
+      const row = document.createElement('div');
+      row.className = 'inv-advice-row';
+      const art = tip.item.image
+        ? '<img src="' + tip.item.image + '" alt="" loading="lazy" referrerpolicy="no-referrer" />'
+        : '<div class="noimg">?</div>';
+      row.innerHTML =
+        art +
+        '<div><div class="dump-title">' + itemNameHtml(tip.item, {{ className: 'name' }}) + '</div>' +
+        '<div class="why">' + tip.why + ' · ' + fmt(tip.item.value) + '</div></div>';
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = actionLabel;
+      btn.addEventListener('click', (e) => {{
+        e.stopPropagation();
+        onAction(tip.item);
+      }});
+      row.appendChild(btn);
+      row.addEventListener('click', (e) => {{
+        if (e.target === btn) return;
+        openDetail(tip.item);
+      }});
+      row.style.cursor = 'pointer';
+      block.appendChild(row);
+    }}
+    invDumpTips.appendChild(block);
   }}
+
+  appendBlock('off', 'Trade these off', topOff, 'Offer', loadDumpIntoYourOffer);
+  appendBlock('aim', 'Aim for these', topAim, 'Target', (item) => {{
+    const existing = state.targets.find((t) => t && t.id === item.id);
+    if (existing) existing.qty = Math.min(9, (existing.qty || 1) + 1);
+    else state.targets.push({{ id: item.id, qty: 1 }});
+    persistTargets();
+    render();
+    commitHistory();
+  }});
 }}
 
 function renderTrendRow(item, pctLabel, pctClass, opts) {{
