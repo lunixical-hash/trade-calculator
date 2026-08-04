@@ -1921,7 +1921,7 @@ def main() -> None:
   .trade-hist-card-main {{
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 5px;
     min-width: 0;
   }}
   .trade-hist-card .when {{
@@ -1929,19 +1929,76 @@ def main() -> None:
     font-weight: 800;
     line-height: 1.3;
   }}
-  .trade-hist-card .status {{
-    font-size: 12px;
-    font-weight: 700;
+  .trade-hist-card .items-preview {{
+    font-size: 11px;
+    font-weight: 650;
     color: var(--muted);
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }}
-  .trade-hist-card .status .src {{
-    color: #fcd34d;
+  .trade-hist-card .items-preview .sep {{
+    opacity: 0.55;
+    margin: 0 4px;
+  }}
+  .trade-hist-thumbs {{
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+  }}
+  .trade-hist-thumbs img,
+  .trade-hist-thumbs .noimg {{
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    object-fit: contain;
+    background: #0d0b14;
+    border: 1px solid var(--line);
+  }}
+  .trade-hist-thumbs .noimg {{
+    display: grid;
+    place-items: center;
+    font-size: 9px;
+    color: var(--muted);
+    font-weight: 800;
+  }}
+  .trade-hist-thumbs .arrow {{
+    font-size: 11px;
+    color: var(--muted);
+    margin: 0 2px;
   }}
   .trade-hist-card-side {{
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 4px;
   }}
+  .trade-hist-nv {{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    line-height: 1.25;
+  }}
+  .trade-hist-nv .was {{
+    text-decoration: line-through;
+    opacity: 0.7;
+  }}
+  .trade-hist-nv .now {{
+    font-size: 12px;
+    font-weight: 800;
+  }}
+  .trade-hist-nv .now.win {{ color: var(--green-soft); }}
+  .trade-hist-nv .now.loss {{ color: #f87171; }}
+  .trade-hist-nv .now.fair {{ color: var(--text); }}
   .trade-hist-pill {{
     display: inline-flex;
     align-items: center;
@@ -7105,21 +7162,56 @@ function tradeHistItemCard(entry) {{
   const name = item ? item.name : entry.id;
   const image = item ? item.image : '';
   const qty = entry.qty || 1;
-  const value = (Number.isFinite(entry.value) ? entry.value : 0) * qty;
+  const wasV = (Number.isFinite(entry.value) ? entry.value : 0) * qty;
+  const nowV = (item ? item.value : 0) * qty;
+  const moved = Math.abs(nowV - wasV) >= 0.5;
   const art = image
     ? '<img src="' + image + '" alt="" loading="lazy" referrerpolicy="no-referrer" />'
     : '<div class="noimg">?</div>';
+  const vals = moved
+    ? '<span class="was">' + fmt(wasV) + '</span> → <strong class="' + (nowV > wasV ? 'up' : 'down') + '">' + fmt(nowV) + '</strong>'
+    : '<strong>' + fmt(wasV) + '</strong>';
   const card = document.createElement('div');
   card.className = 'trade-hist-item-card' + (item ? ' clickable' : '');
   card.innerHTML =
     '<div class="art-wrap">' + art + '</div>' +
     '<div class="iname" title="' + name + '">' + name + '</div>' +
     (qty > 1 ? '<div class="qty">×' + qty + '</div>' : '') +
-    '<div class="vals"><strong>' + fmt(value) + '</strong></div>';
+    '<div class="vals"><span>' + vals + '</span></div>';
   if (item) {{
     card.addEventListener('click', () => openDetail(item));
   }}
   return card;
+}}
+
+function tradeHistSideNames(side, limit) {{
+  limit = limit || 3;
+  const bits = [];
+  for (let i = 0; i < side.length && bits.length < limit; i++) {{
+    const e = side[i];
+    const item = byId[e.id];
+    const name = item ? item.name : e.id;
+    bits.push((e.qty > 1 ? '×' + e.qty + ' ' : '') + name);
+  }}
+  if (side.length > limit) bits.push('+' + (side.length - limit));
+  return bits.join(', ');
+}}
+
+function tradeHistThumbsHtml(side, limit) {{
+  limit = limit || 3;
+  let html = '';
+  for (let i = 0; i < side.length && i < limit; i++) {{
+    const e = side[i];
+    const item = byId[e.id];
+    const image = item ? item.image : '';
+    html += image
+      ? '<img src="' + image + '" alt="" loading="lazy" referrerpolicy="no-referrer" />'
+      : '<div class="noimg">?</div>';
+  }}
+  if (side.length > limit) {{
+    html += '<div class="noimg">+' + (side.length - limit) + '</div>';
+  }}
+  return html;
 }}
 
 function fillTradeHistCards(container, side) {{
@@ -7152,6 +7244,14 @@ function renderTradeHistDetail(tr, idx) {{
     return;
   }}
 
+  const yourNow = sideValueNow(tr.your);
+  const theirNow = sideValueNow(tr.their);
+  const netNow = theirNow - yourNow;
+  const valuesMoved =
+    Math.abs(yourNow - tr.yourTotal) >= 0.5
+    || Math.abs(theirNow - tr.theirTotal) >= 0.5
+    || Math.abs(netNow - tr.net) >= 0.5;
+
   tradeHistDetail.innerHTML =
     '<div class="trade-hist-detail-head">' +
       '<div>' +
@@ -7161,24 +7261,41 @@ function renderTradeHistDetail(tr, idx) {{
     '</div>' +
     '<div class="trade-hist-summary">' +
       '<div class="box">' +
-        '<div class="num">' + fmt(tr.yourTotal) + '</div>' +
-        '<div class="label">GAVE</div>' +
+        '<div class="num">' + fmt(yourNow) + '</div>' +
+        '<div class="label">GAVE · NOW</div>' +
+        (valuesMoved ? '<div class="sub">was <strong>' + fmt(tr.yourTotal) + '</strong></div>' : '') +
       '</div>' +
       '<div class="mid">' +
-        '<p class="verdict ' + netClass(tr.net) + '">' + netLabel(tr.net) + '</p>' +
-        '<div class="hint">Net</div>' +
+        '<p class="verdict ' + netClass(netNow) + '">' + netLabel(netNow) + '</p>' +
+        '<div class="hint">Now</div>' +
+        (valuesMoved
+          ? '<div class="hint" style="margin-top:6px">Was ' + netLabel(tr.net) + '</div>'
+          : '') +
       '</div>' +
       '<div class="box">' +
-        '<div class="num">' + fmt(tr.theirTotal) + '</div>' +
-        '<div class="label">GOT</div>' +
+        '<div class="num">' + fmt(theirNow) + '</div>' +
+        '<div class="label">GOT · NOW</div>' +
+        (valuesMoved ? '<div class="sub">was <strong>' + fmt(tr.theirTotal) + '</strong></div>' : '') +
       '</div>' +
     '</div>' +
     '<div class="trade-hist-section">' +
-      '<div class="trade-hist-section-top"><h5>Gave</h5></div>' +
+      '<div class="trade-hist-section-top">' +
+        '<h5>Gave</h5>' +
+        '<div class="trade-hist-section-totals">' +
+          '<span>Now <strong>' + fmt(yourNow) + '</strong></span>' +
+          (valuesMoved ? '<span>Was <strong>' + fmt(tr.yourTotal) + '</strong></span>' : '') +
+        '</div>' +
+      '</div>' +
       '<div class="trade-hist-cards" data-cards="your"></div>' +
     '</div>' +
     '<div class="trade-hist-section">' +
-      '<div class="trade-hist-section-top"><h5>Got</h5></div>' +
+      '<div class="trade-hist-section-top">' +
+        '<h5>Got</h5>' +
+        '<div class="trade-hist-section-totals">' +
+          '<span>Now <strong>' + fmt(theirNow) + '</strong></span>' +
+          (valuesMoved ? '<span>Was <strong>' + fmt(tr.theirTotal) + '</strong></span>' : '') +
+        '</div>' +
+      '</div>' +
       '<div class="trade-hist-cards" data-cards="their"></div>' +
     '</div>';
 
@@ -7238,6 +7355,11 @@ function renderTradeHistory() {{
     if (firstVisible < 0) firstVisible = i;
     if (i === tradeHistSelectedIdx) selectedVisible = true;
 
+    const yourNow = sideValueNow(tr.your);
+    const theirNow = sideValueNow(tr.their);
+    const netNow = theirNow - yourNow;
+    const netCls = netClass(netNow);
+
     const card = document.createElement('button');
     card.type = 'button';
     card.className = 'trade-hist-card' + (i === tradeHistSelectedIdx ? ' active' : '');
@@ -7245,9 +7367,23 @@ function renderTradeHistory() {{
     card.innerHTML =
       '<div class="trade-hist-card-main">' +
         '<span class="when">' + formatFullDate(tr.t) + '</span>' +
+        '<div class="trade-hist-thumbs">' +
+          tradeHistThumbsHtml(tr.your, 3) +
+          '<span class="arrow">→</span>' +
+          tradeHistThumbsHtml(tr.their, 3) +
+        '</div>' +
+        '<div class="items-preview">' +
+          tradeHistSideNames(tr.your, 2) +
+          '<span class="sep">→</span>' +
+          tradeHistSideNames(tr.their, 2) +
+        '</div>' +
       '</div>' +
       '<div class="trade-hist-card-side">' +
-        '<span class="trade-hist-pill ' + netClass(tr.net) + '">' + signedFmt(tr.net) + '</span>' +
+        '<div class="trade-hist-nv">' +
+          '<span class="was">Was ' + signedFmt(tr.net) + '</span>' +
+          '<span class="now ' + netCls + '">Now ' + signedFmt(netNow) + '</span>' +
+        '</div>' +
+        '<span class="trade-hist-pill ' + netCls + '">' + signedFmt(netNow) + '</span>' +
       '</div>';
     card.addEventListener('click', () => selectTradeHistory(i));
     frag.appendChild(card);
