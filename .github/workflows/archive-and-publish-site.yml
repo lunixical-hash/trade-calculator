@@ -78,7 +78,7 @@ jobs:
 
           if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
             mkdir -p "$DEST"
-            for f in trade_calculator.html index.html roblox_account.js roblox_oauth.js oauth_callback.html auth_public.json; do
+            for f in trade_calculator.html index.html roblox_account.js roblox_oauth.js oauth_callback.html auth_public.json privacy.html terms.html; do
               if git cat-file -e "HEAD~1:$f" 2>/dev/null; then
                 git show "HEAD~1:$f" > "$DEST/$f"
                 ARCHIVED=1
@@ -231,7 +231,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add versions trade_calculator.html index.html roblox_account.js roblox_oauth.js oauth_callback.html auth_public.json || true
+          git add versions trade_calculator.html index.html roblox_account.js roblox_oauth.js oauth_callback.html auth_public.json privacy.html terms.html || true
           if git diff --staged --quiet; then
             echo "No changes to commit."
             exit 0
