@@ -5726,9 +5726,9 @@ function coalesceHistoryByDay(points) {{
     if (seen.has(key)) continue;
     seen.add(key);
     const kept = byDay.get(key) || p;
-    // Prefer a clean day label for tooltips / axis
+    // Prefer a clean day label for tooltips / axis (avoid copy when already clean)
     if (kept && kept.label !== key) {{
-      out.push(Object.assign({{}}, kept, {{ label: key }}));
+      out.push({{ v: kept.v, t: kept.t, label: key }});
     }} else {{
       out.push(kept);
     }}
@@ -5738,7 +5738,11 @@ function coalesceHistoryByDay(points) {{
 
 function itemValueHistory(item) {{
   if (!item) return [];
-  return sanitizeValueHistory(item.history, item.value, itemChangePct(item));
+  // Cache cleaned/coalesced history — outlook/trends call this many times per item
+  if (Array.isArray(item._valueHistCache)) return item._valueHistCache;
+  const cleaned = sanitizeValueHistory(item.history, item.value, itemChangePct(item));
+  item._valueHistCache = cleaned;
+  return cleaned;
 }}
 
 function mountInteractiveChart(container, fullHist, opts) {{
@@ -10365,6 +10369,18 @@ document.getElementById('invClearBtn').addEventListener('click', () => {{
   commitHistory();
 }});
 
+function scheduleTrendsPanel() {{
+  const run = () => {{
+    try {{ renderTrendsPanel(); }} catch (err) {{ console.warn('Trends panel failed', err); }}
+  }};
+  // Keep Market Pulse off the first-paint critical path (history scoring is heavy)
+  if (window.requestIdleCallback) {{
+    window.requestIdleCallback(run, {{ timeout: 500 }});
+  }} else {{
+    requestAnimationFrame(() => setTimeout(run, 0));
+  }}
+}}
+
 loadInv();
 loadTargets();
 loadDumpList();
@@ -10375,8 +10391,8 @@ loadSetProtect();
 loadAutoTargetHot();
 loadQuickSearch();
 render();
-renderTrendsPanel();
-commitHistory();
+commitHistoryDeferred();
+scheduleTrendsPanel();
 
 // Per-Roblox-account local data: when the linked account changes, reload
 // inventory / targets / history from that account's storage namespace.
@@ -10394,8 +10410,8 @@ window.LunixOnAccountChange = function (account) {{
     loadSetProtect();
     loadAutoTargetHot();
     render();
-    renderTrendsPanel();
-    commitHistory();
+    commitHistoryDeferred();
+    scheduleTrendsPanel();
   }} catch (err) {{
     console.warn('Account data reload failed', err);
   }}
