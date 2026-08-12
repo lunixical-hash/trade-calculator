@@ -5702,7 +5702,7 @@ function mountInteractiveChart(container, fullHist, opts) {{
   ];
 
   const timedFull = Array.isArray(fullHist) && fullHist.length > 0 && fullHist.every((p) => Number.isFinite(p.t));
-  let rangeId = opts.defaultRange || 'all';
+  let rangeId = opts.defaultRange || '3m';
   let lastStats = {{ min: 0, max: 0, first: 0, last: 0, up: true, stroke: '#34d399' }};
 
   function histForRange(id) {{
@@ -6067,6 +6067,61 @@ function historyRiseCount(item) {{
     if (hist[i].v > hist[i - 1].v + 0.05) rises += 1;
   }}
   return rises;
+}}
+
+/** Count of clear drops across the whole series. */
+function historyDropCount(item) {{
+  const hist = itemValueHistory(item);
+  let drops = 0;
+  for (let i = 1; i < hist.length; i++) {{
+    if (hist[i].v < hist[i - 1].v - 0.05) drops += 1;
+  }}
+  return drops;
+}}
+
+/**
+ * True "constantly rising" — sustained climb, not one bounce after a dump.
+ * Requires an active raise streak, more raises than drops, and net gain.
+ */
+function isConstantlyRising(item) {{
+  if (!item || item.value < 1) return false;
+  if (itemDropSignal(item)) return false;
+
+  const hist = itemValueHistory(item);
+  const streak = historyRiseStreak(item);
+  const rises = historyRiseCount(item);
+  const drops = historyDropCount(item);
+  const move = itemLastValueMove(item);
+  const pct = itemChangePct(item);
+
+  // Must be raising right now (last step up), with at least a short streak
+  if (streak < 2) return false;
+  if (!(move && move.abs > 0.05)) return false;
+
+  // Need a real series of raises — one bounce after dumps does not count
+  if (rises < 3) return false;
+  if (drops >= rises) return false;
+
+  if (hist.length >= 3) {{
+    const net = hist[hist.length - 1].v - hist[0].v;
+    if (net <= 0) return false;
+
+    // Recent window: among the last up-to-6 steps, raises must dominate
+    const start = Math.max(1, hist.length - 6);
+    let recentUp = 0;
+    let recentDown = 0;
+    for (let i = start; i < hist.length; i++) {{
+      const d = hist[i].v - hist[i - 1].v;
+      if (d > 0.05) recentUp += 1;
+      else if (d < -0.05) recentDown += 1;
+    }}
+    if (recentDown >= recentUp) return false;
+  }} else {{
+    // Thin history: only allow if SV change itself is clearly up
+    if (!(pct >= 1.5 && rises >= 2)) return false;
+  }}
+
+  return true;
 }}
 
 /** Higher = more confidently dropping / worth trading off. */
@@ -6434,15 +6489,17 @@ function renderTrendsPanel() {{
     when: r.changedAt,
   }})));
 
-  // Constantly rising: history streak + SV trending + stability
+  // Constantly rising: sustained climb only (not a bounce after drops)
   const risers = elite
+    .filter((item) => isConstantlyRising(item))
     .map((item) => {{
       let score = historyRiseScore(item);
-      if (TRENDING_IDS.has(item.id)) score += 4;
+      score += historyRiseStreak(item) * 1.5;
+      score += Math.max(0, historyRiseCount(item) - historyDropCount(item));
+      if (TRENDING_IDS.has(item.id)) score += 2;
       if (item.stability === 'Doing Well' || item.stability === 'Underpaid For') score += 1;
       return {{ item, score, pct: itemChangePct(item), abs: itemChangeAbs(item) }};
     }})
-    .filter((r) => r.score >= 2 || TRENDING_IDS.has(r.item.id))
     .sort((a, b) => b.score - a.score || b.abs - a.abs || b.pct - a.pct)
     .slice(0, 6);
 
