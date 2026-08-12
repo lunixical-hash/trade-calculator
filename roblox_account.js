@@ -1,45 +1,46 @@
 /**
  * Roblox account connect UI for Lunix's AI Trade Assistant.
- * Talks to auth_server.py when authApiBase is set in auth_public.json.
+ * Primary path: browser OAuth (Roblox App permissions) via PKCE — no commands.
+ * Optional: local auth_server.py username link for offline/dev use.
  */
 (function () {
-  const ACCOUNT_KEY = 'lunix_roblox_account_v1';
-  const TOKEN_KEY = 'lunix_roblox_session_v1';
-  const CONFIG_URL = 'auth_public.json';
+  const O = () => window.LunixRobloxOAuth;
 
-  /** @type {{ authApiBase?: string, enableUsernameLink?: boolean }} */
-  let config = { authApiBase: '', enableUsernameLink: true };
+  /** @type {{ clientId?: string, redirectUri?: string, authApiBase?: string, enableUsernameLink?: boolean, scopes?: string }} */
+  let config = {
+    clientId: '',
+    redirectUri: '',
+    authApiBase: '',
+    enableUsernameLink: true,
+    scopes: 'openid profile',
+  };
   /** @type {null | { id: number|string, username: string, displayName: string, picture?: string, profile?: string, authMethod?: string }} */
   let account = null;
-  let token = null;
-  let oauthReady = false;
+  let serverToken = null; // only used with optional auth_server.py
 
   function $(id) {
     return document.getElementById(id);
   }
 
-  function loadLocal() {
-    try {
-      const raw = localStorage.getItem(ACCOUNT_KEY);
-      account = raw ? JSON.parse(raw) : null;
-      token = localStorage.getItem(TOKEN_KEY);
-    } catch (_) {
-      account = null;
-      token = null;
-    }
-  }
-
-  function saveLocal() {
-    try {
-      if (account) localStorage.setItem(ACCOUNT_KEY, JSON.stringify(account));
-      else localStorage.removeItem(ACCOUNT_KEY);
-      if (token) localStorage.setItem(TOKEN_KEY, token);
-      else localStorage.removeItem(TOKEN_KEY);
-    } catch (_) {}
+  function clientId() {
+    return String(config.clientId || '').trim();
   }
 
   function apiBase() {
     return String(config.authApiBase || '').replace(/\/$/, '');
+  }
+
+  function oauthConfigured() {
+    return !!clientId();
+  }
+
+  function loadLocal() {
+    account = O().readAccount();
+    try {
+      serverToken = localStorage.getItem('lunix_roblox_session_v1');
+    } catch (_) {
+      serverToken = null;
+    }
   }
 
   function avatarUrl(user) {
@@ -69,20 +70,31 @@
     }
   }
 
-  function setAccount(next, nextToken) {
+  function setAccount(next, nextServerToken) {
     const prevId = account && account.id;
     account = next;
-    token = nextToken || null;
-    saveLocal();
+    if (next) {
+      const keepAccess =
+        next.authMethod === 'oauth' ? localStorage.getItem(O().ACCESS_KEY) : null;
+      O().writeAccount(next, keepAccess);
+    } else {
+      O().clearAccount();
+    }
+    serverToken = nextServerToken || null;
+    try {
+      if (serverToken) localStorage.setItem('lunix_roblox_session_v1', serverToken);
+      else localStorage.removeItem('lunix_roblox_session_v1');
+    } catch (_) {}
     renderChip();
     if ((account && account.id) !== prevId) emitChange();
   }
 
   async function probeLocalAuth() {
     try {
-      const ctrl = typeof AbortSignal !== 'undefined' && AbortSignal.timeout
-        ? AbortSignal.timeout(900)
-        : undefined;
+      const ctrl =
+        typeof AbortSignal !== 'undefined' && AbortSignal.timeout
+          ? AbortSignal.timeout(700)
+          : undefined;
       const res = await fetch('http://127.0.0.1:8787/health', {
         cache: 'no-store',
         signal: ctrl,
@@ -93,73 +105,10 @@
   }
 
   async function fetchConfig() {
-    try {
-      const res = await fetch(CONFIG_URL, { cache: 'no-store' });
-      if (res.ok) {
-        const data = await res.json();
-        if (data && typeof data === 'object') config = { ...config, ...data };
-      }
-    } catch (_) {}
-
+    config = await O().loadConfig();
     if (!apiBase()) {
       const local = await probeLocalAuth();
       if (local) config.authApiBase = local;
-    }
-
-    const base = apiBase();
-    if (!base) {
-      oauthReady = false;
-      return;
-    }
-    try {
-      const res = await fetch(base + '/api/config', { cache: 'no-store' });
-      if (res.ok) {
-        const data = await res.json();
-        oauthReady = !!data.oauthReady;
-        if (data.usernameLink === false) config.enableUsernameLink = false;
-      }
-    } catch (_) {
-      oauthReady = false;
-    }
-  }
-
-  async function refreshSession() {
-    const base = apiBase();
-    if (!base || !token) return;
-    try {
-      const res = await fetch(base + '/api/me', {
-        headers: { Authorization: 'Bearer ' + token },
-        cache: 'no-store',
-      });
-      if (!res.ok) {
-        if (res.status === 401) setAccount(null, null);
-        return;
-      }
-      const data = await res.json();
-      if (data && data.user) setAccount(data.user, token);
-    } catch (_) {}
-  }
-
-  function consumeHashToken() {
-    const hash = (location.hash || '').replace(/^#/, '');
-    if (!hash) return;
-    const params = new URLSearchParams(hash);
-    const t = params.get('roblox_token');
-    const err = params.get('roblox_error');
-    if (!t && !err) return;
-    // Clear sensitive hash from the address bar
-    history.replaceState(null, '', location.pathname + location.search);
-    if (err) {
-      showStatus(err, true);
-      openModal();
-      return;
-    }
-    if (t) {
-      token = t;
-      saveLocal();
-      refreshSession().then(() => {
-        if (account) showStatus('Signed in as ' + (account.displayName || account.username));
-      });
     }
   }
 
@@ -187,9 +136,14 @@
       if (btn) btn.addEventListener('click', openModal);
     } else {
       root.innerHTML =
-        '<button type="button" class="rbx-login-btn" id="rbxLoginBtn">Connect Roblox</button>';
+        '<button type="button" class="rbx-login-btn" id="rbxLoginBtn">Sign in with Roblox</button>';
       const btn = $('rbxLoginBtn');
-      if (btn) btn.addEventListener('click', openModal);
+      if (btn) {
+        btn.addEventListener('click', () => {
+          if (oauthConfigured()) startOAuth();
+          else openModal();
+        });
+      }
     }
   }
 
@@ -207,8 +161,6 @@
     modal.hidden = false;
     showStatus('');
     updateModalBody();
-    const input = $('rbxUsername');
-    if (input) setTimeout(() => input.focus(), 50);
   }
 
   function closeModal() {
@@ -222,7 +174,9 @@
     const oauthBtn = $('rbxOAuthBtn');
     const userForm = $('rbxUserForm');
     const setup = $('rbxSetupHint');
-    const base = apiBase();
+    const divider = $('rbxDivider');
+    const hasOAuth = oauthConfigured();
+    const hasServer = !!apiBase();
 
     if (signed) signed.hidden = !(account && account.id != null);
     if (guest) guest.hidden = !!(account && account.id != null);
@@ -242,7 +196,7 @@
       if (method) {
         method.textContent =
           account.authMethod === 'oauth'
-            ? 'Signed in with Roblox OAuth'
+            ? 'Connected via Roblox App permissions'
             : 'Linked by username';
       }
       const link = $('rbxProfileLink');
@@ -250,32 +204,35 @@
         if (account.profile) {
           link.href = account.profile;
           link.hidden = false;
-        } else {
-          link.hidden = true;
-        }
+        } else link.hidden = true;
       }
     }
 
     if (oauthBtn) {
-      oauthBtn.hidden = !base || !oauthReady;
-      oauthBtn.disabled = !base || !oauthReady;
+      oauthBtn.hidden = false;
+      oauthBtn.disabled = !hasOAuth;
+      oauthBtn.textContent = hasOAuth
+        ? 'Sign in with Roblox'
+        : 'Sign in with Roblox (setup needed)';
     }
     if (userForm) {
-      const allow = config.enableUsernameLink !== false;
+      const allow = config.enableUsernameLink !== false && hasServer;
       userForm.hidden = !allow;
     }
+    if (divider) divider.hidden = !(hasServer && config.enableUsernameLink !== false);
     if (setup) {
-      setup.hidden = !!base;
+      setup.hidden = hasOAuth;
     }
   }
 
-  function startOAuth() {
-    const base = apiBase();
-    if (!base) {
-      showStatus('Auth server URL is not configured (auth_public.json).', true);
-      return;
+  async function startOAuth() {
+    showStatus('Redirecting to Roblox…');
+    try {
+      await O().beginLogin(config);
+    } catch (e) {
+      showStatus(e && e.message ? e.message : String(e), true);
+      openModal();
     }
-    window.location.href = base + '/auth/login';
   }
 
   async function linkUsername(ev) {
@@ -288,10 +245,7 @@
     }
     const base = apiBase();
     if (!base) {
-      showStatus(
-        'Start auth_server.py and set authApiBase in auth_public.json to link an account.',
-        true
-      );
+      showStatus('Use Sign in with Roblox — no commands needed.', true);
       return;
     }
     const btn = $('rbxLinkBtn');
@@ -318,11 +272,11 @@
 
   async function disconnect() {
     const base = apiBase();
-    if (base && token) {
+    if (base && serverToken) {
       try {
         await fetch(base + '/api/logout', {
           method: 'POST',
-          headers: { Authorization: 'Bearer ' + token },
+          headers: { Authorization: 'Bearer ' + serverToken },
         });
       } catch (_) {}
     }
@@ -359,9 +313,7 @@
         width:28px; height:28px; border-radius:50%; object-fit:cover;
         background:#2a2438;
       }
-      .rbx-avatar-fallback {
-        display:inline-block; background:#3b3352;
-      }
+      .rbx-avatar-fallback { display:inline-block; background:#3b3352; }
       .rbx-meta { display:flex; flex-direction:column; align-items:flex-start; line-height:1.15; }
       .rbx-name { font-size:12px; font-weight:700; }
       .rbx-handle { font-size:10px; color: var(--muted, #9a90b3); font-weight:500; }
@@ -415,9 +367,7 @@
         padding:10px 12px; background:#0c0a12; color:var(--text,#f4efff);
         font:inherit; font-size:14px;
       }
-      .rbx-user-row input:focus {
-        outline:none; border-color: var(--purple,#a855f7);
-      }
+      .rbx-user-row input:focus { outline:none; border-color: var(--purple,#a855f7); }
       .rbx-status {
         margin:12px 0 0; font-size:12px; color: var(--muted,#9a90b3); min-height:1.2em;
       }
@@ -427,6 +377,7 @@
         background:rgba(168,85,247,0.08); border:1px solid var(--line,#2a2438);
         font-size:12px; color:var(--muted,#9a90b3); line-height:1.45;
       }
+      .rbx-setup a { color: var(--purple-bright,#c084fc); }
       .rbx-setup code {
         font-size:11px; color:var(--purple-bright,#c084fc);
       }
@@ -474,7 +425,7 @@
           <div class="rbx-dialog" role="dialog" aria-modal="true" aria-labelledby="rbxModalTitle">
             <button type="button" class="rbx-modal-close" id="rbxCloseBtn" aria-label="Close">×</button>
             <h2 id="rbxModalTitle">Roblox account</h2>
-            <p class="rbx-lead">Connect your Roblox account so this calculator remembers you on this device.</p>
+            <p class="rbx-lead">Sign in with Roblox App permissions — same Approve flow used by apps like Bloxlink. No codes or commands.</p>
 
             <div id="rbxSignedIn" hidden>
               <div class="rbx-signed">
@@ -493,9 +444,9 @@
 
             <div id="rbxGuest">
               <div class="rbx-actions">
-                <button type="button" class="primary" id="rbxOAuthBtn" hidden>Sign in with Roblox</button>
-                <div class="rbx-divider" id="rbxDivider">or</div>
-                <form id="rbxUserForm">
+                <button type="button" class="primary" id="rbxOAuthBtn">Sign in with Roblox</button>
+                <div class="rbx-divider" id="rbxDivider" hidden>or</div>
+                <form id="rbxUserForm" hidden>
                   <div class="rbx-user-row">
                     <input id="rbxUsername" type="text" maxlength="20" placeholder="Roblox username" autocomplete="username" />
                     <button type="submit" class="primary" id="rbxLinkBtn">Link</button>
@@ -503,9 +454,13 @@
                 </form>
               </div>
               <div class="rbx-setup" id="rbxSetupHint" hidden>
-                To enable connecting on this site, run <code>python auth_server.py</code>
-                and set <code>authApiBase</code> in <code>auth_public.json</code> to that server’s URL.
-                For full Roblox OAuth, add your app credentials to <code>.env</code> (see <code>.env.example</code>).
+                <strong>One-time owner setup</strong> (then every visitor just clicks Sign in):<br/>
+                1. Create an OAuth 2.0 app at
+                <a href="https://create.roblox.com/dashboard/credentials" target="_blank" rel="noopener">Roblox Creator credentials</a><br/>
+                2. Add redirect URL
+                <code>https://lunixical-hash.github.io/trade-calculator/oauth_callback.html</code><br/>
+                3. Enable scopes <code>openid</code> and <code>profile</code><br/>
+                4. Paste the <strong>Client ID</strong> into <code>auth_public.json</code> → <code>clientId</code>
               </div>
             </div>
             <p class="rbx-status" id="rbxStatus" hidden></p>
@@ -525,48 +480,25 @@
         if (e.key === 'Escape' && !$('rbxModal').hidden) closeModal();
       });
     }
-
-    // Keep profile link fresh
-    const observer = () => {
-      const link = $('rbxProfileLink');
-      if (link && account && account.profile) {
-        link.href = account.profile;
-        link.hidden = false;
-      } else if (link) {
-        link.hidden = true;
-      }
-    };
-    const _set = setAccount;
-    // wrap after definition — update profile link on render instead
-    const prevRender = renderChip;
-    // no-op; updateModalBody handles profile link
-    void prevRender;
-    void observer;
   }
 
   async function init() {
+    if (!O()) {
+      console.error('roblox_oauth.js failed to load');
+      return;
+    }
     ensureDom();
     loadLocal();
     renderChip();
     await fetchConfig();
-    consumeHashToken();
-    await refreshSession();
     renderChip();
     updateModalBody();
-    // profile link
-    const link = $('rbxProfileLink');
-    if (link) {
-      if (account && account.profile) {
-        link.href = account.profile;
-        link.hidden = false;
-      }
-    }
     window.LunixRoblox = {
       getAccount: () => (account ? { ...account } : null),
-      getToken: () => token,
+      getToken: () => localStorage.getItem(O().ACCESS_KEY),
       open: openModal,
       disconnect,
-      refresh: refreshSession,
+      startOAuth,
     };
     emitChange();
   }
