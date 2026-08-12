@@ -398,6 +398,16 @@
       else document.body.prepend(slot);
     }
 
+    // Drop any stale modal from an older cached script build
+    const stale = $('rbxModal');
+    if (stale) {
+      const lead = stale.querySelector('.rbx-lead');
+      const leadText = lead ? lead.textContent || '' : '';
+      if (stale.querySelector('#rbxSetupHint') || /Bloxlink|setup needed|One-time owner/i.test(stale.innerHTML + leadText)) {
+        stale.remove();
+      }
+    }
+
     if (!$('rbxModal')) {
       const modal = document.createElement('div');
       modal.id = 'rbxModal';
