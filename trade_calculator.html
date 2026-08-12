@@ -982,6 +982,23 @@
     gap: 16px;
     flex-wrap: wrap;
     margin: 0 0 18px;
+    position: relative;
+  }
+  .wrap-head .rbx-account-slot {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  @media (max-width: 900px) {
+    .wrap-head .rbx-account-slot {
+      position: static;
+      transform: none;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      order: 3;
+    }
   }
   .quick-search {
     position: relative;
@@ -3759,6 +3776,7 @@
         <input type="checkbox" id="quickSearchToggle" />
         Quick search
       </label>
+      <div id="robloxAccount" class="rbx-account-slot" aria-live="polite"></div>
     </div>
     <div class="quick-search" id="quickSearchWrap" hidden>
       <div class="quick-search-row">
@@ -5009,14 +5027,39 @@
 })();
 
 const SLOTS = 4; // MM2 trades allow 4 unique items per side
-const INV_KEY = 'lunix_mm2_inv_v1';
-const TARGET_KEY = 'lunix_mm2_targets_v1';
-const DUMP_KEY = 'lunix_mm2_tradeoff_v1';
-const SET_PROTECT_KEY = 'lunix_mm2_avoid_set_breaks_v1';
-const AUTO_HOT_KEY = 'lunix_mm2_auto_target_hot_v1';
-const QUICK_SEARCH_KEY = 'lunix_mm2_quick_search_v1';
-const TRADE_HIST_KEY = 'lunix_mm2_trades_v1';
-const TRADE_DISMISS_KEY = 'lunix_mm2_trade_dismiss_v1';
+const INV_KEY_BASE = 'lunix_mm2_inv_v1';
+const TARGET_KEY_BASE = 'lunix_mm2_targets_v1';
+const DUMP_KEY_BASE = 'lunix_mm2_tradeoff_v1';
+const SET_PROTECT_KEY_BASE = 'lunix_mm2_avoid_set_breaks_v1';
+const AUTO_HOT_KEY_BASE = 'lunix_mm2_auto_target_hot_v1';
+const QUICK_SEARCH_KEY_BASE = 'lunix_mm2_quick_search_v1';
+const TRADE_HIST_KEY_BASE = 'lunix_mm2_trades_v1';
+const TRADE_DISMISS_KEY_BASE = 'lunix_mm2_trade_dismiss_v1';
+
+function accountStorageSuffix() {
+  try {
+    const a =
+      (window.LunixRoblox && window.LunixRoblox.getAccount && window.LunixRoblox.getAccount()) ||
+      null;
+    if (a && a.id != null) return '__u' + String(a.id);
+  } catch (_) {}
+  // Fallback while roblox_account.js is still loading / after hash login
+  try {
+    const raw = localStorage.getItem('lunix_roblox_account_v1');
+    if (!raw) return '';
+    const a = JSON.parse(raw);
+    if (a && a.id != null) return '__u' + String(a.id);
+  } catch (_) {}
+  return '';
+}
+function INV_KEY() { return INV_KEY_BASE + accountStorageSuffix(); }
+function TARGET_KEY() { return TARGET_KEY_BASE + accountStorageSuffix(); }
+function DUMP_KEY() { return DUMP_KEY_BASE + accountStorageSuffix(); }
+function SET_PROTECT_KEY() { return SET_PROTECT_KEY_BASE + accountStorageSuffix(); }
+function AUTO_HOT_KEY() { return AUTO_HOT_KEY_BASE + accountStorageSuffix(); }
+function QUICK_SEARCH_KEY() { return QUICK_SEARCH_KEY_BASE + accountStorageSuffix(); }
+function TRADE_HIST_KEY() { return TRADE_HIST_KEY_BASE + accountStorageSuffix(); }
+function TRADE_DISMISS_KEY() { return TRADE_DISMISS_KEY_BASE + accountStorageSuffix(); }
 const TRADE_HIST_MAX = 40;
 const TRADE_INFER_MAX_UNIQUE_SIDE = 8;
 const TRADE_INFER_MAX_UNITS_SIDE = 40;
@@ -6484,7 +6527,7 @@ function signedFmt(n) {
 
 function persistInv() {
   try {
-    localStorage.setItem(INV_KEY, JSON.stringify({
+    localStorage.setItem(INV_KEY(), JSON.stringify({
       items: state.inv,
       history: state.invHistory,
     }));
@@ -6493,19 +6536,19 @@ function persistInv() {
 
 function persistTargets() {
   try {
-    localStorage.setItem(TARGET_KEY, JSON.stringify({ items: state.targets }));
+    localStorage.setItem(TARGET_KEY(), JSON.stringify({ items: state.targets }));
   } catch (_) {}
 }
 
 function persistDumpList() {
   try {
-    localStorage.setItem(DUMP_KEY, JSON.stringify({ items: state.dumpList }));
+    localStorage.setItem(DUMP_KEY(), JSON.stringify({ items: state.dumpList }));
   } catch (_) {}
 }
 
 function persistTradeHistory() {
   try {
-    localStorage.setItem(TRADE_HIST_KEY, JSON.stringify({ trades: state.tradeHistory }));
+    localStorage.setItem(TRADE_HIST_KEY(), JSON.stringify({ trades: state.tradeHistory }));
   } catch (_) {}
   updateTradeHistBadge();
 }
@@ -6548,7 +6591,7 @@ function tradeFingerprint(your, their) {
 function persistTradeDismissed() {
   try {
     localStorage.setItem(
-      TRADE_DISMISS_KEY,
+      TRADE_DISMISS_KEY(),
       JSON.stringify({ keys: state.tradeDismissed.slice(-120) })
     );
   } catch (_) {}
@@ -6556,7 +6599,7 @@ function persistTradeDismissed() {
 
 function loadTradeDismissed() {
   try {
-    const raw = localStorage.getItem(TRADE_DISMISS_KEY);
+    const raw = localStorage.getItem(TRADE_DISMISS_KEY());
     if (!raw) {
       state.tradeDismissed = [];
       return;
@@ -6747,7 +6790,7 @@ function syncInferredTradesFromInvHistory() {
 
 function loadTradeHistory() {
   try {
-    const raw = localStorage.getItem(TRADE_HIST_KEY);
+    const raw = localStorage.getItem(TRADE_HIST_KEY());
     if (!raw) {
       state.tradeHistory = [];
       return;
@@ -7195,7 +7238,7 @@ function renderTradeHistory() {
 
 function loadInv() {
   try {
-    const raw = localStorage.getItem(INV_KEY);
+    const raw = localStorage.getItem(INV_KEY());
     if (!raw) return;
     const data = JSON.parse(raw);
     const items = Array.isArray(data.items) ? data.items : [];
@@ -7230,7 +7273,7 @@ function loadInv() {
 
 function loadTargets() {
   try {
-    const raw = localStorage.getItem(TARGET_KEY);
+    const raw = localStorage.getItem(TARGET_KEY());
     if (!raw) return;
     const data = JSON.parse(raw);
     const items = Array.isArray(data.items) ? data.items : [];
@@ -7247,7 +7290,7 @@ function loadTargets() {
 
 function loadDumpList() {
   try {
-    const raw = localStorage.getItem(DUMP_KEY);
+    const raw = localStorage.getItem(DUMP_KEY());
     if (!raw) return;
     const data = JSON.parse(raw);
     const items = Array.isArray(data.items) ? data.items : [];
@@ -8113,13 +8156,13 @@ function offerBreakOpts() {
 
 function persistSetProtect() {
   try {
-    localStorage.setItem(SET_PROTECT_KEY, state.avoidSetBreaks ? '1' : '0');
+    localStorage.setItem(SET_PROTECT_KEY(), state.avoidSetBreaks ? '1' : '0');
   } catch (_) {}
 }
 
 function loadSetProtect() {
   try {
-    const raw = localStorage.getItem(SET_PROTECT_KEY);
+    const raw = localStorage.getItem(SET_PROTECT_KEY());
     if (raw === '0') state.avoidSetBreaks = false;
     else if (raw === '1') state.avoidSetBreaks = true;
   } catch (_) {}
@@ -8129,13 +8172,13 @@ function loadSetProtect() {
 
 function persistAutoTargetHot() {
   try {
-    localStorage.setItem(AUTO_HOT_KEY, state.autoTargetHot ? '1' : '0');
+    localStorage.setItem(AUTO_HOT_KEY(), state.autoTargetHot ? '1' : '0');
   } catch (_) {}
 }
 
 function loadAutoTargetHot() {
   try {
-    const raw = localStorage.getItem(AUTO_HOT_KEY);
+    const raw = localStorage.getItem(AUTO_HOT_KEY());
     if (raw === '1') state.autoTargetHot = true;
     else if (raw === '0') state.autoTargetHot = false;
   } catch (_) {}
@@ -9320,7 +9363,7 @@ function filterCatalog(q, rar) {
 
 function persistQuickSearch() {
   try {
-    localStorage.setItem(QUICK_SEARCH_KEY, state.quickSearch ? '1' : '0');
+    localStorage.setItem(QUICK_SEARCH_KEY(), state.quickSearch ? '1' : '0');
   } catch (_) {}
 }
 
@@ -9343,7 +9386,7 @@ function setQuickSearchEnabled(on) {
 
 function loadQuickSearch() {
   try {
-    const raw = localStorage.getItem(QUICK_SEARCH_KEY);
+    const raw = localStorage.getItem(QUICK_SEARCH_KEY());
     if (raw === '1') state.quickSearch = true;
     else if (raw === '0') state.quickSearch = false;
   } catch (_) {}
@@ -9817,6 +9860,30 @@ loadQuickSearch();
 render();
 renderTrendsPanel();
 commitHistory();
+
+// Per-Roblox-account local data: when the linked account changes, reload
+// inventory / targets / history from that account's storage namespace.
+window.LunixOnAccountChange = function (account) {
+  const next = account && account.id != null ? String(account.id) : '';
+  if (window.__lunixAccountId === next) return;
+  window.__lunixAccountId = next;
+  try {
+    loadInv();
+    loadTargets();
+    loadDumpList();
+    loadTradeDismissed();
+    loadTradeHistory();
+    syncInferredTradesFromInvHistory();
+    loadSetProtect();
+    loadAutoTargetHot();
+    render();
+    renderTrendsPanel();
+    commitHistory();
+  } catch (err) {
+    console.warn('Account data reload failed', err);
+  }
+};
 </script>
+<script src="roblox_account.js"></script>
 </body>
 </html>

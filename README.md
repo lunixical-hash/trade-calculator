@@ -7,6 +7,8 @@ Trade calculator for Murder Mystery 2 values (scraped from Supreme Values) — *
 | `scrape_mm2_values.py` | Scrapes values into `mm2_values.json` |
 | `build_trade_calculator.py` | Rebuilds `trade_calculator.html` from that JSON |
 | `trade_calculator.html` | Standalone calculator (open in any browser) |
+| `auth_server.py` | Roblox login / username-link API (local or hosted) |
+| `roblox_account.js` | Connect Roblox UI on the calculator |
 | `calculator_overlay.py` | Optional always-on-top Windows overlay |
 
 **Repo:** https://github.com/lunixical-hash/trade-calculator  
@@ -86,7 +88,47 @@ Opens as `trade_calculator.html` (and is what Pages serves).
 
 ---
 
-## Name mismatches
+## Connect a Roblox account
+
+The calculator can link your Roblox identity (avatar + username) and keep **My Items** / trade history separate per account on this device.
+
+GitHub Pages is static, so Roblox login needs a tiny local (or hosted) auth server:
+
+### 1. Run the auth server
+
+```powershell
+python -m pip install -r requirements.txt
+copy .env.example .env
+python auth_server.py
+```
+
+By default it listens on `http://127.0.0.1:8787`.  
+`auth_public.json` can leave `authApiBase` empty — the page auto-detects a local auth server. For a hosted auth server, set:
+
+```json
+{
+  "authApiBase": "https://your-auth-host.example",
+  "enableUsernameLink": true
+}
+```
+
+### 2. Link by username (no OAuth app needed)
+
+1. Start `auth_server.py`
+2. Open the calculator → **Connect Roblox** → enter your username → **Link**
+
+### 3. Optional: Sign in with Roblox (OAuth)
+
+1. Create an OAuth 2.0 app at [Roblox Creator credentials](https://create.roblox.com/dashboard/credentials)
+2. Add redirect URI: `http://127.0.0.1:8787/auth/callback` (and your hosted callback if any)
+3. Enable scopes **openid** and **profile**
+4. Put `ROBLOX_CLIENT_ID` and `ROBLOX_CLIENT_SECRET` in `.env`
+5. Set `PUBLIC_APP_URL` to your calculator URL
+6. Restart `auth_server.py` → **Sign in with Roblox**
+
+To use login on the live GitHub Pages site from the public internet, host `auth_server.py` on HTTPS (Render, Fly.io, etc.), register that callback on your Roblox OAuth app, and point `auth_public.json` → `authApiBase` at it.
+
+---
 
 If a site name doesn't match the in-game inventory name, edit `name_map.json`:
 
