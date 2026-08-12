@@ -1,0 +1,243 @@
+name: Archive and publish site
+
+# GitHub Pages already serves from main. This workflow:
+# 1) Snapshots the previous live site into versions/<timestamp>/
+# 2) Keeps the newest archives (drops older ones)
+# 3) Rebuilds versions/index.html for one-click browsing / rollback
+# Optional: manually restore an older snapshot onto main (goes live via Pages).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "trade_calculator.html"
+      - "index.html"
+      - "roblox_account.js"
+      - "roblox_oauth.js"
+      - "oauth_callback.html"
+      - "auth_public.json"
+  workflow_dispatch:
+    inputs:
+      restore_version:
+        description: "Optional — versions/ folder name to restore to live (e.g. 2026-08-12T212815Z)"
+        required: false
+        default: ""
+      keep_count:
+        description: "How many old site versions to keep"
+        required: false
+        default: "15"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: site-archive-main
+  cancel-in-progress: false
+
+jobs:
+  archive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Restore older version onto live root
+        if: ${{ github.event_name == 'workflow_dispatch' && inputs.restore_version != '' }}
+        env:
+          RESTORE: ${{ inputs.restore_version }}
+        run: |
+          set -euo pipefail
+          SRC="versions/${RESTORE}"
+          if [ ! -d "$SRC" ]; then
+            echo "No such archive: $SRC"
+            echo "Available:"
+            ls -1 versions 2>/dev/null || true
+            exit 1
+          fi
+          for f in trade_calculator.html index.html roblox_account.js roblox_oauth.js oauth_callback.html auth_public.json; do
+            if [ -f "$SRC/$f" ]; then
+              cp -f "$SRC/$f" "./$f"
+              echo "Restored $f from $SRC"
+            fi
+          done
+
+      - name: Snapshot previous live site
+        id: snap
+        env:
+          KEEP: ${{ github.event.inputs.keep_count || '15' }}
+        run: |
+          set -euo pipefail
+          mkdir -p versions
+          TS="$(date -u +%Y-%m-%dT%H%M%SZ)"
+          DEST="versions/${TS}"
+          ARCHIVED=0
+
+          if git rev-parse --verify HEAD~1 >/dev/null 2>&1; then
+            mkdir -p "$DEST"
+            for f in trade_calculator.html index.html roblox_account.js roblox_oauth.js oauth_callback.html auth_public.json; do
+              if git cat-file -e "HEAD~1:$f" 2>/dev/null; then
+                git show "HEAD~1:$f" > "$DEST/$f"
+                ARCHIVED=1
+              fi
+            done
+            if [ "$ARCHIVED" -eq 0 ]; then
+              rmdir "$DEST" 2>/dev/null || rm -rf "$DEST"
+              echo "No previous site files to archive."
+            else
+              # Skip empty / tiny snapshots that didn't include the calculator
+              if [ ! -f "$DEST/trade_calculator.html" ]; then
+                echo "Previous commit had no trade_calculator.html — skipping snapshot."
+                rm -rf "$DEST"
+                ARCHIVED=0
+              else
+                {
+                  echo "{"
+                  echo "  \"archivedAt\": \"${TS}\","
+                  echo "  \"sourceCommit\": \"$(git rev-parse HEAD~1)\","
+                  echo "  \"triggerCommit\": \"$(git rev-parse HEAD)\","
+                  echo "  \"event\": \"${GITHUB_EVENT_NAME}\""
+                  echo "}"
+                } > "$DEST/manifest.json"
+                echo "Archived previous site → $DEST"
+              fi
+            fi
+          else
+            echo "Only one commit on branch — nothing to archive yet."
+          fi
+
+          # Prune oldest beyond KEEP
+          mapfile -t ALL < <(find versions -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | sort -r)
+          COUNT="${#ALL[@]}"
+          echo "Archive count before prune: $COUNT (keep $KEEP)"
+          if [ "$COUNT" -gt "$KEEP" ]; then
+            for old in "${ALL[@]:$KEEP}"; do
+              echo "Pruning versions/$old"
+              rm -rf "versions/$old"
+            done
+          fi
+
+          # Build browseable index
+          python3 <<'PY'
+          from __future__ import annotations
+          import json
+          from pathlib import Path
+
+          root = Path("versions")
+          root.mkdir(exist_ok=True)
+          dirs = sorted(
+              [p for p in root.iterdir() if p.is_dir()],
+              key=lambda p: p.name,
+              reverse=True,
+          )
+          rows = []
+          for d in dirs:
+              man = {}
+              mp = d / "manifest.json"
+              if mp.exists():
+                  try:
+                      man = json.loads(mp.read_text(encoding="utf-8"))
+                  except Exception:
+                      man = {}
+              has_calc = (d / "trade_calculator.html").exists()
+              rows.append(
+                  {
+                      "id": d.name,
+                      "href": f"{d.name}/trade_calculator.html",
+                      "has_calc": has_calc,
+                      "source": man.get("sourceCommit", ""),
+                      "archivedAt": man.get("archivedAt", d.name),
+                  }
+              )
+
+          items = "\n".join(
+              (
+                  f'<li><a href="{r["href"]}">{r["id"]}</a>'
+                  + (
+                      f' · <code>{r["source"][:7]}</code>'
+                      if r["source"]
+                      else ""
+                  )
+                  + (" · calculator" if r["has_calc"] else " · incomplete")
+                  + "</li>"
+              )
+              for r in rows
+          ) or "<li>No archives yet — the next site update on main will create one.</li>"
+
+          html = f"""<!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>Site versions — Lunix's AI Trade Assistant</title>
+            <style>
+              :root {{ color-scheme: dark; }}
+              body {{
+                margin: 0; font-family: Georgia, "Times New Roman", serif;
+                background: radial-gradient(1200px 600px at 20% -10%, #1a1030, #07060c 55%);
+                color: #f4efff; min-height: 100vh; padding: 48px 20px;
+              }}
+              main {{ max-width: 720px; margin: 0 auto; }}
+              h1 {{ font-size: 1.8rem; margin: 0 0 8px; }}
+              p {{ color: #9a90b3; line-height: 1.5; }}
+              a {{ color: #c084fc; }}
+              ol {{ padding-left: 1.2rem; }}
+              li {{ margin: 10px 0; }}
+              code {{ font-size: 0.85em; color: #e9d5ff; }}
+              .card {{
+                margin-top: 24px; padding: 20px 22px; border-radius: 16px;
+                background: rgba(18,16,26,0.9); border: 1px solid #2a2438;
+              }}
+            </style>
+          </head>
+          <body>
+            <main>
+              <h1>Site versions</h1>
+              <p>
+                Older builds of the live calculator are kept here automatically whenever
+                <code>main</code> site files change. Open one to check it, or restore it
+                with the <strong>Archive and publish site</strong> workflow
+                (<code>restore_version</code> input).
+              </p>
+              <p><a href="../trade_calculator.html">← Back to live calculator</a></p>
+              <div class="card">
+                <ol>
+          {items}
+                </ol>
+              </div>
+            </main>
+          </body>
+          </html>
+          """
+          # Dedent-ish: strip leading spaces from template lines for cleaner file
+          (root / "index.html").write_text(
+              "\n".join(line[10:] if line.startswith("          ") else line for line in html.splitlines())
+              + "\n",
+              encoding="utf-8",
+          )
+          print(f"Wrote versions/index.html ({len(rows)} entries)")
+          PY
+
+          echo "archived=$ARCHIVED" >> "$GITHUB_OUTPUT"
+          echo "timestamp=$TS" >> "$GITHUB_OUTPUT"
+
+      - name: Commit archive / restore
+        env:
+          RESTORE: ${{ github.event.inputs.restore_version || '' }}
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add versions trade_calculator.html index.html roblox_account.js roblox_oauth.js oauth_callback.html auth_public.json || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          if [ -n "${RESTORE}" ]; then
+            git commit -m "Restore site version ${RESTORE}"
+          else
+            # skip ci: avoid re-running this workflow on archive-only commits
+            git commit -m "Archive previous site version [skip ci]"
+          fi
+          git push

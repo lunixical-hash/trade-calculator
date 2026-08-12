@@ -7,8 +7,9 @@ Trade calculator for Murder Mystery 2 values (scraped from Supreme Values) — *
 | `scrape_mm2_values.py` | Scrapes values into `mm2_values.json` |
 | `build_trade_calculator.py` | Rebuilds `trade_calculator.html` from that JSON |
 | `trade_calculator.html` | Standalone calculator (open in any browser) |
-| `auth_server.py` | Roblox login / username-link API (local or hosted) |
-| `roblox_account.js` | Connect Roblox UI on the calculator |
+| `roblox_oauth.js` / `oauth_callback.html` | Browser Sign in with Roblox (App permissions) |
+| `roblox_account.js` | Account button / modal on the calculator |
+| `auth_server.py` | Optional local username-link helper |
 | `calculator_overlay.py` | Optional always-on-top Windows overlay |
 
 **Repo:** https://github.com/lunixical-hash/trade-calculator  
@@ -88,47 +89,57 @@ Opens as `trade_calculator.html` (and is what Pages serves).
 
 ---
 
-## Connect a Roblox account
+## Connect a Roblox account (App permissions)
 
-The calculator can link your Roblox identity (avatar + username) and keep **My Items** / trade history separate per account on this device.
+Visitors sign in with the normal Roblox **Approve** / App permissions flow — no commands, no profile codes.
 
-GitHub Pages is static, so Roblox login needs a tiny local (or hosted) auth server:
+The live site uses browser OAuth (PKCE). After a **one-time** owner setup, anyone can click **Sign in with Roblox**.
 
-### 1. Run the auth server
+### One-time owner setup
 
-```powershell
-python -m pip install -r requirements.txt
-copy .env.example .env
-python auth_server.py
+1. Open [Roblox Creator → Credentials](https://create.roblox.com/dashboard/credentials) → create an **OAuth 2.0** app  
+2. Add this **Redirect URL** exactly:
+
+```
+https://lunixical-hash.github.io/trade-calculator/oauth_callback.html
 ```
 
-By default it listens on `http://127.0.0.1:8787`.  
-`auth_public.json` can leave `authApiBase` empty — the page auto-detects a local auth server. For a hosted auth server, set:
+3. Enable scopes **openid** and **profile**  
+4. Copy the **Client ID** into `auth_public.json`:
 
 ```json
 {
-  "authApiBase": "https://your-auth-host.example",
-  "enableUsernameLink": true
+  "clientId": "YOUR_CLIENT_ID_HERE",
+  "redirectUri": "https://lunixical-hash.github.io/trade-calculator/oauth_callback.html",
+  "scopes": "openid profile"
 }
 ```
 
-### 2. Link by username (no OAuth app needed)
+5. Commit + push to `main` (GitHub Pages updates automatically)
 
-1. Start `auth_server.py`
-2. Open the calculator → **Connect Roblox** → enter your username → **Link**
+No client secret is needed in the browser. Approved apps show under Roblox **Settings → App permissions**, same as Bloxlink / Rolimons.
 
-### 3. Optional: Sign in with Roblox (OAuth)
+### Optional (dev only): username link via `auth_server.py`
 
-1. Create an OAuth 2.0 app at [Roblox Creator credentials](https://create.roblox.com/dashboard/credentials)
-2. Add redirect URI: `http://127.0.0.1:8787/auth/callback` (and your hosted callback if any)
-3. Enable scopes **openid** and **profile**
-4. Put `ROBLOX_CLIENT_ID` and `ROBLOX_CLIENT_SECRET` in `.env`
-5. Set `PUBLIC_APP_URL` to your calculator URL
-6. Restart `auth_server.py` → **Sign in with Roblox**
-
-To use login on the live GitHub Pages site from the public internet, host `auth_server.py` on HTTPS (Render, Fly.io, etc.), register that callback on your Roblox OAuth app, and point `auth_public.json` → `authApiBase` at it.
+For local testing without OAuth, you can still run `python auth_server.py` and use username link. End users on the live site do not need this.
 
 ---
+
+## Site updates & version history
+
+GitHub Pages already publishes whatever is on `main`.
+
+Additionally, `.github/workflows/archive-and-publish-site.yml` runs whenever live site files change on `main` and:
+
+- Saves the **previous** site into `versions/<timestamp>/`
+- Keeps the newest **15** snapshots (older ones are pruned)
+- Rebuilds https://lunixical-hash.github.io/trade-calculator/versions/
+
+**Rollback:** Actions → **Archive and publish site** → Run workflow → set `restore_version` to a folder name from `/versions/`.
+
+---
+
+## Name mismatches
 
 If a site name doesn't match the in-game inventory name, edit `name_map.json`:
 
