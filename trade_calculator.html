@@ -2793,29 +2793,46 @@
     border-color: #2a2a2a;
     border-radius: 8px;
   }
-  .chart-wrap.zoomed {
-    border-color: rgba(var(--purple-rgb), 0.45);
+  .chart-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
-  .chart-zoom-hint {
-    position: absolute;
-    right: 8px;
-    bottom: 6px;
-    z-index: 3;
-    pointer-events: none;
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    color: #7c7396;
-    background: rgba(7, 6, 12, 0.72);
-    border: 1px solid #2a2438;
-    border-radius: 999px;
-    padding: 3px 8px;
+  .chart-ranges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
   }
-  .chart-wrap.spark .chart-zoom-hint {
-    bottom: 4px;
-    right: 6px;
-    font-size: 9px;
-    padding: 2px 7px;
+  .chart-ranges button {
+    border: 1px solid #2a2a2a;
+    background: #2a2a2e;
+    color: #b8b8c2;
+    border-radius: 8px;
+    padding: 5px 10px;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .chart-ranges button:hover {
+    color: #f4efff;
+    border-color: #3b3352;
+  }
+  .chart-ranges button.active {
+    background: #0c0c0e;
+    color: #ffffff;
+    border-color: #0c0c0e;
+  }
+  .chart-ranges button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .chart-shell.spark .chart-ranges button {
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 7px;
   }
   .graph-svg,
   .chart-wrap .hspark {
@@ -5359,16 +5376,39 @@ function mountInteractiveChart(container, fullHist, opts) {
   const showAxes = opts.showAxes !== false && !spark;
   const showArea = opts.showArea !== false && !spark;
   const svgClass = spark ? 'hspark' : 'graph-svg';
-  const enableZoom = opts.zoom !== false && Array.isArray(fullHist) && fullHist.length >= 3;
+  const showRanges = opts.ranges !== false;
 
-  let viewLo = 0;
-  let viewHi = fullHist.length - 1;
+  const RANGE_OPTS = [
+    { id: '1w', label: '1w', days: 7 },
+    { id: '1m', label: '1m', days: 30 },
+    { id: '3m', label: '3m', days: 90 },
+    { id: '6m', label: '6m', days: 180 },
+    { id: '1y', label: '1y', days: 365 },
+    { id: 'all', label: 'All', days: null },
+  ];
+
+  const timedFull = Array.isArray(fullHist) && fullHist.length > 0 && fullHist.every((p) => Number.isFinite(p.t));
+  let rangeId = opts.defaultRange || 'all';
   let lastStats = { min: 0, max: 0, first: 0, last: 0, up: true, stroke: '#34d399' };
 
+  function histForRange(id) {
+    if (!Array.isArray(fullHist) || !fullHist.length) return [];
+    const opt = RANGE_OPTS.find((r) => r.id === id) || RANGE_OPTS[RANGE_OPTS.length - 1];
+    if (!opt.days || !timedFull) return fullHist.slice();
+    const latestT = Math.max.apply(null, fullHist.map((p) => p.t));
+    const cutoff = latestT - opt.days * 86400;
+    let sliced = fullHist.filter((p) => p.t >= cutoff);
+    // Always keep at least 2 points when possible so the line can render
+    if (sliced.length < 2 && fullHist.length >= 2) {
+      sliced = fullHist.slice(-2);
+    }
+    return sliced;
+  }
+
   function paint() {
-    const hist = fullHist.slice(viewLo, viewHi + 1);
+    const hist = histForRange(rangeId);
     if (!hist.length) {
-      container.innerHTML = '<div class="graph-empty">No points in view.</div>';
+      container.innerHTML = '<div class="graph-empty">No points in this range.</div>';
       return lastStats;
     }
 
@@ -5380,7 +5420,6 @@ function mountInteractiveChart(container, fullHist, opts) {
     const iw = w - pad.l - pad.r;
     const ih = h - pad.t - pad.b;
 
-    // Prefer real time spacing when timestamps exist; fall back to equal index gaps.
     const timed = hist.every((p) => Number.isFinite(p.t));
     let tMin = 0, tSpan = 1;
     if (timed) {
@@ -5407,14 +5446,11 @@ function mountInteractiveChart(container, fullHist, opts) {
     const fill = up ? 'rgba(52,211,153,0.15)' : 'rgba(240,68,68,0.12)';
     const sw = spark ? '2.2' : '2.5';
 
-    // Color each segment: drops red, solid raises green,
-    // yellow only for a weak bounce after a drop (not a real climb).
     function segmentStroke(prevV, nextV, prevIndex) {
       const d = nextV - prevV;
       const eps = Math.max(span * 0.01, Math.abs(prevV) * 0.003, 0.05);
       if (d < -eps) return '#f87171';
       if (d > eps) {
-        // Weak recovery: previous segment dropped, and this only partially clawed back
         if (prevIndex >= 1) {
           const priorD = hist[prevIndex].v - hist[prevIndex - 1].v;
           if (priorD < -eps) {
@@ -5463,12 +5499,6 @@ function mountInteractiveChart(container, fullHist, opts) {
       }
     }
 
-    const zoomed = enableZoom && (viewLo > 0 || viewHi < fullHist.length - 1);
-    const wrap = document.createElement('div');
-    wrap.className = 'chart-wrap' + (spark ? ' spark' : '') + (zoomed ? ' zoomed' : '');
-    if (enableZoom) {
-      wrap.title = 'Scroll to zoom · double-click to reset';
-    }
     let pointMarkup = '';
     pts.forEach((pt, idx) => {
       const dotCol = idx === 0
@@ -5483,10 +5513,40 @@ function mountInteractiveChart(container, fullHist, opts) {
         '<circle class="chart-hit-svg" data-idx="' + idx + '" cx="' + pt.x.toFixed(1) +
         '" cy="' + pt.y.toFixed(1) + '" r="' + hitR +
         '" fill="transparent" stroke="none" style="cursor:crosshair">' +
-        '<title>' + chartPointLabel(pt.p, viewLo + pt.i, fullHist.length) + ', value ' + fmt(pt.p.v) + '</title>' +
+        '<title>' + chartPointLabel(pt.p, pt.i, hist.length) + ', value ' + fmt(pt.p.v) + '</title>' +
         '</circle>';
     });
 
+    const shell = document.createElement('div');
+    shell.className = 'chart-shell' + (spark ? ' spark' : '');
+
+    if (showRanges) {
+      const ranges = document.createElement('div');
+      ranges.className = 'chart-ranges';
+      ranges.setAttribute('role', 'group');
+      ranges.setAttribute('aria-label', 'Chart time range');
+      RANGE_OPTS.forEach((opt) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = opt.label;
+        btn.dataset.range = opt.id;
+        if (opt.id === rangeId) btn.classList.add('active');
+        if (opt.days && !timedFull) {
+          btn.disabled = true;
+          btn.title = 'Needs dated history points';
+        }
+        btn.addEventListener('click', () => {
+          if (btn.disabled || opt.id === rangeId) return;
+          rangeId = opt.id;
+          paint();
+        });
+        ranges.appendChild(btn);
+      });
+      shell.appendChild(ranges);
+    }
+
+    const wrap = document.createElement('div');
+    wrap.className = 'chart-wrap' + (spark ? ' spark' : '');
     wrap.innerHTML =
       '<svg class="' + svgClass + '" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none" aria-hidden="true">' +
         axes +
@@ -5495,14 +5555,7 @@ function mountInteractiveChart(container, fullHist, opts) {
         pointMarkup +
       '</svg>' +
       '<div class="chart-cross" aria-hidden="true"><div class="vline"></div><div class="hline"></div></div>' +
-      '<div class="chart-tooltip" role="tooltip"></div>' +
-      (enableZoom
-        ? '<div class="chart-zoom-hint" aria-hidden="true">' +
-            (zoomed
-              ? ('Zoomed ' + (viewLo + 1) + '–' + (viewHi + 1) + ' of ' + fullHist.length + ' · double-click reset')
-              : 'Scroll to zoom') +
-          '</div>'
-        : '');
+      '<div class="chart-tooltip" role="tooltip"></div>';
 
     const cross = wrap.querySelector('.chart-cross');
     const vline = cross.querySelector('.vline');
@@ -5534,7 +5587,7 @@ function mountInteractiveChart(container, fullHist, opts) {
       hline.style.top = topPct + '%';
       cross.classList.add('on');
 
-      const prev = idx > 0 ? hist[idx - 1].v : (viewLo > 0 ? fullHist[viewLo - 1].v : null);
+      const prev = idx > 0 ? hist[idx - 1].v : null;
       let deltaHtml = '';
       if (prev != null && Number.isFinite(prev)) {
         const d = pt.p.v - prev;
@@ -5542,12 +5595,11 @@ function mountInteractiveChart(container, fullHist, opts) {
         deltaHtml = '<div class="tt-delta ' + cls + '">' + signedFmt(d) + ' vs prev</div>';
       }
       tip.innerHTML =
-        '<div class="tt-when">' + chartPointLabel(pt.p, viewLo + pt.i, fullHist.length) + '</div>' +
+        '<div class="tt-when">' + chartPointLabel(pt.p, pt.i, hist.length) + '</div>' +
         '<div class="tt-val">' + fmt(pt.p.v) + '</div>' +
         deltaHtml;
       tip.classList.add('on');
 
-      // Pin tooltip inside the chart frame (overflow is clipped)
       const place = () => {
         const wrapW = wrap.clientWidth;
         const wrapH = wrap.clientHeight;
@@ -5562,10 +5614,9 @@ function mountInteractiveChart(container, fullHist, opts) {
         let left = px - tipW / 2;
         left = Math.max(edge, Math.min(left, wrapW - tipW - edge));
 
-        let top = py - tipH - gap; // prefer above the point
-        if (top < edge) top = py + gap; // flip below
+        let top = py - tipH - gap;
+        if (top < edge) top = py + gap;
         if (top + tipH > wrapH - edge) {
-          // Still overflowing: clamp inside, preferring space with more room
           const aboveSpace = py - edge;
           const belowSpace = wrapH - edge - py;
           if (aboveSpace >= belowSpace && aboveSpace >= tipH) top = py - tipH - gap;
@@ -5590,58 +5641,11 @@ function mountInteractiveChart(container, fullHist, opts) {
     });
     wrap.addEventListener('mouseleave', hideTip);
 
-    if (enableZoom) {
-      wrap.addEventListener('wheel', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const range = viewHi - viewLo;
-        if (range < 1 && e.deltaY < 0) return;
-
-        const rect = wrap.getBoundingClientRect();
-        const xRatio = Math.max(0, Math.min(1, (e.clientX - rect.left) / Math.max(rect.width, 1)));
-        const focus = viewLo + xRatio * range;
-
-        // Scroll up = zoom in, scroll down = zoom out
-        const zoomIn = e.deltaY < 0;
-        let newRange = zoomIn
-          ? Math.max(1, Math.floor(range * 0.82))
-          : Math.min(fullHist.length - 1, Math.ceil(range * 1.22) || (range + 1));
-        if (zoomIn && newRange >= range && range > 1) newRange = range - 1;
-        if (!zoomIn && newRange <= range) newRange = Math.min(fullHist.length - 1, range + 1);
-
-        const focusRatio = range > 0 ? (focus - viewLo) / range : 0.5;
-        let newLo = Math.round(focus - focusRatio * newRange);
-        let newHi = newLo + newRange;
-        if (newLo < 0) {
-          newHi -= newLo;
-          newLo = 0;
-        }
-        if (newHi > fullHist.length - 1) {
-          newLo = Math.max(0, newLo - (newHi - (fullHist.length - 1)));
-          newHi = fullHist.length - 1;
-        }
-        if (newHi - newLo < 1) {
-          newHi = Math.min(fullHist.length - 1, newLo + 1);
-        }
-        if (newLo === viewLo && newHi === viewHi) return;
-        viewLo = newLo;
-        viewHi = newHi;
-        paint();
-      }, { passive: false });
-
-      wrap.addEventListener('dblclick', (e) => {
-        e.preventDefault();
-        if (viewLo === 0 && viewHi === fullHist.length - 1) return;
-        viewLo = 0;
-        viewHi = fullHist.length - 1;
-        paint();
-      });
-    }
-
+    shell.appendChild(wrap);
     const rawMin = Math.min.apply(null, vals);
     const rawMax = Math.max.apply(null, vals);
     container.innerHTML = '';
-    container.appendChild(wrap);
+    container.appendChild(shell);
 
     lastStats = { min: rawMin, max: rawMax, first: vals[0], last: vals[vals.length - 1], up, stroke };
     return lastStats;
@@ -9962,7 +9966,7 @@ window.LunixOnAccountChange = function (account) {
   }
 };
 </script>
-<script src="roblox_oauth.js"></script>
-<script src="roblox_account.js"></script>
+<script src="roblox_oauth.js?v=20260812c"></script>
+<script src="roblox_account.js?v=20260812c"></script>
 </body>
 </html>
