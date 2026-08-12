@@ -5357,6 +5357,68 @@ function sanitizeValueHistory(hist, currentValue, changePct) {
     if (out.length && Math.abs(out[out.length - 1].v - p.v) < 1e-6) continue;
     out.push(p);
   }
+  // One point per calendar day (end-of-day value) so intra-day tweaks don't jagged the graph
+  return coalesceHistoryByDay(out);
+}
+
+/** Calendar day key for a history point (prefers YYYY-MM-DD labels, else local date from t). */
+function historyDayKey(point) {
+  if (point && typeof point.label === 'string') {
+    const m = point.label.trim().match(/^(\d{4}-\d{2}-\d{2})/);
+    if (m) return m[1];
+  }
+  if (point && Number.isFinite(point.t)) {
+    const d = toJsDate(point.t);
+    if (d) {
+      const y = d.getFullYear();
+      const mo = String(d.getMonth() + 1).padStart(2, '0');
+      const day = String(d.getDate()).padStart(2, '0');
+      return y + '-' + mo + '-' + day;
+    }
+  }
+  return null;
+}
+
+/**
+ * Collapse multiple same-day adjustments into the day's final value.
+ * Keeps chronological order; unlabeled / undated points are left as-is.
+ */
+function coalesceHistoryByDay(points) {
+  if (!Array.isArray(points) || points.length < 2) return points || [];
+  const byDay = new Map();
+  for (const p of points) {
+    const key = historyDayKey(p);
+    if (!key) continue;
+    const prev = byDay.get(key);
+    if (!prev) {
+      byDay.set(key, p);
+      continue;
+    }
+    const pt = Number.isFinite(p.t) ? p.t : -Infinity;
+    const prevT = Number.isFinite(prev.t) ? prev.t : -Infinity;
+    // Later timestamp wins; if timestamps tie/missing, keep the later scrape in list order
+    if (pt >= prevT) byDay.set(key, p);
+  }
+  if (!byDay.size) return points;
+
+  const seen = new Set();
+  const out = [];
+  for (const p of points) {
+    const key = historyDayKey(p);
+    if (!key) {
+      out.push(p);
+      continue;
+    }
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const kept = byDay.get(key) || p;
+    // Prefer a clean day label for tooltips / axis
+    if (kept && kept.label !== key) {
+      out.push(Object.assign({}, kept, { label: key }));
+    } else {
+      out.push(kept);
+    }
+  }
   return out;
 }
 
