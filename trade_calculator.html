@@ -5347,7 +5347,7 @@ function itemValueHistory(item) {
   return sanitizeValueHistory(item.history, item.value, itemChangePct(item));
 }
 
-function mountInteractiveChart(container, hist, opts) {
+function mountInteractiveChart(container, fullHist, opts) {
   opts = opts || {};
   const spark = !!opts.spark;
   const w = opts.w || (spark ? 320 : 640);
@@ -5358,218 +5358,293 @@ function mountInteractiveChart(container, hist, opts) {
   const showAxes = opts.showAxes !== false && !spark;
   const showArea = opts.showArea !== false && !spark;
   const svgClass = spark ? 'hspark' : 'graph-svg';
+  const enableZoom = opts.zoom !== false && Array.isArray(fullHist) && fullHist.length >= 3;
 
-  const vals = hist.map((p) => p.v);
-  let min = Math.min.apply(null, vals);
-  let max = Math.max.apply(null, vals);
-  if (Math.abs(max - min) < 1) { min -= 1; max += 1; }
-  const span = max - min || 1;
-  const iw = w - pad.l - pad.r;
-  const ih = h - pad.t - pad.b;
+  let viewLo = 0;
+  let viewHi = fullHist.length - 1;
+  let lastStats = { min: 0, max: 0, first: 0, last: 0, up: true, stroke: '#34d399' };
 
-  // Prefer real time spacing when timestamps exist; fall back to equal index gaps.
-  const timed = hist.every((p) => Number.isFinite(p.t));
-  let tMin = 0, tSpan = 1;
-  if (timed) {
-    const ts = hist.map((p) => p.t);
-    tMin = Math.min.apply(null, ts);
-    const tMax = Math.max.apply(null, ts);
-    tSpan = Math.max(tMax - tMin, 1);
-  }
+  function paint() {
+    const hist = fullHist.slice(viewLo, viewHi + 1);
+    if (!hist.length) {
+      container.innerHTML = '<div class="graph-empty">No points in view.</div>';
+      return lastStats;
+    }
 
-  const pts = hist.map((p, i) => {
-    let x;
-    if (hist.length === 1) x = pad.l + iw / 2;
-    else if (timed) x = pad.l + ((p.t - tMin) / tSpan) * iw;
-    else x = pad.l + (i / (hist.length - 1)) * iw;
-    const y = pad.t + (1 - (p.v - min) / span) * ih;
-    return { x, y, p, i };
-  });
-  const line = pts.map((p, i) => (i ? 'L' : 'M') + p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' ');
-  const area = line +
-    ' L' + pts[pts.length - 1].x.toFixed(1) + ',' + (pad.t + ih) +
-    ' L' + pts[0].x.toFixed(1) + ',' + (pad.t + ih) + ' Z';
-  const up = vals[vals.length - 1] >= vals[0];
-  const stroke = up ? '#34d399' : (spark ? '#f87171' : '#f04444');
-  const fill = up ? 'rgba(52,211,153,0.15)' : 'rgba(240,68,68,0.12)';
-  const sw = spark ? '2.2' : '2.5';
+    const vals = hist.map((p) => p.v);
+    let min = Math.min.apply(null, vals);
+    let max = Math.max.apply(null, vals);
+    if (Math.abs(max - min) < 1) { min -= 1; max += 1; }
+    const span = max - min || 1;
+    const iw = w - pad.l - pad.r;
+    const ih = h - pad.t - pad.b;
 
-  // Color each segment: drops red, solid raises green,
-  // yellow only for a weak bounce after a drop (not a real climb).
-  function segmentStroke(prevV, nextV, prevIndex) {
-    const d = nextV - prevV;
-    const eps = Math.max(span * 0.01, Math.abs(prevV) * 0.003, 0.05);
-    if (d < -eps) return '#f87171';
-    if (d > eps) {
-      // Weak recovery: previous segment dropped, and this only partially clawed back
-      if (prevIndex >= 1) {
-        const priorD = hist[prevIndex].v - hist[prevIndex - 1].v;
-        if (priorD < -eps) {
-          const recovered = d / Math.abs(priorD);
-          const pct = Math.abs(prevV) > 0.01 ? (d / Math.abs(prevV)) * 100 : 100;
-          if (recovered < 0.9 && pct < 5) return '#fbbf24';
+    // Prefer real time spacing when timestamps exist; fall back to equal index gaps.
+    const timed = hist.every((p) => Number.isFinite(p.t));
+    let tMin = 0, tSpan = 1;
+    if (timed) {
+      const ts = hist.map((p) => p.t);
+      tMin = Math.min.apply(null, ts);
+      const tMax = Math.max.apply(null, ts);
+      tSpan = Math.max(tMax - tMin, 1);
+    }
+
+    const pts = hist.map((p, i) => {
+      let x;
+      if (hist.length === 1) x = pad.l + iw / 2;
+      else if (timed) x = pad.l + ((p.t - tMin) / tSpan) * iw;
+      else x = pad.l + (i / (hist.length - 1)) * iw;
+      const y = pad.t + (1 - (p.v - min) / span) * ih;
+      return { x, y, p, i };
+    });
+    const line = pts.map((p, i) => (i ? 'L' : 'M') + p.x.toFixed(1) + ',' + p.y.toFixed(1)).join(' ');
+    const area = line +
+      ' L' + pts[pts.length - 1].x.toFixed(1) + ',' + (pad.t + ih) +
+      ' L' + pts[0].x.toFixed(1) + ',' + (pad.t + ih) + ' Z';
+    const up = vals[vals.length - 1] >= vals[0];
+    const stroke = up ? '#34d399' : (spark ? '#f87171' : '#f04444');
+    const fill = up ? 'rgba(52,211,153,0.15)' : 'rgba(240,68,68,0.12)';
+    const sw = spark ? '2.2' : '2.5';
+
+    // Color each segment: drops red, solid raises green,
+    // yellow only for a weak bounce after a drop (not a real climb).
+    function segmentStroke(prevV, nextV, prevIndex) {
+      const d = nextV - prevV;
+      const eps = Math.max(span * 0.01, Math.abs(prevV) * 0.003, 0.05);
+      if (d < -eps) return '#f87171';
+      if (d > eps) {
+        // Weak recovery: previous segment dropped, and this only partially clawed back
+        if (prevIndex >= 1) {
+          const priorD = hist[prevIndex].v - hist[prevIndex - 1].v;
+          if (priorD < -eps) {
+            const recovered = d / Math.abs(priorD);
+            const pct = Math.abs(prevV) > 0.01 ? (d / Math.abs(prevV)) * 100 : 100;
+            if (recovered < 0.9 && pct < 5) return '#fbbf24';
+          }
         }
+        return '#34d399';
       }
-      return '#34d399';
+      return '#94a3b8';
     }
-    return '#94a3b8';
-  }
 
-  let segPaths = '';
-  const segColors = [];
-  for (let i = 1; i < pts.length; i++) {
-    const col = segmentStroke(hist[i - 1].v, hist[i].v, i - 1);
-    segColors.push(col);
-    segPaths +=
-      '<path d="M' + pts[i - 1].x.toFixed(1) + ',' + pts[i - 1].y.toFixed(1) +
-      ' L' + pts[i].x.toFixed(1) + ',' + pts[i].y.toFixed(1) +
-      '" fill="none" stroke="' + col + '" stroke-width="' + sw +
-      '" stroke-linecap="round" stroke-linejoin="round" />';
-  }
-  if (!segPaths) {
-    segPaths =
-      '<path d="' + line + '" fill="none" stroke="' + stroke + '" stroke-width="' + sw +
-      '" stroke-linecap="round" stroke-linejoin="round" />';
-  }
-
-  let axes = '';
-  if (showAxes) {
-    axes = [min, min + span / 2, max].map((v) => {
-      const y = pad.t + (1 - (v - min) / span) * ih;
-      return '<text x="' + (pad.l - 8) + '" y="' + (y + 4) + '" text-anchor="end" fill="#9a90b3" font-size="11" font-family="Outfit,sans-serif">' +
-        fmt(v) + '</text>' +
-        '<line x1="' + pad.l + '" y1="' + y + '" x2="' + (w - pad.r) + '" y2="' + y + '" stroke="#2a2438" stroke-width="1" />';
-    }).join('');
-    const hasDates = Number.isFinite(hist[0].t) && Number.isFinite(hist[hist.length - 1].t);
-    if (hasDates) {
-      axes +=
-        '<text x="' + pad.l + '" y="' + (h - 8) + '" fill="#9a90b3" font-size="11" font-family="Outfit,sans-serif">' +
-          (hist[0].label || formatChartDate(hist[0].t, true)) + '</text>' +
-        '<text x="' + (w - pad.r) + '" y="' + (h - 8) + '" text-anchor="end" fill="#9a90b3" font-size="11" font-family="Outfit,sans-serif">' +
-          (hist[hist.length - 1].label || formatChartDate(hist[hist.length - 1].t, true)) + '</text>';
+    let segPaths = '';
+    const segColors = [];
+    for (let i = 1; i < pts.length; i++) {
+      const col = segmentStroke(hist[i - 1].v, hist[i].v, i - 1);
+      segColors.push(col);
+      segPaths +=
+        '<path d="M' + pts[i - 1].x.toFixed(1) + ',' + pts[i - 1].y.toFixed(1) +
+        ' L' + pts[i].x.toFixed(1) + ',' + pts[i].y.toFixed(1) +
+        '" fill="none" stroke="' + col + '" stroke-width="' + sw +
+        '" stroke-linecap="round" stroke-linejoin="round" />';
     }
-  }
-
-  const wrap = document.createElement('div');
-  wrap.className = 'chart-wrap' + (spark ? ' spark' : '');
-  wrap.innerHTML =
-    '<svg class="' + svgClass + '" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none" aria-hidden="true">' +
-      axes +
-      (showArea ? '<path d="' + area + '" fill="' + fill + '" />' : '') +
-      segPaths +
-    '</svg>' +
-    '<div class="chart-cross" aria-hidden="true"><div class="vline"></div><div class="hline"></div></div>' +
-    '<div class="chart-tooltip" role="tooltip"></div>';
-
-  const cross = wrap.querySelector('.chart-cross');
-  const vline = cross.querySelector('.vline');
-  const hline = cross.querySelector('.hline');
-  const tip = wrap.querySelector('.chart-tooltip');
-  const dots = [];
-  const hits = [];
-
-  pts.forEach((pt, idx) => {
-    const leftPct = (pt.x / w) * 100;
-    const topPct = (pt.y / h) * 100;
-    const dot = document.createElement('div');
-    dot.className = 'chart-dot';
-    dot.style.left = leftPct + '%';
-    dot.style.top = topPct + '%';
-    const dotCol = idx === 0
-      ? (segColors[0] || stroke)
-      : (segColors[idx - 1] || stroke);
-    dot.style.setProperty('--dot', dotCol);
-    wrap.appendChild(dot);
-    dots.push(dot);
-
-    const hit = document.createElement('button');
-    hit.type = 'button';
-    hit.className = 'chart-hit';
-    hit.style.left = leftPct + '%';
-    hit.style.top = topPct + '%';
-    hit.setAttribute('aria-label', chartPointLabel(pt.p, pt.i, hist.length) + ', value ' + fmt(pt.p.v));
-    wrap.appendChild(hit);
-    hits.push(hit);
-  });
-
-  function hideTip() {
-    tip.classList.remove('on');
-    cross.classList.remove('on');
-    dots.forEach((d) => d.classList.remove('active'));
-  }
-
-  function showTip(idx) {
-    const pt = pts[idx];
-    if (!pt) return;
-    dots.forEach((d, i) => d.classList.toggle('active', i === idx));
-    const leftPct = (pt.x / w) * 100;
-    const topPct = (pt.y / h) * 100;
-    vline.style.left = leftPct + '%';
-    hline.style.top = topPct + '%';
-    cross.classList.add('on');
-
-    const prev = idx > 0 ? hist[idx - 1].v : null;
-    let deltaHtml = '';
-    if (prev != null && Number.isFinite(prev)) {
-      const d = pt.p.v - prev;
-      const cls = d > 0 ? 'up' : (d < 0 ? 'down' : '');
-      deltaHtml = '<div class="tt-delta ' + cls + '">' + signedFmt(d) + ' vs prev</div>';
+    if (!segPaths) {
+      segPaths =
+        '<path d="' + line + '" fill="none" stroke="' + stroke + '" stroke-width="' + sw +
+        '" stroke-linecap="round" stroke-linejoin="round" />';
     }
-    tip.innerHTML =
-      '<div class="tt-when">' + chartPointLabel(pt.p, pt.i, hist.length) + '</div>' +
-      '<div class="tt-val">' + fmt(pt.p.v) + '</div>' +
-      deltaHtml;
-    tip.classList.add('on');
 
-    // Pin tooltip inside the chart frame (overflow is clipped)
-    const place = () => {
-      const wrapW = wrap.clientWidth;
-      const wrapH = wrap.clientHeight;
-      if (wrapW < 8 || wrapH < 8) return;
-      const tipW = tip.offsetWidth;
-      const tipH = tip.offsetHeight;
-      const edge = 6;
-      const gap = 12;
-      const px = (pt.x / w) * wrapW;
-      const py = (pt.y / h) * wrapH;
-
-      let left = px - tipW / 2;
-      left = Math.max(edge, Math.min(left, wrapW - tipW - edge));
-
-      let top = py - tipH - gap; // prefer above the point
-      if (top < edge) top = py + gap; // flip below
-      if (top + tipH > wrapH - edge) {
-        // Still overflowing: clamp inside, preferring space with more room
-        const aboveSpace = py - edge;
-        const belowSpace = wrapH - edge - py;
-        if (aboveSpace >= belowSpace && aboveSpace >= tipH) top = py - tipH - gap;
-        else if (belowSpace >= tipH) top = py + gap;
-        else top = Math.max(edge, Math.min(py - tipH / 2, wrapH - tipH - edge));
+    let axes = '';
+    if (showAxes) {
+      axes = [min, min + span / 2, max].map((v) => {
+        const y = pad.t + (1 - (v - min) / span) * ih;
+        return '<text x="' + (pad.l - 8) + '" y="' + (y + 4) + '" text-anchor="end" fill="#9a90b3" font-size="11" font-family="Outfit,sans-serif">' +
+          fmt(v) + '</text>' +
+          '<line x1="' + pad.l + '" y1="' + y + '" x2="' + (w - pad.r) + '" y2="' + y + '" stroke="#2a2438" stroke-width="1" />';
+      }).join('');
+      const hasDates = Number.isFinite(hist[0].t) && Number.isFinite(hist[hist.length - 1].t);
+      if (hasDates) {
+        axes +=
+          '<text x="' + pad.l + '" y="' + (h - 8) + '" fill="#9a90b3" font-size="11" font-family="Outfit,sans-serif">' +
+            (hist[0].label || formatChartDate(hist[0].t, true)) + '</text>' +
+          '<text x="' + (w - pad.r) + '" y="' + (h - 8) + '" text-anchor="end" fill="#9a90b3" font-size="11" font-family="Outfit,sans-serif">' +
+            (hist[hist.length - 1].label || formatChartDate(hist[hist.length - 1].t, true)) + '</text>';
       }
-      top = Math.max(edge, Math.min(top, wrapH - tipH - edge));
+    }
 
-      tip.style.left = left + 'px';
-      tip.style.top = top + 'px';
-      tip.style.transform = 'none';
-    };
-    place();
-    requestAnimationFrame(place);
+    const zoomed = enableZoom && (viewLo > 0 || viewHi < fullHist.length - 1);
+    const wrap = document.createElement('div');
+    wrap.className = 'chart-wrap' + (spark ? ' spark' : '') + (zoomed ? ' zoomed' : '');
+    if (enableZoom) {
+      wrap.title = 'Scroll to zoom · double-click to reset';
+    }
+    wrap.innerHTML =
+      '<svg class="' + svgClass + '" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none" aria-hidden="true">' +
+        axes +
+        (showArea ? '<path d="' + area + '" fill="' + fill + '" />' : '') +
+        segPaths +
+      '</svg>' +
+      '<div class="chart-cross" aria-hidden="true"><div class="vline"></div><div class="hline"></div></div>' +
+      '<div class="chart-tooltip" role="tooltip"></div>' +
+      (enableZoom
+        ? '<div class="chart-zoom-hint" aria-hidden="true">' +
+            (zoomed
+              ? ('Zoomed ' + (viewLo + 1) + '–' + (viewHi + 1) + ' of ' + fullHist.length + ' · double-click reset')
+              : 'Scroll to zoom') +
+          '</div>'
+        : '');
+
+    const cross = wrap.querySelector('.chart-cross');
+    const vline = cross.querySelector('.vline');
+    const hline = cross.querySelector('.hline');
+    const tip = wrap.querySelector('.chart-tooltip');
+    const dots = [];
+    const hits = [];
+
+    pts.forEach((pt, idx) => {
+      const leftPct = (pt.x / w) * 100;
+      const topPct = (pt.y / h) * 100;
+      const dot = document.createElement('div');
+      dot.className = 'chart-dot';
+      dot.style.left = leftPct + '%';
+      dot.style.top = topPct + '%';
+      const dotCol = idx === 0
+        ? (segColors[0] || stroke)
+        : (segColors[idx - 1] || stroke);
+      dot.style.setProperty('--dot', dotCol);
+      wrap.appendChild(dot);
+      dots.push(dot);
+
+      const hit = document.createElement('button');
+      hit.type = 'button';
+      hit.className = 'chart-hit';
+      hit.style.left = leftPct + '%';
+      hit.style.top = topPct + '%';
+      hit.setAttribute('aria-label', chartPointLabel(pt.p, viewLo + pt.i, fullHist.length) + ', value ' + fmt(pt.p.v));
+      wrap.appendChild(hit);
+      hits.push(hit);
+    });
+
+    function hideTip() {
+      tip.classList.remove('on');
+      cross.classList.remove('on');
+      dots.forEach((d) => d.classList.remove('active'));
+    }
+
+    function showTip(idx) {
+      const pt = pts[idx];
+      if (!pt) return;
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      const leftPct = (pt.x / w) * 100;
+      const topPct = (pt.y / h) * 100;
+      vline.style.left = leftPct + '%';
+      hline.style.top = topPct + '%';
+      cross.classList.add('on');
+
+      const prev = idx > 0 ? hist[idx - 1].v : (viewLo > 0 ? fullHist[viewLo - 1].v : null);
+      let deltaHtml = '';
+      if (prev != null && Number.isFinite(prev)) {
+        const d = pt.p.v - prev;
+        const cls = d > 0 ? 'up' : (d < 0 ? 'down' : '');
+        deltaHtml = '<div class="tt-delta ' + cls + '">' + signedFmt(d) + ' vs prev</div>';
+      }
+      tip.innerHTML =
+        '<div class="tt-when">' + chartPointLabel(pt.p, viewLo + pt.i, fullHist.length) + '</div>' +
+        '<div class="tt-val">' + fmt(pt.p.v) + '</div>' +
+        deltaHtml;
+      tip.classList.add('on');
+
+      // Pin tooltip inside the chart frame (overflow is clipped)
+      const place = () => {
+        const wrapW = wrap.clientWidth;
+        const wrapH = wrap.clientHeight;
+        if (wrapW < 8 || wrapH < 8) return;
+        const tipW = tip.offsetWidth;
+        const tipH = tip.offsetHeight;
+        const edge = 6;
+        const gap = 12;
+        const px = (pt.x / w) * wrapW;
+        const py = (pt.y / h) * wrapH;
+
+        let left = px - tipW / 2;
+        left = Math.max(edge, Math.min(left, wrapW - tipW - edge));
+
+        let top = py - tipH - gap; // prefer above the point
+        if (top < edge) top = py + gap; // flip below
+        if (top + tipH > wrapH - edge) {
+          // Still overflowing: clamp inside, preferring space with more room
+          const aboveSpace = py - edge;
+          const belowSpace = wrapH - edge - py;
+          if (aboveSpace >= belowSpace && aboveSpace >= tipH) top = py - tipH - gap;
+          else if (belowSpace >= tipH) top = py + gap;
+          else top = Math.max(edge, Math.min(py - tipH / 2, wrapH - tipH - edge));
+        }
+        top = Math.max(edge, Math.min(top, wrapH - tipH - edge));
+
+        tip.style.left = left + 'px';
+        tip.style.top = top + 'px';
+        tip.style.transform = 'none';
+      };
+      place();
+      requestAnimationFrame(place);
+    }
+
+    hits.forEach((hit, idx) => {
+      hit.addEventListener('mouseenter', () => showTip(idx));
+      hit.addEventListener('focus', () => showTip(idx));
+      hit.addEventListener('mouseleave', hideTip);
+      hit.addEventListener('blur', hideTip);
+    });
+    wrap.addEventListener('mouseleave', hideTip);
+
+    if (enableZoom) {
+      wrap.addEventListener('wheel', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const range = viewHi - viewLo;
+        if (range < 1 && e.deltaY < 0) return;
+
+        const rect = wrap.getBoundingClientRect();
+        const xRatio = Math.max(0, Math.min(1, (e.clientX - rect.left) / Math.max(rect.width, 1)));
+        const focus = viewLo + xRatio * range;
+
+        // Scroll up = zoom in, scroll down = zoom out
+        const zoomIn = e.deltaY < 0;
+        let newRange = zoomIn
+          ? Math.max(1, Math.floor(range * 0.82))
+          : Math.min(fullHist.length - 1, Math.ceil(range * 1.22) || (range + 1));
+        if (zoomIn && newRange >= range && range > 1) newRange = range - 1;
+        if (!zoomIn && newRange <= range) newRange = Math.min(fullHist.length - 1, range + 1);
+
+        const focusRatio = range > 0 ? (focus - viewLo) / range : 0.5;
+        let newLo = Math.round(focus - focusRatio * newRange);
+        let newHi = newLo + newRange;
+        if (newLo < 0) {
+          newHi -= newLo;
+          newLo = 0;
+        }
+        if (newHi > fullHist.length - 1) {
+          newLo = Math.max(0, newLo - (newHi - (fullHist.length - 1)));
+          newHi = fullHist.length - 1;
+        }
+        if (newHi - newLo < 1) {
+          newHi = Math.min(fullHist.length - 1, newLo + 1);
+        }
+        if (newLo === viewLo && newHi === viewHi) return;
+        viewLo = newLo;
+        viewHi = newHi;
+        paint();
+      }, { passive: false });
+
+      wrap.addEventListener('dblclick', (e) => {
+        e.preventDefault();
+        if (viewLo === 0 && viewHi === fullHist.length - 1) return;
+        viewLo = 0;
+        viewHi = fullHist.length - 1;
+        paint();
+      });
+    }
+
+    const rawMin = Math.min.apply(null, vals);
+    const rawMax = Math.max.apply(null, vals);
+    container.innerHTML = '';
+    container.appendChild(wrap);
+
+    lastStats = { min: rawMin, max: rawMax, first: vals[0], last: vals[vals.length - 1], up, stroke };
+    return lastStats;
   }
 
-  hits.forEach((hit, idx) => {
-    hit.addEventListener('mouseenter', () => showTip(idx));
-    hit.addEventListener('focus', () => showTip(idx));
-    hit.addEventListener('mouseleave', hideTip);
-    hit.addEventListener('blur', hideTip);
-  });
-  wrap.addEventListener('mouseleave', hideTip);
-
-  const rawMin = Math.min.apply(null, vals);
-  const rawMax = Math.max.apply(null, vals);
-  container.innerHTML = '';
-  container.appendChild(wrap);
-
-  return { min: rawMin, max: rawMax, first: vals[0], last: vals[vals.length - 1], up, stroke };
+  return paint();
 }
 
 function renderDetailHistory(item) {
