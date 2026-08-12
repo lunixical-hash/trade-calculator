@@ -3143,40 +3143,17 @@ def main() -> None:
   .chart-wrap.spark .hspark {{
     height: 110px;
   }}
-  .chart-hit {{
-    position: absolute;
-    width: 18px;
-    height: 18px;
-    margin: -9px 0 0 -9px;
-    border: none;
-    padding: 0;
-    border-radius: 50%;
-    background: transparent;
-    cursor: crosshair;
-    z-index: 2;
+  .chart-hit-svg {{
+    pointer-events: all;
   }}
-  .chart-dot {{
-    position: absolute;
-    width: 7px;
-    height: 7px;
-    margin: -3.5px 0 0 -3.5px;
-    border-radius: 50%;
-    background: var(--dot, var(--purple-bright));
-    box-shadow: 0 0 0 2px rgba(13, 11, 20, 0.85);
+  .chart-dot-svg {{
     pointer-events: none;
-    z-index: 1;
-    opacity: 0.85;
-    transition: transform .12s ease, opacity .12s ease;
+    opacity: 0.9;
+    transition: r .12s ease, opacity .12s ease;
   }}
-  .chart-wrap.spark .chart-dot {{
-    width: 6px;
-    height: 6px;
-    margin: -3px 0 0 -3px;
-  }}
-  .chart-dot.active {{
-    transform: scale(1.55);
+  .chart-dot-svg.active {{
     opacity: 1;
-    box-shadow: 0 0 0 3px rgba(13, 11, 20, 0.9), 0 0 12px rgba(var(--purple-rgb), 0.45);
+    filter: drop-shadow(0 0 6px rgba(var(--purple-rgb), 0.55));
   }}
   .chart-cross {{
     position: absolute;
@@ -5806,11 +5783,30 @@ function mountInteractiveChart(container, fullHist, opts) {{
     if (enableZoom) {{
       wrap.title = 'Scroll to zoom · double-click to reset';
     }}
+    let pointMarkup = '';
+    pts.forEach((pt, idx) => {{
+      const dotCol = idx === 0
+        ? (segColors[0] || stroke)
+        : (segColors[idx - 1] || stroke);
+      const r = spark ? 3 : 3.5;
+      const hitR = spark ? 9 : 10;
+      pointMarkup +=
+        '<circle class="chart-dot-svg" data-idx="' + idx + '" cx="' + pt.x.toFixed(1) +
+        '" cy="' + pt.y.toFixed(1) + '" r="' + r + '" fill="' + dotCol +
+        '" stroke="rgba(13,11,20,0.9)" stroke-width="2"></circle>' +
+        '<circle class="chart-hit-svg" data-idx="' + idx + '" cx="' + pt.x.toFixed(1) +
+        '" cy="' + pt.y.toFixed(1) + '" r="' + hitR +
+        '" fill="transparent" stroke="none" style="cursor:crosshair">' +
+        '<title>' + chartPointLabel(pt.p, viewLo + pt.i, fullHist.length) + ', value ' + fmt(pt.p.v) + '</title>' +
+        '</circle>';
+    }});
+
     wrap.innerHTML =
       '<svg class="' + svgClass + '" viewBox="0 0 ' + w + ' ' + h + '" preserveAspectRatio="none" aria-hidden="true">' +
         axes +
         (showArea ? '<path d="' + area + '" fill="' + fill + '" />' : '') +
         segPaths +
+        pointMarkup +
       '</svg>' +
       '<div class="chart-cross" aria-hidden="true"><div class="vline"></div><div class="hline"></div></div>' +
       '<div class="chart-tooltip" role="tooltip"></div>' +
@@ -5826,43 +5822,26 @@ function mountInteractiveChart(container, fullHist, opts) {{
     const vline = cross.querySelector('.vline');
     const hline = cross.querySelector('.hline');
     const tip = wrap.querySelector('.chart-tooltip');
-    const dots = [];
-    const hits = [];
-
-    pts.forEach((pt, idx) => {{
-      const leftPct = (pt.x / w) * 100;
-      const topPct = (pt.y / h) * 100;
-      const dot = document.createElement('div');
-      dot.className = 'chart-dot';
-      dot.style.left = leftPct + '%';
-      dot.style.top = topPct + '%';
-      const dotCol = idx === 0
-        ? (segColors[0] || stroke)
-        : (segColors[idx - 1] || stroke);
-      dot.style.setProperty('--dot', dotCol);
-      wrap.appendChild(dot);
-      dots.push(dot);
-
-      const hit = document.createElement('button');
-      hit.type = 'button';
-      hit.className = 'chart-hit';
-      hit.style.left = leftPct + '%';
-      hit.style.top = topPct + '%';
-      hit.setAttribute('aria-label', chartPointLabel(pt.p, viewLo + pt.i, fullHist.length) + ', value ' + fmt(pt.p.v));
-      wrap.appendChild(hit);
-      hits.push(hit);
-    }});
+    const dots = Array.from(wrap.querySelectorAll('circle.chart-dot-svg'));
+    const hits = Array.from(wrap.querySelectorAll('circle.chart-hit-svg'));
 
     function hideTip() {{
       tip.classList.remove('on');
       cross.classList.remove('on');
-      dots.forEach((d) => d.classList.remove('active'));
+      dots.forEach((d) => {{
+        d.classList.remove('active');
+        d.setAttribute('r', spark ? 3 : 3.5);
+      }});
     }}
 
     function showTip(idx) {{
       const pt = pts[idx];
       if (!pt) return;
-      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+      dots.forEach((d, i) => {{
+        const on = i === idx;
+        d.classList.toggle('active', on);
+        d.setAttribute('r', on ? (spark ? 4.5 : 5.2) : (spark ? 3 : 3.5));
+      }});
       const leftPct = (pt.x / w) * 100;
       const topPct = (pt.y / h) * 100;
       vline.style.left = leftPct + '%';
