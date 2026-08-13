@@ -1,0 +1,7 @@
+{
+  "clientId": "1911245617669824888",
+  "redirectUri": "https://lunixical-hash.github.io/trade-calculator/oauth_callback.html",
+  "scopes": "openid profile",
+  "authApiBase": "",
+  "enableUsernameLink": true
+}
