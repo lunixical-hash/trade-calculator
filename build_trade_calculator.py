@@ -10417,8 +10417,8 @@ window.LunixOnAccountChange = function (account) {{
   }}
 }};
 </script>
-<script src="roblox_oauth.js?v=20260812c"></script>
-<script src="roblox_account.js?v=20260812c"></script>
+<script src="roblox_oauth.js?v=20260813a"></script>
+<script src="roblox_account.js?v=20260813a"></script>
 </body>
 </html>
 """
