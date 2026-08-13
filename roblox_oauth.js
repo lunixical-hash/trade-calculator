@@ -106,6 +106,9 @@
         returnTo: new URL('trade_calculator.html', window.location.href).toString(),
       })
     );
+    // Do not send `prompt`. Specifying only select_account/login causes
+    // "Consent prompt is required" / "Account selection prompt is required"
+    // for third-party apps. Omitting it lets Roblox show the required screens.
     const qs = new URLSearchParams({
       client_id: clientId,
       redirect_uri: redirectUri,
@@ -114,9 +117,6 @@
       state,
       code_challenge: challenge,
       code_challenge_method: 'S256',
-      // Third-party apps must request consent; select_account alone fails with
-      // "Consent prompt is required for this request."
-      prompt: 'consent select_account',
     });
     window.location.href = AUTHORIZE_URL + '?' + qs.toString();
   }
