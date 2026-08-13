@@ -114,7 +114,9 @@
       state,
       code_challenge: challenge,
       code_challenge_method: 'S256',
-      prompt: 'select_account',
+      // Third-party apps must request consent; select_account alone fails with
+      // "Consent prompt is required for this request."
+      prompt: 'consent select_account',
     });
     window.location.href = AUTHORIZE_URL + '?' + qs.toString();
   }
