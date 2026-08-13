@@ -414,7 +414,6 @@ class Handler(BaseHTTPRequestHandler):
                     "state": state,
                     "code_challenge": challenge,
                     "code_challenge_method": "S256",
-                    "prompt": "consent select_account",
                 }
             )
             loc = f"{AUTHORIZE_URL}?{qs}"
