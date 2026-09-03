@@ -1,23 +1,23 @@
 {
-  "updatedAt": 1786568490,
+  "updatedAt": 1788470947,
   "source": "supremevalues.com",
   "count": 544,
   "items": {
-    "Alienbeam": 1925.0,
-    "Amerilaser": 21.0,
+    "Alienbeam": 2350.0,
+    "Amerilaser": 22.0,
     "Australis": 140.0,
     "Bat": 120.0,
     "Battleaxe": 12.0,
     "BattleaxeII": 17.0,
     "Batwing": 42.0,
-    "Bauble": 825.0,
-    "Beachy": 150.0,
+    "Bauble": 725.0,
+    "Beachy": 105.0,
     "Bioblade": 8.0,
     "BlackLuger": 1000000.0,
     "Blaster": 17.0,
     "Blizzard": 260.0,
     "Bloom": 400.0,
-    "Blossom": 1360.0,
+    "Blossom": 1370.0,
     "BlueSeer": 3.0,
     "Boneblade": 7.0,
     "Borealis": 145.0,
@@ -25,12 +25,12 @@
     "Candy": 80.0,
     "Chill": 10.0,
     "Clockwork": 10.0,
-    "Constellation": 2700.0,
+    "Constellation": 2950.0,
     "Cookieblade": 3.0,
     "Cookiecane": 13.0,
     "Darkbringer": 33.0,
-    "Darkshot": 1775.0,
-    "Darksword": 1750.0,
+    "Darkshot": 1800.0,
+    "Darksword": 1775.0,
     "Deathshard": 13.0,
     "Eggblade": 5.0,
     "ElderwoodBlade": 33.0,
@@ -40,7 +40,7 @@
     "EternalIII": 8.0,
     "EternalIV": 8.0,
     "Eternalcane": 13.0,
-    "Evergreen": 2500.0,
+    "Evergreen": 3000.0,
     "Evergun": 3450.0,
     "Fang": 10.0,
     "Flames": 5.0,
@@ -66,12 +66,12 @@
     "IceShard": 7.0,
     "Icebeam": 18.0,
     "Iceblaster": 33.0,
-    "Icecream": 150.0,
+    "Icecream": 170.0,
     "Iceflake": 15.0,
     "Jinglegun": 13.0,
     "Laser": 22.0,
     "Lightbringer": 33.0,
-    "Luger": 40.0,
+    "Luger": 18.0,
     "Lugercane": 13.0,
     "Makeshift": 33.0,
     "Minty": 13.0,
@@ -81,9 +81,9 @@
     "Ocean": 285.0,
     "OldGlory": 15.0,
     "OrangeSeer": 2.0,
-    "Ornament": 32.0,
-    "Pearl": 80.0,
-    "Pearlshine": 85.0,
+    "Ornament": 100.0,
+    "Pearl": 75.0,
+    "Pearlshine": 80.0,
     "Peppermint": 4.0,
     "Phantom": 35.0,
     "Pixel": 17.0,
@@ -94,46 +94,46 @@
     "PurpleSeer": 3.0,
     "Rainbow": 410.0,
     "RainbowGun": 420.0,
-    "Raygun": 1700.0,
+    "Raygun": 1950.0,
     "RedLuger": 37.0,
     "RedSeer": 3.0,
-    "Sakura": 1350.0,
-    "Sands": 150.0,
+    "Sakura": 1360.0,
+    "Sands": 105.0,
     "Saw": 7.0,
     "Seer": 3.0,
     "Shark": 20.0,
     "Slasher": 15.0,
-    "SnowDagger": 250.0,
-    "Snowcannon": 850.0,
+    "SnowDagger": 195.0,
+    "Snowcannon": 725.0,
     "Snowflake": 5.0,
     "Snowstorm": 260.0,
-    "Soul": 615.0,
+    "Soul": 630.0,
     "Spectre": 35.0,
     "Spider": 10.0,
-    "Spirit": 605.0,
+    "Spirit": 620.0,
     "Sugar": 32.0,
-    "Sunrise": 1125.0,
-    "Sunset": 625.0,
+    "Sunrise": 1300.0,
+    "Sunset": 775.0,
     "Sweet": 150.0,
     "SwirlyBlade": 12.0,
     "SwirlyGun": 18.0,
     "Tides": 10.0,
-    "TravelersGun": 5600.0,
+    "TravelersGun": 5500.0,
     "Treat": 155.0,
-    "Turkey": 2450.0,
+    "Turkey": 2250.0,
     "VampiresEdge": 15.0,
-    "VampireGun": 1950.0,
+    "VampireGun": 2200.0,
     "Virtual": 13.0,
-    "Watergun": 250.0,
+    "Watergun": 195.0,
     "Waves": 280.0,
     "WinterEdge": 5.0,
-    "Xenoknife": 280.0,
-    "Xenoshot": 280.0,
+    "Xenoknife": 405.0,
+    "Xenoshot": 405.0,
     "Xmas": 7.0,
     "YellowSeer": 2.0,
     "Celestial": 2450.0,
     "ElderwoodScythe": 38.0,
-    "Gingerscope": 17750.0,
+    "Gingerscope": 17250.0,
     "Hallowscythe": 30.0,
     "Harvester": 250.0,
     "Icebreaker": 65.0,
@@ -142,7 +142,7 @@
     "Logchopper": 18.0,
     "SwirlyAxe": 38.0,
     "TravelersAxe": 8100.0,
-    "VampiresAxe": 1275.0,
+    "VampiresAxe": 1600.0,
     "America": 7.0,
     "Blood": 8.0,
     "Cowboy": 4.0,
@@ -154,17 +154,17 @@
     "Splitter": 3.0,
     "ChromaAlienbeam": 24000.0,
     "ChromaBauble": 34000.0,
-    "ChromaBeachy": 1800.0,
-    "ChromaBlizzard": 7500.0,
+    "ChromaBeachy": 1450.0,
+    "ChromaBlizzard": 4500.0,
     "ChromaBoneblade": 22.0,
     "ChromaCandleflame": 40.0,
-    "ChromaConstellation": 27000.0,
+    "ChromaConstellation": 33000.0,
     "ChromaCookiecane": 32.0,
     "ChromaDarkbringer": 65.0,
     "ChromaDeathshard": 35.0,
     "ChromaElderwoodBlade": 37.0,
     "ChromaEvergreen": 48000.0,
-    "ChromaEvergun": 75000.0,
+    "ChromaEvergun": 73000.0,
     "ChromaFang": 32.0,
     "ChromaFireBat": 3.0,
     "ChromaFireBear": 3.0,
@@ -177,30 +177,30 @@
     "ChromaGingerblade": 27.0,
     "ChromaHeartWand": 4250.0,
     "ChromaHeat": 28.0,
-    "ChromaIcecream": 2000.0,
+    "ChromaIcecream": 1950.0,
     "ChromaLaser": 40.0,
     "ChromaLightbringer": 60.0,
     "ChromaLuger": 50.0,
     "ChromaOrnament": 1800.0,
-    "ChromaRaygun": 13250.0,
-    "ChromaSands": 1900.0,
+    "ChromaRaygun": 14000.0,
+    "ChromaSands": 1500.0,
     "ChromaSaw": 23.0,
     "ChromaSeer": 28.0,
     "ChromaShark": 32.0,
     "ChromaSlasher": 32.0,
-    "ChromaSnowDagger": 3500.0,
+    "ChromaSnowDagger": 2350.0,
     "ChromaSnowcannon": 7750.0,
     "ChromaSnowstorm": 4250.0,
-    "ChromaSunrise": 13250.0,
-    "ChromaSunset": 9250.0,
-    "ChromaSweet": 2250.0,
+    "ChromaSunrise": 12000.0,
+    "ChromaSunset": 7750.0,
+    "ChromaSweet": 1800.0,
     "ChromaSwirlyGun": 38.0,
     "ChromaTides": 27.0,
-    "ChromaTravelerGun": 220000.0,
-    "ChromaTreat": 2500.0,
+    "ChromaTravelerGun": 210000.0,
+    "ChromaTreat": 1900.0,
     "ChromaVampireGun": 29000.0,
-    "ChromaWatergun": 3400.0,
-    "Corrupt": 425.0,
+    "ChromaWatergun": 3200.0,
+    "Corrupt": 350.0,
     "ChromaArcticGun": 10.0,
     "ChromaAuroraGun": 45.0,
     "ChromaAuroraKnife": 3.0,
@@ -238,10 +238,10 @@
     "Bats": 2.0,
     "ChromaCandySwirlGun": 2.0,
     "ChromaCandySwirlKnife": 1.0,
-    "CaneKnifeXMAS2018": 575.0,
+    "CaneKnifeXMAS2018": 525.0,
     "Darkgun": 1.0,
     "Darkknife": 70.0,
-    "Dungeon": 210.0,
+    "Dungeon": 160.0,
     "ChromaFloralKnife": 10.0,
     "ChromaGhastlyGun": 7.0,
     "Ghostfire": 10.0,
@@ -251,7 +251,7 @@
     "Jack": 3.0,
     "Magma": 3.0,
     "ChromaMagmaGun": 13.0,
-    "ChromaMakeshiftKnife": 40.0,
+    "ChromaMakeshiftKnife": 35.0,
     "Monster": 1.0,
     "OrangeMarble": 2.0,
     "ChromaSilentNightGun": 12.0,
@@ -266,8 +266,8 @@
     "ChromaToxicKnife": 5.0,
     "ChromaWatcherGun": 20.0,
     "ChromaWraithKnife": 5.0,
-    "Zombified": 35.0,
-    "Bones": 220.0,
+    "Zombified": 30.0,
+    "Bones": 210.0,
     "Brains": 135.0,
     "Branches": 50.0,
     "ChromaCookieKnife": 1.0,
@@ -329,9 +329,9 @@
     "Euro": 4.0,
     "ChromaFrostedKnife": 30.0,
     "Ghosty": 3.0,
-    "Ghoulish": 100.0,
+    "Ghoulish": 90.0,
     "ChromaGiftsKnife": 95.0,
-    "Glitch1": 70.0,
+    "Glitch1": 65.0,
     "Glitch2": 35.0,
     "ChromaGraveGun": 1.0,
     "ChromaGraveKnife": 1.0,
@@ -411,13 +411,13 @@
     "UFO": 3.0,
     "VampireBat": 3.0,
     "ZombieDog": 750.0,
-    "AlienSet": 3625.0,
+    "AlienSet": 4300.0,
     "AuroraSetLegend": 48.0,
     "AuroraSetRare": 8.0,
     "BatSet": 153.0,
     "BatsSet": 241.0,
-    "BaubleSet": 857.0,
-    "BeachSet": 300.0,
+    "BaubleSet": 825.0,
+    "BeachSet": 210.0,
     "BlizzardSet": 520.0,
     "BloomSet": 810.0,
     "BorealisSet": 285.0,
@@ -426,28 +426,28 @@
     "CandySet": 112.0,
     "CandySwirlSet": 3.0,
     "CavernSet": 8.0,
-    "CelestialSet": 5150.0,
-    "ChromaAlienSet": 37250.0,
+    "CelestialSet": 5400.0,
+    "ChromaAlienSet": 38000.0,
     "ChromaBaubleSet": 35800.0,
-    "ChromaBeachSet": 3700.0,
-    "ChromaBlizzardSet": 11750.0,
+    "ChromaBeachSet": 2950.0,
+    "ChromaBlizzardSet": 8750.0,
     "ChromaBringerSet": 125.0,
-    "ChromaEverSet": 123000.0,
+    "ChromaEverSet": 121000.0,
     "ChromaPetSet": 21.0,
     "ChromaSlasherSet": 72.0,
-    "ChromaSnowSet": 11250.0,
-    "ChromaSunSet": 22500.0,
-    "ChromaSweetSet": 4750.0,
-    "ChromaWeaponSet": 180.0,
+    "ChromaSnowSet": 10100.0,
+    "ChromaSunSet": 19750.0,
+    "ChromaSweetSet": 3700.0,
+    "ChromaWeaponSet": 158.0,
     "ColoredSeerSet": 16.0,
     "CookieSet": 25.0,
-    "CorruptSet": 465.0,
-    "DarkSet": 3525.0,
+    "CorruptSet": 368.0,
+    "DarkSet": 3575.0,
     "DarkSetRare": 71.0,
     "ElderwoodSet": 71.0,
     "EternalSet": 43.0,
     "EternalcaneSet": 26.0,
-    "EverSet": 5950.0,
+    "EverSet": 6450.0,
     "EyeSet": 6.0,
     "FlowerwoodSet": 525.0,
     "FrozenSet": 4.0,
@@ -457,12 +457,12 @@
     "FullElderwoodSet": 104.0,
     "FullEliteSet": 6.0,
     "FullIceSet": 258.0,
-    "FullLugerSet": 180.0,
+    "FullLugerSet": 158.0,
     "FullSwirlySet": 68.0,
     "GhostSet": 7.0,
     "GingerSetGodly": 30.0,
     "GingerbreadSetXMAS2019": 86.0,
-    "GingerbreadSetXMAS2020": 10.0,
+    "GingerbreadSetXMAS2020": 13.0,
     "GraveSet": 2.0,
     "HallowSet": 50.0,
     "HauntedSet": 2.0,
@@ -472,13 +472,13 @@
     "LatteSet": 280.0,
     "LightsSet": 3.0,
     "LogchopperSet": 31.0,
-    "LugerSet": 130.0,
+    "LugerSet": 108.0,
     "MarbleSet": 4.0,
     "MummySet": 3.0,
     "OceanSet": 565.0,
     "OldGlorySet": 37.0,
     "PalsSet": 20.0,
-    "PearlSet": 165.0,
+    "PearlSet": 155.0,
     "PlasmaSet": 33.0,
     "PotionSet": 4.0,
     "PumpkinSet": 403.0,
@@ -486,57 +486,57 @@
     "PumpkinSet2020": 39.0,
     "PumpkinSet2021": 32.0,
     "RainbowSet": 830.0,
-    "SakuraSet": 2710.0,
+    "SakuraSet": 2730.0,
     "SantasSetLegend": 6.0,
     "ScratchSet": 6.0,
     "SilentNightSet": 62.0,
     "SkateSet": 23.0,
     "SlasherSet": 37.0,
     "SlimeSet": 2.0,
-    "SmallSet103": 1260.0,
-    "SmallSet107": 1295.0,
+    "SmallSet103": 1240.0,
+    "SmallSet107": 1275.0,
     "SnakebiteSet": 4.0,
-    "SnowSet": 1100.0,
-    "SoulSet": 1220.0,
+    "SnowSet": 920.0,
+    "SoulSet": 1250.0,
     "SparkleSet": 127.0,
     "SpectralSet": 53.0,
     "SpectreSet": 70.0,
-    "SunSet": 1750.0,
+    "SunSet": 2075.0,
     "SweetSet": 305.0,
     "SwirlySet": 56.0,
     "ToxicSet": 7.0,
     "TravelerSet": 53.0,
-    "TravelersSet": 13700.0,
+    "TravelersSet": 13600.0,
     "VampireSetLegend": 48.0,
     "VampireSetRare": 4.0,
-    "VampiresSet": 3225.0,
+    "VampiresSet": 3800.0,
     "VintageSet": 59.0,
     "VirtualSet": 30.0,
     "WrapSet": 24.0,
     "WrappingPaperSet": 14.0,
-    "XenoSet": 560.0,
+    "XenoSet": 810.0,
     "ZombieSet": 6.0,
     "ZombifiedSet": 135.0,
     "TravelerAxe": 8100.0,
-    "VampireAxe": 1275.0,
-    "TravelerGun": 5600.0,
-    "SunsetGun": 1125.0,
-    "UFOKnife": 1925.0,
+    "VampireAxe": 1600.0,
+    "TravelerGun": 5500.0,
+    "SunsetGun": 1300.0,
+    "UFOKnife": 2350.0,
     "Rainbow_G": 420.0,
     "Rainbow_K": 410.0,
     "Ocean_G": 285.0,
-    "XenoKnife": 280.0,
-    "XenoGun": 280.0,
+    "XenoKnife": 405.0,
+    "XenoGun": 405.0,
     "FlowerwoodKnife": 260.0,
     "ZombieBat": 120.0,
-    "Pearl_G": 85.0,
-    "Pearl_K": 80.0,
+    "Pearl_G": 80.0,
+    "Pearl_K": 75.0,
     "candy": 80.0,
     "Phantom2022": 35.0,
     "Spectre2022": 35.0,
     "ElderwoodKnife": 33.0,
     "ElderwoodGun": 33.0,
-    "BaubleKnife": 32.0,
+    "BaubleKnife": 100.0,
     "BattleAxe2": 17.0,
     "AmericaSword": 15.0,
     "EternalCane": 13.0,
@@ -1554,6 +1554,7 @@
     "GhostSet": "https://supremevalues.com/media/mm2legendaries/Ghost_Knife.webp",
     "GingerSetGodly": "https://supremevalues.com/media/mm2godlies/Gingerblade.webp",
     "GingerbreadSetXMAS2019": "https://supremevalues.com/media/mm2uncommons/Gingerbread_Knife_2019.webp",
+    "GingerbreadSetXMAS2020": "https://supremevalues.com/media/mm2uncommons/Gingerbread_Knife_2020.webp",
     "GraveSet": "https://supremevalues.com/media/mm2commons/Grave_Gun.webp",
     "HallowSet": "https://supremevalues.com/media/mm2ancients/Hallowscythe.webp",
     "HauntedSet": "https://supremevalues.com/media/mm2commons/Haunted_Knife.webp",
@@ -2187,14 +2188,14 @@
   },
   "meta": {
     "Alienbeam": {
-      "demand": 6,
+      "demand": 5,
       "rarityScore": 4,
-      "stability": "Doing Well",
+      "stability": "Receding",
       "origin": "Halloween 2025 (Unboxed)",
-      "change": "(+50) +2.7%",
+      "change": "(-100) -4.1%",
       "aliases": "AB, ALB",
-      "riseChance": 50,
-      "flippability": "Flippable",
+      "riseChance": 0,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 1500.0,
@@ -2675,9 +2676,59 @@
           "v": 1925.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 1975.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 2100.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 2350.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 2500.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 2600.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 2650.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 2600.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 2550.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 2450.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 2350.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 2.7
+      "changePct": -4.1
     },
     "Amerilaser": {
       "demand": 1,
@@ -4004,11 +4055,11 @@
     "Bauble": {
       "demand": 5,
       "rarityScore": 4,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": "Christmas 2024 (Gifting 100 Gifts)",
-      "change": "(-25) -2.9%",
+      "change": "(-25) -3.3%",
       "aliases": "Baub",
-      "riseChance": 10,
+      "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -4430,19 +4481,39 @@
           "v": 825.0,
           "t": 1784664566,
           "label": "2026-07-21"
+        },
+        {
+          "v": 800.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 775.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 750.0,
+          "t": 1788276110,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 725.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -2.9
+      "changePct": -3.3
     },
     "Beachy": {
-      "demand": 3,
+      "demand": 2,
       "rarityScore": 3,
       "stability": "Fluctuating",
       "origin": "Summer 2026 (Item Pack)",
-      "change": "(-10) -6.3%",
+      "change": "(-5) -4.5%",
       "aliases": "N/A",
-      "riseChance": 5,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 375.0,
@@ -4478,9 +4549,39 @@
           "v": 150.0,
           "t": 1785528864,
           "label": "2026-07-31"
+        },
+        {
+          "v": 145.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 135.0,
+          "t": 1786802460,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 130.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 120.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 110.0,
+          "t": 1787502629,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 105.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
         }
       ],
-      "changePct": -6.3
+      "changePct": -4.5
     },
     "Bioblade": {
       "demand": 1,
@@ -5386,18 +5487,13 @@
     "Blossom": {
       "demand": 6,
       "rarityScore": 4,
-      "stability": "Doing Well",
+      "stability": "Stable",
       "origin": "Valentine's 2023 (Item Pack)",
       "change": "(+10) +0.7%",
       "aliases": "N/A",
-      "riseChance": 40,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 545.0,
-          "t": 1726340318,
-          "label": "2024-09-14"
-        },
         {
           "v": 550.0,
           "t": 1726621788,
@@ -5992,6 +6088,11 @@
           "v": 1360.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 1370.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
         }
       ],
       "changePct": 0.7
@@ -7938,30 +8039,15 @@
       "changePct": -16.7
     },
     "Constellation": {
-      "demand": 5,
+      "demand": 6,
       "rarityScore": 4,
-      "stability": "Stable",
+      "stability": "Overpaid For",
       "origin": "Christmas 2024 (Unboxed)",
-      "change": "(-25) -0.9%",
+      "change": "(+100) +3.5%",
       "aliases": "Const",
-      "riseChance": 10,
-      "flippability": "Rarely Flippable",
+      "riseChance": 65,
+      "flippability": "Highly Flippable",
       "history": [
-        {
-          "v": 600.0,
-          "t": 1737351067,
-          "label": "2025-01-20"
-        },
-        {
-          "v": 575.0,
-          "t": 1737687366,
-          "label": "2025-01-24"
-        },
-        {
-          "v": 500.0,
-          "t": 1737929205,
-          "label": "2025-01-26"
-        },
         {
           "v": 450.0,
           "t": 1738554381,
@@ -8546,9 +8632,24 @@
           "v": 2700.0,
           "t": 1783875764,
           "label": "2026-07-12"
+        },
+        {
+          "v": 2750.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 2850.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 2950.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -0.9
+      "changePct": 3.5
     },
     "Cookieblade": {
       "demand": 1,
@@ -9177,18 +9278,13 @@
     "Darkshot": {
       "demand": 6,
       "rarityScore": 4,
-      "stability": "Doing Well",
+      "stability": "Stable",
       "origin": "Halloween 2023 (Item Pack)",
       "change": "(+25) +1.4%",
       "aliases": "DShot",
-      "riseChance": 40,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 440.0,
-          "t": 1740708795,
-          "label": "2025-02-28"
-        },
         {
           "v": 445.0,
           "t": 1741055950,
@@ -9783,6 +9879,11 @@
           "v": 1775.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 1800.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
         }
       ],
       "changePct": 1.4
@@ -9790,18 +9891,13 @@
     "Darksword": {
       "demand": 6,
       "rarityScore": 4,
-      "stability": "Doing Well",
+      "stability": "Stable",
       "origin": "Halloween 2023 (Item Pack)",
       "change": "(+25) +1.4%",
       "aliases": "DSword",
-      "riseChance": 40,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 435.0,
-          "t": 1740708795,
-          "label": "2025-02-28"
-        },
         {
           "v": 440.0,
           "t": 1741055950,
@@ -10396,6 +10492,11 @@
           "v": 1750.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 1775.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
         }
       ],
       "changePct": 1.4
@@ -12348,55 +12449,15 @@
       "changePct": -13.3
     },
     "Evergreen": {
-      "demand": 5,
+      "demand": 6,
       "rarityScore": 4,
       "stability": "Stable",
       "origin": "Christmas 2023 (Unboxed)",
-      "change": "(-25) -1.0%",
+      "change": "(+50) +1.7%",
       "aliases": "EGreen",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 1000.0,
-          "t": 1737929205,
-          "label": "2025-01-26"
-        },
-        {
-          "v": 950.0,
-          "t": 1739144010,
-          "label": "2025-02-09"
-        },
-        {
-          "v": 925.0,
-          "t": 1739328428,
-          "label": "2025-02-12"
-        },
-        {
-          "v": 900.0,
-          "t": 1739760471,
-          "label": "2025-02-17"
-        },
-        {
-          "v": 875.0,
-          "t": 1740708795,
-          "label": "2025-02-28"
-        },
-        {
-          "v": 850.0,
-          "t": 1741559979,
-          "label": "2025-03-09"
-        },
-        {
-          "v": 825.0,
-          "t": 1741726284,
-          "label": "2025-03-11"
-        },
-        {
-          "v": 800.0,
-          "t": 1742069160,
-          "label": "2025-03-15"
-        },
         {
           "v": 850.0,
           "t": 1742421618,
@@ -12956,9 +13017,49 @@
           "v": 2500.0,
           "t": 1783443820,
           "label": "2026-07-07"
+        },
+        {
+          "v": 2550.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 2600.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 2650.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 2700.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 2800.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 2900.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 2950.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 3000.0,
+          "t": 1788362380,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -1.0
+      "changePct": 1.7
     },
     "Evergun": {
       "demand": 5,
@@ -18483,11 +18584,11 @@
     "Icecream": {
       "demand": 3,
       "rarityScore": 3,
-      "stability": "Fluctuating",
+      "stability": "Doing Well",
       "origin": "Summer 2026 (Unboxed)",
-      "change": "(-10) -6.3%",
+      "change": "(+10) +6.3%",
       "aliases": "IC",
-      "riseChance": 5,
+      "riseChance": 35,
       "flippability": "Flippable",
       "history": [
         {
@@ -18524,9 +18625,59 @@
           "v": 150.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 135.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 130.0,
+          "t": 1786802460,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 120.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 110.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 105.0,
+          "t": 1787502629,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 120.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 135.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 150.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 160.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 170.0,
+          "t": 1788362382,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -6.3
+      "changePct": 6.3
     },
     "Iceflake": {
       "demand": 1,
@@ -19488,11 +19639,11 @@
     "Luger": {
       "demand": 1,
       "rarityScore": 2,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": "Gun Box #1",
-      "change": "(-2) -4.8%",
+      "change": "(-2) -10.0%",
       "aliases": "Lug",
-      "riseChance": 5,
+      "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -19779,9 +19930,54 @@
           "v": 40.0,
           "t": 1784664566,
           "label": "2026-07-21"
+        },
+        {
+          "v": 37.0,
+          "t": 1786802460,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 35.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 32.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 30.0,
+          "t": 1787502629,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 28.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 25.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 22.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 20.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 18.0,
+          "t": 1788362382,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -4.8
+      "changePct": -10.0
     },
     "Lugercane": {
       "demand": 1,
@@ -21992,15 +22188,20 @@
       "changePct": 0.0
     },
     "Ornament": {
-      "demand": 1,
+      "demand": 2,
       "rarityScore": 2,
-      "stability": "Fluctuating",
+      "stability": "Doing Well",
       "origin": "Christmas 2025 (Gifting 100 Gifts)",
-      "change": "(+2) +6.7%",
+      "change": "(+10) +11.1%",
       "aliases": "Orn",
-      "riseChance": 10,
+      "riseChance": 25,
       "flippability": "Flippable",
       "history": [
+        {
+          "v": 900.0,
+          "t": 1765825902,
+          "label": "2025-12-15"
+        },
         {
           "v": 800.0,
           "t": 1765933416,
@@ -22125,16 +22326,61 @@
           "v": 32.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 35.0,
+          "t": 1786802460,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 38.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 40.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 50.0,
+          "t": 1787502629,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 60.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 70.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 80.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 90.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 100.0,
+          "t": 1788362382,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 6.7
+      "changePct": 11.1
     },
     "Pearl": {
       "demand": 1,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Summer 2024 (Item Pack)",
-      "change": "(-5) -5.9%",
+      "change": "(-5) -6.3%",
       "aliases": "N/A",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
@@ -22388,16 +22634,21 @@
           "v": 80.0,
           "t": 1785778240,
           "label": "2026-08-03"
+        },
+        {
+          "v": 75.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
         }
       ],
-      "changePct": -5.9
+      "changePct": -6.3
     },
     "Pearlshine": {
       "demand": 1,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Summer 2024 (Item Pack)",
-      "change": "(-5) -5.6%",
+      "change": "(-5) -5.9%",
       "aliases": "N/A",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
@@ -22646,9 +22897,14 @@
           "v": 85.0,
           "t": 1785778240,
           "label": "2026-08-03"
+        },
+        {
+          "v": 80.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
         }
       ],
-      "changePct": -5.6
+      "changePct": -5.9
     },
     "Peppermint": {
       "demand": 1,
@@ -25511,14 +25767,14 @@
       "changePct": 1.2
     },
     "Raygun": {
-      "demand": 6,
+      "demand": 5,
       "rarityScore": 3,
-      "stability": "Overpaid For",
+      "stability": "Receding",
       "origin": "Halloween 2025 (Tier 25)",
-      "change": "(+50) +3.0%",
+      "change": "(-50) -2.5%",
       "aliases": "RG, Ray",
-      "riseChance": 60,
-      "flippability": "Highly Flippable",
+      "riseChance": 0,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 1900.0,
@@ -26019,9 +26275,59 @@
           "v": 1700.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 1750.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 1800.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 1900.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 2000.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 2100.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 2150.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 2100.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 2050.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 2000.0,
+          "t": 1788276110,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 1950.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 3.0
+      "changePct": -2.5
     },
     "RedLuger": {
       "demand": 1,
@@ -26517,18 +26823,13 @@
     "Sakura": {
       "demand": 6,
       "rarityScore": 4,
-      "stability": "Doing Well",
+      "stability": "Stable",
       "origin": "Valentine's 2023 (Item Pack)",
       "change": "(+10) +0.7%",
       "aliases": "Sak",
-      "riseChance": 40,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 535.0,
-          "t": 1725770617,
-          "label": "2024-09-08"
-        },
         {
           "v": 540.0,
           "t": 1726340318,
@@ -27123,19 +27424,24 @@
           "v": 1350.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 1360.0,
+          "t": 1786802460,
+          "label": "2026-08-15"
         }
       ],
       "changePct": 0.7
     },
     "Sands": {
-      "demand": 3,
+      "demand": 2,
       "rarityScore": 3,
       "stability": "Fluctuating",
       "origin": "Summer 2026 (Item Pack)",
-      "change": "(-10) -6.3%",
+      "change": "(-5) -4.5%",
       "aliases": "N/A",
-      "riseChance": 5,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 375.0,
@@ -27171,9 +27477,39 @@
           "v": 150.0,
           "t": 1785528864,
           "label": "2026-07-31"
+        },
+        {
+          "v": 145.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 135.0,
+          "t": 1786802460,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 130.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 120.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 110.0,
+          "t": 1787502629,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 105.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
         }
       ],
-      "changePct": -6.3
+      "changePct": -4.5
     },
     "Saw": {
       "demand": 1,
@@ -27645,11 +27981,11 @@
     "SnowDagger": {
       "demand": 3,
       "rarityScore": 3,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": "Christmas 2025 (Unboxed)",
-      "change": "(-5) -2.0%",
+      "change": "(-5) -2.5%",
       "aliases": "Dagger",
-      "riseChance": 10,
+      "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -27891,18 +28227,53 @@
           "v": 250.0,
           "t": 1785528863,
           "label": "2026-07-31"
+        },
+        {
+          "v": 245.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 240.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 230.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 220.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 210.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 200.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 195.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -2.0
+      "changePct": -2.5
     },
     "Snowcannon": {
       "demand": 5,
       "rarityScore": 3,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": "Christmas 2025 (Tier 30)",
-      "change": "(+25) +3.0%",
+      "change": "(-25) -3.3%",
       "aliases": "Cannon",
-      "riseChance": 10,
+      "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -28179,9 +28550,29 @@
           "v": 850.0,
           "t": 1783959883,
           "label": "2026-07-13"
+        },
+        {
+          "v": 825.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 775.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 750.0,
+          "t": 1788276110,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 725.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 3.0
+      "changePct": -3.3
     },
     "Snowflake": {
       "demand": 1,
@@ -28437,12 +28828,12 @@
     "Soul": {
       "demand": 5,
       "rarityScore": 3,
-      "stability": "Stable",
+      "stability": "Doing Well",
       "origin": "Halloween 2024 (Item Pack)",
       "change": "(+5) +0.8%",
       "aliases": "N/A",
-      "riseChance": 10,
-      "flippability": "Rarely Flippable",
+      "riseChance": 40,
+      "flippability": "Flippable",
       "history": [
         {
           "v": 450.0,
@@ -28978,6 +29369,16 @@
           "v": 615.0,
           "t": 1785337882,
           "label": "2026-07-29"
+        },
+        {
+          "v": 625.0,
+          "t": 1788276110,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 630.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
       "changePct": 0.8
@@ -29756,12 +30157,12 @@
     "Spirit": {
       "demand": 5,
       "rarityScore": 3,
-      "stability": "Stable",
+      "stability": "Doing Well",
       "origin": "Halloween 2024 (Item Pack)",
       "change": "(+5) +0.8%",
       "aliases": "N/A",
-      "riseChance": 10,
-      "flippability": "Rarely Flippable",
+      "riseChance": 40,
+      "flippability": "Flippable",
       "history": [
         {
           "v": 450.0,
@@ -30297,6 +30698,16 @@
           "v": 605.0,
           "t": 1785337882,
           "label": "2026-07-29"
+        },
+        {
+          "v": 615.0,
+          "t": 1788276110,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 620.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
       "changePct": 0.8
@@ -30917,11 +31328,11 @@
     "Sunrise": {
       "demand": 5,
       "rarityScore": 4,
-      "stability": "Stable",
+      "stability": "Receding",
       "origin": "Summer 2025 (Unboxed)",
-      "change": "(+25) +2.3%",
+      "change": "(-50) -3.7%",
       "aliases": "SR",
-      "riseChance": 10,
+      "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -31298,25 +31709,45 @@
           "v": 1125.0,
           "t": 1784213672,
           "label": "2026-07-16"
+        },
+        {
+          "v": 1150.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 1200.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 1300.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 1350.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 1300.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 2.3
+      "changePct": -3.7
     },
     "Sunset": {
       "demand": 5,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Summer 2025 (Tier 25)",
-      "change": "(+25) +4.2%",
+      "change": "(-25) -3.1%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 25.0,
-          "t": 1689111054,
-          "label": "2023-07-11"
-        },
         {
           "v": 1200.0,
           "t": 1753394900,
@@ -31671,9 +32102,34 @@
           "v": 625.0,
           "t": 1784213673,
           "label": "2026-07-16"
+        },
+        {
+          "v": 650.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 700.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 750.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 800.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 775.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 4.2
+      "changePct": -3.1
     },
     "Sweet": {
       "demand": 3,
@@ -32562,16 +33018,11 @@
       "rarityScore": 5,
       "stability": "Stable",
       "origin": "Halloween 2023 (Unboxed)",
-      "change": "(+100) +1.8%",
+      "change": "(-100) -1.8%",
       "aliases": "Trav Gun, TVG",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 2250.0,
-          "t": 1729283700,
-          "label": "2024-10-18"
-        },
         {
           "v": 2300.0,
           "t": 1730513653,
@@ -33166,9 +33617,14 @@
           "v": 5600.0,
           "t": 1785081009,
           "label": "2026-07-26"
+        },
+        {
+          "v": 5500.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
         }
       ],
-      "changePct": 1.8
+      "changePct": -1.8
     },
     "Treat": {
       "demand": 3,
@@ -33431,38 +33887,13 @@
     "Turkey": {
       "demand": 5,
       "rarityScore": 4,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": "Thanksgiving 2023 (Item Pack)",
-      "change": "(-25) -1.0%",
+      "change": "(-50) -2.2%",
       "aliases": "N/A",
-      "riseChance": 10,
+      "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 1100.0,
-          "t": 1723152908,
-          "label": "2024-08-08"
-        },
-        {
-          "v": 1075.0,
-          "t": 1723335328,
-          "label": "2024-08-11"
-        },
-        {
-          "v": 1050.0,
-          "t": 1723598009,
-          "label": "2024-08-14"
-        },
-        {
-          "v": 1025.0,
-          "t": 1723843010,
-          "label": "2024-08-16"
-        },
-        {
-          "v": 1000.0,
-          "t": 1724012283,
-          "label": "2024-08-18"
-        },
         {
           "v": 1100.0,
           "t": 1724366690,
@@ -34037,9 +34468,34 @@
           "v": 2450.0,
           "t": 1779583744,
           "label": "2026-05-24"
+        },
+        {
+          "v": 2425.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 2400.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 2350.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 2300.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 2250.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -1.0
+      "changePct": -2.2
     },
     "VampiresEdge": {
       "demand": 1,
@@ -34200,30 +34656,15 @@
       "changePct": 0.0
     },
     "VampireGun": {
-      "demand": 5,
+      "demand": 6,
       "rarityScore": 4,
-      "stability": "Stable",
+      "stability": "Overpaid For",
       "origin": "Halloween 2024 (Unboxed)",
-      "change": "(+25) +1.3%",
+      "change": "(+50) +2.3%",
       "aliases": "Vamp Gun, VG",
-      "riseChance": 10,
-      "flippability": "Rarely Flippable",
+      "riseChance": 60,
+      "flippability": "Highly Flippable",
       "history": [
-        {
-          "v": 3500.0,
-          "t": 1729283700,
-          "label": "2024-10-18"
-        },
-        {
-          "v": 3000.0,
-          "t": 1729437731,
-          "label": "2024-10-20"
-        },
-        {
-          "v": 1800.0,
-          "t": 1729711197,
-          "label": "2024-10-23"
-        },
         {
           "v": 1050.0,
           "t": 1729906388,
@@ -34803,9 +35244,29 @@
           "v": 1950.0,
           "t": 1785081009,
           "label": "2026-07-26"
+        },
+        {
+          "v": 2000.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 2050.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 2150.0,
+          "t": 1788276110,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 2200.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.3
+      "changePct": 2.3
     },
     "Virtual": {
       "demand": 1,
@@ -35068,11 +35529,11 @@
     "Watergun": {
       "demand": 3,
       "rarityScore": 3,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": "Summer 2024 (Unboxed)",
-      "change": "(-10) -3.8%",
+      "change": "(-5) -2.5%",
       "aliases": "WTG",
-      "riseChance": 5,
+      "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -35539,9 +36000,44 @@
           "v": 250.0,
           "t": 1782154892,
           "label": "2026-06-22"
+        },
+        {
+          "v": 245.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 240.0,
+          "t": 1787502629,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 230.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 220.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 210.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 200.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 195.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -3.8
+      "changePct": -2.5
     },
     "Waves": {
       "demand": 4,
@@ -36260,11 +36756,11 @@
       "changePct": -28.6
     },
     "Xenoknife": {
-      "demand": 4,
+      "demand": 5,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Halloween 2025 (Item Pack)",
-      "change": "(+5) +1.8%",
+      "change": "(+15) +3.8%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -36488,16 +36984,61 @@
           "v": 280.0,
           "t": 1785259346,
           "label": "2026-07-28"
+        },
+        {
+          "v": 285.0,
+          "t": 1786802460,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 295.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 300.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 310.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 325.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 350.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 375.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 390.0,
+          "t": 1788276110,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 405.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.8
+      "changePct": 3.8
     },
     "Xenoshot": {
-      "demand": 4,
+      "demand": 5,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Halloween 2025 (Item Pack)",
-      "change": "(+5) +1.8%",
+      "change": "(+15) +3.8%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -36721,9 +37262,54 @@
           "v": 280.0,
           "t": 1785259346,
           "label": "2026-07-28"
+        },
+        {
+          "v": 285.0,
+          "t": 1786802460,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 295.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 300.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 310.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 325.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 350.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 375.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 390.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 405.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.8
+      "changePct": 3.8
     },
     "Xmas": {
       "demand": 1,
@@ -38182,21 +38768,11 @@
       "rarityScore": 4,
       "stability": "Stable",
       "origin": "Christmas 2023 (Tier 20)",
-      "change": "(+250) +1.4%",
+      "change": "(-250) -1.4%",
       "aliases": "GS, GScope, Scope",
       "riseChance": 15,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 8700.0,
-          "t": 1734913217,
-          "label": "2024-12-23"
-        },
-        {
-          "v": 9300.0,
-          "t": 1735246298,
-          "label": "2024-12-26"
-        },
         {
           "v": 9500.0,
           "t": 1735489193,
@@ -38786,9 +39362,19 @@
           "v": 17750.0,
           "t": 1782328278,
           "label": "2026-06-24"
+        },
+        {
+          "v": 17500.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 17250.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.4
+      "changePct": -1.4
     },
     "Hallowscythe": {
       "demand": 1,
@@ -40923,7 +41509,7 @@
       "changePct": -5.9
     },
     "Icewing": {
-      "demand": 2,
+      "demand": 1,
       "rarityScore": 2,
       "stability": "Stable",
       "origin": "Christmas 2018 (Item Pack)",
@@ -42419,7 +43005,7 @@
       "rarityScore": 4,
       "stability": "Stable",
       "origin": "Halloween 2024 (Tier 20)",
-      "change": "(+25) +2.0%",
+      "change": "(+50) +3.2%",
       "aliases": "Vamp Axe, VA",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -42888,9 +43474,44 @@
           "v": 1275.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 1300.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 1325.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 1400.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 1450.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 1500.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 1550.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 1600.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
         }
       ],
-      "changePct": 2.0
+      "changePct": 3.2
     },
     "America": {
       "demand": 1,
@@ -43950,10 +44571,10 @@
       "rarityScore": 4,
       "stability": "Fluctuating",
       "origin": "Summer 2026 (Item Pack)",
-      "change": "(+50) +2.9%",
+      "change": "(+50) +3.6%",
       "aliases": "CBeachy, CBeach",
-      "riseChance": 0,
-      "flippability": "Highly Flippable",
+      "riseChance": 10,
+      "flippability": "Flippable",
       "history": [
         {
           "v": 3250.0,
@@ -43994,18 +44615,63 @@
           "v": 1800.0,
           "t": 1786028413,
           "label": "2026-08-06"
+        },
+        {
+          "v": 1750.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 1650.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 1450.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 1400.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 1250.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 1300.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 1350.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 1400.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 1450.0,
+          "t": 1788362380,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 2.9
+      "changePct": 3.6
     },
     "ChromaBlizzard": {
       "demand": 5,
       "rarityScore": 5,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": "Christmas 2025 (Item Pack)",
-      "change": "(-250) -3.2%",
+      "change": "(-100) -2.2%",
       "aliases": "CBlizz",
-      "riseChance": 10,
+      "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -44192,9 +44858,59 @@
           "v": 7500.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 7250.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 7000.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 6500.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 6000.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 5500.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 5250.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 5000.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 4750.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 4600.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 4500.0,
+          "t": 1788362380,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -3.2
+      "changePct": -2.2
     },
     "ChromaBoneblade": {
       "demand": 1,
@@ -44947,7 +45663,7 @@
       "rarityScore": 6,
       "stability": "Stable",
       "origin": "Christmas 2024 (Unboxed)",
-      "change": "(+500) +1.9%",
+      "change": "(+500) +1.5%",
       "aliases": "CConst",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -45486,9 +46202,49 @@
           "v": 27000.0,
           "t": 1783093915,
           "label": "2026-07-03"
+        },
+        {
+          "v": 27500.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 28000.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 29000.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 30000.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 31000.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 32000.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 32500.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 33000.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.9
+      "changePct": 1.5
     },
     "ChromaCookiecane": {
       "demand": 1,
@@ -47915,21 +48671,11 @@
       "rarityScore": 8,
       "stability": "Stable",
       "origin": "Christmas 2023 (Gifting)",
-      "change": "(-1,000) -1.3%",
+      "change": "(-1,000) -1.4%",
       "aliases": "CEvergun, CEGun, CEG",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 28000.0,
-          "t": 1711683103,
-          "label": "2024-03-29"
-        },
-        {
-          "v": 26000.0,
-          "t": 1712119878,
-          "label": "2024-04-03"
-        },
         {
           "v": 25000.0,
           "t": 1712540639,
@@ -48519,9 +49265,19 @@
           "v": 75000.0,
           "t": 1783897364,
           "label": "2026-07-12"
+        },
+        {
+          "v": 74000.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 73000.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -1.3
+      "changePct": -1.4
     },
     "ChromaFang": {
       "demand": 1,
@@ -51490,13 +52246,13 @@
       "changePct": -6.7
     },
     "ChromaIcecream": {
-      "demand": 5,
-      "rarityScore": 5,
-      "stability": "Fluctuating",
+      "demand": 6,
+      "rarityScore": 4,
+      "stability": "Overpaid For",
       "origin": "Summer 2026 (Unboxed)",
-      "change": "(-500) -20.0%",
+      "change": "(+150) +8.3%",
       "aliases": "CIC, CCream, CIcecream",
-      "riseChance": 0,
+      "riseChance": 65,
       "flippability": "Highly Flippable",
       "history": [
         {
@@ -51523,9 +52279,59 @@
           "v": 2000.0,
           "t": 1785337881,
           "label": "2026-07-29"
+        },
+        {
+          "v": 1900.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 1800.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 1600.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 1450.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 1250.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 1350.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 1450.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 1600.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 1800.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 1950.0,
+          "t": 1788362380,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -20.0
+      "changePct": 8.3
     },
     "ChromaLaser": {
       "demand": 1,
@@ -53627,12 +54433,12 @@
     "ChromaRaygun": {
       "demand": 6,
       "rarityScore": 5,
-      "stability": "Doing Well",
+      "stability": "Stable",
       "origin": "Halloween 2025 (Tier 25)",
-      "change": "(+250) +1.9%",
+      "change": "(+250) +1.8%",
       "aliases": "CRG, CRay",
-      "riseChance": 40,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 15000.0,
@@ -54043,19 +54849,34 @@
           "v": 13250.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 13500.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 13750.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 14000.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
         }
       ],
-      "changePct": 1.9
+      "changePct": 1.8
     },
     "ChromaSands": {
       "demand": 5,
       "rarityScore": 4,
       "stability": "Fluctuating",
       "origin": "Summer 2026 (Item Pack)",
-      "change": "(+50) +2.7%",
+      "change": "(+50) +3.4%",
       "aliases": "CSands, CSand",
-      "riseChance": 0,
-      "flippability": "Highly Flippable",
+      "riseChance": 10,
+      "flippability": "Flippable",
       "history": [
         {
           "v": 3250.0,
@@ -54101,9 +54922,54 @@
           "v": 1900.0,
           "t": 1786375565,
           "label": "2026-08-10"
+        },
+        {
+          "v": 1850.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 1750.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 1550.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 1450.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 1300.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 1350.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 1400.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 1450.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 1500.0,
+          "t": 1788362380,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 2.7
+      "changePct": 3.4
     },
     "ChromaSaw": {
       "demand": 1,
@@ -55739,10 +56605,10 @@
     },
     "ChromaSnowDagger": {
       "demand": 5,
-      "rarityScore": 5,
+      "rarityScore": 4,
       "stability": "Stable",
       "origin": "Christmas 2025 (Unboxed)",
-      "change": "(-250) -6.7%",
+      "change": "(-100) -4.1%",
       "aliases": "CDagger, CDag",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
@@ -56036,9 +56902,39 @@
           "v": 3500.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 3250.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 3000.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 2750.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 2500.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 2450.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 2350.0,
+          "t": 1788362380,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -6.7
+      "changePct": -4.1
     },
     "ChromaSnowcannon": {
       "demand": 5,
@@ -56567,11 +57463,11 @@
       "changePct": 1.2
     },
     "ChromaSunrise": {
-      "demand": 6,
+      "demand": 5,
       "rarityScore": 5,
       "stability": "Stable",
       "origin": "Summer 2025 (Unboxed)",
-      "change": "(+250) +1.9%",
+      "change": "(-250) -2.0%",
       "aliases": "CSunrise, CSR",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -56975,19 +57871,44 @@
           "v": 13250.0,
           "t": 1784664565,
           "label": "2026-07-21"
+        },
+        {
+          "v": 13000.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 12750.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 12500.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 12250.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 12000.0,
+          "t": 1788362380,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.9
+      "changePct": -2.0
     },
     "ChromaSunset": {
-      "demand": 6,
+      "demand": 5,
       "rarityScore": 5,
-      "stability": "Doing Well",
+      "stability": "Underpaid For",
       "origin": "Summer 2025 (Tier 25)",
-      "change": "(+250) +2.8%",
+      "change": "(-250) -3.1%",
       "aliases": "CSunset, CSS",
-      "riseChance": 35,
-      "flippability": "Flippable",
+      "riseChance": 0,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 15000.0,
@@ -57408,16 +58329,46 @@
           "v": 9250.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 9000.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 8750.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 8500.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 8250.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 8000.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 7750.0,
+          "t": 1788362380,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 2.8
+      "changePct": -3.1
     },
     "ChromaSweet": {
       "demand": 5,
       "rarityScore": 4,
       "stability": "Stable",
       "origin": "Valentine's 2026 (Item Pack)",
-      "change": "(-50) -2.2%",
+      "change": "(-50) -2.7%",
       "aliases": "CSweet",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -57651,9 +58602,54 @@
           "v": 2250.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 2200.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 2150.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 2100.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 2050.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 2000.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 1950.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 1900.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 1850.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 1800.0,
+          "t": 1788362380,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -2.2
+      "changePct": -2.7
     },
     "ChromaSwirlyGun": {
       "demand": 1,
@@ -58566,21 +59562,11 @@
       "rarityScore": 10,
       "stability": "Stable",
       "origin": "Halloween 2023 (Unboxed)",
-      "change": "(-5,000) -2.2%",
+      "change": "(-5,000) -2.3%",
       "aliases": "CTG, CTVG, CTrav",
       "riseChance": 15,
       "flippability": "Flippable",
       "history": [
-        {
-          "v": 16000.0,
-          "t": 1701567061,
-          "label": "2023-12-03"
-        },
-        {
-          "v": 18000.0,
-          "t": 1702247892,
-          "label": "2023-12-10"
-        },
         {
           "v": 20000.0,
           "t": 1702512479,
@@ -59170,16 +60156,26 @@
           "v": 220000.0,
           "t": 1781733084,
           "label": "2026-06-17"
+        },
+        {
+          "v": 215000.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 210000.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -2.2
+      "changePct": -2.3
     },
     "ChromaTreat": {
       "demand": 5,
       "rarityScore": 4,
       "stability": "Receding",
       "origin": "Valentine's 2026 (Item Pack)",
-      "change": "(-100) -3.8%",
+      "change": "(-50) -2.6%",
       "aliases": "CTreat",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
@@ -59473,9 +60469,59 @@
           "v": 2500.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 2400.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 2300.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 2250.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 2200.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 2150.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 2100.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 2050.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 2000.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 1950.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 1900.0,
+          "t": 1788362380,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -3.8
+      "changePct": -2.6
     },
     "ChromaVampireGun": {
       "demand": 7,
@@ -60030,9 +61076,9 @@
       "rarityScore": 5,
       "stability": "Stable",
       "origin": "Summer 2024 (Unboxed)",
-      "change": "(-50) -1.4%",
+      "change": "(-100) -3.0%",
       "aliases": "CWTG, CWG",
-      "riseChance": 10,
+      "riseChance": 5,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -60574,16 +61620,26 @@
           "v": 3400.0,
           "t": 1772056933,
           "label": "2026-02-25"
+        },
+        {
+          "v": 3300.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 3200.0,
+          "t": 1788362380,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -1.4
+      "changePct": -3.0
     },
     "Corrupt": {
-      "demand": 4,
+      "demand": 3,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Data Loss from MM1 -> MM2 Update",
-      "change": "(-25) -5.6%",
+      "change": "(-25) -6.7%",
       "aliases": "N/A",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
@@ -60597,9 +61653,14 @@
           "v": 425.0,
           "t": 1786568490,
           "label": "2026-08-12"
+        },
+        {
+          "v": 350.0,
+          "t": 1788470947,
+          "label": "2026-09-03"
         }
       ],
-      "changePct": -5.6
+      "changePct": -6.7
     },
     "ChromaArcticGun": {
       "demand": 2,
@@ -61297,7 +62358,7 @@
       "rarityScore": 5,
       "stability": "Stable",
       "origin": "Christmas 2018 (Tier 30)",
-      "change": "(-25) -4.2%",
+      "change": "(-25) -4.5%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -61316,9 +62377,14 @@
           "v": 575.0,
           "t": 1786568490,
           "label": "2026-08-12"
+        },
+        {
+          "v": 525.0,
+          "t": 1788470947,
+          "label": "2026-09-03"
         }
       ],
-      "changePct": -4.2
+      "changePct": -4.5
     },
     "Darkgun": {
       "demand": 2,
@@ -61366,7 +62432,7 @@
       "rarityScore": 5,
       "stability": "Receding",
       "origin": "Halloween 2019 (Unboxed)",
-      "change": "(-5) -2.3%",
+      "change": "(-5) -3.0%",
       "aliases": "N/A",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
@@ -61385,9 +62451,14 @@
           "v": 210.0,
           "t": 1786568490,
           "label": "2026-08-12"
+        },
+        {
+          "v": 160.0,
+          "t": 1788470947,
+          "label": "2026-09-03"
         }
       ],
-      "changePct": -2.3
+      "changePct": -3.0
     },
     "ChromaFloralKnife": {
       "demand": 2,
@@ -61566,7 +62637,7 @@
       "rarityScore": 4,
       "stability": "Stable",
       "origin": "Halloween 2022 (Survivor, Tier 17)",
-      "change": "(-5) -11.1%",
+      "change": "(-5) -12.5%",
       "aliases": "N/A",
       "riseChance": 20,
       "flippability": "Rarely Flippable",
@@ -61580,9 +62651,14 @@
           "v": 40.0,
           "t": 1786568490,
           "label": "2026-08-12"
+        },
+        {
+          "v": 35.0,
+          "t": 1788470947,
+          "label": "2026-09-03"
         }
       ],
-      "changePct": -11.1
+      "changePct": -12.5
     },
     "Monster": {
       "demand": 1,
@@ -61866,7 +62942,7 @@
       "rarityScore": 4,
       "stability": "Stable",
       "origin": "Halloween 2022 (Zombie, Tier 17)",
-      "change": "(-5) -12.5%",
+      "change": "(-5) -14.3%",
       "aliases": "N/A",
       "riseChance": 20,
       "flippability": "Rarely Flippable",
@@ -61880,16 +62956,21 @@
           "v": 35.0,
           "t": 1786568490,
           "label": "2026-08-12"
+        },
+        {
+          "v": 30.0,
+          "t": 1788470947,
+          "label": "2026-09-03"
         }
       ],
-      "changePct": -12.5
+      "changePct": -14.3
     },
     "Bones": {
       "demand": 3,
       "rarityScore": 5,
       "stability": "Stable",
       "origin": "Halloween 2019 (Unboxed)",
-      "change": "(-5) -2.2%",
+      "change": "(-5) -2.3%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -61903,9 +62984,14 @@
           "v": 220.0,
           "t": 1786568490,
           "label": "2026-08-12"
+        },
+        {
+          "v": 210.0,
+          "t": 1788470947,
+          "label": "2026-09-03"
         }
       ],
-      "changePct": -2.2
+      "changePct": -2.3
     },
     "Brains": {
       "demand": 3,
@@ -63095,7 +64181,7 @@
       "rarityScore": 4,
       "stability": "Stable",
       "origin": "Halloween 2023 (Catalog Promo)",
-      "change": "(-5) -4.8%",
+      "change": "(-5) -5.3%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -63104,9 +64190,14 @@
           "v": 100.0,
           "t": 1785642395,
           "label": "2026-08-01"
+        },
+        {
+          "v": 90.0,
+          "t": 1788470947,
+          "label": "2026-09-03"
         }
       ],
-      "changePct": -4.8
+      "changePct": -5.3
     },
     "ChromaGiftsKnife": {
       "demand": 3,
@@ -63127,11 +64218,11 @@
       "changePct": 5.6
     },
     "Glitch1": {
-      "demand": 3,
+      "demand": 2,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Godly Batwing Deletion",
-      "change": "(-5) -6.7%",
+      "change": "(-5) -7.1%",
       "aliases": "G1",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
@@ -63140,9 +64231,14 @@
           "v": 70.0,
           "t": 1785642395,
           "label": "2026-08-01"
+        },
+        {
+          "v": 65.0,
+          "t": 1788470947,
+          "label": "2026-09-03"
         }
       ],
-      "changePct": -6.7
+      "changePct": -7.1
     },
     "Glitch2": {
       "demand": 2,
@@ -63917,11 +65013,11 @@
     "BlackCat": {
       "demand": 3,
       "rarityScore": 4,
-      "stability": "Underpaid For",
+      "stability": "Stable",
       "origin": "Halloween 2019 (Tier 5)",
-      "change": "(-5) -6.3%",
+      "change": "(+5) +7.1%",
       "aliases": "N/A",
-      "riseChance": 0,
+      "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -63940,7 +65036,7 @@
           "label": "2026-08-12"
         }
       ],
-      "changePct": -6.3
+      "changePct": 7.1
     },
     "BluePumpkinHALLOWS2018": {
       "demand": 3,
@@ -64073,12 +65169,12 @@
     "Elf2019": {
       "demand": 4,
       "rarityScore": 5,
-      "stability": "Doing Well",
+      "stability": "Stable",
       "origin": "Christmas 2019 (Tier 12)",
       "change": "(+50) +8.7%",
       "aliases": "N/A",
-      "riseChance": 40,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 525.0,
@@ -64772,14 +65868,14 @@
       "changePct": -3.2
     },
     "AlienSet": {
-      "demand": 6,
+      "demand": 5,
       "rarityScore": 4,
-      "stability": "Overpaid For",
+      "stability": "Receding",
       "origin": null,
-      "change": "(+100) +2.8%",
+      "change": "(-150) -3.4%",
       "aliases": "N/A",
-      "riseChance": 60,
-      "flippability": "Highly Flippable",
+      "riseChance": 0,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 3650.0,
@@ -65325,9 +66421,59 @@
           "v": 3625.0,
           "t": 1786546787,
           "label": "2026-08-12"
+        },
+        {
+          "v": 3725.0,
+          "t": 1786628833,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 3900.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 4250.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 4500.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 4700.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 4800.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 4700.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 4600.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 4450.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 4300.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 2.8
+      "changePct": -3.4
     },
     "AuroraSetLegend": {
       "demand": 2,
@@ -66481,9 +67627,9 @@
       "rarityScore": 4,
       "stability": "Fluctuating",
       "origin": null,
-      "change": "(+2) +0.2%",
+      "change": "(-15) -1.8%",
       "aliases": "Ornament Set, Orn Set",
-      "riseChance": 10,
+      "riseChance": 25,
       "flippability": "Flippable",
       "history": [
         {
@@ -66700,19 +67846,64 @@
           "v": 857.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 860.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 863.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 865.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 875.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 885.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 870.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 855.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 840.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 825.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 0.2
+      "changePct": -1.8
     },
     "BeachSet": {
-      "demand": 3,
+      "demand": 2,
       "rarityScore": 3,
       "stability": "Fluctuating",
       "origin": null,
-      "change": "(-20) -6.3%",
+      "change": "(-10) -4.5%",
       "aliases": "N/A",
-      "riseChance": 5,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 750.0,
@@ -66748,9 +67939,39 @@
           "v": 300.0,
           "t": 1785528863,
           "label": "2026-07-31"
+        },
+        {
+          "v": 290.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 270.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 260.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 240.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 220.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 210.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
         }
       ],
-      "changePct": -6.3
+      "changePct": -4.5
     },
     "BlizzardSet": {
       "demand": 4,
@@ -68417,30 +69638,15 @@
       "changePct": -11.1
     },
     "CelestialSet": {
-      "demand": 5,
+      "demand": 6,
       "rarityScore": 4,
-      "stability": "Stable",
+      "stability": "Overpaid For",
       "origin": null,
-      "change": "(+50) +1.0%",
+      "change": "(+100) +1.9%",
       "aliases": "Cel Set",
-      "riseChance": 10,
-      "flippability": "Rarely Flippable",
+      "riseChance": 65,
+      "flippability": "Highly Flippable",
       "history": [
-        {
-          "v": 1100.0,
-          "t": 1745188579,
-          "label": "2025-04-20"
-        },
-        {
-          "v": 1150.0,
-          "t": 1745442660,
-          "label": "2025-04-23"
-        },
-        {
-          "v": 1175.0,
-          "t": 1746054919,
-          "label": "2025-04-30"
-        },
         {
           "v": 1225.0,
           "t": 1746378344,
@@ -69025,19 +70231,34 @@
           "v": 5150.0,
           "t": 1786546787,
           "label": "2026-08-12"
+        },
+        {
+          "v": 5200.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 5300.0,
+          "t": 1788276107,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 5400.0,
+          "t": 1788362378,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.0
+      "changePct": 1.9
     },
     "ChromaAlienSet": {
       "demand": 6,
       "rarityScore": 6,
-      "stability": "Doing Well",
+      "stability": "Stable",
       "origin": null,
       "change": "(+250) +0.7%",
       "aliases": "CAlien Set",
-      "riseChance": 40,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 24000.0,
@@ -69543,6 +70764,21 @@
           "v": 37250.0,
           "t": 1786546787,
           "label": "2026-08-12"
+        },
+        {
+          "v": 37500.0,
+          "t": 1786628833,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 37750.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 38000.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
         }
       ],
       "changePct": 0.7
@@ -69900,10 +71136,10 @@
       "rarityScore": 4,
       "stability": "Fluctuating",
       "origin": null,
-      "change": "(+50) +1.4%",
+      "change": "(+100) +3.5%",
       "aliases": "CBeach Set",
-      "riseChance": 0,
-      "flippability": "Highly Flippable",
+      "riseChance": 10,
+      "flippability": "Flippable",
       "history": [
         {
           "v": 6500.0,
@@ -69939,16 +71175,61 @@
           "v": 3700.0,
           "t": 1786375564,
           "label": "2026-08-10"
+        },
+        {
+          "v": 3600.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 3400.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 3000.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 2850.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 2550.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 2650.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 2750.0,
+          "t": 1788103825,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 2850.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 2950.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.4
+      "changePct": 3.5
     },
     "ChromaBlizzardSet": {
       "demand": 5,
       "rarityScore": 5,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": null,
-      "change": "(-250) -2.1%",
+      "change": "(-100) -1.1%",
       "aliases": "CBlizz Set",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -70217,9 +71498,59 @@
           "v": 11750.0,
           "t": 1786546787,
           "label": "2026-08-12"
+        },
+        {
+          "v": 11500.0,
+          "t": 1786628833,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 11250.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 10750.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 10250.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 9750.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 9500.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 9250.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 9000.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 8850.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 8750.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -2.1
+      "changePct": -1.1
     },
     "ChromaBringerSet": {
       "demand": 1,
@@ -70845,16 +72176,6 @@
       "flippability": "Rarely Flippable",
       "history": [
         {
-          "v": 60000.0,
-          "t": 1733102215,
-          "label": "2024-12-02"
-        },
-        {
-          "v": 63000.0,
-          "t": 1734729554,
-          "label": "2024-12-20"
-        },
-        {
           "v": 64000.0,
           "t": 1734913217,
           "label": "2024-12-23"
@@ -71443,6 +72764,16 @@
           "v": 123000.0,
           "t": 1786028413,
           "label": "2026-08-06"
+        },
+        {
+          "v": 122000.0,
+          "t": 1788276106,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 121000.0,
+          "t": 1788362378,
+          "label": "2026-09-02"
         }
       ],
       "changePct": -0.8
@@ -71453,7 +72784,7 @@
       "stability": "Underpaid For",
       "origin": null,
       "change": "(-7) -25.0%",
-      "aliases": "CPet Set View Value History and Similar Items Values Last Updated - August 12th, 2026 at 6:59 PM // Join our Discord Server Join our Discord Server Join our Roblox Group Trade your MM2 items using Cosmic Values, our official trading partner! Take me there The Supreme Values Discord bot has returned! Learn more MM2 Set Values Supreme Values provides up-to-date MM2 Set values, demands, and rarities for trading every Murder Mystery 2 item set. TIP: You can click on an item's image to see extra features and information. Read more about this in our use guide! Chroma Tier Small Tier Collectible Tier Bulk Tier Dynamic Sets Changelog Search In-Page Filter: Select Stability Overpaid For Doing Well Fluctuating Receding",
+      "aliases": "CPet Set View Value History and Similar Items Values Last Updated - September 2nd, 2026 at 7:19 PM // Join our Discord Server Join our Discord Server Join our Roblox Group Trade your MM2 items using Cosmic Values, our official trading partner! Take me there The Supreme Values Discord bot has returned! Learn more MM2 Set Values Supreme Values provides up-to-date MM2 Set values, demands, and rarities for trading every Murder Mystery 2 item set. TIP: You can click on an item's image to see extra features and information. Read more about this in our use guide! Chroma Tier Small Tier Collectible Tier Bulk Tier Dynamic Sets Changelog Search In-Page Filter: Select Stability Overpaid For Doing Well Fluctuating Recedi",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
@@ -72008,7 +73339,7 @@
       "rarityScore": 5,
       "stability": "Stable",
       "origin": null,
-      "change": "(-250) -2.2%",
+      "change": "(-100) -1.0%",
       "aliases": "CSnow Set",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -72342,19 +73673,49 @@
           "v": 11250.0,
           "t": 1786546787,
           "label": "2026-08-12"
+        },
+        {
+          "v": 11000.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 10750.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 10500.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 10250.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 10200.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 10100.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -2.2
+      "changePct": -1.0
     },
     "ChromaSunSet": {
-      "demand": 6,
+      "demand": 5,
       "rarityScore": 5,
-      "stability": "Doing Well",
+      "stability": "Underpaid For",
       "origin": null,
-      "change": "(+250) +1.1%",
+      "change": "(-500) -2.5%",
       "aliases": "CSun Set, CSunrise Set",
-      "riseChance": 35,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 33000.0,
@@ -72800,16 +74161,46 @@
           "v": 22500.0,
           "t": 1786546787,
           "label": "2026-08-12"
+        },
+        {
+          "v": 22250.0,
+          "t": 1787502627,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 21750.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 21250.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 20750.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 20250.0,
+          "t": 1788276106,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 19750.0,
+          "t": 1788362378,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.1
+      "changePct": -2.5
     },
     "ChromaSweetSet": {
       "demand": 5,
       "rarityScore": 4,
       "stability": "Receding",
       "origin": null,
-      "change": "(-150) -3.1%",
+      "change": "(-100) -2.6%",
       "aliases": "CSweet Set",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -73098,25 +74489,70 @@
           "v": 4750.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 4600.0,
+          "t": 1786628833,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 4450.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 4350.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 4250.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 4150.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 4050.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 3950.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 3850.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 3800.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 3700.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -3.1
+      "changePct": -2.6
     },
     "ChromaWeaponSet": {
       "demand": 1,
       "rarityScore": 2,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": null,
-      "change": "(-1) -0.6%",
+      "change": "(-2) -1.3%",
       "aliases": "Full Lug Set",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 2405.0,
-          "t": 1682621258,
-          "label": "2023-04-27"
-        },
         {
           "v": 2415.0,
           "t": 1683513604,
@@ -73711,9 +75147,14 @@
           "v": 180.0,
           "t": 1785645991,
           "label": "2026-08-01"
+        },
+        {
+          "v": 158.0,
+          "t": 1788470947,
+          "label": "2026-09-03"
         }
       ],
-      "changePct": -0.6
+      "changePct": -1.3
     },
     "ColoredSeerSet": {
       "demand": 1,
@@ -73752,60 +75193,15 @@
       "changePct": -3.8
     },
     "CorruptSet": {
-      "demand": 4,
+      "demand": 3,
       "rarityScore": 3,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": null,
-      "change": "(-25) -5.1%",
+      "change": "(-2) -0.5%",
       "aliases": "N/A",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 2270.0,
-          "t": 1709523031,
-          "label": "2024-03-04"
-        },
-        {
-          "v": 2320.0,
-          "t": 1709740798,
-          "label": "2024-03-06"
-        },
-        {
-          "v": 2120.0,
-          "t": 1710127061,
-          "label": "2024-03-11"
-        },
-        {
-          "v": 2020.0,
-          "t": 1710728555,
-          "label": "2024-03-18"
-        },
-        {
-          "v": 1970.0,
-          "t": 1710983009,
-          "label": "2024-03-21"
-        },
-        {
-          "v": 1920.0,
-          "t": 1711330556,
-          "label": "2024-03-25"
-        },
-        {
-          "v": 1770.0,
-          "t": 1711683103,
-          "label": "2024-03-29"
-        },
-        {
-          "v": 1670.0,
-          "t": 1711903703,
-          "label": "2024-03-31"
-        },
-        {
-          "v": 1570.0,
-          "t": 1712119878,
-          "label": "2024-04-03"
-        },
         {
           "v": 1470.0,
           "t": 1712540639,
@@ -74360,25 +75756,65 @@
           "v": 465.0,
           "t": 1786375564,
           "label": "2026-08-10"
+        },
+        {
+          "v": 447.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 435.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 432.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 405.0,
+          "t": 1787502627,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 378.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 375.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 372.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 370.0,
+          "t": 1788276107,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 368.0,
+          "t": 1788362378,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -5.1
+      "changePct": -0.5
     },
     "DarkSet": {
       "demand": 6,
       "rarityScore": 4,
-      "stability": "Doing Well",
+      "stability": "Stable",
       "origin": null,
       "change": "(+50) +1.4%",
       "aliases": "N/A",
-      "riseChance": 40,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 880.0,
-          "t": 1740708795,
-          "label": "2025-02-28"
-        },
         {
           "v": 890.0,
           "t": 1741055950,
@@ -74973,6 +76409,11 @@
           "v": 3525.0,
           "t": 1786546787,
           "label": "2026-08-12"
+        },
+        {
+          "v": 3575.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
         }
       ],
       "changePct": 1.4
@@ -75700,55 +77141,15 @@
       "changePct": -13.3
     },
     "EverSet": {
-      "demand": 5,
+      "demand": 6,
       "rarityScore": 4,
       "stability": "Stable",
       "origin": null,
-      "change": "(-50) -0.8%",
+      "change": "(+50) +0.8%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 3150.0,
-          "t": 1741559979,
-          "label": "2025-03-09"
-        },
-        {
-          "v": 3125.0,
-          "t": 1741726284,
-          "label": "2025-03-11"
-        },
-        {
-          "v": 3100.0,
-          "t": 1742069160,
-          "label": "2025-03-15"
-        },
-        {
-          "v": 3150.0,
-          "t": 1742421618,
-          "label": "2025-03-19"
-        },
-        {
-          "v": 3225.0,
-          "t": 1742764149,
-          "label": "2025-03-23"
-        },
-        {
-          "v": 3300.0,
-          "t": 1743023805,
-          "label": "2025-03-26"
-        },
-        {
-          "v": 3450.0,
-          "t": 1743281742,
-          "label": "2025-03-29"
-        },
-        {
-          "v": 3600.0,
-          "t": 1743558973,
-          "label": "2025-04-02"
-        },
         {
           "v": 3650.0,
           "t": 1743909551,
@@ -76308,9 +77709,49 @@
           "v": 5950.0,
           "t": 1783443818,
           "label": "2026-07-07"
+        },
+        {
+          "v": 6000.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 6050.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 6100.0,
+          "t": 1787502627,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 6150.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 6250.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 6350.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 6400.0,
+          "t": 1788276107,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 6450.0,
+          "t": 1788362378,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -0.8
+      "changePct": 0.8
     },
     "EyeSet": {
       "demand": 1,
@@ -79227,58 +80668,13 @@
     "FullLugerSet": {
       "demand": 1,
       "rarityScore": 2,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": null,
-      "change": "(-1) -0.6%",
+      "change": "(-2) -1.3%",
       "aliases": "Full Lug Set",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 660.0,
-          "t": 1649207524,
-          "label": "2022-04-06"
-        },
-        {
-          "v": 665.0,
-          "t": 1652986725,
-          "label": "2022-05-19"
-        },
-        {
-          "v": 695.0,
-          "t": 1654557346,
-          "label": "2022-06-06"
-        },
-        {
-          "v": 705.0,
-          "t": 1655589171,
-          "label": "2022-06-18"
-        },
-        {
-          "v": 725.0,
-          "t": 1655741038,
-          "label": "2022-06-20"
-        },
-        {
-          "v": 755.0,
-          "t": 1657146121,
-          "label": "2022-07-06"
-        },
-        {
-          "v": 775.0,
-          "t": 1657581089,
-          "label": "2022-07-11"
-        },
-        {
-          "v": 780.0,
-          "t": 1658977209,
-          "label": "2022-07-28"
-        },
-        {
-          "v": 795.0,
-          "t": 1659591926,
-          "label": "2022-08-04"
-        },
         {
           "v": 780.0,
           "t": 1659676359,
@@ -79833,9 +81229,54 @@
           "v": 180.0,
           "t": 1785259345,
           "label": "2026-07-28"
+        },
+        {
+          "v": 177.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 175.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 172.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 170.0,
+          "t": 1787502627,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 168.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 165.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 162.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 160.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 158.0,
+          "t": 1788362378,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -0.6
+      "changePct": -1.3
     },
     "FullSwirlySet": {
       "demand": 1,
@@ -80589,7 +82030,7 @@
       "rarityScore": 4,
       "stability": "Stable",
       "origin": null,
-      "change": null,
+      "change": "(+3) +30.0%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -80598,9 +82039,14 @@
           "v": 10.0,
           "t": 1786568490,
           "label": "2026-08-12"
+        },
+        {
+          "v": 13.0,
+          "t": 1788470947,
+          "label": "2026-09-03"
         }
       ],
-      "changePct": 0.0
+      "changePct": 30.0
     },
     "GraveSet": {
       "demand": 1,
@@ -82152,9 +83598,9 @@
     "LugerSet": {
       "demand": 1,
       "rarityScore": 2,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": null,
-      "change": "(-1) -0.8%",
+      "change": "(-2) -1.8%",
       "aliases": "Lug Set",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
@@ -82693,9 +84139,54 @@
           "v": 130.0,
           "t": 1785259345,
           "label": "2026-07-28"
+        },
+        {
+          "v": 127.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 125.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 122.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 120.0,
+          "t": 1787502627,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 118.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 115.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 112.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 110.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 108.0,
+          "t": 1788362378,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -0.8
+      "changePct": -1.8
     },
     "MarbleSet": {
       "demand": 1,
@@ -83387,7 +84878,7 @@
       "rarityScore": 3,
       "stability": "Stable",
       "origin": null,
-      "change": "(-10) -5.7%",
+      "change": "(-10) -6.1%",
       "aliases": "N/A",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
@@ -83631,9 +85122,14 @@
           "v": 165.0,
           "t": 1785778240,
           "label": "2026-08-03"
+        },
+        {
+          "v": 155.0,
+          "t": 1788276107,
+          "label": "2026-09-01"
         }
       ],
-      "changePct": -5.7
+      "changePct": -6.1
     },
     "PlasmaSet": {
       "demand": 1,
@@ -84744,18 +86240,13 @@
     "SakuraSet": {
       "demand": 6,
       "rarityScore": 4,
-      "stability": "Doing Well",
+      "stability": "Stable",
       "origin": null,
       "change": "(+20) +0.7%",
       "aliases": "Sak Set",
-      "riseChance": 40,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 1080.0,
-          "t": 1725770617,
-          "label": "2024-09-08"
-        },
         {
           "v": 1090.0,
           "t": 1726340318,
@@ -85350,6 +86841,11 @@
           "v": 2710.0,
           "t": 1786546787,
           "label": "2026-08-12"
+        },
+        {
+          "v": 2730.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
         }
       ],
       "changePct": 0.7
@@ -85722,7 +87218,7 @@
       "rarityScore": 4,
       "stability": "Fluctuating",
       "origin": null,
-      "change": "(-1) -0.1%",
+      "change": "(+0) +0.0%",
       "aliases": "SS103",
       "riseChance": 10,
       "flippability": "Flippable",
@@ -86261,16 +87757,41 @@
           "v": 1260.0,
           "t": 1785259345,
           "label": "2026-07-28"
+        },
+        {
+          "v": 1255.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 1250.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 1245.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 1242.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 1240.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
         }
       ],
-      "changePct": -0.1
+      "changePct": 0.0
     },
     "SmallSet107": {
       "demand": 4,
       "rarityScore": 4,
       "stability": "Fluctuating",
       "origin": null,
-      "change": "(-20) -1.5%",
+      "change": "(+0) +0.0%",
       "aliases": "SS107",
       "riseChance": 10,
       "flippability": "Flippable",
@@ -86809,9 +88330,29 @@
           "v": 1295.0,
           "t": 1784664564,
           "label": "2026-07-21"
+        },
+        {
+          "v": 1290.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 1285.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 1280.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 1275.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
         }
       ],
-      "changePct": -1.5
+      "changePct": 0.0
     },
     "SnakebiteSet": {
       "demand": 2,
@@ -86834,11 +88375,11 @@
     "SnowSet": {
       "demand": 5,
       "rarityScore": 3,
-      "stability": "Stable",
+      "stability": "Underpaid For",
       "origin": null,
-      "change": "(-5) -0.5%",
+      "change": "(-30) -3.2%",
       "aliases": "N/A",
-      "riseChance": 10,
+      "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -87210,19 +88751,54 @@
           "v": 1100.0,
           "t": 1785528863,
           "label": "2026-07-31"
+        },
+        {
+          "v": 1095.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 1090.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 1080.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 1045.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 985.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 950.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 920.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": -0.5
+      "changePct": -3.2
     },
     "SoulSet": {
       "demand": 5,
       "rarityScore": 3,
-      "stability": "Stable",
+      "stability": "Doing Well",
       "origin": null,
       "change": "(+10) +0.8%",
       "aliases": "N/A",
-      "riseChance": 10,
-      "flippability": "Rarely Flippable",
+      "riseChance": 40,
+      "flippability": "Flippable",
       "history": [
         {
           "v": 900.0,
@@ -87758,6 +89334,16 @@
           "v": 1220.0,
           "t": 1785337881,
           "label": "2026-07-29"
+        },
+        {
+          "v": 1240.0,
+          "t": 1788276107,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 1250.0,
+          "t": 1788362378,
+          "label": "2026-09-02"
         }
       ],
       "changePct": 0.8
@@ -88804,9 +90390,9 @@
     "SunSet": {
       "demand": 5,
       "rarityScore": 4,
-      "stability": "Stable",
+      "stability": "Receding",
       "origin": null,
-      "change": "(+50) +2.9%",
+      "change": "(-75) -3.5%",
       "aliases": "Sunrise Set",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -89240,9 +90826,34 @@
           "v": 1750.0,
           "t": 1784213672,
           "label": "2026-07-16"
+        },
+        {
+          "v": 1800.0,
+          "t": 1787502627,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 1900.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 2050.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 2150.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 2075.0,
+          "t": 1788362378,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 2.9
+      "changePct": -3.5
     },
     "SweetSet": {
       "demand": 3,
@@ -90081,16 +91692,11 @@
       "rarityScore": 5,
       "stability": "Stable",
       "origin": null,
-      "change": "(+100) +0.7%",
+      "change": "(-100) -0.7%",
       "aliases": "Trav Set",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 9300.0,
-          "t": 1742421618,
-          "label": "2025-03-19"
-        },
         {
           "v": 9400.0,
           "t": 1742764149,
@@ -90685,9 +92291,14 @@
           "v": 13700.0,
           "t": 1785081008,
           "label": "2026-07-26"
+        },
+        {
+          "v": 13600.0,
+          "t": 1788276107,
+          "label": "2026-09-01"
         }
       ],
-      "changePct": 0.7
+      "changePct": -0.7
     },
     "VampireSetLegend": {
       "demand": 2,
@@ -90736,65 +92347,15 @@
       "changePct": -33.3
     },
     "VampiresSet": {
-      "demand": 5,
+      "demand": 6,
       "rarityScore": 4,
-      "stability": "Stable",
+      "stability": "Overpaid For",
       "origin": null,
-      "change": "(+25) +0.8%",
+      "change": "(+50) +1.3%",
       "aliases": "Vamp Set",
-      "riseChance": 10,
-      "flippability": "Rarely Flippable",
+      "riseChance": 60,
+      "flippability": "Highly Flippable",
       "history": [
-        {
-          "v": 950.0,
-          "t": 1736127561,
-          "label": "2025-01-06"
-        },
-        {
-          "v": 940.0,
-          "t": 1736480646,
-          "label": "2025-01-10"
-        },
-        {
-          "v": 910.0,
-          "t": 1736732652,
-          "label": "2025-01-13"
-        },
-        {
-          "v": 900.0,
-          "t": 1737351067,
-          "label": "2025-01-20"
-        },
-        {
-          "v": 875.0,
-          "t": 1737929205,
-          "label": "2025-01-26"
-        },
-        {
-          "v": 850.0,
-          "t": 1738187785,
-          "label": "2025-01-29"
-        },
-        {
-          "v": 845.0,
-          "t": 1738900863,
-          "label": "2025-02-07"
-        },
-        {
-          "v": 830.0,
-          "t": 1739144010,
-          "label": "2025-02-09"
-        },
-        {
-          "v": 820.0,
-          "t": 1739760471,
-          "label": "2025-02-17"
-        },
-        {
-          "v": 825.0,
-          "t": 1741726284,
-          "label": "2025-03-11"
-        },
         {
           "v": 860.0,
           "t": 1742069160,
@@ -91344,9 +92905,59 @@
           "v": 3225.0,
           "t": 1786546787,
           "label": "2026-08-12"
+        },
+        {
+          "v": 3250.0,
+          "t": 1786628833,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 3275.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 3350.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 3400.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 3450.0,
+          "t": 1787502627,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 3500.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 3600.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 3650.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 3750.0,
+          "t": 1788276107,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 3800.0,
+          "t": 1788362378,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 0.8
+      "changePct": 1.3
     },
     "VintageSet": {
       "demand": 1,
@@ -91646,11 +93257,11 @@
       "changePct": -12.5
     },
     "XenoSet": {
-      "demand": 4,
+      "demand": 5,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": null,
-      "change": "(+10) +1.8%",
+      "change": "(+30) +3.8%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -91874,9 +93485,54 @@
           "v": 560.0,
           "t": 1785259345,
           "label": "2026-07-28"
+        },
+        {
+          "v": 570.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 590.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 600.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 620.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 650.0,
+          "t": 1787752768,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 700.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 750.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 780.0,
+          "t": 1788276108,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 810.0,
+          "t": 1788362379,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.8
+      "changePct": 3.8
     },
     "ZombieSet": {
       "demand": 1,
@@ -92812,7 +94468,7 @@
       "rarityScore": 4,
       "stability": "Stable",
       "origin": "Halloween 2024 (Tier 20)",
-      "change": "(+25) +2.0%",
+      "change": "(+50) +3.2%",
       "aliases": "Vamp Axe, VA",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -93281,25 +94937,55 @@
           "v": 1275.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 1300.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 1325.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 1400.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 1450.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 1500.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 1550.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 1600.0,
+          "t": 1787920239,
+          "label": "2026-08-28"
         }
       ],
-      "changePct": 2.0
+      "changePct": 3.2
     },
     "TravelerGun": {
       "demand": 5,
       "rarityScore": 5,
       "stability": "Stable",
       "origin": "Halloween 2023 (Unboxed)",
-      "change": "(+100) +1.8%",
+      "change": "(-100) -1.8%",
       "aliases": "Trav Gun, TVG",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 2250.0,
-          "t": 1729283700,
-          "label": "2024-10-18"
-        },
         {
           "v": 2300.0,
           "t": 1730513653,
@@ -93894,18 +95580,23 @@
           "v": 5600.0,
           "t": 1785081009,
           "label": "2026-07-26"
+        },
+        {
+          "v": 5500.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
         }
       ],
-      "changePct": 1.8
+      "changePct": -1.8
     },
     "SunsetGun": {
       "demand": 5,
       "rarityScore": 4,
-      "stability": "Stable",
+      "stability": "Receding",
       "origin": "Summer 2025 (Unboxed)",
-      "change": "(+25) +2.3%",
+      "change": "(-50) -3.7%",
       "aliases": "SR",
-      "riseChance": 10,
+      "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -94282,19 +95973,44 @@
           "v": 1125.0,
           "t": 1784213672,
           "label": "2026-07-16"
+        },
+        {
+          "v": 1150.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 1200.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 1300.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 1350.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 1300.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 2.3
+      "changePct": -3.7
     },
     "UFOKnife": {
-      "demand": 6,
+      "demand": 5,
       "rarityScore": 4,
-      "stability": "Doing Well",
+      "stability": "Receding",
       "origin": "Halloween 2025 (Unboxed)",
-      "change": "(+50) +2.7%",
+      "change": "(-100) -4.1%",
       "aliases": "AB, ALB",
-      "riseChance": 50,
-      "flippability": "Flippable",
+      "riseChance": 0,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 1500.0,
@@ -94775,9 +96491,59 @@
           "v": 1925.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 1975.0,
+          "t": 1786628834,
+          "label": "2026-08-13"
+        },
+        {
+          "v": 2100.0,
+          "t": 1786802459,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 2350.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 2500.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 2600.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 2650.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 2600.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 2550.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 2450.0,
+          "t": 1788276109,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 2350.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 2.7
+      "changePct": -4.1
     },
     "Rainbow_G": {
       "demand": 5,
@@ -96619,11 +98385,11 @@
       "changePct": 1.8
     },
     "XenoKnife": {
-      "demand": 4,
+      "demand": 5,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Halloween 2025 (Item Pack)",
-      "change": "(+5) +1.8%",
+      "change": "(+15) +3.8%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -96847,16 +98613,61 @@
           "v": 280.0,
           "t": 1785259346,
           "label": "2026-07-28"
+        },
+        {
+          "v": 285.0,
+          "t": 1786802460,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 295.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 300.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 310.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 325.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 350.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 375.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 390.0,
+          "t": 1788276110,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 405.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.8
+      "changePct": 3.8
     },
     "XenoGun": {
-      "demand": 4,
+      "demand": 5,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Halloween 2025 (Item Pack)",
-      "change": "(+5) +1.8%",
+      "change": "(+15) +3.8%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -97080,9 +98891,54 @@
           "v": 280.0,
           "t": 1785259346,
           "label": "2026-07-28"
+        },
+        {
+          "v": 285.0,
+          "t": 1786802460,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 295.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 300.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 310.0,
+          "t": 1787502628,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 325.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 350.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 375.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 390.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 405.0,
+          "t": 1788362381,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 1.8
+      "changePct": 3.8
     },
     "FlowerwoodKnife": {
       "demand": 4,
@@ -98130,7 +99986,7 @@
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Summer 2024 (Item Pack)",
-      "change": "(-5) -5.6%",
+      "change": "(-5) -5.9%",
       "aliases": "N/A",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
@@ -98379,16 +100235,21 @@
           "v": 85.0,
           "t": 1785778240,
           "label": "2026-08-03"
+        },
+        {
+          "v": 80.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
         }
       ],
-      "changePct": -5.6
+      "changePct": -5.9
     },
     "Pearl_K": {
       "demand": 1,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Summer 2024 (Item Pack)",
-      "change": "(-5) -5.9%",
+      "change": "(-5) -6.3%",
       "aliases": "N/A",
       "riseChance": 5,
       "flippability": "Rarely Flippable",
@@ -98642,9 +100503,14 @@
           "v": 80.0,
           "t": 1785778240,
           "label": "2026-08-03"
+        },
+        {
+          "v": 75.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
         }
       ],
-      "changePct": -5.9
+      "changePct": -6.3
     },
     "candy": {
       "demand": 1,
@@ -101202,15 +103068,20 @@
       "changePct": -5.7
     },
     "BaubleKnife": {
-      "demand": 1,
+      "demand": 2,
       "rarityScore": 2,
-      "stability": "Fluctuating",
+      "stability": "Doing Well",
       "origin": "Christmas 2025 (Gifting 100 Gifts)",
-      "change": "(+2) +6.7%",
+      "change": "(+10) +11.1%",
       "aliases": "Orn",
-      "riseChance": 10,
+      "riseChance": 25,
       "flippability": "Flippable",
       "history": [
+        {
+          "v": 900.0,
+          "t": 1765825902,
+          "label": "2025-12-15"
+        },
         {
           "v": 800.0,
           "t": 1765933416,
@@ -101335,9 +103206,54 @@
           "v": 32.0,
           "t": 1786546788,
           "label": "2026-08-12"
+        },
+        {
+          "v": 35.0,
+          "t": 1786802460,
+          "label": "2026-08-15"
+        },
+        {
+          "v": 38.0,
+          "t": 1787062549,
+          "label": "2026-08-18"
+        },
+        {
+          "v": 40.0,
+          "t": 1787234487,
+          "label": "2026-08-20"
+        },
+        {
+          "v": 50.0,
+          "t": 1787502629,
+          "label": "2026-08-23"
+        },
+        {
+          "v": 60.0,
+          "t": 1787752769,
+          "label": "2026-08-26"
+        },
+        {
+          "v": 70.0,
+          "t": 1787920240,
+          "label": "2026-08-28"
+        },
+        {
+          "v": 80.0,
+          "t": 1788103826,
+          "label": "2026-08-30"
+        },
+        {
+          "v": 90.0,
+          "t": 1788276111,
+          "label": "2026-09-01"
+        },
+        {
+          "v": 100.0,
+          "t": 1788362382,
+          "label": "2026-09-02"
         }
       ],
-      "changePct": 6.7
+      "changePct": 11.1
     },
     "BattleAxe2": {
       "demand": 1,
@@ -103162,6 +105078,63 @@
     "WintersEdge": "WinterEdge",
     "TheSeer": "Seer"
   },
-  "trending": [],
-  "changelog": null
+  "trending": [
+    {
+      "name": "Chroma Icecream",
+      "id": "ChromaIcecream",
+      "value": 1950,
+      "stability": "Overpaid For",
+      "change": "(+150)"
+    },
+    {
+      "name": "Constellation",
+      "id": "Constellation",
+      "value": 2950,
+      "stability": "Overpaid For",
+      "change": "(+100)"
+    },
+    {
+      "name": "Vampire's Gun",
+      "id": "VampireGun",
+      "value": 2200,
+      "stability": "Overpaid For",
+      "change": "(+50)"
+    },
+    {
+      "name": "Ornament",
+      "id": "Ornament",
+      "value": 100,
+      "stability": "Doing Well",
+      "change": "(+10)"
+    },
+    {
+      "name": "Icecream",
+      "id": "Icecream",
+      "value": 170,
+      "stability": "Doing Well",
+      "change": "(+10)"
+    },
+    {
+      "name": "Soul Set",
+      "id": "SoulSet",
+      "value": 1250,
+      "stability": "Doing Well",
+      "change": "(+10)"
+    },
+    {
+      "name": "Soul",
+      "id": "Soul",
+      "value": 630,
+      "stability": "Doing Well",
+      "change": "(+5)"
+    },
+    {
+      "name": "Spirit",
+      "id": "Spirit",
+      "value": 620,
+      "stability": "Doing Well",
+      "change": "(+5)"
+    }
+  ],
+  "changelog": "SUPREME VALUES UPDATE 02/09/2026 (DD/MM/YYYY):\n\n\nANCIENTS:\nGingerscope reduced to 17,250\n\n\nCHROMAS:\nChroma Traveler's Gun reduced to 210,000\nChroma Evergun reduced to 73,000\nChroma Constellation increased to 33,000 [N/A], stability changed from \"Doing Well\" to \"Stable\"\nChroma Sunrise reduced to 12,000\nChroma Sunset reduced to 7,750 [7,500-7,750]\nChroma Blizzard reduced to 4,500 [4,300-4,500]\nChroma Watergun reduced to 3,200\nChroma Snow Dagger reduced to 2,350\nChroma Icecream increased to 1,950 [1,950-2,150]\nChroma Treat reduced to 1,900 [1,850-1,900]\nChroma Sweet reduced to 1,800\nChroma Sands increased to 1,500 [1,450-1,550]\nChroma Beachy increased to 1,450 [1,400-1,500]\n\n\nGODLIES:\nEvergreen increased to 3,000 [N/A], stability changed from \"Doing Well\" to \"Stable\"\nConstellation increased to 2,950 [2,950-3,050]\nAlienbeam reduced to 2,350 [2,250-2,350]\nTurkey reduced to 2,250 [2,200-2,250]\nVampire's Gun increased to 2,200 [2,200-2,300]\nRaygun reduced to 1,950 [1,850-1,950]\nSunrise reduced to 1,300 [1,200-1,300], stability changed from \"Stable\" to \"Receding\"\nSunset reduced to 775\nBauble reduced to 725 [675-725], stability changed from \"Stable\" to \"Underpaid For\"\nSnowcannon reduced to 725 [675-725], stability changed from \"Stable\" to \"Underpaid For\"\nSoul increased to 630 [630-640], stability changed from \"Stable\" to \"Doing Well\"\nSpirit increased to 620 [620-630], stability changed from \"Stable\" to \"Doing Well\"\nXenoknife increased to 405 [N/A], stability changed from \"Doing Well\" to \"Stable\"\nXenoshot increased to 405 [N/A], stability changed from \"Doing Well\" to \"Stable\"\nSnow Dagger reduced to 195 [185-195]\nWatergun reduced to 195 [185-195]\nIcecream increased to 170 [170-185]\nOrnament increased to 100 [100-110]\nLuger reduced to 18 [17-18]\n\n\nSETS:\nChroma Ever Set reduced to 121,000\nChroma Sun Set reduced to 19,750 [19,500-19,750]\nChroma Snow Set reduced to 10,100\nChroma Blizzard Set reduced to 8,750 [8,550-8,750]\nChroma Sweet Set reduced to 3,700 [3,650-3,700]\nChroma Beach Set increased to 2,950 [2,850-3,050]\n\n\n\nEver Set increased to 6,450 [N/A], stability changed from \"Doing Well\" to \"Stable\"\nCelestial Set increased to 5,400 [5,400-5,500]\nAlien Set reduced to 4,300 ["
 }
