@@ -285,6 +285,8 @@ def main() -> None:
             "origin": m.get("origin"),
             "change": m.get("change"),
             "changePct": change_pct,
+            "riseChance": m.get("riseChance"),
+            "flippability": m.get("flippability"),
             "history": hist_clean,
             "aliases": alias_list_for(sv_id, m, reverse, image),
         }
@@ -1518,6 +1520,21 @@ def main() -> None:
   .trade-outlook.bad {{ color: #f87171; }}
   .trade-outlook.warn {{ color: #fbbf24; }}
   .trade-outlook.fair {{ color: var(--muted); }}
+  .trade-accept {{
+    margin: 3px auto 0;
+    min-height: 1.2em;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    line-height: 1.3;
+    text-align: center;
+    max-width: 280px;
+    color: var(--muted);
+  }}
+  .trade-accept .pct {{ font-weight: 800; }}
+  .trade-accept.good {{ color: var(--green-soft); }}
+  .trade-accept.bad {{ color: #f87171; }}
+  .trade-accept.warn {{ color: #fbbf24; }}
   .trade-caution {{
     display: none;
     margin: 12px 0 0;
@@ -4140,6 +4157,7 @@ def main() -> None:
         <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
         <p class="verdict fair" id="verdict">—</p>
         <p class="trade-outlook fair" id="tradeOutlook" aria-live="polite"></p>
+        <p class="trade-accept" id="tradeAccept" aria-live="polite"></p>
       </div>
       <div class="value-box">
         <div class="num" id="theirValue">0</div>
@@ -6363,6 +6381,53 @@ function itemIsHot(item) {{
   return TRENDING_IDS.has(item.id);
 }}
 
+/**
+ * Normalized demand 0..10 for an item. Demand is how many people actively
+ * want it — high demand items move fast and are easy to trade at value;
+ * low demand items are "overpay to move" and often sit. Defaults to a
+ * neutral-ish 5 when the source didn't record it.
+ */
+function itemDemand(item) {{
+  if (!item) return 5;
+  const d = item.demand;
+  if (typeof d === 'number' && Number.isFinite(d)) {{
+    return Math.max(0, Math.min(10, d));
+  }}
+  return 5;
+}}
+
+/**
+ * How easily an item can actually be traded/liquidated, 0..1.
+ * Blends demand with the scraped "flippability" tier so the calculator can
+ * reason about whether a real trader would take it — not just its value.
+ */
+function itemLiquidity(item) {{
+  if (!item) return 0.5;
+  const dem = itemDemand(item);
+  let liq = dem / 10; // demand is the main driver
+
+  const flip = (item.flippability || '').toLowerCase();
+  if (flip.includes('rarely')) liq -= 0.28;
+  else if (flip.includes('sometimes')) liq -= 0.08;
+  else if (flip.includes('flippable') || flip.includes('easily')) liq += 0.12;
+
+  // Items actively falling are harder to move at listed value
+  if (itemDropSignal(item)) liq -= 0.12;
+  // Trending / rising items clear fast
+  if (itemIsHot(item)) liq += 0.1;
+
+  return Math.max(0.05, Math.min(1, liq));
+}}
+
+/** Human label for how likely a real trader is to take a package. */
+function acceptanceLabel(pct) {{
+  if (pct >= 82) return {{ text: 'Very likely to accept', cls: 'good' }};
+  if (pct >= 62) return {{ text: 'Likely to accept', cls: 'good' }};
+  if (pct >= 45) return {{ text: 'Could go either way', cls: 'warn' }};
+  if (pct >= 28) return {{ text: 'Unlikely to accept', cls: 'warn' }};
+  return {{ text: 'They\\'d probably decline', cls: 'bad' }};
+}}
+
 function renderInvDumpTips() {{
   if (!invDumpTips) return;
   invDumpTips.innerHTML = '';
@@ -6603,7 +6668,11 @@ const OUTLOOK_SCORE = {{
   caution: -3,
 }};
 
-/** Value-weighted trend score for a trade side (higher = more likely to rise). */
+/**
+ * Value-weighted trend score for a trade side (higher = more likely to rise).
+ * Also tracks value-weighted demand and liquidity so the calculator can judge
+ * how tradeable / acceptable a side really is, not just its listed value.
+ */
 function sideTrendScore(side) {{
   let weighted = 0;
   let total = 0;
@@ -6613,6 +6682,10 @@ function sideTrendScore(side) {{
   let cold = 0;
   let caution = 0;
   let recentPct = 0;
+  let demandW = 0;
+  let liqW = 0;
+  let lowDemand = 0;
+  let hardToMove = 0;
   for (const entry of state[side]) {{
     if (!entry) continue;
     const item = byId[entry.id];
@@ -6625,13 +6698,22 @@ function sideTrendScore(side) {{
     total += weight;
     counted += 1;
     recentPct += itemChangePct(item) * weight;
+    const dem = itemDemand(item);
+    const liq = itemLiquidity(item);
+    demandW += dem * weight;
+    liqW += liq * weight;
+    if (dem <= 3) lowDemand += 1;
+    if (liq <= 0.35) hardToMove += 1;
     if (outlook === 'fire') {{ fire += 1; hot += 1; }}
     else if (outlook === 'rise2') hot += 1;
     if (outlook === 'caution') {{ caution += 1; cold += 1; }}
     else if (outlook === 'drop2') cold += 1;
   }}
   if (!counted) {{
-    return {{ score: 0, count: 0, hot: 0, fire: 0, cold: 0, caution: 0, recentPct: 0 }};
+    return {{
+      score: 0, count: 0, hot: 0, fire: 0, cold: 0, caution: 0,
+      recentPct: 0, demand: 5, liquidity: 0.5, lowDemand: 0, hardToMove: 0,
+    }};
   }}
   return {{
     score: weighted / total,
@@ -6641,6 +6723,10 @@ function sideTrendScore(side) {{
     cold,
     caution,
     recentPct: recentPct / total,
+    demand: demandW / total,
+    liquidity: liqW / total,
+    lowDemand,
+    hardToMove,
   }};
 }}
 
@@ -6663,6 +6749,45 @@ function trendHopBudgetPct(yourSide, theirSide, trendEdge) {{
   return Math.max(0, Math.min(18, budget));
 }}
 
+/**
+ * Estimate the chance (0..100) the OTHER trader accepts this offer.
+ * A real trader takes a deal when they come out ahead on value AND what
+ * they're receiving is easy to use/re-trade. Overpaying them and handing over
+ * high-demand, liquid items raises acceptance; asking them to take your
+ * low-demand / hard-to-move items for their good stuff lowers it.
+ *
+ * yours/theirs are the listed value sums. "your" side = what THEY receive.
+ */
+function estimateAcceptance(yours, theirs, yourSide, theirSide) {{
+  if (!yourSide.count || !theirSide.count) return null;
+
+  // From their seat: they give `theirs`, they get `yours`.
+  const theirGainPct = theirs > 0 ? ((yours - theirs) / theirs) * 100 : 0;
+
+  // Baseline sits near 50% at a perfectly even listed trade.
+  let pct = 50 + theirGainPct * 3.2;
+
+  // They only take your side if it's actually tradeable for them.
+  // High liquidity on what they receive = easy yes; low = they hesitate.
+  pct += (yourSide.liquidity - 0.5) * 42;
+
+  // Giving up their own liquid, high-demand items is a reason to say no.
+  pct -= (theirSide.liquidity - 0.5) * 20;
+
+  // Concrete friction: your low-demand / hard-to-move items land on them.
+  pct -= yourSide.lowDemand * 5;
+  pct -= yourSide.hardToMove * 6;
+
+  // They love receiving hot risers; they resist giving them away.
+  pct += yourSide.fire * 4 + (yourSide.hot - yourSide.fire) * 2;
+  pct -= theirSide.fire * 3;
+
+  // Handing them clear droppers makes them wary even at fair value.
+  pct -= yourSide.caution * 7 + (yourSide.cold - yourSide.caution) * 3;
+
+  return Math.max(3, Math.min(97, Math.round(pct)));
+}}
+
 function describeTradeOutlook(yours, theirs) {{
   const yourSide = sideTrendScore('your');
   const theirSide = sideTrendScore('their');
@@ -6679,6 +6804,22 @@ function describeTradeOutlook(yours, theirs) {{
   const lossPct = valueDiff < -0.5 ? -valuePct : 0; // how much % you overpay
   const hopBudget = trendHopBudgetPct(yourSide, theirSide, trendEdge);
   const lossLabel = lossPct >= 0.5 ? ('−' + lossPct.toFixed(lossPct >= 10 ? 0 : 1) + '%') : '';
+
+  // --- Realism / tradeability: value can lie when demand is thin ---
+  // You're getting a value win, but on low-demand items that are hard to move.
+  if (valuePct >= 6 && theirSide.hardToMove >= 1 && theirSide.liquidity <= 0.4) {{
+    return {{
+      text: 'Value favors you, but those items have low demand — expect to overpay to move them again',
+      cls: 'warn',
+    }};
+  }}
+  // Their good, liquid stuff for your hard-to-move items: they likely won't bite.
+  if (yourSide.liquidity - theirSide.liquidity >= 0.28 && valueDiff >= -yours * 0.02) {{
+    return {{
+      text: 'Fair on value, but you\\'re handing over easy-to-trade items for low-demand ones',
+      cls: 'warn',
+    }};
+  }}
 
   // Receiving clear droppers — don't call it a hop
   if (theirSide.cold > 0 && theirSide.cold >= Math.max(1, theirSide.hot)) {{
@@ -6798,11 +6939,27 @@ function describeTradeOutlook(yours, theirs) {{
   return {{ text: 'Slight value edge against you; trends are flat', cls: 'fair' }};
 }}
 
+const tradeAcceptEl = document.getElementById('tradeAccept');
+
 function updateTradeOutlook(yours, theirs) {{
   if (!tradeOutlookEl) return;
   const tip = describeTradeOutlook(yours, theirs);
   tradeOutlookEl.className = 'trade-outlook ' + (tip.cls || 'fair');
   tradeOutlookEl.textContent = tip.text || '';
+
+  if (!tradeAcceptEl) return;
+  const yourSide = sideTrendScore('your');
+  const theirSide = sideTrendScore('their');
+  const accept = estimateAcceptance(yours, theirs, yourSide, theirSide);
+  if (accept == null) {{
+    tradeAcceptEl.className = 'trade-accept';
+    tradeAcceptEl.textContent = '';
+    return;
+  }}
+  const label = acceptanceLabel(accept);
+  tradeAcceptEl.className = 'trade-accept ' + label.cls;
+  tradeAcceptEl.innerHTML =
+    label.text + ' · <span class="pct">' + accept + '%</span> chance they say yes';
 }}
 
 function updateHeader() {{
@@ -8376,6 +8533,19 @@ function comboOutlookAvg(items) {{
   return total ? weighted / total : 0;
 }}
 
+/** Value-weighted liquidity (0…1). High = easy to trade / high demand. */
+function comboLiquidityAvg(items) {{
+  if (!items.length) return 0.5;
+  let weighted = 0;
+  let total = 0;
+  for (const item of items) {{
+    const w = Math.max(item.value || 0, 1);
+    weighted += itemLiquidity(item) * w;
+    total += w;
+  }}
+  return total ? weighted / total : 0.5;
+}}
+
 /**
  * Score a package YOU would give to match their side.
  * Biased toward slight underpay and dumping colder items (not your 🔥s).
@@ -8397,6 +8567,11 @@ function scoreOfferPackage(combo, theirValue) {{
   const heat = comboOutlookAvg(combo);
   score -= heat * 22;
   score -= comboWant(combo) * 1.5;
+
+  // Realism: liquid, in-demand items are far more likely to get accepted.
+  // Nudge offers toward tradeable items so suggestions aren't "dead weight".
+  const liq = comboLiquidityAvg(combo);
+  score += (liq - 0.5) * 24;
 
   // Tiny preference for fewer unique slots when values are close
   score -= uniqueCount(combo) * 0.4;
@@ -8424,6 +8599,12 @@ function scoreReceivePackage(combo, yourValue, hasTarget) {{
   const heat = comboOutlookAvg(combo);
   score += heat * 20;
   score += comboWant(combo) * 2.2;
+
+  // Realism: prefer receiving liquid, high-demand items — they hold value and
+  // re-trade easily. Low-demand "overpay to move" items are worth less in practice.
+  const liq = comboLiquidityAvg(combo);
+  score += (liq - 0.5) * 30;
+
   if (hasTarget) score += 35;
   return score;
 }}

@@ -6,8 +6,8 @@ name: Scrape values and update site
 
 on:
   schedule:
-    # Every 6 hours (UTC). Adjust the cron as desired.
-    - cron: "0 */6 * * *"
+    # Every 3 hours (UTC). Adjust the cron as desired.
+    - cron: "0 */3 * * *"
   workflow_dispatch: {}
 
 permissions:
