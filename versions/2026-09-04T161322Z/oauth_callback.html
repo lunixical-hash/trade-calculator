@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Signing in with Roblox…</title>
+  <style>
+    :root { color-scheme: dark; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      font-family: Georgia, "Times New Roman", serif;
+      background: radial-gradient(900px 500px at 30% -10%, #24143f, #07060c 60%);
+      color: #f4efff;
+      padding: 24px;
+    }
+    .card {
+      width: min(420px, 100%);
+      background: rgba(18, 16, 26, 0.95);
+      border: 1px solid #2a2438;
+      border-radius: 18px;
+      padding: 28px 24px;
+      text-align: center;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.45);
+    }
+    h1 { margin: 0 0 10px; font-size: 1.35rem; }
+    p { margin: 0; color: #9a90b3; line-height: 1.45; font-size: 0.95rem; }
+    .err { color: #fb7185; margin-top: 14px; }
+    a { color: #c084fc; }
+    .spin {
+      width: 28px; height: 28px; margin: 0 auto 16px;
+      border-radius: 50%;
+      border: 3px solid #3b3352;
+      border-top-color: #a855f7;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="spin" id="spin" aria-hidden="true"></div>
+    <h1 id="title">Signing in with Roblox</h1>
+    <p id="msg">Finishing App permissions…</p>
+    <p class="err" id="err" hidden></p>
+    <p id="back" hidden style="margin-top:16px"><a href="trade_calculator.html">Back to calculator</a></p>
+  </div>
+  <script src="roblox_oauth.js?v=20260813c"></script>
+  <script>
+    (async function () {
+      const title = document.getElementById('title');
+      const msg = document.getElementById('msg');
+      const err = document.getElementById('err');
+      const spin = document.getElementById('spin');
+      const back = document.getElementById('back');
+      try {
+        const result = await window.LunixRobloxOAuth.finishLoginFromRedirect();
+        title.textContent = 'Signed in';
+        msg.textContent = 'Welcome, ' + (result.user.displayName || result.user.username) + '. Redirecting…';
+        setTimeout(function () {
+          window.location.replace(result.returnTo || 'trade_calculator.html');
+        }, 500);
+      } catch (e) {
+        spin.hidden = true;
+        title.textContent = 'Sign-in failed';
+        msg.textContent = 'Roblox did not complete App permissions for this site.';
+        err.hidden = false;
+        err.textContent = e && e.message ? e.message : String(e);
+        back.hidden = false;
+      }
+    })();
+  </script>
+</body>
+</html>
