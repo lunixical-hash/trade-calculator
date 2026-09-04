@@ -1204,21 +1204,6 @@
   .trade-outlook.bad { color: #f87171; }
   .trade-outlook.warn { color: #fbbf24; }
   .trade-outlook.fair { color: var(--muted); }
-  .trade-accept {
-    margin: 3px auto 0;
-    min-height: 1.2em;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: .01em;
-    line-height: 1.3;
-    text-align: center;
-    max-width: 280px;
-    color: var(--muted);
-  }
-  .trade-accept .pct { font-weight: 800; }
-  .trade-accept.good { color: var(--green-soft); }
-  .trade-accept.bad { color: #f87171; }
-  .trade-accept.warn { color: #fbbf24; }
   .trade-caution {
     display: none;
     margin: 12px 0 0;
@@ -1249,6 +1234,93 @@
     font-size: 0.75em;
     opacity: 0.9;
   }
+
+  /* Paste-a-screenshot */
+  .paste-strip {
+    display: none;
+    margin: 12px 0 0;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(139, 92, 246, 0.5);
+    background: rgba(139, 92, 246, 0.12);
+    color: #e9d5ff;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .paste-strip.show { display: block; }
+  .paste-strip.err {
+    border-color: rgba(248, 113, 113, 0.5);
+    background: rgba(248, 113, 113, 0.1);
+    color: #fca5a5;
+  }
+  .paste-strip .ps-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .paste-strip .ps-spin {
+    width: 13px;
+    height: 13px;
+    border: 2px solid rgba(233, 213, 255, 0.35);
+    border-top-color: #e9d5ff;
+    border-radius: 50%;
+    animation: ps-spin 0.7s linear infinite;
+    flex-shrink: 0;
+  }
+  @keyframes ps-spin { to { transform: rotate(360deg); } }
+  .paste-strip .ps-close {
+    margin-left: auto;
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font-size: 15px;
+    line-height: 1;
+    opacity: 0.7;
+    padding: 2px 4px;
+  }
+  .paste-strip .ps-close:hover { opacity: 1; }
+  .paste-strip .ps-row {
+    margin: 3px 0;
+  }
+  .paste-strip .ps-row b { color: #f4efff; }
+  .paste-strip .ps-chip {
+    display: inline-block;
+    margin: 2px 4px 2px 0;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: rgba(139, 92, 246, 0.22);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .paste-strip .ps-chip.miss {
+    background: rgba(248, 113, 113, 0.15);
+    border-color: rgba(248, 113, 113, 0.4);
+    color: #fca5a5;
+  }
+  .paste-strip .ps-chip .ps-q { opacity: 0.7; }
+  .paste-strip .ps-hint {
+    margin-top: 6px;
+    font-size: 11.5px;
+    opacity: 0.8;
+  }
+  .paste-strip .ps-actions { margin-top: 8px; }
+  .paste-strip .ps-btn {
+    cursor: pointer;
+    border: 1px solid rgba(139, 92, 246, 0.5);
+    background: rgba(139, 92, 246, 0.16);
+    color: #e9d5ff;
+    border-radius: 8px;
+    padding: 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 6px;
+  }
+  .paste-strip .ps-btn:hover { background: rgba(139, 92, 246, 0.28); }
 
   /* Boards */
   .boards {
@@ -3828,7 +3900,6 @@
           <option>Set</option>
         </select>
       </div>
-      <p class="quick-hint">Start typing anywhere · Add to offer = Your Offer · Add to request = Their Offer</p>
       <div class="quick-results" id="quickResults" hidden></div>
     </div>
 
@@ -3841,7 +3912,6 @@
         <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
         <p class="verdict fair" id="verdict">—</p>
         <p class="trade-outlook fair" id="tradeOutlook" aria-live="polite"></p>
-        <p class="trade-accept" id="tradeAccept" aria-live="polite"></p>
       </div>
       <div class="value-box">
         <div class="num" id="theirValue">0</div>
@@ -3850,6 +3920,8 @@
     </section>
 
     <div class="trade-caution" id="tradeCaution" role="status" aria-live="polite"></div>
+
+    <div class="paste-strip" id="pasteStrip" role="status" aria-live="polite"></div>
 
     <section class="boards">
       <div class="board">
@@ -6103,15 +6175,6 @@ function itemLiquidity(item) {
   return Math.max(0.05, Math.min(1, liq));
 }
 
-/** Human label for how likely a real trader is to take a package. */
-function acceptanceLabel(pct) {
-  if (pct >= 82) return { text: 'Very likely to accept', cls: 'good' };
-  if (pct >= 62) return { text: 'Likely to accept', cls: 'good' };
-  if (pct >= 45) return { text: 'Could go either way', cls: 'warn' };
-  if (pct >= 28) return { text: 'Unlikely to accept', cls: 'warn' };
-  return { text: 'They\'d probably decline', cls: 'bad' };
-}
-
 function renderInvDumpTips() {
   if (!invDumpTips) return;
   invDumpTips.innerHTML = '';
@@ -6433,45 +6496,6 @@ function trendHopBudgetPct(yourSide, theirSide, trendEdge) {
   return Math.max(0, Math.min(18, budget));
 }
 
-/**
- * Estimate the chance (0..100) the OTHER trader accepts this offer.
- * A real trader takes a deal when they come out ahead on value AND what
- * they're receiving is easy to use/re-trade. Overpaying them and handing over
- * high-demand, liquid items raises acceptance; asking them to take your
- * low-demand / hard-to-move items for their good stuff lowers it.
- *
- * yours/theirs are the listed value sums. "your" side = what THEY receive.
- */
-function estimateAcceptance(yours, theirs, yourSide, theirSide) {
-  if (!yourSide.count || !theirSide.count) return null;
-
-  // From their seat: they give `theirs`, they get `yours`.
-  const theirGainPct = theirs > 0 ? ((yours - theirs) / theirs) * 100 : 0;
-
-  // Baseline sits near 50% at a perfectly even listed trade.
-  let pct = 50 + theirGainPct * 3.2;
-
-  // They only take your side if it's actually tradeable for them.
-  // High liquidity on what they receive = easy yes; low = they hesitate.
-  pct += (yourSide.liquidity - 0.5) * 42;
-
-  // Giving up their own liquid, high-demand items is a reason to say no.
-  pct -= (theirSide.liquidity - 0.5) * 20;
-
-  // Concrete friction: your low-demand / hard-to-move items land on them.
-  pct -= yourSide.lowDemand * 5;
-  pct -= yourSide.hardToMove * 6;
-
-  // They love receiving hot risers; they resist giving them away.
-  pct += yourSide.fire * 4 + (yourSide.hot - yourSide.fire) * 2;
-  pct -= theirSide.fire * 3;
-
-  // Handing them clear droppers makes them wary even at fair value.
-  pct -= yourSide.caution * 7 + (yourSide.cold - yourSide.caution) * 3;
-
-  return Math.max(3, Math.min(97, Math.round(pct)));
-}
-
 function describeTradeOutlook(yours, theirs) {
   const yourSide = sideTrendScore('your');
   const theirSide = sideTrendScore('their');
@@ -6623,27 +6647,11 @@ function describeTradeOutlook(yours, theirs) {
   return { text: 'Slight value edge against you; trends are flat', cls: 'fair' };
 }
 
-const tradeAcceptEl = document.getElementById('tradeAccept');
-
 function updateTradeOutlook(yours, theirs) {
   if (!tradeOutlookEl) return;
   const tip = describeTradeOutlook(yours, theirs);
   tradeOutlookEl.className = 'trade-outlook ' + (tip.cls || 'fair');
   tradeOutlookEl.textContent = tip.text || '';
-
-  if (!tradeAcceptEl) return;
-  const yourSide = sideTrendScore('your');
-  const theirSide = sideTrendScore('their');
-  const accept = estimateAcceptance(yours, theirs, yourSide, theirSide);
-  if (accept == null) {
-    tradeAcceptEl.className = 'trade-accept';
-    tradeAcceptEl.textContent = '';
-    return;
-  }
-  const label = acceptanceLabel(accept);
-  tradeAcceptEl.className = 'trade-accept ' + label.cls;
-  tradeAcceptEl.innerHTML =
-    label.text + ' · <span class="pct">' + accept + '%</span> chance they say yes';
 }
 
 function updateHeader() {
@@ -10133,6 +10141,371 @@ document.addEventListener('keydown', (e) => {
   quickSearchInput.value += e.key;
   renderQuickResults();
 });
+
+/* =========================================================================
+ * Paste-a-screenshot → auto-fill trade
+ * Paste a Roblox MM2 trade window screenshot anywhere (Ctrl/Cmd+V).
+ * Top row = Your Offer, bottom row = Their Offer.
+ * We OCR the item name tags (Tesseract.js, loaded on demand), fuzzy-match
+ * them to the catalog, fill both boards, and show an editable strip so any
+ * misread (incl. same-name items like Rainbow knife vs gun) is a click to fix.
+ * =======================================================================*/
+const TESSERACT_CDN = 'https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';
+let _tessLoad = null;
+
+function loadTesseract() {
+  if (window.Tesseract) return Promise.resolve(window.Tesseract);
+  if (_tessLoad) return _tessLoad;
+  _tessLoad = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = TESSERACT_CDN;
+    s.async = true;
+    s.onload = () => window.Tesseract ? resolve(window.Tesseract) : reject(new Error('Tesseract missing after load'));
+    s.onerror = () => reject(new Error('Could not load the text-reader (offline?)'));
+    document.head.appendChild(s);
+  });
+  return _tessLoad;
+}
+
+// --- Name matcher -------------------------------------------------------
+function normName(s) {
+  return String(s || '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ''); // drop spaces, punctuation, apostrophes
+}
+
+// Build a normalized lookup once: name / id / aliases -> item.
+// Ambiguous keys keep the highest-value candidate (best guess); others
+// remain reachable via exact id. Same-name pairs (Rainbow) resolve to one
+// item and the user can swap in the confirmation strip.
+const NAME_LOOKUP = (() => {
+  const map = new Map();
+  const add = (key, item) => {
+    const k = normName(key);
+    if (!k) return;
+    const prev = map.get(k);
+    if (!prev || (item.value || 0) > (prev.value || 0)) map.set(k, item);
+  };
+  for (const item of CATALOG) {
+    add(item.name, item);
+    add(item.id, item);
+    for (const a of (item.aliases || [])) add(a, item);
+  }
+  return map;
+})();
+const NAME_KEYS = Array.from(NAME_LOOKUP.keys());
+
+function levenshtein(a, b) {
+  const m = a.length, n = b.length;
+  if (!m) return n;
+  if (!n) return m;
+  let prev = new Array(n + 1);
+  for (let j = 0; j <= n; j++) prev[j] = j;
+  for (let i = 1; i <= m; i++) {
+    let cur = [i];
+    for (let j = 1; j <= n; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + cost);
+    }
+    prev = cur;
+  }
+  return prev[n];
+}
+
+/** Match one OCR'd label to a catalog item. Returns { item, score } or null. */
+function matchName(raw) {
+  const key = normName(raw);
+  if (!key || key.length < 2) return null;
+  const exact = NAME_LOOKUP.get(key);
+  if (exact) return { item: exact, score: 1 };
+
+  // Fuzzy: nearest key by edit distance, tolerant of small OCR slips.
+  let best = null;
+  let bestDist = Infinity;
+  for (const k of NAME_KEYS) {
+    // Cheap length gate before the expensive distance
+    if (Math.abs(k.length - key.length) > 3) continue;
+    const d = levenshtein(key, k);
+    if (d < bestDist) { bestDist = d; best = k; }
+    if (d === 0) break;
+  }
+  if (best == null) return null;
+  const tol = Math.max(1, Math.floor(Math.max(key.length, best.length) * 0.3));
+  if (bestDist > tol) return null;
+  const score = 1 - bestDist / Math.max(key.length, best.length);
+  return { item: NAME_LOOKUP.get(best), score };
+}
+
+// --- OCR segmentation ---------------------------------------------------
+// Flatten Tesseract output to a flat word list with bbox + confidence.
+// v5 nests words under data.blocks[].paragraphs[].lines[].words[]; older
+// builds expose a flat data.words. Handle both.
+function flattenWords(data) {
+  if (!data) return [];
+  if (Array.isArray(data.words) && data.words.length) return data.words;
+  const out = [];
+  const blocks = Array.isArray(data.blocks) ? data.blocks : [];
+  for (const b of blocks) {
+    const paras = (b && b.paragraphs) || [];
+    for (const p of paras) {
+      const lines = (p && p.lines) || [];
+      for (const ln of lines) {
+        const ws = (ln && ln.words) || [];
+        for (const w of ws) out.push(w);
+      }
+    }
+  }
+  return out;
+}
+
+// Tesseract word boxes -> two rows (your/their) of matched items + quantities.
+function parseTradeFromWords(words, imgHeight) {
+  const clean = (words || [])
+    .filter((w) => w && w.text && w.bbox && (w.confidence == null || w.confidence > 40))
+    .map((w) => ({
+      text: w.text.trim(),
+      x: w.bbox.x0,
+      y: (w.bbox.y0 + w.bbox.y1) / 2,
+      top: w.bbox.y0,
+    }))
+    .filter((w) => w.text);
+
+  // Find the "YOUR OFFER" / "THEIR OFFER" band positions to split rows.
+  const findBand = (re) => {
+    for (const w of clean) {
+      if (re.test(w.text.toUpperCase())) return w.y;
+    }
+    return null;
+  };
+  const yourY = findBand(/^YOUR$|OFFER/);
+  const theirY = findBand(/^THEIR$/);
+  // Header y for each section (fallback: split image in half)
+  let splitY;
+  if (yourY != null && theirY != null) splitY = (yourY + theirY) / 2;
+  else splitY = imgHeight / 2;
+
+  // Header words to ignore when reading item names.
+  const isHeader = (t) => /^(YOUR|THEIR|OFFER|DECLINE|ACCEPT|PLEASE|WAIT|BEFORE|ACCEPTING)$/i.test(t)
+    || /accepting/i.test(t);
+
+  const rowFor = (w) => {
+    // A section's item labels sit BELOW its header. Use the two header ys.
+    if (theirY != null && w.y > theirY - 5) return 'their';
+    if (yourY != null && w.y > yourY - 5 && w.y < splitY) return 'your';
+    return w.y < splitY ? 'your' : 'their';
+  };
+
+  const buckets = { your: [], their: [] };
+  for (const w of clean) {
+    if (isHeader(w.text)) continue;
+    // Quantity badges look like x3 / X3 / x12
+    const qm = w.text.match(/^x\s*(\d{1,2})$/i);
+    if (qm) {
+      buckets[rowFor(w)].push({ qty: parseInt(qm[1], 10), x: w.x, y: w.y, isQty: true });
+      continue;
+    }
+    buckets[rowFor(w)].push({ text: w.text, x: w.x, y: w.y, isQty: false });
+  }
+
+  const buildRow = (arr) => {
+    // Group nearby words on the same label (OCR may split a name).
+    const labels = arr.filter((w) => !w.isQty).sort((a, b) => a.x - b.x);
+    const qtys = arr.filter((w) => w.isQty);
+    const items = [];
+    for (const lab of labels) {
+      const m = matchName(lab.text);
+      if (!m) {
+        items.push({ raw: lab.text, item: null, qty: 1, x: lab.x });
+        continue;
+      }
+      // Attach a qty badge if one sits near/above this label
+      let qty = 1;
+      let bestQ = null;
+      let bestD = 90; // px proximity window
+      for (const q of qtys) {
+        const d = Math.abs(q.x - lab.x);
+        if (q.y < lab.y && d < bestD) { bestD = d; bestQ = q; }
+      }
+      if (bestQ) qty = Math.max(1, Math.min(99, bestQ.qty));
+      items.push({ raw: lab.text, item: m.item, qty, score: m.score, x: lab.x });
+    }
+    // Merge duplicates that are actually the same slot split by OCR is
+    // unlikely here; keep distinct labels as distinct slots.
+    return items.slice(0, SLOTS);
+  };
+
+  return { your: buildRow(buckets.your), their: buildRow(buckets.their) };
+}
+
+// --- Fill boards --------------------------------------------------------
+function applyParsedTrade(parsed) {
+  const fillSide = (side, items) => {
+    state[side] = Array(SLOTS).fill(null);
+    let slot = 0;
+    for (const it of items) {
+      if (!it.item || slot >= SLOTS) continue;
+      state[side][slot] = {
+        id: it.item.id,
+        name: it.item.name,
+        value: it.item.value,
+        image: it.item.image,
+        qty: it.qty || 1,
+        _enter: true,
+      };
+      slot += 1;
+    }
+  };
+  fillSide('your', parsed.your);
+  fillSide('their', parsed.their);
+  paintTradeBoards({ full: true });
+  updateHeader();
+  updateTradeCaution();
+  updateGenOfferBtn();
+  commitHistoryDeferred();
+}
+
+// --- Confirmation strip UI ---------------------------------------------
+const pasteStripEl = document.getElementById('pasteStrip');
+
+function psRender(html, cls) {
+  if (!pasteStripEl) return;
+  pasteStripEl.className = 'paste-strip show' + (cls ? ' ' + cls : '');
+  pasteStripEl.innerHTML = html;
+  const close = pasteStripEl.querySelector('.ps-close');
+  if (close) close.addEventListener('click', psHide);
+}
+function psHide() {
+  if (!pasteStripEl) return;
+  pasteStripEl.className = 'paste-strip';
+  pasteStripEl.innerHTML = '';
+}
+function psLoading() {
+  psRender(
+    '<div class="ps-head"><span class="ps-spin"></span>Reading trade from image…'
+    + '<button class="ps-close" title="Dismiss">×</button></div>'
+    + '<div class="ps-hint">First read loads the text-reader — can take a few seconds.</div>'
+  );
+}
+function psError(msg) {
+  psRender(
+    '<div class="ps-head">Couldn\'t read that image'
+    + '<button class="ps-close" title="Dismiss">×</button></div>'
+    + '<div class="ps-row">' + escapeHtml(msg || '') + '</div>'
+    + '<div class="ps-hint">Try a clearer, uncropped screenshot of the trade window, '
+    + 'or add items manually.</div>',
+    'err'
+  );
+}
+function chipHtml(it) {
+  if (!it.item) {
+    return '<span class="ps-chip miss">? ' + escapeHtml(it.raw || '') + '</span>';
+  }
+  const q = it.qty > 1 ? ' <span class="ps-q">x' + it.qty + '</span>' : '';
+  return '<span class="ps-chip">' + escapeHtml(it.item.name) + q + '</span>';
+}
+function psResult(parsed) {
+  const yourFound = parsed.your.filter((i) => i.item).length;
+  const theirFound = parsed.their.filter((i) => i.item).length;
+  if (!yourFound && !theirFound) {
+    psError('No matching items were recognized in the screenshot.');
+    return;
+  }
+  const rowHtml = (label, items) => {
+    const chips = items.length
+      ? items.map(chipHtml).join('')
+      : '<span class="ps-chip miss">none</span>';
+    return '<div class="ps-row"><b>' + label + ':</b> ' + chips + '</div>';
+  };
+  const anyMiss = parsed.your.concat(parsed.their).some((i) => !i.item);
+  const anyLow = parsed.your.concat(parsed.their).some((i) => i.item && i.score != null && i.score < 0.72);
+  let hint = 'Filled from your screenshot. Wrong item? Click it on the board to remove, then add the right one.';
+  if (anyMiss) hint = 'Some labels (marked ?) weren\'t recognized — add those manually.';
+  else if (anyLow) hint = 'Some names were a fuzzy match — double-check the boards, especially same-name items.';
+  psRender(
+    '<div class="ps-head">Read from image'
+    + '<button class="ps-close" title="Dismiss">×</button></div>'
+    + rowHtml('Your Offer', parsed.your)
+    + rowHtml('Their Offer', parsed.their)
+    + '<div class="ps-hint">' + hint + '</div>'
+    + '<div class="ps-actions"><button class="ps-btn" id="psClear">Clear trade</button></div>'
+  );
+  const clearBtn = document.getElementById('psClear');
+  if (clearBtn) clearBtn.addEventListener('click', () => {
+    state.your = Array(SLOTS).fill(null);
+    state.their = Array(SLOTS).fill(null);
+    paintTradeBoards({ full: true });
+    updateHeader();
+    updateTradeCaution();
+    updateGenOfferBtn();
+    commitHistoryDeferred();
+    psHide();
+  });
+}
+
+function escapeHtml(s) {
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+
+// --- Orchestration ------------------------------------------------------
+let _ocrBusy = false;
+
+async function handlePastedImage(blob) {
+  if (_ocrBusy) return;
+  _ocrBusy = true;
+  psLoading();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  try {
+    const url = URL.createObjectURL(blob);
+    try {
+      // Load image to learn its height for row splitting.
+      const img = await new Promise((res, rej) => {
+        const im = new Image();
+        im.onload = () => res(im);
+        im.onerror = () => rej(new Error('image decode failed'));
+        im.src = url;
+      });
+      const Tesseract = await loadTesseract();
+      // v5 returns only `text` unless we ask for `blocks` (word boxes live there).
+      const { data } = await Tesseract.recognize(url, 'eng', { blocks: true });
+      const words = flattenWords(data);
+      if (!words.length) {
+        psError('No text was found in the image.');
+        return;
+      }
+      const parsed = parseTradeFromWords(words, img.naturalHeight || img.height || 1);
+      applyParsedTrade(parsed);
+      psResult(parsed);
+    } finally {
+      URL.revokeObjectURL(url);
+    }
+  } catch (err) {
+    psError((err && err.message) ? err.message : 'Something went wrong reading the image.');
+  } finally {
+    _ocrBusy = false;
+  }
+}
+
+function imageBlobFromPaste(e) {
+  const items = (e.clipboardData && e.clipboardData.items) || [];
+  for (const it of items) {
+    if (it.kind === 'file' && it.type && it.type.startsWith('image/')) {
+      return it.getAsFile();
+    }
+  }
+  return null;
+}
+
+document.addEventListener('paste', (e) => {
+  // Don't hijack paste into text inputs (search, hex, etc.)
+  if (isTypingTarget(e.target)) return;
+  const blob = imageBlobFromPaste(e);
+  if (!blob) return;
+  e.preventDefault();
+  handlePastedImage(blob);
+});
+
 search.addEventListener('input', renderPicker);
 rarityFilter.addEventListener('change', renderPicker);
 if (quickSearchToggle) {
