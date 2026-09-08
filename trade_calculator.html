@@ -2256,6 +2256,18 @@
     color: var(--muted);
     letter-spacing: 0.01em;
   }
+  .depth-select {
+    appearance: auto;
+    font: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text, #f4efff);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 3px 6px;
+    cursor: pointer;
+  }
   .set-protect-toggle input {
     appearance: none;
     width: 34px;
@@ -3964,6 +3976,14 @@
             <input type="checkbox" id="autoTargetHot" />
             Auto-target hot/rising
           </label>
+          <label class="set-protect-toggle depth-toggle" title="Fewer trades = faster. More trades explores deeper but can lag on slower devices.">
+            Suggestions
+            <select id="suggestDepth" class="depth-select">
+              <option value="fast">Fast (fewer)</option>
+              <option value="balanced" selected>Balanced</option>
+              <option value="thorough">Thorough (more)</option>
+            </select>
+          </label>
         </div>
       </div>
       <div class="target-box">
@@ -5138,6 +5158,7 @@ const TARGET_KEY_BASE = 'lunix_mm2_targets_v1';
 const DUMP_KEY_BASE = 'lunix_mm2_tradeoff_v1';
 const SET_PROTECT_KEY_BASE = 'lunix_mm2_avoid_set_breaks_v1';
 const AUTO_HOT_KEY_BASE = 'lunix_mm2_auto_target_hot_v1';
+const SUGGEST_DEPTH_KEY_BASE = 'lunix_mm2_suggest_depth_v1';
 const QUICK_SEARCH_KEY_BASE = 'lunix_mm2_quick_search_v1';
 const TRADE_HIST_KEY_BASE = 'lunix_mm2_trades_v1';
 const TRADE_DISMISS_KEY_BASE = 'lunix_mm2_trade_dismiss_v1';
@@ -5163,6 +5184,7 @@ function TARGET_KEY() { return TARGET_KEY_BASE + accountStorageSuffix(); }
 function DUMP_KEY() { return DUMP_KEY_BASE + accountStorageSuffix(); }
 function SET_PROTECT_KEY() { return SET_PROTECT_KEY_BASE + accountStorageSuffix(); }
 function AUTO_HOT_KEY() { return AUTO_HOT_KEY_BASE + accountStorageSuffix(); }
+function SUGGEST_DEPTH_KEY() { return SUGGEST_DEPTH_KEY_BASE + accountStorageSuffix(); }
 function QUICK_SEARCH_KEY() { return QUICK_SEARCH_KEY_BASE + accountStorageSuffix(); }
 function TRADE_HIST_KEY() { return TRADE_HIST_KEY_BASE + accountStorageSuffix(); }
 function TRADE_DISMISS_KEY() { return TRADE_DISMISS_KEY_BASE + accountStorageSuffix(); }
@@ -5185,6 +5207,7 @@ const state = {
   pickingFor: null, // 'your' | 'their' | 'inv' | 'targets' | 'dump'
   avoidSetBreaks: true,
   autoTargetHot: false,
+  suggestDepth: 'balanced', // 'fast' | 'balanced' | 'thorough'
   quickSearch: false,
 };
 
@@ -8580,6 +8603,48 @@ function loadAutoTargetHot() {
   if (el) el.checked = !!state.autoTargetHot;
 }
 
+const SUGGEST_DEPTHS = new Set(['fast', 'balanced', 'thorough']);
+
+function persistSuggestDepth() {
+  try {
+    localStorage.setItem(SUGGEST_DEPTH_KEY(), state.suggestDepth);
+  } catch (_) {}
+}
+
+function loadSuggestDepth() {
+  try {
+    const raw = localStorage.getItem(SUGGEST_DEPTH_KEY());
+    if (raw && SUGGEST_DEPTHS.has(raw)) state.suggestDepth = raw;
+  } catch (_) {}
+  const el = document.getElementById('suggestDepth');
+  if (el) el.value = state.suggestDepth;
+}
+
+/**
+ * Pool/combo caps by depth. Fewer, tighter pools = far fewer combinations to
+ * score, which is what keeps suggestion generation snappy on slower devices.
+ */
+function suggestBudget() {
+  switch (state.suggestDepth) {
+    case 'fast':
+      return {
+        units: 8, pool1: 32, pool2: 16, pool3: 10, pool4: 0,
+        fillers: 14, fillerPair: 8, maxOut: 8,
+      };
+    case 'thorough':
+      return {
+        units: 14, pool1: 80, pool2: 32, pool3: 20, pool4: 14,
+        fillers: 28, fillerPair: 16, maxOut: 16,
+      };
+    case 'balanced':
+    default:
+      return {
+        units: 11, pool1: 50, pool2: 24, pool3: 14, pool4: 8,
+        fillers: 20, fillerPair: 12, maxOut: 12,
+      };
+  }
+}
+
 /** Hot trending or clearly rising elite items — used as soft receive targets. */
 function isHotRisingTarget(item) {
   if (!item || !SUGGEST_RARITIES.has(item.rarity) || item.value < 1) return false;
@@ -8626,8 +8691,9 @@ function buildSuggestions() {
   }
   if (!bag.length && !setGiveCombos.length) return [];
 
+  const budget = suggestBudget();
   bag.sort((a, b) => b.value - a.value);
-  const units = bag.slice(0, 14);
+  const units = bag.slice(0, budget.units);
 
   const targetUnits = [];
   const targetSeen = new Set();
@@ -8657,7 +8723,7 @@ function buildSuggestions() {
     && itemOutlook(item) !== 'caution'
     && itemOutlook(item) !== 'drop2'
   )).sort((a, b) => wantScore(b) - wantScore(a));
-  const fillers = poolAll.slice(0, 28);
+  const fillers = poolAll.slice(0, budget.fillers);
 
   const getCombos = [];
   if (hasTargets) {
@@ -8678,7 +8744,7 @@ function buildSuggestions() {
           }
         }
         if (room >= 2) {
-          for (const pair of pickCombos(fillers.slice(0, 16), 2)) {
+          for (const pair of pickCombos(fillers.slice(0, budget.fillerPair), 2)) {
             if (pair.some((item) => core.some((c) => c.id === item.id))) continue;
             const mixed = core.concat(pair);
             if (uniqueCount(mixed) <= SLOTS) getCombos.push(mixed);
@@ -8687,19 +8753,22 @@ function buildSuggestions() {
       }
     }
   } else {
-    const pool1 = poolAll.slice(0, 80);
-    const pool2 = poolAll.slice(0, 32);
-    const pool3 = poolAll.slice(0, 20);
-    const pool4 = poolAll.slice(0, 14);
+    const pool1 = poolAll.slice(0, budget.pool1);
+    const pool2 = poolAll.slice(0, budget.pool2);
+    const pool3 = poolAll.slice(0, budget.pool3);
+    const pool4 = poolAll.slice(0, budget.pool4);
     for (const item of pool1) getCombos.push([item]);
-    for (const combo of pickCombos(pool2, 2)) getCombos.push(combo);
-    for (const combo of pickCombos(pool3, 3)) getCombos.push(combo);
-    for (const combo of pickCombos(pool4, 4)) getCombos.push(combo);
+    if (budget.pool2 >= 2) for (const combo of pickCombos(pool2, 2)) getCombos.push(combo);
+    if (budget.pool3 >= 3) for (const combo of pickCombos(pool3, 3)) getCombos.push(combo);
+    if (budget.pool4 >= 4) for (const combo of pickCombos(pool4, 4)) getCombos.push(combo);
   }
 
   const ideas = [];
   const giveCombosAll = [];
-  for (let gs = 1; gs <= SLOTS; gs++) {
+  // Fast mode caps give-side to 3 pieces — the 4-piece give combos add a lot
+  // of pairings for little gain and are the main source of lag.
+  const maxGive = state.suggestDepth === 'fast' ? 3 : SLOTS;
+  for (let gs = 1; gs <= maxGive; gs++) {
     if (!units.length) break;
     for (const gives of pickCombos(units, gs)) {
       if (uniqueCount(gives) > SLOTS) continue;
@@ -8774,7 +8843,7 @@ function buildSuggestions() {
     giveUses.set(giveKey, (giveUses.get(giveKey) || 0) + 1);
     getUses.set(getKey, (getUses.get(getKey) || 0) + 1);
     out.push(idea);
-    if (out.length >= 16) break;
+    if (out.length >= budget.maxOut) break;
   }
   return out;
 }
@@ -10593,6 +10662,17 @@ if (autoTargetHotEl) {
     render();
   });
 }
+const suggestDepthEl = document.getElementById('suggestDepth');
+if (suggestDepthEl) {
+  suggestDepthEl.addEventListener('change', () => {
+    const v = suggestDepthEl.value;
+    state.suggestDepth = SUGGEST_DEPTHS.has(v) ? v : 'balanced';
+    persistSuggestDepth();
+    state.lowerCycle = null;
+    state.higherCycle = null;
+    render();
+  });
+}
 document.getElementById('graphClose').addEventListener('click', closeGraph);
 graphModal.addEventListener('click', (e) => {
   if (e.target === graphModal) closeGraph();
@@ -10627,6 +10707,7 @@ loadTradeHistory();
 syncInferredTradesFromInvHistory();
 loadSetProtect();
 loadAutoTargetHot();
+loadSuggestDepth();
 loadQuickSearch();
 render();
 commitHistoryDeferred();
@@ -10647,6 +10728,7 @@ window.LunixOnAccountChange = function (account) {
     syncInferredTradesFromInvHistory();
     loadSetProtect();
     loadAutoTargetHot();
+    loadSuggestDepth();
     render();
     commitHistoryDeferred();
     scheduleTrendsPanel();
