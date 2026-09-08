@@ -93,6 +93,7 @@ SET_MEMBER_OVERRIDES: dict[str, list[str]] = {
     "BlizzardSet": ["Blizzard", "Snowstorm"],
     "DarkSet": ["Darkshot", "Darksword"],
     "SakuraSet": ["Sakura", "Blossom"],
+    "BloomSet": ["Bloom", "Flora"],
     "SoulSet": ["Soul", "Spirit"],
     "CelestialSet": ["Celestial", "Constellation"],
     "HallowSet": ["Hallowgun", "Hallowscythe"],
