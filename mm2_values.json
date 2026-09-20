@@ -1,5 +1,5 @@
 {
-  "updatedAt": 1789857792,
+  "updatedAt": 1789876589,
   "source": "supremevalues.com",
   "count": 544,
   "items": {
@@ -74429,7 +74429,7 @@
       "origin": null,
       "change": "(+250) +1.4%",
       "aliases": "CSun Set, CSunrise Set",
-      "riseChance": 10,
+      "riseChance": 15,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -77908,7 +77908,7 @@
     "EverSet": {
       "demand": 5,
       "rarityScore": 4,
-      "stability": "Stable",
+      "stability": "Receding",
       "origin": null,
       "change": "(-50) -0.8%",
       "aliases": "N/A",
