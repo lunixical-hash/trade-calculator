@@ -1,9 +1,9 @@
 {
-  "updatedAt": 1790020439,
+  "updatedAt": 1790034828,
   "source": "supremevalues.com",
-  "count": 544,
+  "count": 545,
   "items": {
-    "Alienbeam": 2000.0,
+    "Alienbeam": 2050.0,
     "Amerilaser": 22.0,
     "Australis": 140.0,
     "Bat": 120.0,
@@ -11,11 +11,11 @@
     "BattleaxeII": 17.0,
     "Batwing": 42.0,
     "Bauble": 675.0,
-    "Beachy": 105.0,
+    "Beachy": 100.0,
     "Bioblade": 8.0,
     "BlackLuger": 1000000.0,
     "Blaster": 17.0,
-    "Blizzard": 310.0,
+    "Blizzard": 305.0,
     "Bloom": 400.0,
     "Blossom": 1370.0,
     "BlueSeer": 3.0,
@@ -25,7 +25,7 @@
     "Candy": 80.0,
     "Chill": 10.0,
     "Clockwork": 10.0,
-    "Constellation": 2800.0,
+    "Constellation": 2750.0,
     "Cookieblade": 3.0,
     "Cookiecane": 13.0,
     "Darkbringer": 33.0,
@@ -66,7 +66,7 @@
     "IceShard": 7.0,
     "Icebeam": 18.0,
     "Iceblaster": 33.0,
-    "Icecream": 150.0,
+    "Icecream": 155.0,
     "Iceflake": 15.0,
     "Jinglegun": 13.0,
     "Laser": 22.0,
@@ -98,7 +98,7 @@
     "RedLuger": 35.0,
     "RedSeer": 3.0,
     "Sakura": 1360.0,
-    "Sands": 105.0,
+    "Sands": 100.0,
     "Saw": 7.0,
     "Seer": 3.0,
     "Shark": 20.0,
@@ -106,7 +106,7 @@
     "SnowDagger": 175.0,
     "Snowcannon": 675.0,
     "Snowflake": 5.0,
-    "Snowstorm": 310.0,
+    "Snowstorm": 305.0,
     "Soul": 655.0,
     "Spectre": 35.0,
     "Spider": 10.0,
@@ -120,20 +120,20 @@
     "Tides": 10.0,
     "TravelersGun": 5200.0,
     "Treat": 155.0,
-    "Turkey": 1775.0,
+    "Turkey": 2000.0,
     "VampiresEdge": 15.0,
-    "VampireGun": 1750.0,
+    "VampireGun": 1775.0,
     "Virtual": 13.0,
-    "Watergun": 175.0,
+    "Watergun": 170.0,
     "Waves": 280.0,
     "WinterEdge": 5.0,
     "Xenoknife": 405.0,
     "Xenoshot": 405.0,
     "Xmas": 7.0,
     "YellowSeer": 2.0,
-    "Celestial": 2450.0,
+    "Celestial": 2350.0,
     "ElderwoodScythe": 38.0,
-    "Gingerscope": 15750.0,
+    "Gingerscope": 16000.0,
     "Hallowscythe": 30.0,
     "Harvester": 250.0,
     "Icebreaker": 65.0,
@@ -154,7 +154,7 @@
     "Splitter": 3.0,
     "ChromaAlienbeam": 24000.0,
     "ChromaBauble": 34000.0,
-    "ChromaBeachy": 1400.0,
+    "ChromaBeachy": 1300.0,
     "ChromaBlizzard": 5500.0,
     "ChromaBoneblade": 22.0,
     "ChromaCandleflame": 40.0,
@@ -163,8 +163,8 @@
     "ChromaDarkbringer": 65.0,
     "ChromaDeathshard": 35.0,
     "ChromaElderwoodBlade": 37.0,
-    "ChromaEvergreen": 42000.0,
-    "ChromaEvergun": 58000.0,
+    "ChromaEvergreen": 41000.0,
+    "ChromaEvergun": 57000.0,
     "ChromaFang": 32.0,
     "ChromaFireBat": 3.0,
     "ChromaFireBear": 3.0,
@@ -177,13 +177,13 @@
     "ChromaGingerblade": 27.0,
     "ChromaHeartWand": 4250.0,
     "ChromaHeat": 28.0,
-    "ChromaIcecream": 1900.0,
+    "ChromaIcecream": 1800.0,
     "ChromaLaser": 40.0,
     "ChromaLightbringer": 60.0,
     "ChromaLuger": 50.0,
     "ChromaOrnament": 1825.0,
     "ChromaRaygun": 14000.0,
-    "ChromaSands": 1450.0,
+    "ChromaSands": 1350.0,
     "ChromaSaw": 23.0,
     "ChromaSeer": 28.0,
     "ChromaShark": 32.0,
@@ -192,11 +192,11 @@
     "ChromaSnowcannon": 7750.0,
     "ChromaSnowstorm": 4250.0,
     "ChromaSunrise": 10750.0,
-    "ChromaSunset": 7000.0,
+    "ChromaSunset": 7250.0,
     "ChromaSweet": 1725.0,
     "ChromaSwirlyGun": 35.0,
     "ChromaTides": 27.0,
-    "ChromaTravelerGun": 160000.0,
+    "ChromaTravelerGun": 155000.0,
     "ChromaTreat": 1775.0,
     "ChromaVampireGun": 29000.0,
     "ChromaWatergun": 2600.0,
@@ -241,7 +241,7 @@
     "CaneKnifeXMAS2018": 525.0,
     "Darkgun": 1.0,
     "Darkknife": 70.0,
-    "Dungeon": 150.0,
+    "Dungeon": 140.0,
     "ChromaFloralKnife": 10.0,
     "ChromaGhastlyGun": 7.0,
     "Ghostfire": 10.0,
@@ -411,14 +411,14 @@
     "UFO": 3.0,
     "VampireBat": 3.0,
     "ZombieDog": 750.0,
-    "AlienSet": 3975.0,
+    "AlienSet": 4025.0,
     "AuroraSetLegend": 48.0,
     "AuroraSetRare": 8.0,
     "BatSet": 153.0,
     "BatsSet": 241.0,
     "BaubleSet": 760.0,
-    "BeachSet": 210.0,
-    "BlizzardSet": 620.0,
+    "BeachSet": 200.0,
+    "BlizzardSet": 610.0,
     "BloomSet": 810.0,
     "BorealisSet": 285.0,
     "BowSet": 410.0,
@@ -426,17 +426,17 @@
     "CandySet": 112.0,
     "CandySwirlSet": 3.0,
     "CavernSet": 8.0,
-    "CelestialSet": 5250.0,
+    "CelestialSet": 5100.0,
     "ChromaAlienSet": 38000.0,
     "ChromaBaubleSet": 35825.0,
-    "ChromaBeachSet": 2850.0,
+    "ChromaBeachSet": 2650.0,
     "ChromaBlizzardSet": 9750.0,
     "ChromaBringerSet": 125.0,
-    "ChromaEverSet": 100000.0,
+    "ChromaEverSet": 98000.0,
     "ChromaPetSet": 21.0,
     "ChromaSlasherSet": 72.0,
     "ChromaSnowSet": 10100.0,
-    "ChromaSunSet": 17750.0,
+    "ChromaSunSet": 18000.0,
     "ChromaSweetSet": 3500.0,
     "ChromaWeaponSet": 156.0,
     "ColoredSeerSet": 16.0,
@@ -486,6 +486,7 @@
     "PumpkinSet2020": 39.0,
     "PumpkinSet2021": 32.0,
     "RainbowSet": 830.0,
+    "RetroSet": 85.0,
     "SakuraSet": 2730.0,
     "SantasSetLegend": 6.0,
     "ScratchSet": 6.0,
@@ -509,7 +510,7 @@
     "TravelersSet": 13300.0,
     "VampireSetLegend": 48.0,
     "VampireSetRare": 4.0,
-    "VampiresSet": 3350.0,
+    "VampiresSet": 3375.0,
     "VintageSet": 59.0,
     "VirtualSet": 30.0,
     "WrapSet": 24.0,
@@ -521,7 +522,7 @@
     "VampireAxe": 1600.0,
     "TravelerGun": 5200.0,
     "SunsetGun": 1075.0,
-    "UFOKnife": 2000.0,
+    "UFOKnife": 2050.0,
     "Rainbow_G": 420.0,
     "Rainbow_K": 410.0,
     "Ocean_G": 285.0,
@@ -1032,6 +1033,7 @@
     "PumpkinSet2020": "Pumpkin Set (2020)",
     "PumpkinSet2021": "Pumpkin Set (2021)",
     "RainbowSet": "Rainbow Set",
+    "RetroSet": "Retro Set",
     "SakuraSet": "Sakura Set",
     "SantasSetLegend": "Santa's Set (Legend.)",
     "ScratchSet": "Scratch Set",
@@ -1578,6 +1580,7 @@
     "PumpkinSet2020": "https://supremevalues.com/media/mm2pets/Red_Pumpkin_2020.webp",
     "PumpkinSet2021": "https://supremevalues.com/media/mm2pets/Red_Pumpkin_2021.webp",
     "RainbowSet": "https://supremevalues.com/media/mm2godlies/Rainbow_Gun.webp",
+    "RetroSet": "https://supremevalues.com/media/mm2legendaries/Shadow.webp",
     "SakuraSet": "https://supremevalues.com/media/mm2godlies/Sakura.webp",
     "SantasSetLegend": "https://supremevalues.com/media/mm2legendaries/Santas_Magic.webp",
     "ScratchSet": "https://supremevalues.com/media/mm2legendaries/Scratch.webp",
@@ -2124,6 +2127,7 @@
     "PumpkinSet2020": "Set",
     "PumpkinSet2021": "Set",
     "RainbowSet": "Set",
+    "RetroSet": "Set",
     "SakuraSet": "Set",
     "SantasSetLegend": "Set",
     "ScratchSet": "Set",
@@ -2192,7 +2196,7 @@
       "rarityScore": 4,
       "stability": "Doing Well",
       "origin": "Halloween 2025 (Unboxed)",
-      "change": "(-50) -2.4%",
+      "change": "(+50) +2.5%",
       "aliases": "AB, ALB",
       "riseChance": 40,
       "flippability": "Flippable",
@@ -2761,9 +2765,14 @@
           "v": 2000.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 2050.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -2.4
+      "changePct": 2.5
     },
     "Amerilaser": {
       "demand": 1,
@@ -3174,12 +3183,12 @@
     "Bat": {
       "demand": 2,
       "rarityScore": 2,
-      "stability": "Fluctuating",
+      "stability": "Stable",
       "origin": "Halloween 2022 (Zombie, Tier 20)",
       "change": "(-5) -4.0%",
       "aliases": "N/A",
       "riseChance": 5,
-      "flippability": "Flippable",
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 625.0,
@@ -4555,7 +4564,7 @@
       "rarityScore": 3,
       "stability": "Fluctuating",
       "origin": "Summer 2026 (Item Pack)",
-      "change": "(-5) -4.5%",
+      "change": "(-5) -4.8%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Flippable",
@@ -4624,9 +4633,14 @@
           "v": 105.0,
           "t": 1787752769,
           "label": "2026-08-26"
+        },
+        {
+          "v": 100.0,
+          "t": 1790009264,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -4.5
+      "changePct": -4.8
     },
     "Bioblade": {
       "demand": 1,
@@ -5073,7 +5087,7 @@
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Christmas 2025 (Item Pack)",
-      "change": "(+5) +1.6%",
+      "change": "(-5) -1.6%",
       "aliases": "Blizz",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -5287,9 +5301,14 @@
           "v": 310.0,
           "t": 1789583990,
           "label": "2026-09-16"
+        },
+        {
+          "v": 305.0,
+          "t": 1790009264,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": 1.6
+      "changePct": -1.6
     },
     "Bloom": {
       "demand": 5,
@@ -8118,16 +8137,11 @@
       "rarityScore": 4,
       "stability": "Stable",
       "origin": "Christmas 2024 (Unboxed)",
-      "change": "(-100) -3.4%",
+      "change": "(-50) -1.8%",
       "aliases": "Const",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 550.0,
-          "t": 1741559979,
-          "label": "2025-03-09"
-        },
         {
           "v": 525.0,
           "t": 1741726284,
@@ -8722,9 +8736,14 @@
           "v": 2800.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 2750.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -3.4
+      "changePct": -1.8
     },
     "Cookieblade": {
       "demand": 1,
@@ -9357,7 +9376,7 @@
       "origin": "Halloween 2023 (Item Pack)",
       "change": "(+25) +1.4%",
       "aliases": "DShot",
-      "riseChance": 15,
+      "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -9970,7 +9989,7 @@
       "origin": "Halloween 2023 (Item Pack)",
       "change": "(+25) +1.4%",
       "aliases": "DSword",
-      "riseChance": 15,
+      "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -18661,7 +18680,7 @@
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Summer 2026 (Unboxed)",
-      "change": "(+5) +3.4%",
+      "change": "(+5) +3.3%",
       "aliases": "IC",
       "riseChance": 15,
       "flippability": "Rarely Flippable",
@@ -18780,9 +18799,14 @@
           "v": 150.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 155.0,
+          "t": 1790009264,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": 3.4
+      "changePct": 3.3
     },
     "Iceflake": {
       "demand": 1,
@@ -22300,12 +22324,12 @@
     "Ornament": {
       "demand": 2,
       "rarityScore": 2,
-      "stability": "Fluctuating",
+      "stability": "Underpaid For",
       "origin": "Christmas 2025 (Gifting 100 Gifts)",
       "change": "(-10) -10.5%",
       "aliases": "Orn",
-      "riseChance": 5,
-      "flippability": "Flippable",
+      "riseChance": 0,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 900.0,
@@ -25902,14 +25926,14 @@
       "changePct": 1.2
     },
     "Raygun": {
-      "demand": 6,
+      "demand": 5,
       "rarityScore": 3,
-      "stability": "Doing Well",
+      "stability": "Stable",
       "origin": "Halloween 2025 (Tier 25)",
       "change": "(+25) +1.3%",
       "aliases": "RG, Ray",
-      "riseChance": 35,
-      "flippability": "Flippable",
+      "riseChance": 10,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 1900.0,
@@ -27613,7 +27637,7 @@
       "rarityScore": 3,
       "stability": "Fluctuating",
       "origin": "Summer 2026 (Item Pack)",
-      "change": "(-5) -4.5%",
+      "change": "(-5) -4.8%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Flippable",
@@ -27682,9 +27706,14 @@
           "v": 105.0,
           "t": 1787752769,
           "label": "2026-08-26"
+        },
+        {
+          "v": 100.0,
+          "t": 1790009264,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -4.5
+      "changePct": -4.8
     },
     "Saw": {
       "demand": 1,
@@ -28832,7 +28861,7 @@
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Christmas 2025 (Item Pack)",
-      "change": "(+5) +1.6%",
+      "change": "(-5) -1.6%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -29046,9 +29075,14 @@
           "v": 310.0,
           "t": 1789583990,
           "label": "2026-09-16"
+        },
+        {
+          "v": 305.0,
+          "t": 1790009264,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": 1.6
+      "changePct": -1.6
     },
     "Soul": {
       "demand": 5,
@@ -34180,20 +34214,15 @@
       "changePct": -3.1
     },
     "Turkey": {
-      "demand": 5,
+      "demand": 6,
       "rarityScore": 4,
-      "stability": "Stable",
+      "stability": "Doing Well",
       "origin": "Thanksgiving 2023 (Item Pack)",
-      "change": "(-25) -1.4%",
+      "change": "(-25) -1.2%",
       "aliases": "N/A",
-      "riseChance": 10,
-      "flippability": "Rarely Flippable",
+      "riseChance": 35,
+      "flippability": "Flippable",
       "history": [
-        {
-          "v": 1200.0,
-          "t": 1727632565,
-          "label": "2024-09-29"
-        },
         {
           "v": 1250.0,
           "t": 1727905521,
@@ -34788,9 +34817,14 @@
           "v": 1775.0,
           "t": 1789583990,
           "label": "2026-09-16"
+        },
+        {
+          "v": 2000.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -1.4
+      "changePct": -1.2
     },
     "VampiresEdge": {
       "demand": 1,
@@ -34955,16 +34989,11 @@
       "rarityScore": 4,
       "stability": "Stable",
       "origin": "Halloween 2024 (Unboxed)",
-      "change": "(-25) -1.4%",
+      "change": "(+25) +1.4%",
       "aliases": "Vamp Gun, VG",
-      "riseChance": 10,
+      "riseChance": 15,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 375.0,
-          "t": 1732413367,
-          "label": "2024-11-24"
-        },
         {
           "v": 325.0,
           "t": 1732663133,
@@ -35559,9 +35588,14 @@
           "v": 1750.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 1775.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -1.4
+      "changePct": 1.4
     },
     "Virtual": {
       "demand": 1,
@@ -35826,7 +35860,7 @@
       "rarityScore": 3,
       "stability": "Stable",
       "origin": "Summer 2024 (Unboxed)",
-      "change": "(-10) -5.4%",
+      "change": "(-5) -2.9%",
       "aliases": "WTG",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -36340,9 +36374,14 @@
           "v": 175.0,
           "t": 1788785995,
           "label": "2026-09-07"
+        },
+        {
+          "v": 170.0,
+          "t": 1790009264,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -5.4
+      "changePct": -2.9
     },
     "Waves": {
       "demand": 4,
@@ -37852,16 +37891,11 @@
       "rarityScore": 4,
       "stability": "Receding",
       "origin": "Christmas 2024 (Tier 20)",
-      "change": "(-100) -3.9%",
+      "change": "(-100) -4.1%",
       "aliases": "Cel, Celest",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 375.0,
-          "t": 1737160968,
-          "label": "2025-01-18"
-        },
         {
           "v": 350.0,
           "t": 1737351067,
@@ -38456,9 +38490,14 @@
           "v": 2450.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 2350.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -3.9
+      "changePct": -4.1
     },
     "ElderwoodScythe": {
       "demand": 1,
@@ -39073,16 +39112,11 @@
       "rarityScore": 4,
       "stability": "Stable",
       "origin": "Christmas 2023 (Tier 20)",
-      "change": "(-250) -1.6%",
+      "change": "(+250) +1.6%",
       "aliases": "GS, GScope, Scope",
-      "riseChance": 5,
+      "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 8500.0,
-          "t": 1739931117,
-          "label": "2025-02-19"
-        },
         {
           "v": 8200.0,
           "t": 1740193662,
@@ -39677,9 +39711,14 @@
           "v": 15750.0,
           "t": 1789477234,
           "label": "2026-09-15"
+        },
+        {
+          "v": 16000.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -1.6
+      "changePct": 1.6
     },
     "Hallowscythe": {
       "demand": 1,
@@ -44876,7 +44915,7 @@
       "rarityScore": 4,
       "stability": "Underpaid For",
       "origin": "Summer 2026 (Item Pack)",
-      "change": "(-50) -3.4%",
+      "change": "(-100) -7.1%",
       "aliases": "CBeachy, CBeach",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
@@ -45000,9 +45039,14 @@
           "v": 1400.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 1300.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -3.4
+      "changePct": -7.1
     },
     "ChromaBlizzard": {
       "demand": 5,
@@ -48448,16 +48492,11 @@
       "rarityScore": 7,
       "stability": "Underpaid For",
       "origin": "Christmas 2023 (Unboxed)",
-      "change": "(-1,000) -2.3%",
+      "change": "(-1,000) -2.4%",
       "aliases": "CEvergreen, CEGreen, CEGR",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 10000.0,
-          "t": 1721933944,
-          "label": "2024-07-25"
-        },
         {
           "v": 9000.0,
           "t": 1722294826,
@@ -49052,25 +49091,25 @@
           "v": 42000.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 41000.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -2.3
+      "changePct": -2.4
     },
     "ChromaEvergun": {
       "demand": 7,
       "rarityScore": 8,
       "stability": "Underpaid For",
       "origin": "Christmas 2023 (Gifting)",
-      "change": "(-2,000) -3.3%",
+      "change": "(-1,000) -1.7%",
       "aliases": "CEvergun, CEGun, CEG",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 18500.0,
-          "t": 1717445750,
-          "label": "2024-06-03"
-        },
         {
           "v": 19500.0,
           "t": 1717876004,
@@ -49665,9 +49704,14 @@
           "v": 58000.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 57000.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -3.3
+      "changePct": -1.7
     },
     "ChromaFang": {
       "demand": 1,
@@ -52640,7 +52684,7 @@
       "rarityScore": 4,
       "stability": "Underpaid For",
       "origin": "Summer 2026 (Unboxed)",
-      "change": "(-100) -5.0%",
+      "change": "(-100) -5.3%",
       "aliases": "CIC, CCream, CIcecream",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
@@ -52759,9 +52803,14 @@
           "v": 1900.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 1800.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -5.0
+      "changePct": -5.3
     },
     "ChromaLaser": {
       "demand": 1,
@@ -54609,7 +54658,7 @@
       "origin": "Christmas 2025 (Gifting)",
       "change": "(+25) +1.4%",
       "aliases": "COR, COrn",
-      "riseChance": 15,
+      "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -55308,7 +55357,7 @@
       "rarityScore": 4,
       "stability": "Underpaid For",
       "origin": "Summer 2026 (Item Pack)",
-      "change": "(-50) -3.3%",
+      "change": "(-100) -6.9%",
       "aliases": "CSands, CSand",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
@@ -55437,9 +55486,14 @@
           "v": 1450.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 1350.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -3.3
+      "changePct": -6.9
     },
     "ChromaSaw": {
       "demand": 1,
@@ -58398,12 +58452,12 @@
     "ChromaSunset": {
       "demand": 6,
       "rarityScore": 5,
-      "stability": "Stable",
+      "stability": "Doing Well",
       "origin": "Summer 2025 (Tier 25)",
-      "change": "(+250) +3.7%",
+      "change": "(+250) +3.6%",
       "aliases": "CSunset, CSS",
-      "riseChance": 15,
-      "flippability": "Rarely Flippable",
+      "riseChance": 40,
+      "flippability": "Flippable",
       "history": [
         {
           "v": 15000.0,
@@ -58889,9 +58943,14 @@
           "v": 7000.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 7250.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": 3.7
+      "changePct": 3.6
     },
     "ChromaSweet": {
       "demand": 5,
@@ -60097,16 +60156,11 @@
       "rarityScore": 10,
       "stability": "Underpaid For",
       "origin": "Halloween 2023 (Unboxed)",
-      "change": "(-5,000) -3.0%",
+      "change": "(-5,000) -3.1%",
       "aliases": "CTG, CTVG, CTrav",
       "riseChance": 0,
       "flippability": "Flippable",
       "history": [
-        {
-          "v": 24000.0,
-          "t": 1705958139,
-          "label": "2024-01-22"
-        },
         {
           "v": 28000.0,
           "t": 1706307831,
@@ -60701,9 +60755,14 @@
           "v": 160000.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 155000.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -3.0
+      "changePct": -3.1
     },
     "ChromaTreat": {
       "demand": 5,
@@ -62997,7 +63056,7 @@
       "rarityScore": 5,
       "stability": "Receding",
       "origin": "Halloween 2019 (Unboxed)",
-      "change": "(-10) -6.3%",
+      "change": "(-10) -6.7%",
       "aliases": "N/A",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
@@ -63026,9 +63085,14 @@
           "v": 150.0,
           "t": 1788538765,
           "label": "2026-09-04"
+        },
+        {
+          "v": 140.0,
+          "t": 1790034828,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -6.3
+      "changePct": -6.7
     },
     "ChromaFloralKnife": {
       "demand": 2,
@@ -66442,16 +66506,11 @@
       "rarityScore": 4,
       "stability": "Doing Well",
       "origin": null,
-      "change": "(-25) -0.6%",
+      "change": "(+50) +1.3%",
       "aliases": "N/A",
       "riseChance": 40,
       "flippability": "Flippable",
       "history": [
-        {
-          "v": 530.0,
-          "t": 1762898687,
-          "label": "2025-11-11"
-        },
         {
           "v": 550.0,
           "t": 1763061296,
@@ -67046,9 +67105,14 @@
           "v": 3975.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 4025.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -0.6
+      "changePct": 1.3
     },
     "AuroraSetLegend": {
       "demand": 2,
@@ -67104,12 +67168,12 @@
     "BatSet": {
       "demand": 2,
       "rarityScore": 2,
-      "stability": "Fluctuating",
+      "stability": "Stable",
       "origin": null,
       "change": "(-2) -1.3%",
       "aliases": "N/A",
       "riseChance": 5,
-      "flippability": "Flippable",
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 430.0,
@@ -68200,12 +68264,12 @@
     "BaubleSet": {
       "demand": 5,
       "rarityScore": 4,
-      "stability": "Fluctuating",
+      "stability": "Underpaid For",
       "origin": null,
       "change": "(-10) -1.3%",
       "aliases": "Ornament Set, Orn Set",
       "riseChance": 10,
-      "flippability": "Flippable",
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 1625.0,
@@ -68505,7 +68569,7 @@
       "rarityScore": 3,
       "stability": "Fluctuating",
       "origin": null,
-      "change": "(-10) -4.5%",
+      "change": "(-10) -4.8%",
       "aliases": "N/A",
       "riseChance": 10,
       "flippability": "Flippable",
@@ -68574,16 +68638,21 @@
           "v": 210.0,
           "t": 1787752768,
           "label": "2026-08-26"
+        },
+        {
+          "v": 200.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -4.5
+      "changePct": -4.8
     },
     "BlizzardSet": {
       "demand": 4,
       "rarityScore": 3,
       "stability": "Stable",
       "origin": null,
-      "change": "(+10) +1.6%",
+      "change": "(-10) -1.6%",
       "aliases": "Blizz Set",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
@@ -68797,9 +68866,14 @@
           "v": 620.0,
           "t": 1789583989,
           "label": "2026-09-16"
+        },
+        {
+          "v": 610.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": 1.6
+      "changePct": -1.6
     },
     "BloomSet": {
       "demand": 5,
@@ -70282,16 +70356,11 @@
       "rarityScore": 4,
       "stability": "Receding",
       "origin": null,
-      "change": "(-200) -3.7%",
+      "change": "(-150) -2.9%",
       "aliases": "Cel Set",
       "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 1400.0,
-          "t": 1748747447,
-          "label": "2025-06-01"
-        },
         {
           "v": 1425.0,
           "t": 1749133502,
@@ -70886,9 +70955,14 @@
           "v": 5250.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 5100.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -3.7
+      "changePct": -2.9
     },
     "ChromaAlienSet": {
       "demand": 6,
@@ -71430,7 +71504,7 @@
       "origin": null,
       "change": "(+25) +0.1%",
       "aliases": "CBauble Set, CBaub Set",
-      "riseChance": 15,
+      "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -71781,7 +71855,7 @@
       "rarityScore": 4,
       "stability": "Underpaid For",
       "origin": null,
-      "change": "(-100) -3.4%",
+      "change": "(-200) -7.0%",
       "aliases": "CBeach Set",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
@@ -71900,9 +71974,14 @@
           "v": 2850.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 2650.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -3.4
+      "changePct": -7.0
     },
     "ChromaBlizzardSet": {
       "demand": 5,
@@ -72885,16 +72964,11 @@
       "rarityScore": 8,
       "stability": "Underpaid For",
       "origin": null,
-      "change": "(-3,000) -2.9%",
+      "change": "(-2,000) -2.0%",
       "aliases": "CEver Set",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 80000.0,
-          "t": 1742243415,
-          "label": "2025-03-17"
-        },
         {
           "v": 82000.0,
           "t": 1742421618,
@@ -73489,9 +73563,14 @@
           "v": 100000.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 98000.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -2.9
+      "changePct": -2.0
     },
     "ChromaPetSet": {
       "demand": 1,
@@ -73499,7 +73578,7 @@
       "stability": "Underpaid For",
       "origin": null,
       "change": "(-7) -25.0%",
-      "aliases": "CPet Set View Value History and Similar Items Values Last Updated - September 18th, 2026 at 10:15 PM // Join our Discord Server Join our Discord Server Join our Roblox Group Trade your MM2 items using Cosmic Values, our official trading partner! Take me there The Supreme Values Discord bot has returned! Learn more MM2 Set Values Supreme Values provides up-to-date MM2 Set values, demands, and rarities for trading every Murder Mystery 2 item set. TIP: You can click on an item's image to see extra features and information. Read more about this in our use guide! Chroma Tier Small Tier Collectible Tier Bulk Tier Dynamic Sets Changelog Search In-Page Filter: Select Stability Doing Well Fluctuating Receding Stable U",
+      "aliases": "CPet Set View Value History and Similar Items Values Last Updated - September 21st, 2026 at 8:55 PM // Join our Discord Server Join our Discord Server Join our Roblox Group Trade your MM2 items using Cosmic Values, our official trading partner! Take me there The Supreme Values Discord bot has returned! Learn more MM2 Set Values Supreme Values provides up-to-date MM2 Set values, demands, and rarities for trading every Murder Mystery 2 item set. TIP: You can click on an item's image to see extra features and information. Read more about this in our use guide! Chroma Tier Small Tier Collectible Tier Bulk Tier Dynamic Sets Changelog Search In-Page Filter: Select Stability Doing Well Fluctuating Receding Stable Un",
       "riseChance": 0,
       "flippability": "Rarely Flippable",
       "history": [
@@ -74425,12 +74504,12 @@
     "ChromaSunSet": {
       "demand": 6,
       "rarityScore": 5,
-      "stability": "Stable",
+      "stability": "Doing Well",
       "origin": null,
       "change": "(+250) +1.4%",
       "aliases": "CSun Set, CSunrise Set",
-      "riseChance": 15,
-      "flippability": "Rarely Flippable",
+      "riseChance": 40,
+      "flippability": "Flippable",
       "history": [
         {
           "v": 33000.0,
@@ -74946,6 +75025,11 @@
           "v": 17750.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 18000.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
       "changePct": 1.4
@@ -76577,7 +76661,7 @@
       "origin": null,
       "change": "(+50) +1.4%",
       "aliases": "N/A",
-      "riseChance": 15,
+      "riseChance": 10,
       "flippability": "Rarely Flippable",
       "history": [
         {
@@ -87012,6 +87096,24 @@
       ],
       "changePct": 1.2
     },
+    "RetroSet": {
+      "demand": 4,
+      "rarityScore": 4,
+      "stability": "Fluctuating",
+      "origin": null,
+      "change": null,
+      "aliases": "N/A",
+      "riseChance": 0,
+      "flippability": null,
+      "history": [
+        {
+          "v": 85.0,
+          "t": 1790034828,
+          "label": "2026-09-21"
+        }
+      ],
+      "changePct": 0.0
+    },
     "SakuraSet": {
       "demand": 6,
       "rarityScore": 4,
@@ -93181,16 +93283,11 @@
       "rarityScore": 4,
       "stability": "Stable",
       "origin": null,
-      "change": "(-25) -0.7%",
+      "change": "(+25) +0.7%",
       "aliases": "Vamp Set",
-      "riseChance": 10,
+      "riseChance": 15,
       "flippability": "Rarely Flippable",
       "history": [
-        {
-          "v": 905.0,
-          "t": 1746378344,
-          "label": "2025-05-04"
-        },
         {
           "v": 915.0,
           "t": 1746757700,
@@ -93785,9 +93882,14 @@
           "v": 3350.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 3375.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -0.7
+      "changePct": 0.7
     },
     "VintageSet": {
       "demand": 1,
@@ -96857,7 +96959,7 @@
       "rarityScore": 4,
       "stability": "Doing Well",
       "origin": "Halloween 2025 (Unboxed)",
-      "change": "(-50) -2.4%",
+      "change": "(+50) +2.5%",
       "aliases": "AB, ALB",
       "riseChance": 40,
       "flippability": "Flippable",
@@ -97426,9 +97528,14 @@
           "v": 2000.0,
           "t": 1789755129,
           "label": "2026-09-18"
+        },
+        {
+          "v": 2050.0,
+          "t": 1790009263,
+          "label": "2026-09-21"
         }
       ],
-      "changePct": -2.4
+      "changePct": 2.5
     },
     "Rainbow_G": {
       "demand": 5,
@@ -100256,12 +100363,12 @@
     "ZombieBat": {
       "demand": 2,
       "rarityScore": 2,
-      "stability": "Fluctuating",
+      "stability": "Stable",
       "origin": "Halloween 2022 (Zombie, Tier 20)",
       "change": "(-5) -4.0%",
       "aliases": "N/A",
       "riseChance": 5,
-      "flippability": "Flippable",
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 625.0,
@@ -103955,12 +104062,12 @@
     "BaubleKnife": {
       "demand": 2,
       "rarityScore": 2,
-      "stability": "Fluctuating",
+      "stability": "Underpaid For",
       "origin": "Christmas 2025 (Gifting 100 Gifts)",
       "change": "(-10) -10.5%",
       "aliases": "Orn",
-      "riseChance": 5,
-      "flippability": "Flippable",
+      "riseChance": 0,
+      "flippability": "Rarely Flippable",
       "history": [
         {
           "v": 900.0,
@@ -105990,12 +106097,19 @@
   },
   "trending": [
     {
-      "name": "Raygun",
-      "id": "Raygun",
-      "value": 1975,
+      "name": "Chroma Sunset",
+      "id": "ChromaSunset",
+      "value": 7250,
       "stability": "Doing Well",
-      "change": "(+25)"
+      "change": "(+250)"
+    },
+    {
+      "name": "Alienbeam",
+      "id": "Alienbeam",
+      "value": 2050,
+      "stability": "Doing Well",
+      "change": "(+50)"
     }
   ],
-  "changelog": "SUPREME VALUES UPDATE 18/09/2026 (DD/MM/YYYY):\n\n\nNEW ITEMS:\nGolden's demand set to 3, rarity set to 5\nShadow's demand set to 3, rarity set to 5\n\nCowboy's demand set to 3, rarity set to 5\nLaser's demand set to 3, rarity set to 5\nPhaser's demand set to 3, rarity set to 5\nPrince's demand set to 3, rarity set to 5\n\nGhost's demand set to 3, rarity set to 5\n\nRetro Set's demand set to 4, rarity set to 5\n\n\nANCIENTS:\nCelestial reduced to 2,450 [2,400-2,450]\n\n\nCHROMAS:\nChroma Traveler's Gun reduced to 160,000 [150,000-160,000]\nChroma Evergun reduced to 58,000 [56,000-58,000]\nChroma Evergreen reduced to 42,000 [40,000-42,000]\nChroma Sunset increased to 7,000, demand increased to 6\nChroma Blizzard increased to 5,500 [N/A], demand reduced to 5, stability changed from \"Doing Well\" to \"Stable\"\nChroma Icecream reduced to 1,900 [1,800-1,900]\nChroma Sands reduced to 1,450 [1,350-1,450]\nChroma Beachy reduced to 1,400 [1,300-1,400]\n\n\nGODLIES:\nTraveler's Gun reduced to 5,200\nConstellation reduced to 2,800\nEvergreen reduced to 2,500 [2,450-2,500]\nAlienbeam corrected to 2,000 [2,000-2,050], demand increased to 6, stability changed from \"Stable\" to \"Doing Well\"\nRaygun increased to 1,975 [1,975-2,025]\nVampire's Gun reduced to 1,750 [N/A], stability changed from \"Receding\" to \"Stable\"\nBlizzard's demand reduced to 4\nSnowstorm's demand reduced to 4\nIcecream increased to 150, demand increased to 3\n\n\nSETS:\nChroma Ever Set reduced to 100,000 [96,000-100,000]\nChroma Sun Set increased to 17,750, demand increased to 6\nChroma Blizzard Set increased to 9,750 [N/A], demand reduced to 5, stability changed from \"Doing Well\" to \"Stable\"\nChroma Beach Set reduced to 2,850 [2,650-2,850]\n\n\n\nTraveler's Set reduced to 13,300\nEver Set reduced to 5,950 [5,900-5,950]\nCelestial Set reduced to 5,250 [5,200-5,250]\nAlien Set corrected to 3,975 [3,975-4,075]\nVampire's Set reduced to 3,350 [N/A], stability changed from \"Receding\" to \"Stable\"\nBlizzard Set's demand reduced to 4\n\n\n\nSite Created and Managed by hdmi\nCopyright \u00a9 2020-2026 Supreme Values\n\t\t\t\n\t\nPrivacy Policy\nFAQ\nTerms of Use\n\t\nTrading Servers\nScam Prevention\nUse Guide\n\t\nDiscord Info\nDiscord Invite\nRoblox Group\nYour Inventory Value:\n0 [N/A]\nView Inventory"
+  "changelog": "SUPREME VALUES UPDATE 21/09/2026 (DD/MM/YYYY):\n\n\nNEW ITEMS:\nGolden set to 12 [10-13], rarity reduced to 4, stability set to \"Fluctuating\"\nShadow set to 12 [10-13], rarity reduced to 4, stability set to \"Fluctuating\"\n\nCowboy set to 12 [10-13], rarity reduced to 4, stability set to \"Fluctuating\"\nLaser set to 12 [10-13], rarity reduced to 4, stability set to \"Fluctuating\"\nPhaser set to 12 [10-13], rarity reduced to 4, stability set to \"Fluctuating\"\nPrince set to 12 [10-13], rarity reduced to 4, stability set to \"Fluctuating\"\n\nGhost set to 12 [10-13], rarity reduced to 4, stability set to \"Fluctuating\"\n\nRetro Set set to 85 [70-90], rarity reduced to 4, stability set to \"Fluctuating\"\n\n\nANCIENTS:\nGingerscope increased to 16,000\nCelestial reduced to 2,350 [2,300-2,350]\n\n\nCHROMAS:\nChroma Traveler's Gun reduced to 155,000 [145,000-155,000]\nChroma Evergun reduced to 57,000 [55,000-57,000]\nChroma Evergreen reduced to 41,000 [40,000-41,000]\nChroma Sunset increased to 7,250 [7,250-7,500], stability changed from \"Stable\" to \"Doing Well\"\nChroma Icecream reduced to 1,800 [1,700-1,800]\nChroma Sands reduced to 1,350 [1,250-1,350]\nChroma Beachy reduced to 1,300 [1,200-1,300]\n\n\nGODLIES:\nConstellation reduced to 2,750\nAlienbeam increased to 2,050 [2,050-2,100]\nTurkey corrected to 2,000 [2,000-2,050], demand increased to 6, stability changed from \"Stable\" to \"Doing Well\"\nRaygun's range changed to [N/A], demand reduced to 5, stability changed from \"Doing Well\" to \"Stable\"\nVampire's Gun increased to 1,775\nBlizzard reduced to 305\nSnowstorm reduced to 305\nWatergun reduced to 170\nIcecream increased to 155\nBat's range changed to [N/A], stability changed from \"Fluctuating\" to \"Stable\"\nBeachy reduced to 100 [95-105]\nSands reduced to 100 [95-105]\nOrnament's range changed to [80-85], stability changed from \"Fluctuating\" to \"Underpaid For\"\n\n\nRARES:\nDungeon reduced to 140 [130-140]\n\n\nSETS:\nChroma Ever Set reduced to 98,000 [95,000-98,000]\nChroma Sun Set increased to 18,000 [18,000-18,250], stability changed from \"Stable\" to \"Doing Well\"\nChroma Beach Set reduced to 2,650 [2,450-2,650]\n\n\n\nCelestial Set reduced to 5,100 [5,050-5,100]\nAlien Set increased to 4,025 [4,025-4,075]\nVampire's Set increase"
 }
