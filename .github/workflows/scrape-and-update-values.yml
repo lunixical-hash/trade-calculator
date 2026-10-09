@@ -13,6 +13,15 @@ on:
 permissions:
   contents: write
 
+# Force UTF-8 for all Python text I/O. Without this, GitHub's Linux runner can
+# use an ASCII/C locale and mangle emoji/symbols (e.g. the fire glyph) into
+# mojibake when build_trade_calculator.py reads its template and writes output.
+env:
+  PYTHONUTF8: "1"
+  PYTHONIOENCODING: "utf-8"
+  LANG: "C.UTF-8"
+  LC_ALL: "C.UTF-8"
+
 concurrency:
   group: scrape-values-main
   cancel-in-progress: false

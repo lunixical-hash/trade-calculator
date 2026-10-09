@@ -42,7 +42,7 @@
     scrollbar-width: thin;
     scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
   }
-  /* Subtle themed scrollbars ΓÇö Firefox above, WebKit below.
+  /* Subtle themed scrollbars — Firefox above, WebKit below.
      No CSS scroll-behavior:smooth (feels laggy on wheel); JS uses behavior:'smooth' for programmatic scrolls. */
   *::-webkit-scrollbar {
     width: var(--scrollbar-size);
@@ -252,7 +252,7 @@
     opacity: 0 !important;
   }
 
-  /* Stackable background textures (theme-tinted) ΓÇö kept bold on dark UIs */
+  /* Stackable background textures (theme-tinted) — kept bold on dark UIs */
   .bg-texture,
   .bg-effect {
     position: fixed;
@@ -402,7 +402,7 @@
     animation: rainSheer 1.8s linear infinite;
   }
 
-  /* Rainy window background ΓÇö condensation + glass droplets */
+  /* Rainy window background — condensation + glass droplets */
   body[data-bg-variant="rainy"] .bg-ambient {
     background:
       radial-gradient(920px 540px at 48% -8%, rgba(var(--purple-bright-rgb), 0.14) 0%, transparent 58%),
@@ -1230,7 +1230,7 @@
     color: #fbbf24;
   }
   .board.caution-side h2::after {
-    content: ' ΓÜá';
+    content: ' ⚠';
     font-size: 0.75em;
     opacity: 0.9;
   }
@@ -1612,7 +1612,7 @@
     display: none;
   }
 
-  /* Trade history modal ΓÇö split list + detail */
+  /* Trade history modal — split list + detail */
   .graph-modal.trade-hist-modal {
     width: min(1180px, 98vw);
     height: min(92vh, 900px);
@@ -3889,7 +3889,7 @@
   <div class="wrap">
     <div class="wrap-head">
       <h1>Lunix's AI Trade Assistant</h1>
-      <label class="set-protect-toggle" title="Type anywhere to search ΓÇö add to Your Offer or Their Offer">
+      <label class="set-protect-toggle" title="Type anywhere to search — add to Your Offer or Their Offer">
         <input type="checkbox" id="quickSearchToggle" />
         Quick search
       </label>
@@ -3897,7 +3897,7 @@
     </div>
     <div class="quick-search" id="quickSearchWrap" hidden>
       <div class="quick-search-row">
-        <input id="quickSearch" type="search" placeholder="Type to search itemsΓÇª" autocomplete="off" />
+        <input id="quickSearch" type="search" placeholder="Type to search items…" autocomplete="off" />
         <select id="quickRarity" aria-label="Rarity filter">
           <option value="">All rarities</option>
           <option>Ancient</option>
@@ -3922,7 +3922,7 @@
       </div>
       <div class="meter-wrap">
         <div class="meter"><div class="meter-fill" id="meterFill"></div></div>
-        <p class="verdict fair" id="verdict">ΓÇö</p>
+        <p class="verdict fair" id="verdict">—</p>
         <p class="trade-outlook fair" id="tradeOutlook" aria-live="polite"></p>
       </div>
       <div class="value-box">
@@ -3968,7 +3968,7 @@
       <div class="suggest-head">
         <h2>Suggested Trades</h2>
         <div class="suggest-toggles">
-          <label class="set-protect-toggle" title="When on, complete sets stay intact ΓÇö only extras and whole sets are used">
+          <label class="set-protect-toggle" title="When on, complete sets stay intact — only extras and whole sets are used">
             <input type="checkbox" id="avoidSetBreaks" checked />
             Avoid set breaks
           </label>
@@ -4019,8 +4019,8 @@
     <div class="inv-value-block">
       <div class="total" id="invTotal">0</div>
       <div class="inv-value-row">
-        <span class="inv-delta flat" id="invDelta">ΓÇö</span>
-        <span class="inv-since" id="invSince">all time ΓÇö</span>
+        <span class="inv-delta flat" id="invDelta">—</span>
+        <span class="inv-since" id="invSince">all time —</span>
       </div>
       <div class="inv-status" id="invStatus" hidden></div>
     </div>
@@ -4121,7 +4121,7 @@
     <div class="graph-modal trade-hist-modal">
       <div class="graph-head">
         <h3>Trade history</h3>
-        <button class="modal-close" id="tradeHistClose" type="button" aria-label="Close">├ù</button>
+        <button class="modal-close" id="tradeHistClose" type="button" aria-label="Close">×</button>
       </div>
       <div class="trade-hist-body">
         <aside class="trade-hist-sidebar">
@@ -4143,7 +4143,7 @@
     <div class="graph-modal">
       <div class="graph-head">
         <h3 id="prevTradeTitle">Previous trade</h3>
-        <button class="modal-close" id="prevTradeClose" type="button" aria-label="Close">├ù</button>
+        <button class="modal-close" id="prevTradeClose" type="button" aria-label="Close">×</button>
       </div>
       <div class="prev-trade-body">
         <div class="prev-trade-meta" id="prevTradeMeta"></div>
@@ -4168,16 +4168,16 @@
     <div class="graph-modal">
       <div class="graph-head">
         <h3>Inventory history</h3>
-        <button class="modal-close" id="graphClose" type="button" aria-label="Close">├ù</button>
+        <button class="modal-close" id="graphClose" type="button" aria-label="Close">×</button>
       </div>
       <div class="graph-body">
         <div class="graph-top">
           <div class="graph-meta">
             <span>Saves: <strong id="graphPoints">0</strong></span>
-            <span>Min: <strong id="graphMin">ΓÇö</strong></span>
-            <span>Max: <strong id="graphMax">ΓÇö</strong></span>
-            <span>Latest: <strong id="graphLatest">ΓÇö</strong></span>
-            <span>Change: <strong id="graphDelta" class="delta">ΓÇö</strong></span>
+            <span>Min: <strong id="graphMin">—</strong></span>
+            <span>Max: <strong id="graphMax">—</strong></span>
+            <span>Latest: <strong id="graphLatest">—</strong></span>
+            <span>Change: <strong id="graphDelta" class="delta">—</strong></span>
           </div>
           <div id="graphChart"></div>
         </div>
@@ -4193,7 +4193,7 @@
     <div class="modal">
       <div class="modal-head">
         <h3 id="pickerTitle">Add item</h3>
-        <input id="search" type="search" placeholder="Search Supreme ValuesΓÇª" autocomplete="off" />
+        <input id="search" type="search" placeholder="Search Supreme Values…" autocomplete="off" />
         <select id="rarityFilter">
           <option value="">All rarities</option>
           <option>Ancient</option>
@@ -4207,7 +4207,7 @@
           <option>Common</option>
           <option>Set</option>
         </select>
-        <button class="modal-close" id="modalClose" type="button" aria-label="Close">├ù</button>
+        <button class="modal-close" id="modalClose" type="button" aria-label="Close">×</button>
       </div>
       <div class="modal-body" id="modalBody">
         <div class="modal-list" id="modalList"></div>
@@ -4224,17 +4224,17 @@
       <div class="detail-top">
         <div class="title">Extra Features:</div>
         <div class="actions">
-          <button class="detail-x" id="detailClose" type="button" aria-label="Close">├ù</button>
+          <button class="detail-x" id="detailClose" type="button" aria-label="Close">×</button>
         </div>
       </div>
       <div class="detail-body">
         <div class="detail-stats">
-          <div class="iname" id="dName">ΓÇö</div>
-          <div class="row">Value - <span class="v" id="dValue">ΓÇö</span> <span class="na" id="dValueTag">[N/A]</span></div>
-          <div class="row">Stability - <span id="dStability">ΓÇö</span></div>
-          <div class="row">Demand - <span id="dDemand">ΓÇö</span> ΓÇó Rarity - <span id="dRarityScore">ΓÇö</span></div>
-          <div class="row">Origin - <span id="dOrigin">ΓÇö</span></div>
-          <div class="row">Change in Value - <span class="change" id="dChange">ΓÇö</span></div>
+          <div class="iname" id="dName">—</div>
+          <div class="row">Value - <span class="v" id="dValue">—</span> <span class="na" id="dValueTag">[N/A]</span></div>
+          <div class="row">Stability - <span id="dStability">—</span></div>
+          <div class="row">Demand - <span id="dDemand">—</span> • Rarity - <span id="dRarityScore">—</span></div>
+          <div class="row">Origin - <span id="dOrigin">—</span></div>
+          <div class="row">Change in Value - <span class="change" id="dChange">—</span></div>
           <div class="detail-history" id="dHistory">
             <div class="hlabel">Value history</div>
             <div id="dHistoryBody"></div>
@@ -4242,7 +4242,7 @@
         </div>
         <img class="detail-art" id="dArt" alt="" referrerpolicy="no-referrer" />
       </div>
-      <div class="detail-foot">Aliases - <em id="dAliases">ΓÇö</em></div>
+      <div class="detail-foot">Aliases - <em id="dAliases">—</em></div>
     </div>
   </div>
 
@@ -4431,7 +4431,7 @@
   }
 
   function paintChromaHue(hue) {
-    // Continuous HSL hue cycle ΓÇö seamless wrap at 360┬░
+    // Continuous HSL hue cycle — seamless wrap at 360°
     const h = ((hue % 360) + 360) % 360;
     const base = hslToRgb(h, 0.78, 0.58);
     const bright = hslToRgb(h + 8, 0.86, 0.7);
@@ -4631,7 +4631,7 @@
     body.toggleAttribute('data-theme-mix', isMix);
     body.removeAttribute('data-theme-black');
 
-    // Soft surface tint ΓÇö mixtures pull both colors into the surfaces
+    // Soft surface tint — mixtures pull both colors into the surfaces
     const bg = isMix
       ? mixRgb(mixRgb({ r: 7, g: 6, b: 12 }, base, 0.12), shift, 0.1)
       : mixRgb({ r: 7, g: 6, b: 12 }, base, 0.1);
@@ -5198,7 +5198,7 @@ const state = {
   their: Array(SLOTS).fill(null),
   inv: [], // { id, qty }
   targets: [], // { id, qty }
-  dumpList: [], // { id, qty } ΓÇö user-chosen items to trade off
+  dumpList: [], // { id, qty } — user-chosen items to trade off
   invHistory: [], // { t, v, items?: [{ id, qty }] }
   tradeHistory: [], // { t, your, their, yourTotal, theirTotal, net, source?, key? }
   tradeDismissed: [], // inferred keys the user removed
@@ -5376,7 +5376,7 @@ function fmt(n) {
 }
 
 function dash(v) {
-  return v == null || v === '' ? 'ΓÇö' : String(v);
+  return v == null || v === '' ? '—' : String(v);
 }
 
 function setInvStatus(text, dirty) {
@@ -5407,8 +5407,8 @@ function openDetail(item) {
   const change = item.change;
   changeEl.textContent = dash(change);
   changeEl.className = 'change';
-  if (typeof change === 'string' && /\(-|ΓêÆ|-[0-9]/.test(change)) changeEl.classList.add('down');
-  const aliases = (item.aliases && item.aliases.length) ? item.aliases.join(', ') : 'ΓÇö';
+  if (typeof change === 'string' && /\(-|−|-[0-9]/.test(change)) changeEl.classList.add('down');
+  const aliases = (item.aliases && item.aliases.length) ? item.aliases.join(', ') : '—';
   document.getElementById('dAliases').textContent = aliases;
   renderDetailHistory(item);
   const art = document.getElementById('dArt');
@@ -5535,7 +5535,7 @@ function coalesceHistoryByDay(points) {
 
 function itemValueHistory(item) {
   if (!item) return [];
-  // Cache cleaned/coalesced history ΓÇö outlook/trends call this many times per item
+  // Cache cleaned/coalesced history — outlook/trends call this many times per item
   if (Array.isArray(item._valueHistCache)) return item._valueHistCache;
   const cleaned = sanitizeValueHistory(item.history, item.value, itemChangePct(item));
   item._valueHistCache = cleaned;
@@ -5845,7 +5845,7 @@ function renderDetailHistory(item) {
     }
   }
   if (hist.length < 2) {
-    body.innerHTML = '<div class="hempty">No history points yet ΓÇö re-scrape values to build a series.</div>';
+    body.innerHTML = '<div class="hempty">No history points yet — re-scrape values to build a series.</div>';
     return;
   }
   const stats = mountInteractiveChart(body, hist, { spark: true, showArea: false, showAxes: false });
@@ -5943,7 +5943,7 @@ function historyDropCount(item) {
 }
 
 /**
- * True "constantly rising" ΓÇö sustained climb, not one bounce after a dump.
+ * True "constantly rising" — sustained climb, not one bounce after a dump.
  * Requires an active raise streak, more raises than drops, and net gain.
  */
 function isConstantlyRising(item) {
@@ -5961,7 +5961,7 @@ function isConstantlyRising(item) {
   if (streak < 2) return false;
   if (!(move && move.abs > 0.05)) return false;
 
-  // Need a real series of raises ΓÇö one bounce after dumps does not count
+  // Need a real series of raises — one bounce after dumps does not count
   if (rises < 3) return false;
   if (drops >= rises) return false;
 
@@ -6063,7 +6063,7 @@ function itemOutlook(item) {
     return 'drop';
   }
 
-  // ≡ƒöÑ = strong, sustained heat ΓÇö not a couple of small raises
+  // 🔥 = strong, sustained heat — not a couple of small raises
   const strongStab = stab === 'Doing Well' || stab === 'Underpaid For';
   const fire =
     (streak >= 4 && riseCount >= 4 && (pct >= 1.5 || rise >= 4))
@@ -6073,7 +6073,7 @@ function itemOutlook(item) {
     || (pct >= 6 && riseCount >= 4 && streak >= 3 && rise >= 5);
   if (fire) return 'fire';
 
-  // ΓåæΓåæ = likely rising, but not locked-in fire
+  // ↑↑ = likely rising, but not locked-in fire
   if (
     rise >= 3.5
     || (streak >= 3 && riseCount >= 3 && pct >= 1)
@@ -6093,13 +6093,13 @@ function itemOutlook(item) {
 }
 
 const OUTLOOK_MARK = {
-  fire: { cls: 'hot', glyph: '≡ƒöÑ', title: 'Very likely to raise (strong sustained climb)' },
-  rise2: { cls: 'rise2', glyph: 'ΓåæΓåæ', title: 'Likely to raise' },
-  rise: { cls: 'rise', glyph: 'Γåæ', title: 'May raise' },
-  flat: { cls: 'flat', glyph: 'ΓöÇ', title: 'Hard to predict' },
-  drop: { cls: 'drop', glyph: 'Γåô', title: 'May drop' },
-  drop2: { cls: 'drop2', glyph: 'ΓåôΓåô', title: 'Likely to drop' },
-  caution: { cls: 'caution', glyph: 'ΓÜá', title: 'Very likely to drop' },
+  fire: { cls: 'hot', glyph: '🔥', title: 'Very likely to raise (strong sustained climb)' },
+  rise2: { cls: 'rise2', glyph: '↑↑', title: 'Likely to raise' },
+  rise: { cls: 'rise', glyph: '↑', title: 'May raise' },
+  flat: { cls: 'flat', glyph: '─', title: 'Hard to predict' },
+  drop: { cls: 'drop', glyph: '↓', title: 'May drop' },
+  drop2: { cls: 'drop2', glyph: '↓↓', title: 'Likely to drop' },
+  caution: { cls: 'caution', glyph: '⚠', title: 'Very likely to drop' },
 };
 
 function loadDumpIntoYourOffer(item) {
@@ -6149,11 +6149,11 @@ function itemNameHtml(item, opts) {
     marks = '<span class="name-mark ' + mark.cls + '" title="' + mark.title + '" aria-label="' + mark.title + '">' +
       mark.glyph + '</span>';
   }
-  const safe = String((item && item.name) || 'ΓÇö');
+  const safe = String((item && item.name) || '—');
   return '<span class="' + cls + '">' + safe + '</span>' + marks;
 }
 
-/** True hot = Market Pulse trending / "hot" tier ΓÇö not ordinary raises. */
+/** True hot = Market Pulse trending / "hot" tier — not ordinary raises. */
 function itemIsHot(item) {
   if (!item || !item.id) return false;
   if (itemDropSignal(item)) return false;
@@ -6162,7 +6162,7 @@ function itemIsHot(item) {
 
 /**
  * Normalized demand 0..10 for an item. Demand is how many people actively
- * want it ΓÇö high demand items move fast and are easy to trade at value;
+ * want it — high demand items move fast and are easy to trade at value;
  * low demand items are "overpay to move" and often sit. Defaults to a
  * neutral-ish 5 when the source didn't record it.
  */
@@ -6178,7 +6178,7 @@ function itemDemand(item) {
 /**
  * How easily an item can actually be traded/liquidated, 0..1.
  * Blends demand with the scraped "flippability" tier so the calculator can
- * reason about whether a real trader would take it ΓÇö not just its value.
+ * reason about whether a real trader would take it — not just its value.
  */
 function itemLiquidity(item) {
   if (!item) return 0.5;
@@ -6301,7 +6301,7 @@ function renderInvDumpTips() {
       row.innerHTML =
         art +
         '<div><div class="dump-title">' + itemNameHtml(tip.item, { className: 'name' }) + '</div>' +
-        '<div class="why">' + tip.why + ' ┬╖ ' + fmt(tip.item.value) + '</div></div>';
+        '<div class="why">' + tip.why + ' · ' + fmt(tip.item.value) + '</div></div>';
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.textContent = actionLabel;
@@ -6348,7 +6348,7 @@ function renderTrendRow(item, pctLabel, pctClass, opts) {
     '<div><div class="tname-wrap">' + itemNameHtml(item, {
       className: 'tname',
     }) + '</div>' +
-    '<div class="tmeta">' + metaBits.join(' ┬╖ ') + '</div></div>' +
+    '<div class="tmeta">' + metaBits.join(' · ') + '</div></div>' +
     '<div class="tpct ' + pctClass + '">' + pctLabel + '</div>';
   btn.addEventListener('click', () => openDetail(item));
   return btn;
@@ -6411,7 +6411,7 @@ function renderTrendsPanel() {
       const isHot = itemIsHot(r.item);
       const label = isHot
         ? 'hot'
-        : (r.abs > 0 ? signedFmt(r.abs) : 'Γåæ');
+        : (r.abs > 0 ? signedFmt(r.abs) : '↑');
       risersEl.appendChild(renderTrendRow(r.item, label, 'up', { hot: isHot }));
     });
   }
@@ -6534,13 +6534,13 @@ function describeTradeOutlook(yours, theirs) {
   const valuePct = yours > 0 ? (valueDiff / yours) * 100 : (valueDiff > 0 ? 100 : -100);
   const lossPct = valueDiff < -0.5 ? -valuePct : 0; // how much % you overpay
   const hopBudget = trendHopBudgetPct(yourSide, theirSide, trendEdge);
-  const lossLabel = lossPct >= 0.5 ? ('ΓêÆ' + lossPct.toFixed(lossPct >= 10 ? 0 : 1) + '%') : '';
+  const lossLabel = lossPct >= 0.5 ? ('−' + lossPct.toFixed(lossPct >= 10 ? 0 : 1) + '%') : '';
 
   // --- Realism / tradeability: value can lie when demand is thin ---
   // You're getting a value win, but on low-demand items that are hard to move.
   if (valuePct >= 6 && theirSide.hardToMove >= 1 && theirSide.liquidity <= 0.4) {
     return {
-      text: 'Value favors you, but those items have low demand ΓÇö expect to overpay to move them again',
+      text: 'Value favors you, but those items have low demand — expect to overpay to move them again',
       cls: 'warn',
     };
   }
@@ -6552,7 +6552,7 @@ function describeTradeOutlook(yours, theirs) {
     };
   }
 
-  // Receiving clear droppers ΓÇö don't call it a hop
+  // Receiving clear droppers — don't call it a hop
   if (theirSide.cold > 0 && theirSide.cold >= Math.max(1, theirSide.hot)) {
     if (valueDiff > yours * 0.08) {
       return {
@@ -6561,7 +6561,7 @@ function describeTradeOutlook(yours, theirs) {
       };
     }
     return {
-      text: 'Risky ΓÇö items you\'re getting look likely to fall',
+      text: 'Risky — items you\'re getting look likely to fall',
       cls: 'bad',
     };
   }
@@ -6575,7 +6575,7 @@ function describeTradeOutlook(yours, theirs) {
       };
     }
     return {
-      text: 'Weak on trends ΓÇö you\'d be giving away stronger risers',
+      text: 'Weak on trends — you\'d be giving away stronger risers',
       cls: 'bad',
     };
   }
@@ -6591,13 +6591,13 @@ function describeTradeOutlook(yours, theirs) {
     const room = hopBudget - lossPct;
     if (room >= hopBudget * 0.35) {
       return {
-        text: 'Worth the ' + lossLabel + ' ΓÇö solid trend hop',
+        text: 'Worth the ' + lossLabel + ' — solid trend hop',
         cls: 'good',
       };
     }
     if (room >= 0) {
       return {
-        text: 'Borderline hop ΓÇö ' + lossLabel + ' is about max for these trends',
+        text: 'Borderline hop — ' + lossLabel + ' is about max for these trends',
         cls: 'warn',
       };
     }
@@ -6608,7 +6608,7 @@ function describeTradeOutlook(yours, theirs) {
       };
     }
     return {
-      text: lossLabel + ' is too much ΓÇö trends don\'t cover that cut',
+      text: lossLabel + ' is too much — trends don\'t cover that cut',
       cls: 'bad',
     };
   }
@@ -6616,17 +6616,17 @@ function describeTradeOutlook(yours, theirs) {
   // Ahead or even on value + strong trends
   if (trendEdge >= 1.1) {
     if (valueDiff >= -0.5) {
-      return { text: 'Strong take ΓÇö their side looks hotter on trends', cls: 'good' };
+      return { text: 'Strong take — their side looks hotter on trends', cls: 'good' };
     }
   }
 
   if (trendEdge >= 0.45) {
     if (valueDiff >= -0.5) {
-      return { text: 'Good trade ΓÇö you\'re receiving the better trends', cls: 'good' };
+      return { text: 'Good trade — you\'re receiving the better trends', cls: 'good' };
     }
   }
 
-  // Value win but worse trends ΓÇö when is the premium worth keeping cold?
+  // Value win but worse trends — when is the premium worth keeping cold?
   if (trendEdge <= -0.45 && valuePct > 0) {
     const keepBudget = 3 + Math.abs(trendEdge) * 2.5 + theirSide.cold * 1.5;
     if (valuePct >= keepBudget + 4) {
@@ -6642,21 +6642,21 @@ function describeTradeOutlook(yours, theirs) {
       };
     }
     if (trendEdge <= -1.1) {
-      return { text: 'Poor on trends ΓÇö their items look colder', cls: 'bad' };
+      return { text: 'Poor on trends — their items look colder', cls: 'bad' };
     }
     return { text: 'Trends slightly favor their side', cls: 'warn' };
   }
 
   if (trendEdge <= -1.1) {
-    return { text: 'Poor on trends ΓÇö their items look colder', cls: 'bad' };
+    return { text: 'Poor on trends — their items look colder', cls: 'bad' };
   }
   if (trendEdge <= -0.45) {
     return { text: 'Trends slightly favor their side', cls: 'warn' };
   }
 
-  // Trends roughly even ΓÇö lean on value
+  // Trends roughly even — lean on value
   if (Math.abs(valueDiff) < 0.5) {
-    return { text: 'Even trade ΓÇö value and trends look balanced', cls: 'fair' };
+    return { text: 'Even trade — value and trends look balanced', cls: 'fair' };
   }
   if (valuePct >= 5) {
     return { text: 'Solid on value; trends look about even', cls: 'good' };
@@ -6692,7 +6692,7 @@ function updateHeader() {
   verdictEl.className = 'verdict';
   if (yours === 0 && theirs === 0) {
     verdictEl.classList.add('fair');
-    verdictEl.textContent = 'ΓÇö';
+    verdictEl.textContent = '—';
     meterFill.style.background = 'linear-gradient(90deg, var(--purple-deep), var(--purple-bright))';
     updateTradeOutlook(0, 0);
     return;
@@ -6748,9 +6748,9 @@ function updateTradeCaution() {
     const lossLabel = row.lost < 0 ? ('-' + fmt(Math.abs(row.lost))) : row.why;
     return row.name + ' <span class="drop">' + lossLabel + '</span>';
   });
-  const extra = losers.length > 3 ? ' ┬╖ +' + (losers.length - 3) + ' more' : '';
+  const extra = losers.length > 3 ? ' · +' + (losers.length - 3) + ' more' : '';
   el.innerHTML =
-    '<strong>Caution</strong> ΓÇö item' + (losers.length === 1 ? '' : 's') +
+    '<strong>Caution</strong> — item' + (losers.length === 1 ? '' : 's') +
     ' you\'re receiving recently lost value: ' + bits.join(', ') + extra;
   el.classList.add('show');
   if (theirBoard) theirBoard.classList.add('caution-side');
@@ -6840,10 +6840,10 @@ function buildTradeSlotEl(side, i) {
     ? '<img class="art" src="' + entry.image + '" alt="" decoding="async" referrerpolicy="no-referrer" />'
     : '<div class="art" style="display:grid;place-items:center;color:#9aa3b2;font-size:11px">No img</div>';
   slot.innerHTML =
-    '<button class="remove" type="button" title="Remove">├ù</button>' +
+    '<button class="remove" type="button" title="Remove">×</button>' +
     img +
     '<div class="qty">' +
-      '<button type="button" data-act="dec">ΓêÆ</button>' +
+      '<button type="button" data-act="dec">−</button>' +
       '<input type="number" min="1" max="99" value="' + entry.qty + '" />' +
       '<button type="button" data-act="inc">+</button>' +
     '</div>';
@@ -6891,7 +6891,7 @@ function buildTradeSlotEl(side, i) {
     e.preventDefault();
     removeTradeEntry(side, i, slot);
   });
-  slot.title = 'Click for details ┬╖ Right-click to remove';
+  slot.title = 'Click for details · Right-click to remove';
   slot.style.cursor = 'pointer';
   return slot;
 }
@@ -7300,11 +7300,11 @@ function prevTradeSlotCard(entry) {
   slot.innerHTML =
     art +
     '<div class="slot-name">' + name + '</div>' +
-    '<div class="slot-qty">├ù' + qty + '</div>' +
+    '<div class="slot-qty">×' + qty + '</div>' +
     '<div class="slot-vals">' +
       '<span>then <strong>' + fmt(thenV) + '</strong></span>' +
       '<span>now <strong>' + fmt(nowV) + '</strong>' +
-        (deltaHtml ? ' ┬╖ ' + deltaHtml : '') +
+        (deltaHtml ? ' · ' + deltaHtml : '') +
       '</span>' +
     '</div>';
   if (item) {
@@ -7334,7 +7334,7 @@ function openPrevTrade(tr) {
 
   if (prevTradeTitle) {
     prevTradeTitle.textContent = tr.source === 'inventory'
-      ? 'Previous trade ┬╖ From inventory'
+      ? 'Previous trade · From inventory'
       : 'Previous trade';
   }
   if (prevTradeMeta) {
@@ -7370,11 +7370,11 @@ function openPrevTrade(tr) {
 
   if (prevTradeYourTotals) {
     prevTradeYourTotals.innerHTML =
-      'Then <strong>' + fmt(tr.yourTotal) + '</strong> ┬╖ Now <strong>' + fmt(yourNow) + '</strong>';
+      'Then <strong>' + fmt(tr.yourTotal) + '</strong> · Now <strong>' + fmt(yourNow) + '</strong>';
   }
   if (prevTradeTheirTotals) {
     prevTradeTheirTotals.innerHTML =
-      'Then <strong>' + fmt(tr.theirTotal) + '</strong> ┬╖ Now <strong>' + fmt(theirNow) + '</strong>';
+      'Then <strong>' + fmt(tr.theirTotal) + '</strong> · Now <strong>' + fmt(theirNow) + '</strong>';
   }
 
   fillPrevTradeGrid(prevTradeYourGrid, tr.your);
@@ -7394,14 +7394,14 @@ function tradeHistItemCard(entry) {
     ? '<img src="' + image + '" alt="" loading="lazy" referrerpolicy="no-referrer" />'
     : '<div class="noimg">?</div>';
   const vals = moved
-    ? '<span class="was">' + fmt(wasV) + '</span> ΓåÆ <strong class="' + (nowV > wasV ? 'up' : 'down') + '">' + fmt(nowV) + '</strong>'
+    ? '<span class="was">' + fmt(wasV) + '</span> → <strong class="' + (nowV > wasV ? 'up' : 'down') + '">' + fmt(nowV) + '</strong>'
     : '<strong>' + fmt(wasV) + '</strong>';
   const card = document.createElement('div');
   card.className = 'trade-hist-item-card' + (item ? ' clickable' : '');
   card.innerHTML =
     '<div class="art-wrap">' + art + '</div>' +
     '<div class="iname" title="' + name + '">' + name + '</div>' +
-    (qty > 1 ? '<div class="qty">├ù' + qty + '</div>' : '') +
+    (qty > 1 ? '<div class="qty">×' + qty + '</div>' : '') +
     '<div class="vals"><span>' + vals + '</span></div>';
   if (item) {
     card.addEventListener('click', () => openDetail(item));
@@ -7416,7 +7416,7 @@ function tradeHistSideNames(side, limit) {
     const e = side[i];
     const item = byId[e.id];
     const name = item ? item.name : e.id;
-    bits.push((e.qty > 1 ? '├ù' + e.qty + ' ' : '') + name);
+    bits.push((e.qty > 1 ? '×' + e.qty + ' ' : '') + name);
   }
   if (side.length > limit) bits.push('+' + (side.length - limit));
   return bits.join(', ');
@@ -7487,7 +7487,7 @@ function renderTradeHistDetail(tr, idx) {
     '<div class="trade-hist-summary">' +
       '<div class="box">' +
         '<div class="num">' + fmt(yourNow) + '</div>' +
-        '<div class="label">GAVE ┬╖ NOW</div>' +
+        '<div class="label">GAVE · NOW</div>' +
         (valuesMoved ? '<div class="sub">was <strong>' + fmt(tr.yourTotal) + '</strong></div>' : '') +
       '</div>' +
       '<div class="mid">' +
@@ -7499,7 +7499,7 @@ function renderTradeHistDetail(tr, idx) {
       '</div>' +
       '<div class="box">' +
         '<div class="num">' + fmt(theirNow) + '</div>' +
-        '<div class="label">GOT ┬╖ NOW</div>' +
+        '<div class="label">GOT · NOW</div>' +
         (valuesMoved ? '<div class="sub">was <strong>' + fmt(tr.theirTotal) + '</strong></div>' : '') +
       '</div>' +
     '</div>' +
@@ -7594,12 +7594,12 @@ function renderTradeHistory() {
         '<span class="when">' + formatFullDate(tr.t) + '</span>' +
         '<div class="trade-hist-thumbs">' +
           tradeHistThumbsHtml(tr.your, 3) +
-          '<span class="arrow">ΓåÆ</span>' +
+          '<span class="arrow">→</span>' +
           tradeHistThumbsHtml(tr.their, 3) +
         '</div>' +
         '<div class="items-preview">' +
           tradeHistSideNames(tr.your, 2) +
-          '<span class="sep">ΓåÆ</span>' +
+          '<span class="sep">→</span>' +
           tradeHistSideNames(tr.their, 2) +
         '</div>' +
       '</div>' +
@@ -7700,7 +7700,7 @@ function renderDumpList() {
   if (!dumpListEl) return;
   dumpListEl.innerHTML = '';
   if (!state.dumpList.length) {
-    dumpListEl.innerHTML = '<div class="target-empty">Auto-detects drops ┬╖ or add your own</div>';
+    dumpListEl.innerHTML = '<div class="target-empty">Auto-detects drops · or add your own</div>';
     persistDumpList();
     return;
   }
@@ -7717,7 +7717,7 @@ function renderDumpList() {
       art +
       '<span class="label" title="' + item.name + '">' + item.name + '</span>' +
       '<span class="val">' + fmt(item.value) + '</span>' +
-      '<button class="x" type="button" aria-label="Remove">├ù</button>';
+      '<button class="x" type="button" aria-label="Remove">×</button>';
     chip.querySelector('.x').addEventListener('click', (e) => {
       e.stopPropagation();
       state.dumpList = state.dumpList.filter((t) => t.id !== entry.id);
@@ -7752,7 +7752,7 @@ function renderTargets() {
       art +
       '<span class="label" title="' + item.name + '">' + item.name + '</span>' +
       '<span class="val">' + fmt(item.value) + '</span>' +
-      '<button class="x" type="button" aria-label="Remove">├ù</button>';
+      '<button class="x" type="button" aria-label="Remove">×</button>';
     chip.querySelector('.x').addEventListener('click', (e) => {
       e.stopPropagation();
       state.targets = state.targets.filter((t) => t.id !== entry.id);
@@ -7820,7 +7820,7 @@ function saveInvSnapshot() {
   syncInferredTradesFromInvHistory();
   updateInvPanel();
   commitHistory();
-  setInvStatus('Saved ┬╖ ' + new Date().toLocaleString());
+  setInvStatus('Saved · ' + new Date().toLocaleString());
 }
 
 /** Inventory snapshots use Date.now() (ms); item value history uses unix seconds. */
@@ -7950,7 +7950,7 @@ function renderInvHistoryList() {
         line.innerHTML =
           art +
           '<div class="name" title="' + row.item.name + '">' + row.item.name + '</div>' +
-          '<div class="detail">├ù' + row.entry.qty + ' ┬╖ <strong>' + fmt(row.item.value * row.entry.qty) + '</strong></div>';
+          '<div class="detail">×' + row.entry.qty + ' · <strong>' + fmt(row.item.value * row.entry.qty) + '</strong></div>';
         itemsEl.appendChild(line);
       }
     }
@@ -8024,7 +8024,7 @@ function restoreInvFromHistory(index) {
   persistInv();
   render();
   commitHistory();
-  setInvStatus('Restored ΓÇö Save to keep', true);
+  setInvStatus('Restored — Save to keep', true);
   closeGraph();
 }
 
@@ -8038,10 +8038,10 @@ function renderGraph() {
 
   pointsEl.textContent = String(hist.length);
   if (hist.length < 1) {
-    latestEl.textContent = 'ΓÇö';
-    minEl.textContent = 'ΓÇö';
-    maxEl.textContent = 'ΓÇö';
-    deltaEl.textContent = 'ΓÇö';
+    latestEl.textContent = '—';
+    minEl.textContent = '—';
+    maxEl.textContent = '—';
+    deltaEl.textContent = '—';
     deltaEl.className = 'delta';
   }
 
@@ -8095,8 +8095,8 @@ function updateInvPanel() {
 
   if (last == null) {
     invDeltaEl.className = 'inv-delta flat';
-    invDeltaEl.textContent = 'ΓÇö';
-    invSinceEl.textContent = 'all time ΓÇö';
+    invDeltaEl.textContent = '—';
+    invSinceEl.textContent = 'all time —';
   } else {
     const delta = total - last;
     const first = hist[0].v;
@@ -8111,7 +8111,7 @@ function updateInvPanel() {
     setInvStatus('Unsaved', true);
     invSaveBtn.textContent = 'Save*';
   } else if (hist.length) {
-    setInvStatus('Saved ┬╖ ' + formatShortDate(hist[hist.length - 1].t));
+    setInvStatus('Saved · ' + formatShortDate(hist[hist.length - 1].t));
     invSaveBtn.textContent = 'Save';
   } else {
     setInvStatus('');
@@ -8152,7 +8152,7 @@ function updateInvPanel() {
       }) + '</div>' +
       '<div class="meta">' + fmt(item.value * entry.qty) + '</div></div>' +
       '<div class="qty">' +
-        '<button type="button" data-act="dec">ΓêÆ</button>' +
+        '<button type="button" data-act="dec">−</button>' +
         '<span>' + entry.qty + '</span>' +
         '<button type="button" data-act="inc">+</button>' +
       '</div>';
@@ -8186,18 +8186,18 @@ function updateInvPanel() {
 
 function parseChangePct(change) {
   if (!change || typeof change !== 'string') return 0;
-  const m = change.match(/([+\-ΓêÆ])\s*([0-9]+(?:\.[0-9]+)?)%/);
+  const m = change.match(/([+\-−])\s*([0-9]+(?:\.[0-9]+)?)%/);
   if (!m) return 0;
-  const sign = (m[1] === '-' || m[1] === 'ΓêÆ') ? -1 : 1;
+  const sign = (m[1] === '-' || m[1] === '−') ? -1 : 1;
   return sign * parseFloat(m[2]);
 }
 
 /** Absolute value delta from SV change text like "(-1,000) -2.2%". */
 function parseChangeAbs(change, value, pct) {
   if (change && typeof change === 'string') {
-    const m = change.match(/\(([+\-ΓêÆ]?\s*[0-9][0-9,]*(?:\.[0-9]+)?)\)/);
+    const m = change.match(/\(([+\-−]?\s*[0-9][0-9,]*(?:\.[0-9]+)?)\)/);
     if (m) {
-      const raw = m[1].replace(/[\s,]/g, '').replace('ΓêÆ', '-');
+      const raw = m[1].replace(/[\s,]/g, '').replace('−', '-');
       const n = parseFloat(raw);
       if (Number.isFinite(n)) return n;
     }
@@ -8235,7 +8235,7 @@ function comboWant(items) {
   return items.reduce((sum, item) => sum + wantScore(item), 0) / items.length;
 }
 
-/** Value-weighted outlook (ΓêÆ3ΓÇª+3). High = hotter / rising. */
+/** Value-weighted outlook (−3…+3). High = hotter / rising. */
 function comboOutlookAvg(items) {
   if (!items.length) return 0;
   let weighted = 0;
@@ -8248,7 +8248,7 @@ function comboOutlookAvg(items) {
   return total ? weighted / total : 0;
 }
 
-/** Value-weighted liquidity (0ΓÇª1). High = easy to trade / high demand. */
+/** Value-weighted liquidity (0…1). High = easy to trade / high demand. */
 function comboLiquidityAvg(items) {
   if (!items.length) return 0.5;
   let weighted = 0;
@@ -8263,7 +8263,7 @@ function comboLiquidityAvg(items) {
 
 /**
  * Score a package YOU would give to match their side.
- * Biased toward slight underpay and dumping colder items (not your ≡ƒöÑs).
+ * Biased toward slight underpay and dumping colder items (not your 🔥s).
  */
 function scoreOfferPackage(combo, theirValue) {
   const v = comboValue(combo);
@@ -8315,7 +8315,7 @@ function scoreReceivePackage(combo, yourValue, hasTarget) {
   score += heat * 20;
   score += comboWant(combo) * 2.2;
 
-  // Realism: prefer receiving liquid, high-demand items ΓÇö they hold value and
+  // Realism: prefer receiving liquid, high-demand items — they hold value and
   // re-trade easily. Low-demand "overpay to move" items are worth less in practice.
   const liq = comboLiquidityAvg(combo);
   score += (liq - 0.5) * 30;
@@ -8384,10 +8384,10 @@ function reasonBits(gives, gets) {
   if (Math.abs(valueDiff) < Math.max(25, comboValue(gives) * 0.015)) bits.push('near equal value');
   else if (valueDiff > 0) bits.push('+' + fmt(valueDiff) + ' listed');
   else bits.push(signedFmt(valueDiff) + ' listed');
-  return bits.slice(0, 4).join(' ┬╖ ') || 'Stronger performance signals';
+  return bits.slice(0, 4).join(' · ') || 'Stronger performance signals';
 }
 
-/** Tight value band ΓÇö MM2 offers rarely clear big listed gaps. Biased so you rarely lose. */
+/** Tight value band — MM2 offers rarely clear big listed gaps. Biased so you rarely lose. */
 function suggestionValueOk(gv, tv, opts) {
   opts = opts || {};
   if (gv < 1 || tv < 1) return false;
@@ -8402,7 +8402,7 @@ function suggestionValueOk(gv, tv, opts) {
   return true;
 }
 
-/** Prefer real offer shapes: 1v1, 1v2, 2v1, 2v2, etc. ΓÇö not lopsided piles. */
+/** Prefer real offer shapes: 1v1, 1v2, 2v1, 2v2, etc. — not lopsided piles. */
 function suggestionShapeOk(gives, gets) {
   const gu = uniqueCount(gives);
   const tu = uniqueCount(gets);
@@ -8509,9 +8509,9 @@ function isChromaSet(item) {
 }
 
 function rarityLabel(item) {
-  if (!item) return 'ΓÇö';
+  if (!item) return '—';
   if (isChromaSet(item)) return 'Chroma Set';
-  return item.rarity || 'ΓÇö';
+  return item.rarity || '—';
 }
 
 function catalogSets() {
@@ -8645,7 +8645,7 @@ function suggestBudget() {
   }
 }
 
-/** Hot trending or clearly rising elite items ΓÇö used as soft receive targets. */
+/** Hot trending or clearly rising elite items — used as soft receive targets. */
 function isHotRisingTarget(item) {
   if (!item || !SUGGEST_RARITIES.has(item.rarity) || item.value < 1) return false;
   if (itemDropSignal(item)) return false;
@@ -8765,7 +8765,7 @@ function buildSuggestions() {
 
   const ideas = [];
   const giveCombosAll = [];
-  // Fast mode caps give-side to 3 pieces ΓÇö the 4-piece give combos add a lot
+  // Fast mode caps give-side to 3 pieces — the 4-piece give combos add a lot
   // of pairings for little gain and are the main source of lag.
   const maxGive = state.suggestDepth === 'fast' ? 3 : SLOTS;
   for (let gs = 1; gs <= maxGive; gs++) {
@@ -8962,7 +8962,7 @@ function buildDumpTradeIdeas() {
             if (sig) return sig.why;
             if (pickedIds.has(item.id)) return 'you chose to trade off';
             return '';
-          }).filter(Boolean).slice(0, 2).join(' ┬╖ '),
+          }).filter(Boolean).slice(0, 2).join(' · '),
         };
       }
     }
@@ -9039,8 +9039,8 @@ function applyCompletedTrade() {
     return;
   }
 
-  const giveNames = giving.map((e) => (e.qty > 1 ? e.qty + '├ù ' : '') + e.name).join(', ');
-  const getNames = getting.map((e) => (e.qty > 1 ? e.qty + '├ù ' : '') + e.name).join(', ');
+  const giveNames = giving.map((e) => (e.qty > 1 ? e.qty + '× ' : '') + e.name).join(', ');
+  const getNames = getting.map((e) => (e.qty > 1 ? e.qty + '× ' : '') + e.name).join(', ');
   if (!confirm(
     'Apply this trade to My Items?\n\n' +
     'Remove: ' + giveNames + '\n' +
@@ -9093,7 +9093,7 @@ function applyCompletedTrade() {
   syncInferredTradesFromInvHistory();
   render();
   commitHistory();
-  setInvStatus('Trade applied ┬╖ saved ' + new Date().toLocaleString());
+  setInvStatus('Trade applied · saved ' + new Date().toLocaleString());
 }
 
 function inventoryOfferPool(excludeIds, opts) {
@@ -9199,7 +9199,7 @@ function collectOfferCombos(filterFn, opts) {
   // 4 unique item types max; stacks share a slot. Prefer extras so sets stay intact.
   enumeratePool(pool, [], 0);
 
-  // Trading a whole set is OK (not breaking it) ΓÇö include intact set ┬▒ loose fillers
+  // Trading a whole set is OK (not breaking it) — include intact set ± loose fillers
   if (!allowBreak) {
     for (const b of protect.intactBundles) {
       if (b.members.length > SLOTS) continue;
@@ -9400,7 +9400,7 @@ function generateOfferAgainstTheir() {
     return;
   }
 
-  // Keep offers tight ΓÇö avoid big overpays on generate
+  // Keep offers tight — avoid big overpays on generate
   const maxPay = theirValue * 1.035;
   const breakOpts = offerBreakOpts();
 
@@ -9421,7 +9421,7 @@ function generateOfferAgainstTheir() {
     }
     if (!fallback.length) {
       alert(state.avoidSetBreaks
-        ? 'No offer combos without breaking a set. Turn off ΓÇ£Avoid set breaksΓÇ¥ to unlock set pieces.'
+        ? 'No offer combos without breaking a set. Turn off “Avoid set breaks” to unlock set pieces.'
         : 'No offer combos available from My Items.');
       return;
     }
@@ -9503,7 +9503,7 @@ function generateLowerOffer() {
 
   if (!cycle.list.length) {
     alert(state.avoidSetBreaks
-      ? 'No lower offers without breaking a set. Turn off ΓÇ£Avoid set breaksΓÇ¥ to unlock set pieces.'
+      ? 'No lower offers without breaking a set. Turn off “Avoid set breaks” to unlock set pieces.'
       : 'No lower offers available from My Items.');
     state.lowerCycle = null;
     return;
@@ -9582,7 +9582,7 @@ function generateHigherOffer() {
 
   if (!cycle.list.length) {
     alert(state.avoidSetBreaks
-      ? 'No higher offers without breaking a set. Turn off ΓÇ£Avoid set breaksΓÇ¥ to unlock set pieces.'
+      ? 'No higher offers without breaking a set. Turn off “Avoid set breaks” to unlock set pieces.'
       : 'No higher offers available from My Items.');
     state.higherCycle = null;
     return;
@@ -9615,27 +9615,27 @@ function renderSuggestCard(idea, opts) {
   const card = document.createElement('div');
   card.className = 'suggest-card' + (opts.dump ? ' dump' : '');
   const targetNote = idea.targetHits
-    ? ' ┬╖ includes ' + idea.targetHits + ' target' + (idea.targetHits > 1 ? 's' : '')
+    ? ' · includes ' + idea.targetHits + ' target' + (idea.targetHits > 1 ? 's' : '')
     : (idea.hotHits
-      ? ' ┬╖ ' + idea.hotHits + ' hot/rising'
+      ? ' · ' + idea.hotHits + ' hot/rising'
       : '');
   const whyExtra = opts.dump && idea.dumpWhy
-    ? 'Dump: ' + idea.dumpWhy + ' ┬╖ '
+    ? 'Dump: ' + idea.dumpWhy + ' · '
     : (!opts.dump && state.autoTargetHot && idea.targetHits
-      ? 'Hot/rising aim ┬╖ '
+      ? 'Hot/rising aim · '
       : '');
   const why = whyExtra + reasonBits(gives, gets);
   card.innerHTML =
     '<div class="suggest-swap">' +
       '<div class="suggest-side">' +
-        '<div class="tag">' + (opts.dump ? 'TRADE OFF ┬╖ ' : 'GIVE ┬╖ ') + gives.length + '</div>' +
+        '<div class="tag">' + (opts.dump ? 'TRADE OFF · ' : 'GIVE · ') + gives.length + '</div>' +
         artsHtml(gives) +
         '<div class="name" title="' + namesLine(gives) + '">' + namesRichHtml(gives) + '</div>' +
         '<div class="val">' + fmt(idea.gv) + '</div>' +
       '</div>' +
-      '<div class="suggest-arrow">ΓåÆ</div>' +
+      '<div class="suggest-arrow">→</div>' +
       '<div class="suggest-side">' +
-        '<div class="tag">GET ┬╖ ' + gets.length + targetNote + '</div>' +
+        '<div class="tag">GET · ' + gets.length + targetNote + '</div>' +
         artsHtml(gets) +
         '<div class="name" title="' + namesLine(gets) + '">' + namesRichHtml(gets) + '</div>' +
         '<div class="val">' + fmt(idea.tv) + '</div>' +
@@ -9769,7 +9769,7 @@ function render(opts) {
     paintTradeBoards({ full: true });
   }
   if (opts.inv !== false) updateInvPanel();
-  // Suggestions depend on inventory / targets / dump ΓÇö NOT the offer boards.
+  // Suggestions depend on inventory / targets / dump — NOT the offer boards.
   // Never rebuild them on trade-slot add/remove (that was freezing the UI).
   const needSuggest = opts.suggestions === true || (opts.suggestions !== false && opts.inv !== false);
   if (needSuggest) {
@@ -9783,7 +9783,7 @@ function render(opts) {
 
 function openPicker(side) {
   if (side !== 'inv' && side !== 'targets' && side !== 'dump' && firstEmpty(side) === -1) {
-    alert('That offer is full (4 unique items ΓÇö stacks share a slot).');
+    alert('That offer is full (4 unique items — stacks share a slot).');
     return;
   }
   state.pickingFor = side;
@@ -9897,13 +9897,13 @@ function renderQuickResults() {
     const art = item.image
       ? '<img src="' + item.image + '" alt="" loading="lazy" referrerpolicy="no-referrer" />'
       : '<div class="noimg">?</div>';
-    const demand = item.demand != null ? ' ┬╖ Demand ' + item.demand : '';
+    const demand = item.demand != null ? ' · Demand ' + item.demand : '';
     row.innerHTML =
       art +
       '<div><div class="name-line">' + itemNameHtml(item, {
         className: 'name',
       }) + '</div>' +
-      '<div class="meta">' + item.id + ' ┬╖ ' + rarityLabel(item) + demand + '</div>' +
+      '<div class="meta">' + item.id + ' · ' + rarityLabel(item) + demand + '</div>' +
       '<div class="val">' + fmt(item.value) + '</div></div>' +
       '<div class="quick-actions">' +
         '<button type="button" class="offer">Add to offer</button>' +
@@ -9959,7 +9959,7 @@ function renderPickerMine() {
       '<div><div class="name-line">' + itemNameHtml(item, {
         className: 'name',
       }) + '</div>' +
-      '<div class="meta">├ù' + entry.qty + ' ┬╖ ' + fmt(item.value) + '</div></div>';
+      '<div class="meta">×' + entry.qty + ' · ' + fmt(item.value) + '</div></div>';
     row.title = 'Add to offer';
     row.addEventListener('click', () => addFromMine(item));
     frag.appendChild(row);
@@ -9990,18 +9990,18 @@ function renderPicker() {
       const art = item.image
         ? '<img src="' + item.image + '" alt="" loading="lazy" referrerpolicy="no-referrer" />'
         : '<div class="noimg">?</div>';
-      const demand = item.demand != null ? ' ┬╖ Demand ' + item.demand : '';
+      const demand = item.demand != null ? ' · Demand ' + item.demand : '';
       const members = (item.members && item.members.length)
-        ? ' ┬╖ adds ' + item.members.length + ' items'
-        : (item.rarity === 'Set' ? ' ┬╖ set (no breakdown)' : '');
+        ? ' · adds ' + item.members.length + ' items'
+        : (item.rarity === 'Set' ? ' · set (no breakdown)' : '');
       row.innerHTML =
         art +
         '<div><div class="name-line">' + itemNameHtml(item, {
           className: 'name',
         }) + '</div>' +
-        '<div class="meta">' + item.id + ' ┬╖ ' + rarityLabel(item) + demand + members + '</div></div>' +
+        '<div class="meta">' + item.id + ' · ' + rarityLabel(item) + demand + members + '</div></div>' +
         '<div class="val">' + fmt(item.value) + '</div>';
-      row.title = 'Left-click add & close ┬╖ Right-click add & keep open';
+      row.title = 'Left-click add & close · Right-click add & keep open';
       row.addEventListener('click', () => addItem(item, false));
       row.addEventListener('contextmenu', (e) => {
         e.preventDefault();
@@ -10078,10 +10078,10 @@ function addItem(item, keepOpen) {
   // Expand sets into their contained items when we know the full list
   const memberIds = item.members && item.members.length ? item.members : null;
   if (item.rarity === 'Set' && !memberIds) {
-    // Opaque set row ΓÇö still addable as one trade slot
+    // Opaque set row — still addable as one trade slot
     if (!placeOne(side, item)) {
       if (side !== 'inv' && side !== 'targets' && side !== 'dump') {
-        alert('That offer is full (4 unique items ΓÇö stacks share a slot).');
+        alert('That offer is full (4 unique items — stacks share a slot).');
       }
       return;
     }
@@ -10097,10 +10097,10 @@ function addItem(item, keepOpen) {
       else parts.push(part);
     }
     if (!parts.length) {
-      // Broken mapping ΓÇö fall back to the set as one entry
+      // Broken mapping — fall back to the set as one entry
       if (!placeOne(side, item)) {
         if (side !== 'inv' && side !== 'targets' && side !== 'dump') {
-          alert('That offer is full (4 unique items ΓÇö stacks share a slot).');
+          alert('That offer is full (4 unique items — stacks share a slot).');
         }
         return;
       }
@@ -10111,7 +10111,7 @@ function addItem(item, keepOpen) {
       const empty = state[side].filter((x) => !x).length;
       const needNew = parts.filter((p) => !state[side].some((e) => e && e.id === p.id)).length;
       if (needNew > empty) {
-        // Not enough room to expand ΓÇö add the set as a single valued slot instead
+        // Not enough room to expand — add the set as a single valued slot instead
         if (!placeOne(side, item)) {
           alert(
             'Need ' + needNew + ' empty slots to expand this set (have ' + empty +
@@ -10129,7 +10129,7 @@ function addItem(item, keepOpen) {
   }
 
   if (!placeOne(side, item)) {
-    if (side !== 'inv' && side !== 'targets' && side !== 'dump') alert('That offer is full (4 unique items ΓÇö stacks share a slot).');
+    if (side !== 'inv' && side !== 'targets' && side !== 'dump') alert('That offer is full (4 unique items — stacks share a slot).');
     return;
   }
   afterItemChange(side, keepOpen);
@@ -10212,7 +10212,7 @@ document.addEventListener('keydown', (e) => {
 });
 
 /* =========================================================================
- * Paste-a-screenshot ΓåÆ auto-fill trade
+ * Paste-a-screenshot → auto-fill trade
  * Paste a Roblox MM2 trade window screenshot anywhere (Ctrl/Cmd+V).
  * Top row = Your Offer, bottom row = Their Offer.
  * We OCR the item name tags (Tesseract.js, loaded on demand), fuzzy-match
@@ -10450,15 +10450,15 @@ function psHide() {
 }
 function psLoading() {
   psRender(
-    '<div class="ps-head"><span class="ps-spin"></span>Reading trade from imageΓÇª'
-    + '<button class="ps-close" title="Dismiss">├ù</button></div>'
-    + '<div class="ps-hint">First read loads the text-reader ΓÇö can take a few seconds.</div>'
+    '<div class="ps-head"><span class="ps-spin"></span>Reading trade from image…'
+    + '<button class="ps-close" title="Dismiss">×</button></div>'
+    + '<div class="ps-hint">First read loads the text-reader — can take a few seconds.</div>'
   );
 }
 function psError(msg) {
   psRender(
     '<div class="ps-head">Couldn\'t read that image'
-    + '<button class="ps-close" title="Dismiss">├ù</button></div>'
+    + '<button class="ps-close" title="Dismiss">×</button></div>'
     + '<div class="ps-row">' + escapeHtml(msg || '') + '</div>'
     + '<div class="ps-hint">Try a clearer, uncropped screenshot of the trade window, '
     + 'or add items manually.</div>',
@@ -10488,11 +10488,11 @@ function psResult(parsed) {
   const anyMiss = parsed.your.concat(parsed.their).some((i) => !i.item);
   const anyLow = parsed.your.concat(parsed.their).some((i) => i.item && i.score != null && i.score < 0.72);
   let hint = 'Filled from your screenshot. Wrong item? Click it on the board to remove, then add the right one.';
-  if (anyMiss) hint = 'Some labels (marked ?) weren\'t recognized ΓÇö add those manually.';
-  else if (anyLow) hint = 'Some names were a fuzzy match ΓÇö double-check the boards, especially same-name items.';
+  if (anyMiss) hint = 'Some labels (marked ?) weren\'t recognized — add those manually.';
+  else if (anyLow) hint = 'Some names were a fuzzy match — double-check the boards, especially same-name items.';
   psRender(
     '<div class="ps-head">Read from image'
-    + '<button class="ps-close" title="Dismiss">├ù</button></div>'
+    + '<button class="ps-close" title="Dismiss">×</button></div>'
     + rowHtml('Your Offer', parsed.your)
     + rowHtml('Their Offer', parsed.their)
     + '<div class="ps-hint">' + hint + '</div>'

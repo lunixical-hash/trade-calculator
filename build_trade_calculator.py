@@ -6409,13 +6409,13 @@ function itemOutlook(item) {{
 }}
 
 const OUTLOOK_MARK = {{
-  fire: {{ cls: 'hot', glyph: '🔥', title: 'Very likely to raise (strong sustained climb)' }},
-  rise2: {{ cls: 'rise2', glyph: '↑↑', title: 'Likely to raise' }},
-  rise: {{ cls: 'rise', glyph: '↑', title: 'May raise' }},
-  flat: {{ cls: 'flat', glyph: '─', title: 'Hard to predict' }},
-  drop: {{ cls: 'drop', glyph: '↓', title: 'May drop' }},
-  drop2: {{ cls: 'drop2', glyph: '↓↓', title: 'Likely to drop' }},
-  caution: {{ cls: 'caution', glyph: '⚠', title: 'Very likely to drop' }},
+  fire: {{ cls: 'hot', glyph: '\uD83D\uDD25', title: 'Very likely to raise (strong sustained climb)' }},
+  rise2: {{ cls: 'rise2', glyph: '\u2191\u2191', title: 'Likely to raise' }},
+  rise: {{ cls: 'rise', glyph: '\u2191', title: 'May raise' }},
+  flat: {{ cls: 'flat', glyph: '\u2500', title: 'Hard to predict' }},
+  drop: {{ cls: 'drop', glyph: '\u2193', title: 'May drop' }},
+  drop2: {{ cls: 'drop2', glyph: '\u2193\u2193', title: 'Likely to drop' }},
+  caution: {{ cls: 'caution', glyph: '\u26A0', title: 'Very likely to drop' }},
 }};
 
 function loadDumpIntoYourOffer(item) {{
