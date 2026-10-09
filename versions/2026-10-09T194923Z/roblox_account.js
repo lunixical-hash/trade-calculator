@@ -89,27 +89,10 @@
     if ((account && account.id) !== prevId) emitChange();
   }
 
-  async function probeLocalAuth() {
-    try {
-      const ctrl =
-        typeof AbortSignal !== 'undefined' && AbortSignal.timeout
-          ? AbortSignal.timeout(700)
-          : undefined;
-      const res = await fetch('http://127.0.0.1:8787/health', {
-        cache: 'no-store',
-        signal: ctrl,
-      });
-      if (res.ok) return 'http://127.0.0.1:8787';
-    } catch (_) {}
-    return '';
-  }
-
   async function fetchConfig() {
     config = await O().loadConfig();
-    if (!apiBase()) {
-      const local = await probeLocalAuth();
-      if (local) config.authApiBase = local;
-    }
+    // Do not auto-probe localhost — that triggers Chromium's
+    // "Access other apps and services on this device" permission prompt.
   }
 
   function renderChip() {
@@ -173,10 +156,10 @@
     const guest = $('rbxGuest');
     const oauthBtn = $('rbxOAuthBtn');
     const userForm = $('rbxUserForm');
-    const setup = $('rbxSetupHint');
     const divider = $('rbxDivider');
     const hasOAuth = oauthConfigured();
     const hasServer = !!apiBase();
+    const allowUsername = config.enableUsernameLink !== false && hasServer;
 
     if (signed) signed.hidden = !(account && account.id != null);
     if (guest) guest.hidden = !!(account && account.id != null);
@@ -211,18 +194,10 @@
     if (oauthBtn) {
       oauthBtn.hidden = false;
       oauthBtn.disabled = !hasOAuth;
-      oauthBtn.textContent = hasOAuth
-        ? 'Sign in with Roblox'
-        : 'Sign in with Roblox (setup needed)';
+      oauthBtn.textContent = 'Sign in with Roblox';
     }
-    if (userForm) {
-      const allow = config.enableUsernameLink !== false && hasServer;
-      userForm.hidden = !allow;
-    }
-    if (divider) divider.hidden = !(hasServer && config.enableUsernameLink !== false);
-    if (setup) {
-      setup.hidden = hasOAuth;
-    }
+    if (userForm) userForm.hidden = !allowUsername;
+    if (divider) divider.hidden = !allowUsername;
   }
 
   async function startOAuth() {
@@ -372,15 +347,6 @@
         margin:12px 0 0; font-size:12px; color: var(--muted,#9a90b3); min-height:1.2em;
       }
       .rbx-status.error { color:#fb7185; }
-      .rbx-setup {
-        margin-top:12px; padding:10px 12px; border-radius:12px;
-        background:rgba(168,85,247,0.08); border:1px solid var(--line,#2a2438);
-        font-size:12px; color:var(--muted,#9a90b3); line-height:1.45;
-      }
-      .rbx-setup a { color: var(--purple-bright,#c084fc); }
-      .rbx-setup code {
-        font-size:11px; color:var(--purple-bright,#c084fc);
-      }
       .rbx-signed {
         display:flex; gap:12px; align-items:center; margin-bottom:14px;
       }
@@ -415,6 +381,16 @@
       else document.body.prepend(slot);
     }
 
+    // Drop any stale modal from an older cached script build
+    const stale = $('rbxModal');
+    if (stale) {
+      const lead = stale.querySelector('.rbx-lead');
+      const leadText = lead ? lead.textContent || '' : '';
+      if (stale.querySelector('#rbxSetupHint') || /Bloxlink|setup needed|One-time owner/i.test(stale.innerHTML + leadText)) {
+        stale.remove();
+      }
+    }
+
     if (!$('rbxModal')) {
       const modal = document.createElement('div');
       modal.id = 'rbxModal';
@@ -425,7 +401,7 @@
           <div class="rbx-dialog" role="dialog" aria-modal="true" aria-labelledby="rbxModalTitle">
             <button type="button" class="rbx-modal-close" id="rbxCloseBtn" aria-label="Close">×</button>
             <h2 id="rbxModalTitle">Roblox account</h2>
-            <p class="rbx-lead">Sign in with Roblox App permissions — same Approve flow used by apps like Bloxlink. No codes or commands.</p>
+            <p class="rbx-lead">Connect your Roblox account to save calculator data on this device.</p>
 
             <div id="rbxSignedIn" hidden>
               <div class="rbx-signed">
@@ -452,15 +428,6 @@
                     <button type="submit" class="primary" id="rbxLinkBtn">Link</button>
                   </div>
                 </form>
-              </div>
-              <div class="rbx-setup" id="rbxSetupHint" hidden>
-                <strong>One-time owner setup</strong> (then every visitor just clicks Sign in):<br/>
-                1. Create an OAuth 2.0 app at
-                <a href="https://create.roblox.com/dashboard/credentials" target="_blank" rel="noopener">Roblox Creator credentials</a><br/>
-                2. Add redirect URL
-                <code>https://lunixical-hash.github.io/trade-calculator/oauth_callback.html</code><br/>
-                3. Enable scopes <code>openid</code> and <code>profile</code><br/>
-                4. Paste the <strong>Client ID</strong> into <code>auth_public.json</code> → <code>clientId</code>
               </div>
             </div>
             <p class="rbx-status" id="rbxStatus" hidden></p>
