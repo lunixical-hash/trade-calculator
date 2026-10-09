@@ -1,4 +1,4 @@
-"""
+﻿"""
 Scrapes MM2 item values from supremevalues.com and writes mm2_values.json.
 
 Captures: value, display name, image URL, category rarity, demand, rarity score,
@@ -103,10 +103,10 @@ def to_game_name(display_name: str, name_map: dict[str, str]) -> str | None:
 def parse_change_pct(change: str | None) -> float:
     if not change or not isinstance(change, str):
         return 0.0
-    m = re.search(r"([+\-−])\s*([0-9]+(?:\.[0-9]+)?)\s*%", change)
+    m = re.search(r"([+\-ΓêÆ])\s*([0-9]+(?:\.[0-9]+)?)\s*%", change)
     if not m:
         return 0.0
-    sign = -1.0 if m.group(1) in {"-", "−"} else 1.0
+    sign = -1.0 if m.group(1) in {"-", "ΓêÆ"} else 1.0
     return sign * float(m.group(2))
 
 
@@ -693,7 +693,7 @@ def merge_item_history(
     # Drop wrong-scale / synthetic points before deciding on the tip
     hist = sanitize_item_history(hist, value)
 
-    # If value moved since last known point, record the scrape tip — but never
+    # If value moved since last known point, record the scrape tip ΓÇö but never
     # invent a fake "yesterday" prior from % change or previous catalog value.
     if not hist:
         hist = [
@@ -711,7 +711,7 @@ def merge_item_history(
                 "label": time.strftime("%Y-%m-%d", time.localtime(updated_at)),
             }
         )
-    # else: tip value already matches — keep the authoritative SV/scrape stamp
+    # else: tip value already matches ΓÇö keep the authoritative SV/scrape stamp
 
     return sanitize_item_history(hist, value)[-HISTORY_MAX_POINTS:]
 
@@ -848,6 +848,27 @@ def main() -> None:
             rarities[src] = rarities[dst]
         if dst in meta and src not in meta:
             meta[src] = meta[dst]
+
+    # Safety guard: never overwrite a good catalog with an empty / tiny scrape.
+    # A failed or blocked scrape (common on headless/CI IPs) returns 0 items.
+    # Writing that out would wipe the live site, so abort loudly instead.
+    MIN_ABSOLUTE_ITEMS = 50
+    prev_count = 0
+    if isinstance(previous.get("items"), dict):
+        prev_count = len(previous["items"])
+
+    if len(items) < MIN_ABSOLUTE_ITEMS:
+        raise SystemExit(
+            f"Aborting: scrape produced only {len(items)} items "
+            f"(minimum {MIN_ABSOLUTE_ITEMS}). Not overwriting {OUT_FILE.name}. "
+            f"Supreme Values likely blocked or changed its markup."
+        )
+    if prev_count >= MIN_ABSOLUTE_ITEMS and len(items) < prev_count * 0.5:
+        raise SystemExit(
+            f"Aborting: scrape produced {len(items)} items, less than half of "
+            f"the previous {prev_count}. Refusing to overwrite {OUT_FILE.name} "
+            f"with a likely-broken scrape."
+        )
 
     payload = apply_to_values_payload(
         {
