@@ -319,7 +319,7 @@ def main() -> None:
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lunix's AI Trade Assistant</title>
+<title>MM2 Trade Calculator</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
@@ -4204,7 +4204,7 @@ def main() -> None:
   </aside>
   <div class="wrap">
     <div class="wrap-head">
-      <h1>Lunix's AI Trade Assistant</h1>
+      <h1>MM2 Trade Calculator</h1>
       <label class="set-protect-toggle" title="Type anywhere to search — add to Your Offer or Their Offer">
         <input type="checkbox" id="quickSearchToggle" />
         Quick search
@@ -6409,7 +6409,7 @@ function itemOutlook(item) {{
 }}
 
 const OUTLOOK_MARK = {{
-  fire: {{ cls: 'hot', glyph: '\uD83D\uDD25', title: 'Very likely to raise (strong sustained climb)' }},
+  fire: {{ cls: 'hot', glyph: '🔥', title: 'Very likely to raise (strong sustained climb)' }},
   rise2: {{ cls: 'rise2', glyph: '\u2191\u2191', title: 'Likely to raise' }},
   rise: {{ cls: 'rise', glyph: '\u2191', title: 'May raise' }},
   flat: {{ cls: 'flat', glyph: '\u2500', title: 'Hard to predict' }},

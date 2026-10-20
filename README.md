@@ -1,6 +1,6 @@
-# Lunix's AI Trade Assistant
+# MM2 Trade Calculator
 
-Trade calculator for Murder Mystery 2 values (scraped from Supreme Values) — **Lunix's AI Trade Assistant**.
+Trade calculator for Murder Mystery 2 values, scraped from Supreme Values.
 
 | Artifact | Purpose |
 |---|---|
@@ -160,7 +160,7 @@ Left = website name, right = exact MM2 inventory name.
 ```powershell
 git init
 git add .
-git commit -m "Add Lunix's AI Trade Assistant scraper and calculator"
+git commit -m "Add the MM2 trade calculator"
 gh repo create trade-calculator --public --source=. --remote=origin --push
 ```
 
@@ -186,7 +186,7 @@ Live URL: `https://lunixical-hash.github.io/trade-calculator/`
 
 ---
 
-## Lunix / local JSON (optional)
+## Local JSON (optional)
 
 ```lua
 local HttpService = game:GetService("HttpService")

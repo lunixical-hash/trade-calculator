@@ -1,5 +1,5 @@
 /**
- * Roblox account connect UI for Lunix's AI Trade Assistant.
+ * Roblox account connect UI for the MM2 trade calculator.
  * Primary path: browser OAuth (Roblox App permissions) via PKCE — no commands.
  * Optional: local auth_server.py username link for offline/dev use.
  */

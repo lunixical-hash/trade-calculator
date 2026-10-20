@@ -1,5 +1,5 @@
 """
-Always-on-top corner overlay for Lunix's AI Trade Assistant.
+Always-on-top corner overlay for the MM2 trade calculator.
 
 Usage:
   python calculator_overlay.py
@@ -39,7 +39,7 @@ def corner_pos(
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Lunix's AI Trade Assistant screen overlay"
+        description="MM2 trade calculator screen overlay"
     )
     parser.add_argument(
         "--corner",
@@ -68,7 +68,7 @@ def main() -> int:
 
     x, y = corner_pos(args.corner, args.width, args.height)
     webview.create_window(
-        "Lunix's AI Trade Assistant",
+        "MM2 Trade Calculator",
         HTML.resolve().as_uri(),
         width=args.width,
         height=args.height,

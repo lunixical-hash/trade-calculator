@@ -224,7 +224,7 @@ HTML = """<!DOCTYPE html>
 <header>
   <h1>MM2 Name Match Review</h1>
   <div class="sub">
-    Left side = <b>game inventory ID</b> (what Lunix/trades use).
+    Left side = <b>game inventory ID</b> (what in-game trades use).
     Right side = closest Supreme Values name guess. Mark Correct / Wrong / Skip, and type the right SV id if needed.
   </div>
   <div class="controls">
