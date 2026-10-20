@@ -89,27 +89,10 @@
     if ((account && account.id) !== prevId) emitChange();
   }
 
-  async function probeLocalAuth() {
-    try {
-      const ctrl =
-        typeof AbortSignal !== 'undefined' && AbortSignal.timeout
-          ? AbortSignal.timeout(700)
-          : undefined;
-      const res = await fetch('http://127.0.0.1:8787/health', {
-        cache: 'no-store',
-        signal: ctrl,
-      });
-      if (res.ok) return 'http://127.0.0.1:8787';
-    } catch (_) {}
-    return '';
-  }
-
   async function fetchConfig() {
     config = await O().loadConfig();
-    if (!apiBase()) {
-      const local = await probeLocalAuth();
-      if (local) config.authApiBase = local;
-    }
+    // Do not auto-probe localhost — that triggers Chromium's
+    // "Access other apps and services on this device" permission prompt.
   }
 
   function renderChip() {
@@ -396,6 +379,16 @@
       slot.className = 'rbx-account-slot';
       if (head) head.appendChild(slot);
       else document.body.prepend(slot);
+    }
+
+    // Drop any stale modal from an older cached script build
+    const stale = $('rbxModal');
+    if (stale) {
+      const lead = stale.querySelector('.rbx-lead');
+      const leadText = lead ? lead.textContent || '' : '';
+      if (stale.querySelector('#rbxSetupHint') || /Bloxlink|setup needed|One-time owner/i.test(stale.innerHTML + leadText)) {
+        stale.remove();
+      }
     }
 
     if (!$('rbxModal')) {
