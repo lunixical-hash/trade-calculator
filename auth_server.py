@@ -1,5 +1,5 @@
 """
-Roblox account login server for Lunix's AI Trade Assistant.
+Roblox account login server for the MM2 trade calculator.
 
 Handles OAuth 2.0 (authorization code + PKCE) and username lookup so the
 static GitHub Pages calculator can show a connected Roblox identity.
@@ -139,7 +139,7 @@ def http_json(
     form: dict | None = None,
 ) -> Any:
     hdrs = {
-        "User-Agent": "LunixTradeAssistantAuth/1.0",
+        "User-Agent": "TradeCalculatorAuth/1.0",
         "Accept": "application/json",
     }
     if headers:
@@ -289,7 +289,7 @@ def drop_session(token: str, c: dict[str, str]) -> None:
 
 
 class Handler(BaseHTTPRequestHandler):
-    server_version = "LunixAuth/1.0"
+    server_version = "TradeCalculatorAuth/1.0"
 
     def log_message(self, fmt: str, *args: Any) -> None:
         print(f"[auth] {self.address_string()} {fmt % args}")
@@ -518,7 +518,7 @@ def main() -> None:
     host = c["host"]
     port = int(c["port"])
     oauth = bool(c["client_id"] and c["client_secret"])
-    print(f"Lunix Roblox auth server on http://{host}:{port}")
+    print(f"Roblox auth server on http://{host}:{port}")
     print(f"  Public auth URL : {c['auth_public_url']}")
     print(f"  Redirect URI    : {c['redirect_uri']}")
     print(f"  App return URL  : {c['app_url']}")

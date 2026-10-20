@@ -22,6 +22,10 @@ from playwright.sync_api import sync_playwright
 from catalog_fixes import apply_to_values_payload, sanitize_item_history
 
 ROOT = Path(__file__).resolve().parent
+
+
+class CloudflareBlocked(RuntimeError):
+    """Supreme Values served a human-verification page instead of the item list."""
 OUT_FILE = ROOT / "mm2_values.json"
 NAME_MAP_FILE = ROOT / "name_map.json"
 ALIASES_FILE = ROOT / "aliases.json"
@@ -204,10 +208,144 @@ EXTRACT_SV_POPUP_JS = """
 """
 
 
+# Server-rendered item cards. Used when _svPopup is missing but the HTML list loaded.
+EXTRACT_ITEMCOLUMN_JS = """
+() => {
+  const rows = [];
+  const seen = new Set();
+  for (const col of document.querySelectorAll('.itemcolumn')) {
+    const name = (col.querySelector('.itemhead')?.innerText || '').replace(/\\s+/g, ' ').trim();
+    const rawValue = col.getAttribute('data-value');
+    let value = rawValue != null ? Number(rawValue) : NaN;
+    if (!Number.isFinite(value)) {
+      const text = (col.innerText || '').replace(/\\s+/g, ' ');
+      const valueMatch = text.match(/Value\\s*-\\s*([0-9][0-9,]*(?:\\.[0-9]+)?)\\s*([kKmMbB]?)/i);
+      if (!valueMatch) continue;
+      value = parseFloat(valueMatch[1].replace(/,/g, ''));
+      const suf = (valueMatch[2] || '').toLowerCase();
+      if (suf === 'k') value *= 1000;
+      if (suf === 'm') value *= 1000000;
+      if (suf === 'b') value *= 1000000000;
+    }
+    if (!name || !Number.isFinite(value) || name.length > 80) continue;
+    const key = name + '|' + value;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const text = (col.innerText || '').replace(/\\s+/g, ' ');
+    const btn = col.querySelector('button[data-image], [data-image]');
+    const imageKey = (btn && btn.getAttribute('data-image')) || '';
+    const image = imageKey
+      ? ('https://supremevalues.com/media/' + imageKey + '.webp')
+      : null;
+    const itemSlug = imageKey ? String(imageKey).split('/').pop() : null;
+    const demandAttr = col.getAttribute('data-demand');
+    const rarityAttr = col.getAttribute('data-rarity');
+    const demandMatch = text.match(/Demand\\s*-\\s*([0-9]+)/i);
+    const rarityMatch = text.match(/Rarity\\s*-\\s*([0-9]+)/i);
+    const stability = (col.getAttribute('data-stability') || '').trim()
+      || ((text.match(/Stability\\s*-\\s*([A-Za-z ]+?)(?:\\s+Demand|\\s+Rarity|$)/i) || [])[1] || '').trim();
+    const changeMatch = text.match(/Change in Value\\s*-\\s*(\\([^)]+\\)(?:\\s*[+\\-]?[0-9][0-9,]*(?:\\.[0-9]+)?%)?)/i);
+    const originMatch = text.match(/Origin\\s*-\\s*(.+?)(?:\\s+Change in Value|\\s+Inv\\.|\\s+Aliases|$)/i);
+    const aliasesMatch = text.match(/Aliases\\s*-\\s*(.+?)(?:\\s+Flippability|\\s+Chance of Rising|\\s+View Item|$)/i);
+    const riseMatch = text.match(/Chance of Rising\\s*-\\s*([0-9]+)/i);
+    const flipMatch = text.match(/Flippability\\s*-\\s*([A-Za-z ]+?)(?:\\s+Chance|\\s+View|$)/i);
+    rows.push({
+      name,
+      value,
+      image,
+      imageKey: imageKey || null,
+      itemSlug,
+      demand: demandAttr != null && demandAttr !== '' ? Number(demandAttr) : (demandMatch ? Number(demandMatch[1]) : null),
+      rarityScore: rarityAttr != null && rarityAttr !== '' ? Number(rarityAttr) : (rarityMatch ? Number(rarityMatch[1]) : null),
+      stability: stability || null,
+      origin: originMatch ? originMatch[1].trim() : null,
+      change: changeMatch ? changeMatch[1].trim() : null,
+      aliases: aliasesMatch ? aliasesMatch[1].trim() : null,
+      riseChance: riseMatch ? Number(riseMatch[1]) : null,
+      flippability: flipMatch ? flipMatch[1].trim() : null,
+    });
+  }
+  return rows;
+}
+"""
+
+
+def _page_is_cloudflare_challenge(page) -> bool:
+    try:
+        title = page.title() or ""
+    except Exception:
+        title = ""
+    if "Just a moment" in title:
+        return True
+    try:
+        return bool(
+            page.evaluate(
+                """() => {
+                  const t = ((document.body && document.body.innerText) || '').slice(0, 800);
+                  return /Performing security verification|Verify you are human/i.test(t);
+                }"""
+            )
+        )
+    except Exception:
+        return False
+
+
+def _listing_ready(page) -> bool:
+    try:
+        return bool(
+            page.evaluate(
+                """() => {
+                  if (typeof _svPopup !== 'undefined' && _svPopup && Object.keys(_svPopup).length > 0) return true;
+                  if (document.querySelector('.itemcolumn .itemhead')) return true;
+                  return false;
+                }"""
+            )
+        )
+    except Exception:
+        return False
+
+
+def wait_for_listing(page, timeout_s: float = 20.0) -> None:
+    """Wait until item data is on the page, or the Cloudflare check has stuck.
+
+    Raises CloudflareBlocked when the human-verification interstitial does not
+    clear. An empty catalog from that page must not be treated as a real scrape.
+    """
+    deadline = time.time() + timeout_s
+    while time.time() < deadline:
+        if _listing_ready(page):
+            return
+        if _page_is_cloudflare_challenge(page):
+            # Give a managed check a moment to finish, then bail if it stays.
+            page.wait_for_timeout(1500)
+            if _listing_ready(page):
+                return
+            if _page_is_cloudflare_challenge(page):
+                raise CloudflareBlocked(
+                    "Supreme Values is showing a Cloudflare human-verification page, "
+                    "so the item list never loaded. Datacenter runners (including "
+                    "GitHub Actions) get this check and cannot read values. "
+                    "Not overwriting mm2_values.json."
+                )
+        page.wait_for_timeout(500)
+    if _page_is_cloudflare_challenge(page) or not _listing_ready(page):
+        raise CloudflareBlocked(
+            "Supreme Values did not render the item list (Cloudflare verification "
+            "page, or the listing never appeared). Not overwriting mm2_values.json."
+        )
+
+
 def scrape_trending_and_changelog(page) -> tuple[list[dict], str | None]:
     """Pull Trending Items + latest update blurb from the MM2 home page."""
     page.goto(HOME_URL, wait_until="domcontentloaded", timeout=90_000)
-    page.wait_for_timeout(2_000)
+    page.wait_for_timeout(1_500)
+    if _page_is_cloudflare_challenge(page):
+        raise CloudflareBlocked(
+            "Supreme Values is showing a Cloudflare human-verification page, "
+            "so the item list never loaded. Datacenter runners (including "
+            "GitHub Actions) get this check and cannot read values. "
+            "Not overwriting mm2_values.json."
+        )
     data = page.evaluate(
         """() => {
           const body = (document.body.innerText || '').replace(/\\r/g, '');
@@ -247,17 +385,15 @@ def scrape_trending_and_changelog(page) -> tuple[list[dict], str | None]:
 
 def scrape_page(page, url: str, category: str) -> list[dict]:
     page.goto(url, wait_until="domcontentloaded", timeout=90_000)
-    try:
-        page.wait_for_selector('img[src*="/media/mm2"]', timeout=45_000)
-    except Exception:
-        pass
-    page.wait_for_timeout(2_500)
-    page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
-    page.wait_for_timeout(1_200)
-    page.evaluate("() => window.scrollTo(0, 0)")
+    wait_for_listing(page)
     page.wait_for_timeout(400)
+    page.evaluate("() => window.scrollTo(0, document.body.scrollHeight)")
+    page.wait_for_timeout(400)
+    page.evaluate("() => window.scrollTo(0, 0)")
 
     raw = page.evaluate(EXTRACT_SV_POPUP_JS)
+    if not isinstance(raw, list) or not raw:
+        raw = page.evaluate(EXTRACT_ITEMCOLUMN_JS)
     if not isinstance(raw, list) or not raw:
         raw = page.evaluate(
             """() => {
@@ -768,19 +904,21 @@ def main() -> None:
         )
         page = context.new_page()
 
-        print(f"Scraping home trends: {HOME_URL} ...")
+        print(f"Scraping home trends: {HOME_URL} ...", flush=True)
         try:
             trending_raw, changelog = scrape_trending_and_changelog(page)
-            print(f"  trending {len(trending_raw)} items")
+            print(f"  trending {len(trending_raw)} items", flush=True)
+        except CloudflareBlocked:
+            raise
         except Exception as e:
             trending_raw = []
-            print(f"  FAILED trends: {e}")
+            print(f"  FAILED trends: {e}", flush=True)
 
         for url, category in PAGES:
-            print(f"Scraping {category}: {url} ...")
+            print(f"Scraping {category}: {url} ...", flush=True)
             try:
                 found = scrape_page(page, url, category)
-                print(f"  found {len(found)} items")
+                print(f"  found {len(found)} items", flush=True)
                 for row in found:
                     game_name = to_game_name(row["displayName"], name_map)
                     if not game_name:
@@ -813,8 +951,10 @@ def main() -> None:
                         "history": history,
                         "changePct": parse_change_pct(row.get("change")),
                     }
+            except CloudflareBlocked:
+                raise
             except Exception as e:
-                print(f"  FAILED: {e}")
+                print(f"  FAILED: {e}", flush=True)
 
         browser.close()
 
@@ -903,4 +1043,7 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except CloudflareBlocked as e:
+        raise SystemExit(str(e)) from e
