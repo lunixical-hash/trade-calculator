@@ -1,5 +1,5 @@
 /**
- * Roblox account connect UI for Lunix's AI Trade Assistant.
+ * Roblox account connect UI for the MM2 trade calculator.
  * Primary path: browser OAuth (Roblox App permissions) via PKCE — no commands.
  * Optional: local auth_server.py username link for offline/dev use.
  */
@@ -89,27 +89,10 @@
     if ((account && account.id) !== prevId) emitChange();
   }
 
-  async function probeLocalAuth() {
-    try {
-      const ctrl =
-        typeof AbortSignal !== 'undefined' && AbortSignal.timeout
-          ? AbortSignal.timeout(700)
-          : undefined;
-      const res = await fetch('http://127.0.0.1:8787/health', {
-        cache: 'no-store',
-        signal: ctrl,
-      });
-      if (res.ok) return 'http://127.0.0.1:8787';
-    } catch (_) {}
-    return '';
-  }
-
   async function fetchConfig() {
     config = await O().loadConfig();
-    if (!apiBase()) {
-      const local = await probeLocalAuth();
-      if (local) config.authApiBase = local;
-    }
+    // Do not auto-probe localhost — that triggers Chromium's
+    // "Access other apps and services on this device" permission prompt.
   }
 
   function renderChip() {
