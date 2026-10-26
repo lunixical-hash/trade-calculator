@@ -1,13 +1,5 @@
 # AFK coin path
 
-Walks to coins named `Coin_Server` anywhere in Workspace. The ReplicatedStorage template is ignored. Your server still collects the coins.
+Client only. Press Play, set the Studio command bar to **Client**, paste `auto-collect/AutoCollect.lua`.
 
-## Run it
-
-1. Press Play.
-2. Set the Studio command bar to **Client** (not Server).
-3. Paste `auto-collect/AutoCollect.lua`.
-
-The F9 developer console only shows output. It does not run code.
-
-A green line and dots are drawn along the path. They are created on your client only. The character walks with normal Humanoid movement, not MoveTo.
+It finds `Coin_Server` parts in Workspace, builds a path around walls, and walks with normal character movement. A green line shows the route. Only you can see that line. Your server still collects the coins.
