@@ -1,18 +1,26 @@
--- LocalScript: StarterPlayer.StarterPlayerScripts/AutoCollect
--- Finds every Coin_Server in Workspace (any map) and walks a path to the nearest reachable one.
--- The copy in ReplicatedStorage is ignored because this only searches Workspace.
--- Your server already collects, fades, and destroys coins. This script only moves.
+-- LocalScript: StarterPlayer.StarterPlayerScripts.AutoCollect
+-- Paste this whole file into a LocalScript. It only walks. Your server still collects coins.
+-- Output window lines start with [AutoCollect] so you can see why it is or isn't moving.
 
 local PathfindingService = game:GetService("PathfindingService")
 local Players = game:GetService("Players")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Workspace = game:GetService("Workspace")
 
+if not script:IsA("LocalScript") then
+	warn("[AutoCollect] This must be a LocalScript in StarterPlayerScripts. It is a " .. script.ClassName .. ", so it will not move your character.")
+	return
+end
+
 local player = Players.LocalPlayer
+if not player then
+	warn("[AutoCollect] Players.LocalPlayer is nil. Put this in StarterPlayerScripts as a LocalScript.")
+	return
+end
 
 local Config = {
 	SearchRadius = 1000,
 	ReplanInterval = 0.35,
+	StatusInterval = 2,
 
 	CoinServerName = "Coin_Server",
 	CoinVisualName = "CoinVisual",
@@ -31,51 +39,73 @@ local Config = {
 type Candidate = { server: BasePart, pos: Vector3, straightDist: number }
 
 local tracked: { [BasePart]: boolean } = {}
+local namedNodes = 0
+local skippedNotPart = 0
 local busy = false
 local unreachableUntil: { [BasePart]: number } = {}
+local lastStatus = ""
+local loggedSample = false
 
 local function log(...)
 	print("[AutoCollect]", ...)
 end
 
-local function isCoinServer(inst: Instance): boolean
-	return inst.Name == Config.CoinServerName
-		and inst:IsA("BasePart")
-		and inst:IsDescendantOf(Workspace)
-		and not inst:IsDescendantOf(ReplicatedStorage)
-end
-
-local function track(inst: Instance)
-	if isCoinServer(inst) then
-		tracked[inst :: BasePart] = true
-	end
-end
-
-local function untrack(inst: Instance)
+local function resolvePart(inst: Instance): BasePart?
 	if inst:IsA("BasePart") then
-		tracked[inst] = nil
-		unreachableUntil[inst] = nil
+		return inst
+	end
+	local visual = inst:FindFirstChild(Config.CoinVisualName, true)
+	if visual and visual:IsA("BasePart") then
+		return visual
+	end
+	local part = inst:FindFirstChildWhichIsA("BasePart", true)
+	if part then
+		return part
+	end
+	return nil
+end
+
+local function consider(inst: Instance)
+	if inst.Name ~= Config.CoinServerName then
+		return
+	end
+	if not inst:IsDescendantOf(Workspace) then
+		return
+	end
+	namedNodes += 1
+	local part = resolvePart(inst)
+	if not part then
+		skippedNotPart += 1
+		log("found", inst:GetFullName(), "class", inst.ClassName, "but no BasePart to walk to")
+		return
+	end
+	tracked[part] = true
+	if not loggedSample then
+		loggedSample = true
+		log("sample coin", inst:GetFullName(), "class", inst.ClassName, "part", part:GetFullName(), "transparency", part.Transparency)
 	end
 end
 
 for _, inst in Workspace:GetDescendants() do
-	track(inst)
+	consider(inst)
 end
-Workspace.DescendantAdded:Connect(track)
-Workspace.DescendantRemoving:Connect(untrack)
 
-local function getVisual(server: BasePart): BasePart
-	local visual = server:FindFirstChild(Config.CoinVisualName)
-	if visual and visual:IsA("BasePart") then
-		return visual
+Workspace.DescendantAdded:Connect(function(inst)
+	consider(inst)
+	if inst.Name == Config.CoinServerName then
+		log("new coin appeared:", inst:GetFullName())
 	end
-	return server
-end
+end)
+
+Workspace.DescendantRemoving:Connect(function(inst)
+	if inst:IsA("BasePart") then
+		tracked[inst] = nil
+		unreachableUntil[inst] = nil
+	end
+end)
 
 local function isAvailable(server: BasePart): boolean
-	return tracked[server] == true
-		and server.Parent ~= nil
-		and server.Transparency < Config.CollectedTransparency
+	return tracked[server] == true and server.Parent ~= nil and server.Transparency < Config.CollectedTransparency
 end
 
 local function rootAndHumanoid(character: Model): (BasePart?, Humanoid?)
@@ -87,60 +117,77 @@ local function rootAndHumanoid(character: Model): (BasePart?, Humanoid?)
 	return nil, nil
 end
 
+local function countTracked(): (number, number)
+	local total = 0
+	local available = 0
+	for server in tracked do
+		if server.Parent then
+			total += 1
+			if isAvailable(server) then
+				available += 1
+			end
+		end
+	end
+	return total, available
+end
+
 local function listAvailableCoins(origin: Vector3): { Candidate }
 	local list: { Candidate } = {}
 	local radiusSq = Config.SearchRadius * Config.SearchRadius
-
 	for server in tracked do
-		if not isAvailable(server) then
-			continue
-		end
-		local pos = getVisual(server).Position
-		local offset = pos - origin
-		if offset:Dot(offset) <= radiusSq then
-			table.insert(list, {
-				server = server,
-				pos = pos,
-				straightDist = offset.Magnitude,
-			})
+		if isAvailable(server) then
+			local pos = server.Position
+			local visual = server:FindFirstChild(Config.CoinVisualName)
+			if visual and visual:IsA("BasePart") then
+				pos = visual.Position
+			elseif server.Name ~= Config.CoinServerName then
+				local parent = server.Parent
+				if parent then
+					local nested = parent:FindFirstChild(Config.CoinVisualName)
+					if nested and nested:IsA("BasePart") then
+						pos = nested.Position
+					end
+				end
+			end
+			local offset = pos - origin
+			if offset:Dot(offset) <= radiusSq then
+				table.insert(list, { server = server, pos = pos, straightDist = offset.Magnitude })
+			end
 		end
 	end
-
 	return list
 end
 
-local function isOnCooldown(server: BasePart): boolean
-	local untilTime = unreachableUntil[server]
-	return untilTime ~= nil and os.clock() < untilTime
-end
-
-local function markUnreachable(server: BasePart)
+local function markUnreachable(server: BasePart, reason: string)
 	unreachableUntil[server] = os.clock() + Config.UnreachableCooldown
-	log("no path to", server:GetFullName())
+	log("no path to", server:GetFullName(), "—", reason)
 end
 
-local function computePath(from: Vector3, to: Vector3): (number?, { PathWaypoint }?)
+local function computePath(from: Vector3, to: Vector3): (number?, { PathWaypoint }?, string)
 	local path = PathfindingService:CreatePath({
 		AgentRadius = Config.AgentRadius,
 		AgentHeight = Config.AgentHeight,
 		AgentCanJump = Config.AgentCanJump,
 		WaypointSpacing = Config.WaypointSpacing,
 	})
-	local ok = pcall(function()
+	local ok, err = pcall(function()
 		path:ComputeAsync(from, to)
 	end)
-	if not ok or path.Status ~= Enum.PathStatus.Success then
-		return nil, nil
+	if not ok then
+		return nil, nil, tostring(err)
+	end
+	if path.Status ~= Enum.PathStatus.Success then
+		return nil, nil, tostring(path.Status)
 	end
 	local waypoints = path:GetWaypoints()
 	if #waypoints == 0 then
-		return nil, nil
+		return nil, nil, "empty waypoints"
 	end
 	local length = 0
 	for i = 2, #waypoints do
 		length += (waypoints[i].Position - waypoints[i - 1].Position).Magnitude
 	end
-	return length, waypoints
+	return length, waypoints, "ok"
 end
 
 local function pickBestTarget(origin: Vector3): (BasePart?, { PathWaypoint }?)
@@ -148,7 +195,6 @@ local function pickBestTarget(origin: Vector3): (BasePart?, { PathWaypoint }?)
 	if #coins == 0 then
 		return nil, nil
 	end
-
 	table.sort(coins, function(a, b)
 		return a.straightDist < b.straightDist
 	end)
@@ -160,76 +206,60 @@ local function pickBestTarget(origin: Vector3): (BasePart?, { PathWaypoint }?)
 
 	for i = 1, limit do
 		local c = coins[i]
-		if not isOnCooldown(c.server) and isAvailable(c.server) then
-			local length, waypoints = computePath(origin, c.pos)
+		local untilTime = unreachableUntil[c.server]
+		if untilTime ~= nil and os.clock() < untilTime then
+			continue
+		end
+		if isAvailable(c.server) then
+			local length, waypoints, reason = computePath(origin, c.pos)
 			if length and waypoints and length < bestLength then
 				bestLength = length
 				bestServer = c.server
 				bestWaypoints = waypoints
 			elseif not length then
-				markUnreachable(c.server)
+				markUnreachable(c.server, reason)
 			end
 		end
 	end
 
 	if bestServer and bestWaypoints then
-		log(string.format("pathing to %s (%d studs, %d waypoints)", bestServer:GetFullName(), math.floor(bestLength), #bestWaypoints))
+		log(string.format("walking to %s (%d studs, %d waypoints)", bestServer:GetFullName(), math.floor(bestLength), #bestWaypoints))
 	end
 	return bestServer, bestWaypoints
 end
 
-local function prepareHumanoid(humanoid: Humanoid)
+local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BasePart, waypoints: { PathWaypoint })
 	if humanoid.Sit then
 		humanoid.Sit = false
 	end
-	if humanoid.PlatformStand then
-		humanoid.PlatformStand = false
-	end
+	humanoid.PlatformStand = false
 	humanoid.AutoRotate = true
-end
-
-local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BasePart, waypoints: { PathWaypoint })
-	prepareHumanoid(humanoid)
 
 	for i, waypoint in waypoints do
 		if i == 1 then
 			continue
 		end
 		if not isAvailable(target) then
-			log("server took", target:GetFullName(), "— picking next")
+			log("coin gone or already transparent, picking another")
 			return
 		end
-		local character = player.Character
-		if not character or humanoid.Parent ~= character then
+		if humanoid.Parent ~= player.Character then
 			return
 		end
-
 		if waypoint.Action == Enum.PathWaypointAction.Jump then
 			humanoid.Jump = true
 		end
-
 		humanoid:MoveTo(waypoint.Position)
+
 		local finished = false
-		local conn: RBXScriptConnection?
-		conn = humanoid.MoveToFinished:Connect(function()
+		local conn = humanoid.MoveToFinished:Connect(function()
 			finished = true
 		end)
-
 		local deadline = os.clock() + Config.MoveToTimeout
 		local nextPulse = os.clock()
 		while not finished and os.clock() < deadline do
-			if not isAvailable(target) then
-				if conn then
-					conn:Disconnect()
-				end
-				log("server took", target:GetFullName(), "— picking next")
-				return
-			end
-			character = player.Character
-			if not character or humanoid.Parent ~= character then
-				if conn then
-					conn:Disconnect()
-				end
+			if not isAvailable(target) or humanoid.Parent ~= player.Character then
+				conn:Disconnect()
 				return
 			end
 			if os.clock() >= nextPulse then
@@ -238,11 +268,9 @@ local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BaseP
 			end
 			task.wait(0.1)
 		end
-		if conn then
-			conn:Disconnect()
-		end
+		conn:Disconnect()
 		if not finished then
-			markUnreachable(target)
+			markUnreachable(target, "MoveTo timed out (character did not arrive)")
 			return
 		end
 	end
@@ -264,18 +292,49 @@ local function runOnce()
 	busy = true
 	local ok, err = pcall(function()
 		local target, waypoints = pickBestTarget(root.Position)
-		if not target or not waypoints then
-			return
+		if target and waypoints then
+			followWaypoints(humanoid, root, target, waypoints)
 		end
-		followWaypoints(humanoid, root, target, waypoints)
 	end)
 	busy = false
 	if not ok then
-		warn("[AutoCollect]", err)
+		warn("[AutoCollect] error:", err)
 	end
 end
 
-log("watching Workspace for", Config.CoinServerName, "(ReplicatedStorage template is ignored)")
+log("started. LocalScript is running for", player.Name)
+local total, available = countTracked()
+log(string.format("initial scan: named Coin_Server=%d, walkable parts=%d, available(transparency<1)=%d, no-part=%d", namedNodes, total, available, skippedNotPart))
+if namedNodes == 0 then
+	log("NO coins found in Workspace. The ReplicatedStorage template does not count. Coins must be named Coin_Server and be in the map that is currently in Workspace.")
+elseif available == 0 and total > 0 then
+	log("Coins were found, but every one has Transparency >= 1, so they are treated as already collected and skipped.")
+end
+
+task.spawn(function()
+	while true do
+		local character = player.Character
+		local root = character and character:FindFirstChild("HumanoidRootPart")
+		local totalNow, availableNow = countTracked()
+		local near = 0
+		if root and root:IsA("BasePart") then
+			near = #listAvailableCoins(root.Position)
+		end
+		local line = string.format(
+			"status character=%s tracked=%d available=%d within1000=%d busy=%s",
+			character ~= nil and "yes" or "NO",
+			totalNow,
+			availableNow,
+			near,
+			tostring(busy)
+		)
+		if line ~= lastStatus then
+			lastStatus = line
+			log(line)
+		end
+		task.wait(Config.StatusInterval)
+	end
+end)
 
 task.spawn(function()
 	while true do
