@@ -1,32 +1,32 @@
-# Free AFK auto-collect
+# Free AFK auto-collect (client move + server awards)
 
-One server script. Works for **PC, mobile, tablet, and console** — no client scripts, no touch/gamepad UI. Every player auto-collects coins in range; pathfinding walks around walls when needed.
+Smooth movement on **PC / mobile / tablet / console** via a **LocalScript**. Coin grants stay **server-authoritative**.
 
-## Studio
+## Studio placement
 
-1. Create a **Script** under `ServerScriptService` named `AutoCollect`.
-2. Paste `auto-collect/AutoCollect.lua`.
-3. Edit `Config` at the top if needed (`CollectRadius` is in studs, default **1000**).
-4. If your economy is not `leaderstats.Coins`, change the `award` function in that same script.
+| File | Put in Studio as |
+|------|------------------|
+| `Config.lua` | `ReplicatedStorage/AutoCollect/Config` (**ModuleScript**) |
+| `AutoCollectServer.lua` | `ServerScriptService/AutoCollectServer` (**Script**) |
+| `AutoCollectClient.lua` | `StarterPlayer.StarterPlayerScripts/AutoCollectClient` (**LocalScript**) |
 
-## Coin hierarchy
+Create the `ReplicatedStorage/AutoCollect` folder first, then add `Config`. The server script creates `RequestCollect` (RemoteEvent) under that folder if missing.
+
+Drop the `.lua` suffix when naming instances in Studio (or paste contents into matching scripts).
+
+## Split of responsibility
+
+- **Client:** pathfinding + `Humanoid:MoveTo` (smooth, uses normal client physics on all devices). When a coin is in range, fires `RequestCollect`.
+- **Server:** validates coin instance, `CoinContainer` ancestry, availability (`Transparency < 1`), and distance (`CollectRadius` + slack). Then fade → award → delayed destroy. Never trusts the client for the grant amount beyond the request.
+
+## Coins
 
 ```
 Workspace.<MapName>.CoinContainer.Coin_Server.CoinVisual
 ```
 
-Map name is discovered automatically. Coins already collected (`Coin_Server.Transparency == 1`, waiting to despawn) are skipped.
+Already-collected coins (`Transparency == 1`, waiting to despawn) are skipped on both sides.
 
-## Cross-device notes
+## Config
 
-- Server owns `HumanoidRootPart` while walking so mobile/console input cannot cancel `MoveTo`.
-- Ownership is returned to the player when a walk finishes.
-- R6 and R15 both use `HumanoidRootPart` + `Humanoid`.
-- No LocalScripts required.
-
-## Behavior
-
-- Free for all players.
-- Vacuum / collect anything within `CollectRadius` (1000 studs by default).
-- Pathfinds when a walk is still useful; picks shortest walkable target among nearby candidates.
-- Fade-then-destroy collect path matches intentional coin despawn timing.
+Edit `CollectRadius` (default **1000** studs) and other knobs in `ReplicatedStorage/AutoCollect/Config`. Wire `award` in `AutoCollectServer` if you do not use `leaderstats.Coins`.
