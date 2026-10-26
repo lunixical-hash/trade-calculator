@@ -1,5 +1,5 @@
 -- Client only. Press Play, set the command bar to Client, paste this.
--- Finds Coin_Server, builds a path around walls, walks there.
+-- Finds CoinVisual, builds a path around walls, walks there.
 -- Green line is local. Your server still collects the coins.
 
 local Players = game:GetService("Players")
@@ -12,8 +12,8 @@ if not player then
 	return
 end
 
-local COIN = "Coin_Server"
 local VISUAL = "CoinVisual"
+local SERVER = "Coin_Server"
 local CELL = 4
 local ARRIVE = 3.5
 local STEP_UP = 6
@@ -23,7 +23,7 @@ local rayParams = RaycastParams.new()
 rayParams.FilterType = Enum.RaycastFilterType.Exclude
 
 local function watch(inst: Instance)
-	if inst.Name == COIN and inst:IsA("BasePart") and inst:IsDescendantOf(Workspace) then
+	if inst.Name == VISUAL and inst:IsA("BasePart") and inst:IsDescendantOf(Workspace) then
 		coins[inst] = true
 	end
 end
@@ -38,16 +38,19 @@ Workspace.DescendantRemoving:Connect(function(inst)
 	end
 end)
 
-local function available(part: BasePart): boolean
-	return coins[part] == true and part.Parent ~= nil and part.Transparency < 1
+local function available(visual: BasePart): boolean
+	if coins[visual] ~= true or visual.Parent == nil or visual.Transparency >= 1 then
+		return false
+	end
+	local server = visual.Parent
+	if server and server.Name == SERVER and server:IsA("BasePart") and server.Transparency >= 1 then
+		return false
+	end
+	return true
 end
 
-local function coinPosition(part: BasePart): Vector3
-	local visual = part:FindFirstChild(VISUAL)
-	if visual and visual:IsA("BasePart") then
-		return visual.Position
-	end
-	return part.Position
+local function coinPosition(visual: BasePart): Vector3
+	return visual.Position
 end
 
 local function refreshFilter()
@@ -57,6 +60,9 @@ local function refreshFilter()
 	end
 	for part in coins do
 		table.insert(ignore, part)
+		if part.Parent and part.Parent.Name == SERVER then
+			table.insert(ignore, part.Parent)
+		end
 	end
 	rayParams.FilterDescendantsInstances = ignore
 end
@@ -343,7 +349,11 @@ local function walkPath(humanoid: Humanoid, root: BasePart, coin: BasePart, poin
 	lineFolder:ClearAllChildren()
 end
 
-print("[AutoCollect] client running")
+local seen = 0
+for _ in coins do
+	seen += 1
+end
+print("[AutoCollect] client running, CoinVisual parts in Workspace:", seen)
 
 while true do
 	local character = player.Character
