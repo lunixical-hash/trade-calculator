@@ -1,20 +1,146 @@
--- Script: ServerScriptService/AutoCollect/AutoCollectService
--- AFK owners pathfind around walls to the nearest reachable coin, re-plan often,
--- and only award via CoinCollect (skips already-collected / transparent coins).
+-- Script: ServerScriptService/AutoCollect
+-- Free AFK auto-collect for every player. Pathfinds around walls to the nearest
+-- reachable coin. Coins: Workspace.<MapName>.CoinContainer.Coin_Server.CoinVisual
+-- Collected coins fade (Transparency = 1) then destroy — those are skipped.
 
 local PathfindingService = game:GetService("PathfindingService")
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
 
-local Config = require(script.Parent.Config)
-local CoinCollect = require(script.Parent.CoinCollect)
-local GamePassCache = require(script.Parent.GamePassCache)
+----------------------------------------------------------------
+-- Config (edit here)
+----------------------------------------------------------------
+local Config = {
+	CollectRadius = 8,
+	ReplanInterval = 0.35,
 
-type Candidate = {
-	server: BasePart,
-	pos: Vector3,
-	straightDist: number,
+	CoinContainerName = "CoinContainer",
+	CoinServerName = "Coin_Server",
+	CoinVisualName = "CoinVisual",
+
+	CollectedTransparency = 1,
+	DestroyAfterSeconds = 2,
+
+	CoinValueAttribute = "Value",
+	DefaultCoinValue = 1,
+
+	AgentRadius = 2,
+	AgentHeight = 5,
+	AgentCanJump = true,
+	WaypointSpacing = 4,
+	MoveToTimeout = 2,
+	MaxPathCandidates = 12,
+	UnreachableCooldown = 4,
 }
+
+----------------------------------------------------------------
+-- Collect (server-authoritative; skips already-taken coins)
+----------------------------------------------------------------
+local collecting: { [Instance]: boolean } = {}
+
+local function getCoinServer(coin: Instance): BasePart?
+	if coin.Name == Config.CoinServerName and coin:IsA("BasePart") then
+		return coin
+	end
+	local server = coin:FindFirstChild(Config.CoinServerName)
+	if server and server:IsA("BasePart") then
+		return server
+	end
+	if coin:IsA("BasePart") then
+		return coin
+	end
+	return nil
+end
+
+local function getCoinVisual(coinServer: BasePart): BasePart?
+	local visual = coinServer:FindFirstChild(Config.CoinVisualName)
+	if visual and visual:IsA("BasePart") then
+		return visual
+	end
+	return coinServer
+end
+
+local function getVisualPosition(coin: Instance): Vector3?
+	local server = getCoinServer(coin)
+	if not server then
+		return nil
+	end
+	local visual = getCoinVisual(server)
+	return visual and visual.Position or nil
+end
+
+local function isAvailable(coin: Instance): boolean
+	if collecting[coin] or not coin.Parent then
+		return false
+	end
+	local server = getCoinServer(coin)
+	if not server or not server.Parent then
+		return false
+	end
+	if server.Transparency >= Config.CollectedTransparency then
+		return false
+	end
+	return true
+end
+
+local function coinValue(coin: Instance): number
+	local server = getCoinServer(coin) or coin
+	local v = server:GetAttribute(Config.CoinValueAttribute)
+	if typeof(v) == "number" then
+		return v
+	end
+	return Config.DefaultCoinValue
+end
+
+-- Replace with your economy API if you do not use leaderstats.Coins.
+local function award(player: Player, amount: number)
+	local stats = player:FindFirstChild("leaderstats")
+	local coins = stats and stats:FindFirstChild("Coins")
+	if coins and coins:IsA("IntValue") then
+		coins.Value += amount
+	end
+end
+
+local function tryCollect(player: Player, coin: Instance): boolean
+	if not isAvailable(coin) or not player.Character then
+		return false
+	end
+	local server = getCoinServer(coin)
+	if not server then
+		return false
+	end
+
+	collecting[coin] = true
+	collecting[server] = true
+
+	local amount = coinValue(coin)
+	server.Transparency = Config.CollectedTransparency
+	local visual = server:FindFirstChild(Config.CoinVisualName)
+	if visual and visual:IsA("BasePart") then
+		visual.Transparency = Config.CollectedTransparency
+	end
+	server.CanTouch = false
+	server.CanQuery = false
+
+	award(player, amount)
+
+	task.delay(Config.DestroyAfterSeconds, function()
+		collecting[coin] = nil
+		collecting[server] = nil
+		if server.Parent then
+			server:Destroy()
+		elseif coin.Parent then
+			coin:Destroy()
+		end
+	end)
+
+	return true
+end
+
+----------------------------------------------------------------
+-- Pathfinding AFK loop (all players)
+----------------------------------------------------------------
+type Candidate = { server: BasePart, pos: Vector3, straightDist: number }
 
 local busy: { [Player]: boolean } = {}
 local unreachableUntil: { [Player]: { [BasePart]: number } } = {}
@@ -32,26 +158,23 @@ local function listAvailableCoins(): { Candidate }
 	local list: { Candidate } = {}
 	for _, map in Workspace:GetChildren() do
 		local container = map:FindFirstChild(Config.CoinContainerName)
-		if container then
-			for _, child in container:GetChildren() do
-				local server: BasePart? = nil
-				if child.Name == Config.CoinServerName and child:IsA("BasePart") then
-					server = child
-				elseif child:IsA("Model") then
-					local nested = child:FindFirstChild(Config.CoinServerName)
-					if nested and nested:IsA("BasePart") then
-						server = nested
-					end
+		if not container then
+			continue
+		end
+		for _, child in container:GetChildren() do
+			local server: BasePart? = nil
+			if child.Name == Config.CoinServerName and child:IsA("BasePart") then
+				server = child
+			elseif child:IsA("Model") then
+				local nested = child:FindFirstChild(Config.CoinServerName)
+				if nested and nested:IsA("BasePart") then
+					server = nested
 				end
-				if server and CoinCollect.IsAvailable(server) then
-					local pos = CoinCollect.GetVisualPosition(server)
-					if pos then
-						table.insert(list, {
-							server = server,
-							pos = pos,
-							straightDist = 0,
-						})
-					end
+			end
+			if server and isAvailable(server) then
+				local pos = getVisualPosition(server)
+				if pos then
+					table.insert(list, { server = server, pos = pos, straightDist = 0 })
 				end
 			end
 		end
@@ -61,10 +184,7 @@ end
 
 local function isOnCooldown(player: Player, server: BasePart): boolean
 	local map = unreachableUntil[player]
-	if not map then
-		return false
-	end
-	local untilTime = map[server]
+	local untilTime = map and map[server]
 	return untilTime ~= nil and os.clock() < untilTime
 end
 
@@ -86,7 +206,6 @@ local function createPath()
 	})
 end
 
--- Returns path length on success, or nil if blocked.
 local function computePathLength(from: Vector3, to: Vector3): (number?, { PathWaypoint }?)
 	local path = createPath()
 	local ok = pcall(function()
@@ -106,7 +225,6 @@ local function computePathLength(from: Vector3, to: Vector3): (number?, { PathWa
 	return length, waypoints
 end
 
--- Pick the reachable coin with the shortest walk path among nearby candidates.
 local function pickBestTarget(player: Player, origin: Vector3): (BasePart?, { PathWaypoint }?)
 	local coins = listAvailableCoins()
 	if #coins == 0 then
@@ -120,19 +238,17 @@ local function pickBestTarget(player: Player, origin: Vector3): (BasePart?, { Pa
 		return a.straightDist < b.straightDist
 	end)
 
-	local limit = math.min(Config.MaxPathCandidates, #coins)
 	local bestServer: BasePart? = nil
 	local bestWaypoints: { PathWaypoint }? = nil
 	local bestLength = math.huge
+	local limit = math.min(Config.MaxPathCandidates, #coins)
 
 	for i = 1, limit do
 		local c = coins[i]
-		if not isOnCooldown(player, c.server) and CoinCollect.IsAvailable(c.server) then
-			-- Already in pickup range — no path needed.
+		if not isOnCooldown(player, c.server) and isAvailable(c.server) then
 			if c.straightDist <= Config.CollectRadius then
 				return c.server, {}
 			end
-
 			local length, waypoints = computePathLength(origin, c.pos)
 			if length and waypoints and length < bestLength then
 				bestLength = length
@@ -152,7 +268,7 @@ local function tryVacuumNearby(player: Player, origin: Vector3)
 	for _, c in listAvailableCoins() do
 		local offset = c.pos - origin
 		if offset:Dot(offset) <= radiusSq then
-			CoinCollect.TryCollect(player, c.server)
+			tryCollect(player, c.server)
 		end
 	end
 end
@@ -162,19 +278,15 @@ local function followWaypoints(player: Player, humanoid: Humanoid, root: BasePar
 		if i == 1 then
 			continue
 		end
-		if not GamePassCache.Owns(player) then
-			return
-		end
-		if not CoinCollect.IsAvailable(target) then
+		if not isAvailable(target) then
 			return
 		end
 		if not player.Character or humanoid.Parent ~= player.Character then
 			return
 		end
 
-		-- Dynamic: grab anything that comes into range while walking (e.g. overlapping spawns).
 		tryVacuumNearby(player, root.Position)
-		if not CoinCollect.IsAvailable(target) then
+		if not isAvailable(target) then
 			return
 		end
 
@@ -191,18 +303,19 @@ local function followWaypoints(player: Player, humanoid: Humanoid, root: BasePar
 
 		local deadline = os.clock() + Config.MoveToTimeout
 		while not finished and os.clock() < deadline do
-			if not CoinCollect.IsAvailable(target) then
+			if not isAvailable(target) then
 				if conn then
 					conn:Disconnect()
 				end
 				return
 			end
 			tryVacuumNearby(player, root.Position)
-			if (root.Position - (CoinCollect.GetVisualPosition(target) or waypoint.Position)).Magnitude <= Config.CollectRadius then
+			local targetPos = getVisualPosition(target) or waypoint.Position
+			if (root.Position - targetPos).Magnitude <= Config.CollectRadius then
 				if conn then
 					conn:Disconnect()
 				end
-				CoinCollect.TryCollect(player, target)
+				tryCollect(player, target)
 				return
 			end
 			task.wait(0.1)
@@ -216,16 +329,13 @@ local function followWaypoints(player: Player, humanoid: Humanoid, root: BasePar
 		end
 	end
 
-	if CoinCollect.IsAvailable(target) then
-		CoinCollect.TryCollect(player, target)
+	if isAvailable(target) then
+		tryCollect(player, target)
 	end
 end
 
-local function runOwner(player: Player)
+local function runPlayer(player: Player)
 	if busy[player] then
-		return
-	end
-	if not GamePassCache.Owns(player) then
 		return
 	end
 
@@ -247,7 +357,7 @@ local function runOwner(player: Player)
 			return
 		end
 		if not waypoints or #waypoints == 0 then
-			CoinCollect.TryCollect(player, target)
+			tryCollect(player, target)
 			return
 		end
 		followWaypoints(player, humanoid, root, target, waypoints)
@@ -266,7 +376,7 @@ end)
 task.spawn(function()
 	while true do
 		for _, player in Players:GetPlayers() do
-			task.spawn(runOwner, player)
+			task.spawn(runPlayer, player)
 		end
 		task.wait(Config.ReplanInterval)
 	end
