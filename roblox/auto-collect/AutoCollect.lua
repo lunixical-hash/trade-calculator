@@ -1,22 +1,46 @@
--- LocalScript: StarterPlayer.StarterPlayerScripts/AutoCollectClient
--- Pathfinding + Humanoid:MoveTo on the client for smooth movement on all devices.
--- Fires RequestCollect; server validates and awards (never trust this script for grants).
+-- LocalScript: StarterPlayer.StarterPlayerScripts/AutoCollect
+-- ONE file: config + pathfinding + MoveTo + collect/award.
+--
+-- WARNING: Awards run on the client. Exploiters can grant themselves coins
+-- unless you later add a thin server validator. Chosen for simplicity/smoothness.
 
 local PathfindingService = game:GetService("PathfindingService")
 local Players = game:GetService("Players")
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Workspace = game:GetService("Workspace")
 
 local player = Players.LocalPlayer
-local folder = ReplicatedStorage:WaitForChild("AutoCollect")
-local Config = require(folder:WaitForChild("Config"))
-local requestCollect = folder:WaitForChild("RequestCollect") :: RemoteEvent
 
-type Candidate = { server: BasePart, pos: Vector3, straightDist: number }
+----------------------------------------------------------------
+-- Config (edit here)
+----------------------------------------------------------------
+local Config = {
+	CollectRadius = 1000, -- studs
+	ReplanInterval = 0.35,
 
-local busy = false
-local unreachableUntil: { [BasePart]: number } = {}
-local lastRequestAt: { [BasePart]: number } = {}
+	CoinContainerName = "CoinContainer",
+	CoinServerName = "Coin_Server",
+	CoinVisualName = "CoinVisual",
+
+	CollectedTransparency = 1,
+	DestroyAfterSeconds = 2,
+
+	CoinValueAttribute = "Value",
+	DefaultCoinValue = 1,
+
+	AgentRadius = 2,
+	AgentHeight = 5,
+	AgentCanJump = true,
+	WaypointSpacing = 4,
+	MoveToTimeout = 3,
+	MoveToRepulse = 0.35,
+	MaxPathCandidates = 12,
+	UnreachableCooldown = 4,
+}
+
+----------------------------------------------------------------
+-- Collect / award (client-side — see warning at top)
+----------------------------------------------------------------
+local collecting: { [Instance]: boolean } = {}
 
 local function getCoinServer(coin: Instance): BasePart?
 	if coin.Name == Config.CoinServerName and coin:IsA("BasePart") then
@@ -44,9 +68,8 @@ local function getVisualPosition(coin: Instance): Vector3?
 	return server.Position
 end
 
--- Client-side preview of availability (server re-checks before awarding).
 local function isAvailable(coin: Instance): boolean
-	if not coin.Parent then
+	if collecting[coin] or not coin.Parent then
 		return false
 	end
 	local server = getCoinServer(coin)
@@ -58,6 +81,81 @@ local function isAvailable(coin: Instance): boolean
 	end
 	return true
 end
+
+local function coinValue(coin: Instance): number
+	local server = getCoinServer(coin) or coin
+	local v = server:GetAttribute(Config.CoinValueAttribute)
+	if typeof(v) == "number" then
+		return v
+	end
+	return Config.DefaultCoinValue
+end
+
+-- Replace if your economy is not leaderstats.Coins (still client-side).
+local function award(amount: number)
+	local stats = player:FindFirstChild("leaderstats")
+	local coins = stats and stats:FindFirstChild("Coins")
+	if coins and coins:IsA("IntValue") then
+		coins.Value += amount
+	end
+end
+
+local function tryCollect(coin: Instance): boolean
+	if not isAvailable(coin) then
+		return false
+	end
+	local character = player.Character
+	if not character then
+		return false
+	end
+	local root = character:FindFirstChild("HumanoidRootPart")
+	if not (root and root:IsA("BasePart")) then
+		return false
+	end
+	local pos = getVisualPosition(coin)
+	if not pos or (pos - root.Position).Magnitude > Config.CollectRadius then
+		return false
+	end
+
+	local server = getCoinServer(coin)
+	if not server then
+		return false
+	end
+
+	collecting[coin] = true
+	collecting[server] = true
+
+	local amount = coinValue(coin)
+	server.Transparency = Config.CollectedTransparency
+	local visual = server:FindFirstChild(Config.CoinVisualName)
+	if visual and visual:IsA("BasePart") then
+		visual.Transparency = Config.CollectedTransparency
+	end
+	server.CanTouch = false
+	server.CanQuery = false
+
+	award(amount)
+
+	task.delay(Config.DestroyAfterSeconds, function()
+		collecting[coin] = nil
+		collecting[server] = nil
+		if server.Parent then
+			server:Destroy()
+		elseif coin.Parent then
+			coin:Destroy()
+		end
+	end)
+
+	return true
+end
+
+----------------------------------------------------------------
+-- Pathfinding + MoveTo (smooth on all devices)
+----------------------------------------------------------------
+type Candidate = { server: BasePart, pos: Vector3, straightDist: number }
+
+local busy = false
+local unreachableUntil: { [BasePart]: number } = {}
 
 local function rootAndHumanoid(character: Model): (BasePart?, Humanoid?)
 	local root = character:FindFirstChild("HumanoidRootPart")
@@ -105,22 +203,12 @@ local function markUnreachable(server: BasePart)
 	unreachableUntil[server] = os.clock() + Config.UnreachableCooldown
 end
 
-local function requestCollectCoin(server: BasePart)
-	local now = os.clock()
-	local last = lastRequestAt[server]
-	if last and (now - last) < Config.ClientRequestCooldown then
-		return
-	end
-	lastRequestAt[server] = now
-	requestCollect:FireServer(server)
-end
-
 local function tryVacuumNearby(origin: Vector3)
 	local radiusSq = Config.CollectRadius * Config.CollectRadius
 	for _, c in listAvailableCoins() do
 		local offset = c.pos - origin
 		if offset:Dot(offset) <= radiusSq then
-			requestCollectCoin(c.server)
+			tryCollect(c.server)
 		end
 	end
 end
@@ -260,7 +348,7 @@ local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BaseP
 				if conn then
 					conn:Disconnect()
 				end
-				requestCollectCoin(target)
+				tryCollect(target)
 				return
 			end
 			task.wait(0.1)
@@ -275,7 +363,7 @@ local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BaseP
 	end
 
 	if isAvailable(target) then
-		requestCollectCoin(target)
+		tryCollect(target)
 	end
 end
 
@@ -301,14 +389,14 @@ local function runOnce()
 			return
 		end
 		if not waypoints or #waypoints == 0 then
-			requestCollectCoin(target)
+			tryCollect(target)
 			return
 		end
 		followWaypoints(humanoid, root, target, waypoints)
 	end)
 	busy = false
 	if not ok then
-		warn("[AutoCollect] client error", err)
+		warn("[AutoCollect] error", err)
 	end
 end
 
