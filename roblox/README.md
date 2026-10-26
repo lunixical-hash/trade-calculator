@@ -1,6 +1,6 @@
 # Auto-collect coins gamepass
 
-Drop-in Luau for Studio. Checks gamepass ownership on the server and auto-collects nearby coins for AFK players.
+Drop-in Luau for Studio. Server checks gamepass ownership, then AFK-pathfinds around walls to the nearest reachable coin for maximum collections.
 
 ## Studio placement
 
@@ -19,24 +19,34 @@ Rename each file in Studio to drop the `.lua` extension (or paste contents into 
 
 ## Coin hierarchy (map-aware)
 
-Coins live under the active map, which changes often:
-
 ```
 Workspace.<MapName>.CoinContainer.Coin_Server.CoinVisual
 ```
 
-Auto-collect finds any `CoinContainer` under Workspace children — you do not hardcode the map name.
+`MapName` changes per map; scripts find any `CoinContainer` under Workspace.
+
+## Pathfinding (walls)
+
+Maps with lots of walls are handled with `PathfindingService`:
+
+1. Rank coins by straight-line distance, take the closest `MaxPathCandidates` (default 12).
+2. Compute a walkable path for each; pick the **shortest successful path** (not just closest through a wall).
+3. Walk waypoints with `Humanoid:MoveTo` (jumps when the path says so).
+4. Re-plan often (`ReplanInterval`); vacuum any coin that enters `CollectRadius` while moving.
+5. Skip coins already at transparency `1` (collected, waiting to despawn).
+6. Briefly cool down coins that fail pathfinding so the bot does not thrash on blocked spots.
+
+Tune `AgentRadius` / `AgentHeight` / `AgentCanJump` in `Config` if the character gets stuck in tight corridors.
 
 ## Collected-but-not-destroyed yet
 
-When a coin is collected, `Coin_Server.Transparency` is set to `1`, then destroyed a short time later. That is intentional.
+On collect, `Coin_Server.Transparency` goes to `1`, then the instance is destroyed after a short delay. `IsAvailable` ignores those so auto-collect never waits on a taken coin.
 
-`CoinCollect.IsAvailable` skips any coin with transparency already at `1`, so the auto-collect loop never latches onto an already-taken coin while it waits to despawn.
-
-If your existing pickup script already does that fade+destroy, call `CoinCollect.TryCollect` from it (or mirror the same transparency gate) so both paths stay in sync. Prefer wiring your real award function inside `CoinCollect.award` rather than duplicating grants.
+Prefer routing your real manual pickup through `CoinCollect.TryCollect` so both paths stay in sync. Wire your economy inside `award` in `CoinCollect`.
 
 ## What you still set
 
-1. Paste your GamePass ID into `Config.GamePassId` (replace `0`).
-2. Grant ownership yourself (purchase UI / dashboard not included).
-3. Point `award` in `CoinCollect` at your real economy if it is not `leaderstats.Coins`.
+1. Paste GamePass ID into `Config.GamePassId` (replace `0`).
+2. Grant ownership yourself (no purchase UI in this pack).
+3. Point `award` at your real economy if not `leaderstats.Coins`.
+4. If pathfinding struggles in narrow halls, lower `AgentRadius` slightly.
