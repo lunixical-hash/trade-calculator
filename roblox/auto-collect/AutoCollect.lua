@@ -9,6 +9,10 @@ if not player then
 end
 
 local camera = workspace.CurrentCamera
+if not camera then
+	warn("[AutoCollect] No camera. Press Play and paste this on the Client command bar.")
+	return
+end
 local VISUAL = "CoinVisual"
 local SERVER = "Coin_Server"
 
@@ -167,29 +171,67 @@ pcall(function()
 	end
 end)
 
-local seen = 0
-for _ in coins do
-	seen += 1
+local mover
+local moverAttachment
+local function ensureMover(root)
+	if mover and mover.Parent and moverAttachment and moverAttachment.Parent == root then
+		return
+	end
+	if mover then
+		mover:Destroy()
+	end
+	if moverAttachment then
+		moverAttachment:Destroy()
+	end
+	moverAttachment = Instance.new("Attachment")
+	moverAttachment.Name = "AutoCollectAttachment"
+	moverAttachment.Parent = root
+	mover = Instance.new("LinearVelocity")
+	mover.Name = "AutoCollectVelocity"
+	mover.Attachment0 = moverAttachment
+	mover.RelativeTo = Enum.ActuatorRelativeTo.World
+	mover.VelocityConstraintMode = Enum.VelocityConstraintMode.Vector
+	mover.ForceLimitMode = Enum.ForceLimitMode.PerAxis
+	mover.MaxAxesForce = Vector3.new(1e5, 0, 1e5)
+	mover.VectorVelocity = Vector3.zero
+	mover.Parent = root
 end
-print("[AutoCollect] local, CoinVisual found:", seen)
 
-game:GetService("RunService").Heartbeat:Connect(function(dt)
+local seen = 0
+local sample
+for inst in coins do
+	seen += 1
+	sample = inst
+end
+print("[AutoCollect] local, CoinVisual found:", seen, sample and sample:GetFullName() or "")
+
+local lastPos
+local lastReport = 0
+local warnedStuck = false
+
+game:GetService("RunService").RenderStepped:Connect(function()
 	camera = workspace.CurrentCamera
 	if camera and folder.Parent ~= camera then
 		folder.Parent = camera
 	end
 	local character = player.Character
-	local root = character and character:FindFirstChild("HumanoidRootPart")
 	local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+	local root = humanoid and humanoid.RootPart
 	if not root or not humanoid or humanoid.Health <= 0 or not camera then
 		beam.Enabled = false
+		if mover then
+			mover.VectorVelocity = Vector3.zero
+		end
 		return
 	end
 
 	refreshIgnore()
-	local _, goal = nearest(root.Position)
-	if not goal then
+	local coin, goal = nearest(root.Position)
+	if not coin or not goal then
 		beam.Enabled = false
+		if mover then
+			mover.VectorVelocity = Vector3.zero
+		end
 		return
 	end
 
@@ -197,17 +239,29 @@ game:GetService("RunService").Heartbeat:Connect(function(dt)
 	beam.Enabled = true
 	place(startNode, root.Position)
 	place(goalNode, goal)
-
 	if dir.Magnitude < 0.05 then
 		return
 	end
 
+	local speed = math.max(humanoid.WalkSpeed, 16)
 	humanoid.AutoRotate = true
 	humanoid.PlatformStand = false
 	humanoid:Move(dir, false)
-	local speed = math.max(humanoid.WalkSpeed, 16)
-	local step = dir * speed * math.min(dt, 0.05)
-	local nextPos = root.Position + step
-	root.AssemblyLinearVelocity = Vector3.new(step.X / math.max(dt, 0.001), root.AssemblyLinearVelocity.Y, step.Z / math.max(dt, 0.001))
-	root.CFrame = CFrame.lookAt(nextPos, nextPos + dir)
+	ensureMover(root)
+	mover.VectorVelocity = Vector3.new(dir.X * speed, 0, dir.Z * speed)
+
+	local now = os.clock()
+	if not lastPos then
+		lastPos = root.Position
+	end
+	if now - lastReport > 2 then
+		local moved = (Vector3.new(root.Position.X, 0, root.Position.Z) - Vector3.new(lastPos.X, 0, lastPos.Z)).Magnitude
+		print(string.format("[AutoCollect] chasing %s, %.0f studs away, moved %.1f studs", coin:GetFullName(), (goal - root.Position).Magnitude, moved))
+		if moved < 0.2 and not warnedStuck then
+			warnedStuck = true
+			warn("[AutoCollect] The character position is not changing. The server is probably the network owner, so this client cannot move it.")
+		end
+		lastPos = root.Position
+		lastReport = now
+	end
 end)
