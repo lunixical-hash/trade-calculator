@@ -1,25 +1,32 @@
--- Regular LocalScript. Put it in StarterGui (not StarterPlayerScripts).
--- Paste this whole file into a LocalScript named AutoCollect. It only walks.
--- Your server still collects coins.
--- Output window lines start with [AutoCollect] so you can see why it is or isn't moving.
+-- Paste this whole file into the Studio command bar while the game is playing.
+-- The command bar must be set to Client (not Server). The F9 console cannot run code.
+-- It only walks. Your server still collects coins.
+-- Output lines start with [AutoCollect].
 
 local PathfindingService = game:GetService("PathfindingService")
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
 
-local runContext = nil
+local sourceScript = nil
 pcall(function()
-	runContext = (script :: any).RunContext
+	sourceScript = script
 end)
-local runsOnClient = script:IsA("LocalScript") or runContext == Enum.RunContext.Client
-if not runsOnClient then
-	warn("[AutoCollect] This is a " .. script.ClassName .. " running on the server. Use a LocalScript, or set this Script's RunContext to Client.")
-	return
+
+if sourceScript ~= nil then
+	local runContext = nil
+	pcall(function()
+		runContext = (sourceScript :: any).RunContext
+	end)
+	local runsOnClient = sourceScript:IsA("LocalScript") or runContext == Enum.RunContext.Client
+	if not runsOnClient then
+		warn("[AutoCollect] This is running on the server. In the command bar, switch Server to Client, then paste again.")
+		return
+	end
 end
 
 local player = Players.LocalPlayer
 if not player then
-	warn("[AutoCollect] Players.LocalPlayer is nil. This has to run on the client. Put a LocalScript in StarterGui.")
+	warn("[AutoCollect] No local player. Press Play, set the command bar to Client, then paste this again. Server mode and the F9 window will not move your character.")
 	return
 end
 
@@ -308,7 +315,7 @@ local function runOnce()
 	end
 end
 
-log("started for", player.Name, "from", script:GetFullName(), "class", script.ClassName)
+log("started for", player.Name, "from", if sourceScript then sourceScript:GetFullName() else "command bar")
 local total, available = countTracked()
 log(string.format("initial scan: named Coin_Server=%d, walkable parts=%d, available(transparency<1)=%d, no-part=%d", namedNodes, total, available, skippedNotPart))
 if namedNodes == 0 then

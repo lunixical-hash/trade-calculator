@@ -1,13 +1,11 @@
-# AFK coin path — one LocalScript
+# AFK coin path
 
-Walks to coins named `Coin_Server` anywhere in Workspace. Map names are not required. The template in ReplicatedStorage is ignored.
+Walks to coins named `Coin_Server` anywhere in Workspace. The ReplicatedStorage template is ignored. Your server still collects the coins.
 
-Your server still collects, fades, and destroys coins. This script only moves the character.
+## Run it
 
-## Studio
+1. Press Play.
+2. Set the Studio command bar to **Client** (not Server).
+3. Paste `auto-collect/AutoCollect.lua`.
 
-1. `StarterGui` → **LocalScript** named `AutoCollect` (a normal LocalScript, not under StarterPlayer)
-2. Paste `auto-collect/AutoCollect.lua` (same text as the Notepad file `AutoCollect.txt` in the agent files)
-3. Do not also run the old Office3 / ResearchFacility test scripts
-
-It skips coins already collected (`Transparency == 1`) and retargets when the server takes the current one.
+The F9 developer console only shows output. It does not run code.
