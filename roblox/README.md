@@ -16,9 +16,16 @@ Workspace.<MapName>.CoinContainer.Coin_Server.CoinVisual
 
 Already-collected coins (`Coin_Server.Transparency == 1`, waiting to despawn) are skipped.
 
-## Office3 test
+## Map path tests
 
-`auto-collect/Office3PathTest.lua` is a LocalScript that only walks coins under `Workspace.Office3`. Paste it into `StarterPlayerScripts` as `Office3PathTest`. Watch the Output window for `[Office3PathTest]`. Do not run it together with `AutoCollect`. It does not award or destroy coins — your server still does that.
+Paste one of these into `StarterPlayerScripts` as a LocalScript. Only run one at a time (both call `MoveTo`). They do not award or destroy coins.
+
+| File | Map |
+|------|-----|
+| `auto-collect/Office3PathTest.lua` | `Workspace.Office3` |
+| `auto-collect/ResearchFacilityPathTest.lua` | `Workspace.ResearchFacility` |
+
+Output is prefixed `[Office3PathTest]` or `[ResearchFacilityPathTest]`.
 
 ## Important: client-trusting awards
 
