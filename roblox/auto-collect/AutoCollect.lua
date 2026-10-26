@@ -1,31 +1,22 @@
 -- LocalScript: StarterPlayer.StarterPlayerScripts/AutoCollect
--- ONE file: config + pathfinding + MoveTo + collect/award.
---
--- WARNING: Awards run on the client. Exploiters can grant themselves coins
--- unless you later add a thin server validator. Chosen for simplicity/smoothness.
+-- Finds every Coin_Server in Workspace (any map) and walks a path to the nearest reachable one.
+-- The copy in ReplicatedStorage is ignored because this only searches Workspace.
+-- Your server already collects, fades, and destroys coins. This script only moves.
 
 local PathfindingService = game:GetService("PathfindingService")
 local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local Workspace = game:GetService("Workspace")
 
 local player = Players.LocalPlayer
 
-----------------------------------------------------------------
--- Config (edit here)
-----------------------------------------------------------------
 local Config = {
-	CollectRadius = 1000, -- studs
+	SearchRadius = 1000,
 	ReplanInterval = 0.35,
 
-	CoinContainerName = "CoinContainer",
 	CoinServerName = "Coin_Server",
 	CoinVisualName = "CoinVisual",
-
 	CollectedTransparency = 1,
-	DestroyAfterSeconds = 2,
-
-	CoinValueAttribute = "Value",
-	DefaultCoinValue = 1,
 
 	AgentRadius = 2,
 	AgentHeight = 5,
@@ -37,125 +28,55 @@ local Config = {
 	UnreachableCooldown = 4,
 }
 
-----------------------------------------------------------------
--- Collect / award (client-side — see warning at top)
-----------------------------------------------------------------
-local collecting: { [Instance]: boolean } = {}
-
-local function getCoinServer(coin: Instance): BasePart?
-	if coin.Name == Config.CoinServerName and coin:IsA("BasePart") then
-		return coin
-	end
-	local server = coin:FindFirstChild(Config.CoinServerName)
-	if server and server:IsA("BasePart") then
-		return server
-	end
-	if coin:IsA("BasePart") then
-		return coin
-	end
-	return nil
-end
-
-local function getVisualPosition(coin: Instance): Vector3?
-	local server = getCoinServer(coin)
-	if not server then
-		return nil
-	end
-	local visual = server:FindFirstChild(Config.CoinVisualName)
-	if visual and visual:IsA("BasePart") then
-		return visual.Position
-	end
-	return server.Position
-end
-
-local function isAvailable(coin: Instance): boolean
-	if collecting[coin] or not coin.Parent then
-		return false
-	end
-	local server = getCoinServer(coin)
-	if not server or not server.Parent then
-		return false
-	end
-	if server.Transparency >= Config.CollectedTransparency then
-		return false
-	end
-	return true
-end
-
-local function coinValue(coin: Instance): number
-	local server = getCoinServer(coin) or coin
-	local v = server:GetAttribute(Config.CoinValueAttribute)
-	if typeof(v) == "number" then
-		return v
-	end
-	return Config.DefaultCoinValue
-end
-
--- Replace if your economy is not leaderstats.Coins (still client-side).
-local function award(amount: number)
-	local stats = player:FindFirstChild("leaderstats")
-	local coins = stats and stats:FindFirstChild("Coins")
-	if coins and coins:IsA("IntValue") then
-		coins.Value += amount
-	end
-end
-
-local function tryCollect(coin: Instance): boolean
-	if not isAvailable(coin) then
-		return false
-	end
-	local character = player.Character
-	if not character then
-		return false
-	end
-	local root = character:FindFirstChild("HumanoidRootPart")
-	if not (root and root:IsA("BasePart")) then
-		return false
-	end
-	local pos = getVisualPosition(coin)
-	if not pos or (pos - root.Position).Magnitude > Config.CollectRadius then
-		return false
-	end
-
-	local server = getCoinServer(coin)
-	if not server then
-		return false
-	end
-
-	collecting[coin] = true
-	collecting[server] = true
-
-	local amount = coinValue(coin)
-	server.Transparency = Config.CollectedTransparency
-	local visual = server:FindFirstChild(Config.CoinVisualName)
-	if visual and visual:IsA("BasePart") then
-		visual.Transparency = Config.CollectedTransparency
-	end
-	server.CanTouch = false
-	server.CanQuery = false
-
-	award(amount)
-
-	task.delay(Config.DestroyAfterSeconds, function()
-		collecting[coin] = nil
-		collecting[server] = nil
-		if server.Parent then
-			server:Destroy()
-		elseif coin.Parent then
-			coin:Destroy()
-		end
-	end)
-
-	return true
-end
-
-----------------------------------------------------------------
--- Pathfinding + MoveTo (smooth on all devices)
-----------------------------------------------------------------
 type Candidate = { server: BasePart, pos: Vector3, straightDist: number }
 
+local tracked: { [BasePart]: boolean } = {}
 local busy = false
 local unreachableUntil: { [BasePart]: number } = {}
+
+local function log(...)
+	print("[AutoCollect]", ...)
+end
+
+local function isCoinServer(inst: Instance): boolean
+	return inst.Name == Config.CoinServerName
+		and inst:IsA("BasePart")
+		and inst:IsDescendantOf(Workspace)
+		and not inst:IsDescendantOf(ReplicatedStorage)
+end
+
+local function track(inst: Instance)
+	if isCoinServer(inst) then
+		tracked[inst :: BasePart] = true
+	end
+end
+
+local function untrack(inst: Instance)
+	if inst:IsA("BasePart") then
+		tracked[inst] = nil
+		unreachableUntil[inst] = nil
+	end
+end
+
+for _, inst in Workspace:GetDescendants() do
+	track(inst)
+end
+Workspace.DescendantAdded:Connect(track)
+Workspace.DescendantRemoving:Connect(untrack)
+
+local function getVisual(server: BasePart): BasePart
+	local visual = server:FindFirstChild(Config.CoinVisualName)
+	if visual and visual:IsA("BasePart") then
+		return visual
+	end
+	return server
+end
+
+local function isAvailable(server: BasePart): boolean
+	return tracked[server] == true
+		and server.Parent ~= nil
+		and server.Transparency < Config.CollectedTransparency
+end
 
 local function rootAndHumanoid(character: Model): (BasePart?, Humanoid?)
 	local root = character:FindFirstChild("HumanoidRootPart")
@@ -166,31 +87,25 @@ local function rootAndHumanoid(character: Model): (BasePart?, Humanoid?)
 	return nil, nil
 end
 
-local function listAvailableCoins(): { Candidate }
+local function listAvailableCoins(origin: Vector3): { Candidate }
 	local list: { Candidate } = {}
-	for _, map in Workspace:GetChildren() do
-		local container = map:FindFirstChild(Config.CoinContainerName)
-		if not container then
+	local radiusSq = Config.SearchRadius * Config.SearchRadius
+
+	for server in tracked do
+		if not isAvailable(server) then
 			continue
 		end
-		for _, child in container:GetChildren() do
-			local server: BasePart? = nil
-			if child.Name == Config.CoinServerName and child:IsA("BasePart") then
-				server = child
-			elseif child:IsA("Model") then
-				local nested = child:FindFirstChild(Config.CoinServerName)
-				if nested and nested:IsA("BasePart") then
-					server = nested
-				end
-			end
-			if server and isAvailable(server) then
-				local pos = getVisualPosition(server)
-				if pos then
-					table.insert(list, { server = server, pos = pos, straightDist = 0 })
-				end
-			end
+		local pos = getVisual(server).Position
+		local offset = pos - origin
+		if offset:Dot(offset) <= radiusSq then
+			table.insert(list, {
+				server = server,
+				pos = pos,
+				straightDist = offset.Magnitude,
+			})
 		end
 	end
+
 	return list
 end
 
@@ -201,29 +116,16 @@ end
 
 local function markUnreachable(server: BasePart)
 	unreachableUntil[server] = os.clock() + Config.UnreachableCooldown
+	log("no path to", server:GetFullName())
 end
 
-local function tryVacuumNearby(origin: Vector3)
-	local radiusSq = Config.CollectRadius * Config.CollectRadius
-	for _, c in listAvailableCoins() do
-		local offset = c.pos - origin
-		if offset:Dot(offset) <= radiusSq then
-			tryCollect(c.server)
-		end
-	end
-end
-
-local function createPath()
-	return PathfindingService:CreatePath({
+local function computePath(from: Vector3, to: Vector3): (number?, { PathWaypoint }?)
+	local path = PathfindingService:CreatePath({
 		AgentRadius = Config.AgentRadius,
 		AgentHeight = Config.AgentHeight,
 		AgentCanJump = Config.AgentCanJump,
 		WaypointSpacing = Config.WaypointSpacing,
 	})
-end
-
-local function computePathLength(from: Vector3, to: Vector3): (number?, { PathWaypoint }?)
-	local path = createPath()
 	local ok = pcall(function()
 		path:ComputeAsync(from, to)
 	end)
@@ -242,14 +144,11 @@ local function computePathLength(from: Vector3, to: Vector3): (number?, { PathWa
 end
 
 local function pickBestTarget(origin: Vector3): (BasePart?, { PathWaypoint }?)
-	local coins = listAvailableCoins()
+	local coins = listAvailableCoins(origin)
 	if #coins == 0 then
 		return nil, nil
 	end
 
-	for _, c in coins do
-		c.straightDist = (c.pos - origin).Magnitude
-	end
 	table.sort(coins, function(a, b)
 		return a.straightDist < b.straightDist
 	end)
@@ -262,10 +161,7 @@ local function pickBestTarget(origin: Vector3): (BasePart?, { PathWaypoint }?)
 	for i = 1, limit do
 		local c = coins[i]
 		if not isOnCooldown(c.server) and isAvailable(c.server) then
-			if c.straightDist <= Config.CollectRadius then
-				return c.server, {}
-			end
-			local length, waypoints = computePathLength(origin, c.pos)
+			local length, waypoints = computePath(origin, c.pos)
 			if length and waypoints and length < bestLength then
 				bestLength = length
 				bestServer = c.server
@@ -276,6 +172,9 @@ local function pickBestTarget(origin: Vector3): (BasePart?, { PathWaypoint }?)
 		end
 	end
 
+	if bestServer and bestWaypoints then
+		log(string.format("pathing to %s (%d studs, %d waypoints)", bestServer:GetFullName(), math.floor(bestLength), #bestWaypoints))
+	end
 	return bestServer, bestWaypoints
 end
 
@@ -297,15 +196,11 @@ local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BaseP
 			continue
 		end
 		if not isAvailable(target) then
+			log("server took", target:GetFullName(), "— picking next")
 			return
 		end
 		local character = player.Character
 		if not character or humanoid.Parent ~= character then
-			return
-		end
-
-		tryVacuumNearby(root.Position)
-		if not isAvailable(target) then
 			return
 		end
 
@@ -327,6 +222,7 @@ local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BaseP
 				if conn then
 					conn:Disconnect()
 				end
+				log("server took", target:GetFullName(), "— picking next")
 				return
 			end
 			character = player.Character
@@ -336,20 +232,9 @@ local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BaseP
 				end
 				return
 			end
-
 			if os.clock() >= nextPulse then
 				humanoid:MoveTo(waypoint.Position)
 				nextPulse = os.clock() + Config.MoveToRepulse
-			end
-
-			tryVacuumNearby(root.Position)
-			local targetPos = getVisualPosition(target) or waypoint.Position
-			if (root.Position - targetPos).Magnitude <= Config.CollectRadius then
-				if conn then
-					conn:Disconnect()
-				end
-				tryCollect(target)
-				return
 			end
 			task.wait(0.1)
 		end
@@ -360,10 +245,6 @@ local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BaseP
 			markUnreachable(target)
 			return
 		end
-	end
-
-	if isAvailable(target) then
-		tryCollect(target)
 	end
 end
 
@@ -382,23 +263,19 @@ local function runOnce()
 
 	busy = true
 	local ok, err = pcall(function()
-		tryVacuumNearby(root.Position)
-
 		local target, waypoints = pickBestTarget(root.Position)
-		if not target then
-			return
-		end
-		if not waypoints or #waypoints == 0 then
-			tryCollect(target)
+		if not target or not waypoints then
 			return
 		end
 		followWaypoints(humanoid, root, target, waypoints)
 	end)
 	busy = false
 	if not ok then
-		warn("[AutoCollect] error", err)
+		warn("[AutoCollect]", err)
 	end
 end
+
+log("watching Workspace for", Config.CoinServerName, "(ReplicatedStorage template is ignored)")
 
 task.spawn(function()
 	while true do
