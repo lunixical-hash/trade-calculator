@@ -1,19 +1,25 @@
--- LocalScript: StarterPlayer.StarterPlayerScripts.AutoCollect
--- Paste this whole file into a LocalScript. It only walks. Your server still collects coins.
+-- Regular LocalScript. Put it in StarterGui (not StarterPlayerScripts).
+-- Paste this whole file into a LocalScript named AutoCollect. It only walks.
+-- Your server still collects coins.
 -- Output window lines start with [AutoCollect] so you can see why it is or isn't moving.
 
 local PathfindingService = game:GetService("PathfindingService")
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
 
-if not script:IsA("LocalScript") then
-	warn("[AutoCollect] This must be a LocalScript in StarterPlayerScripts. It is a " .. script.ClassName .. ", so it will not move your character.")
+local runContext = nil
+pcall(function()
+	runContext = (script :: any).RunContext
+end)
+local runsOnClient = script:IsA("LocalScript") or runContext == Enum.RunContext.Client
+if not runsOnClient then
+	warn("[AutoCollect] This is a " .. script.ClassName .. " running on the server. Use a LocalScript, or set this Script's RunContext to Client.")
 	return
 end
 
 local player = Players.LocalPlayer
 if not player then
-	warn("[AutoCollect] Players.LocalPlayer is nil. Put this in StarterPlayerScripts as a LocalScript.")
+	warn("[AutoCollect] Players.LocalPlayer is nil. This has to run on the client. Put a LocalScript in StarterGui.")
 	return
 end
 
@@ -302,7 +308,7 @@ local function runOnce()
 	end
 end
 
-log("started. LocalScript is running for", player.Name)
+log("started for", player.Name, "from", script:GetFullName(), "class", script.ClassName)
 local total, available = countTracked()
 log(string.format("initial scan: named Coin_Server=%d, walkable parts=%d, available(transparency<1)=%d, no-part=%d", namedNodes, total, available, skippedNotPart))
 if namedNodes == 0 then
