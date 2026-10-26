@@ -18,12 +18,32 @@ local CELL = 4
 local ARRIVE = 3.5
 local STEP_UP = 6
 
-local coins: { [BasePart]: boolean } = {}
+local coins: { [Instance]: boolean } = {}
 local rayParams = RaycastParams.new()
 rayParams.FilterType = Enum.RaycastFilterType.Exclude
 
+local function worldPosition(inst: Instance): Vector3?
+	if inst:IsA("BasePart") then
+		return inst.Position
+	end
+	if inst:IsA("Model") then
+		return inst:GetPivot().Position
+	end
+	if inst:IsA("Attachment") then
+		return inst.WorldPosition
+	end
+	if inst.Parent and inst.Parent:IsA("BasePart") then
+		return inst.Parent.Position
+	end
+	local child = inst:FindFirstChildWhichIsA("BasePart", true)
+	if child then
+		return child.Position
+	end
+	return nil
+end
+
 local function watch(inst: Instance)
-	if inst.Name == VISUAL and inst:IsA("BasePart") and inst:IsDescendantOf(Workspace) then
+	if inst.Name == VISUAL and inst:IsDescendantOf(Workspace) and worldPosition(inst) ~= nil then
 		coins[inst] = true
 	end
 end
@@ -33,24 +53,26 @@ for _, inst in Workspace:GetDescendants() do
 end
 Workspace.DescendantAdded:Connect(watch)
 Workspace.DescendantRemoving:Connect(function(inst)
-	if inst:IsA("BasePart") then
-		coins[inst] = nil
-	end
+	coins[inst] = nil
 end)
 
-local function available(visual: BasePart): boolean
-	if coins[visual] ~= true or visual.Parent == nil or visual.Transparency >= 1 then
-		return false
+local function taken(inst: Instance): boolean
+	if inst:IsA("BasePart") and inst.Transparency >= 1 then
+		return true
 	end
-	local server = visual.Parent
-	if server and server.Name == SERVER and server:IsA("BasePart") and server.Transparency >= 1 then
-		return false
+	local server = if inst.Name == SERVER then inst else inst:FindFirstAncestor(SERVER)
+	if server and server:IsA("BasePart") and server.Transparency >= 1 then
+		return true
 	end
-	return true
+	return false
 end
 
-local function coinPosition(visual: BasePart): Vector3
-	return visual.Position
+local function available(inst: Instance): boolean
+	return coins[inst] == true and inst.Parent ~= nil and worldPosition(inst) ~= nil and not taken(inst)
+end
+
+local function coinPosition(inst: Instance): Vector3
+	return worldPosition(inst) :: Vector3
 end
 
 local function refreshFilter()
@@ -58,10 +80,11 @@ local function refreshFilter()
 	if player.Character then
 		table.insert(ignore, player.Character)
 	end
-	for part in coins do
-		table.insert(ignore, part)
-		if part.Parent and part.Parent.Name == SERVER then
-			table.insert(ignore, part.Parent)
+	for inst in coins do
+		table.insert(ignore, inst)
+		local server = inst:FindFirstAncestor(SERVER)
+		if server then
+			table.insert(ignore, server)
 		end
 	end
 	rayParams.FilterDescendantsInstances = ignore
@@ -279,23 +302,38 @@ end
 
 local walkHumanoid: Humanoid? = nil
 local walkDirection = Vector3.zero
-RunService:BindToRenderStep("AutoCollectWalk", Enum.RenderPriority.Input.Value + 5, function()
+
+pcall(function()
+	RunService:UnbindFromRenderStep("AutoCollectWalk")
+end)
+RunService:BindToRenderStep("AutoCollectWalk", Enum.RenderPriority.Camera.Value + 1, function()
 	local humanoid = walkHumanoid
 	if humanoid and humanoid.Parent and walkDirection.Magnitude > 0.05 then
 		humanoid:Move(walkDirection, false)
 	end
 end)
 
-local function nearestCoin(origin: Vector3): (BasePart?, Vector3?)
-	local best: BasePart? = nil
+pcall(function()
+	local scripts = player:FindFirstChild("PlayerScripts")
+	if scripts then
+		local module = scripts:FindFirstChild("PlayerModule")
+		if module and module:IsA("ModuleScript") then
+			require(module):GetControls():Disable()
+			print("[AutoCollect] default controls disabled so the walk is not cancelled")
+		end
+	end
+end)
+
+local function nearestCoin(origin: Vector3): (Instance?, Vector3?)
+	local best: Instance? = nil
 	local bestPos: Vector3? = nil
 	local bestDist = math.huge
-	for part in coins do
-		if available(part) then
-			local pos = coinPosition(part)
+	for inst in coins do
+		if available(inst) then
+			local pos = coinPosition(inst)
 			local dist = (Vector3.new(pos.X, 0, pos.Z) - Vector3.new(origin.X, 0, origin.Z)).Magnitude
 			if dist < bestDist and dist <= 1000 then
-				best = part
+				best = inst
 				bestPos = pos
 				bestDist = dist
 			end
@@ -304,12 +342,13 @@ local function nearestCoin(origin: Vector3): (BasePart?, Vector3?)
 	return best, bestPos
 end
 
-local function walkPath(humanoid: Humanoid, root: BasePart, coin: BasePart, points: { Vector3 })
+local function walkPath(humanoid: Humanoid, root: BasePart, coin: Instance, points: { Vector3 })
 	humanoid.Sit = false
 	humanoid.PlatformStand = false
 	humanoid.AutoRotate = true
 	walkHumanoid = humanoid
 	showLine(points)
+	print("[AutoCollect] walking", coin:GetFullName())
 
 	local index = 2
 	local stuck = os.clock()
@@ -340,6 +379,7 @@ local function walkPath(humanoid: Humanoid, root: BasePart, coin: BasePart, poin
 			startNode.Position = root.Position
 		end
 		walkDirection = flat.Unit
+		humanoid:Move(walkDirection, false)
 		RunService.Heartbeat:Wait()
 	end
 
@@ -353,7 +393,7 @@ local seen = 0
 for _ in coins do
 	seen += 1
 end
-print("[AutoCollect] client running, CoinVisual parts in Workspace:", seen)
+print("[AutoCollect] client running, CoinVisual found:", seen)
 
 while true do
 	local character = player.Character
@@ -362,10 +402,8 @@ while true do
 	if root and root:IsA("BasePart") and humanoid and humanoid.Health > 0 then
 		local coin, pos = nearestCoin(root.Position)
 		if coin and pos then
-			local points = buildPath(root.Position, pos)
-			if points then
-				walkPath(humanoid, root, coin, points)
-			end
+			local points = buildPath(root.Position, pos) or { root.Position, pos }
+			walkPath(humanoid, root, coin, points)
 		end
 	end
 	task.wait(0.2)
