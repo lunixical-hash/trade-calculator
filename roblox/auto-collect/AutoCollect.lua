@@ -3,8 +3,8 @@
 -- It only walks. Your server still collects coins.
 -- Output lines start with [AutoCollect].
 
-local PathfindingService = game:GetService("PathfindingService")
 local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
 local Workspace = game:GetService("Workspace")
 
 local sourceScript = nil
@@ -40,12 +40,13 @@ local Config = {
 	CollectedTransparency = 1,
 
 	AgentRadius = 2,
-	AgentHeight = 5,
 	AgentCanJump = true,
-	WaypointSpacing = 4,
-	MoveToTimeout = 3,
-	MoveToRepulse = 0.35,
-	MaxPathCandidates = 12,
+	CellSize = 4,
+	MaxStepUp = 6,
+	ArriveDistance = 3.5,
+	StuckTimeout = 4,
+	MaxPathCandidates = 8,
+	MaxSearchNodes = 2500,
 	UnreachableCooldown = 4,
 }
 
@@ -171,39 +172,309 @@ local function listAvailableCoins(origin: Vector3): { Candidate }
 	return list
 end
 
+local pathFolder = Workspace:FindFirstChild("AutoCollectPath")
+if pathFolder then
+	pathFolder:Destroy()
+end
+pathFolder = Instance.new("Folder")
+pathFolder.Name = "AutoCollectPath"
+pathFolder.Parent = Workspace
+
+local function clearPathLine()
+	pathFolder:ClearAllChildren()
+end
+
+-- Neon parts and Beams created here exist only on this client.
+local function showPathLine(points: { Vector3 })
+	clearPathLine()
+	if #points < 2 then
+		return
+	end
+	local attachments = {}
+	for i, position in points do
+		local node = Instance.new("Part")
+		node.Name = if i == 1 then "Start" else "Node"
+		node.Anchored = true
+		node.CanCollide = false
+		node.CanQuery = false
+		node.CanTouch = false
+		node.Material = Enum.Material.Neon
+		node.Color = Color3.fromRGB(0, 255, 80)
+		node.Size = if i == #points then Vector3.new(1.4, 1.4, 1.4) else Vector3.new(0.55, 0.55, 0.55)
+		node.Shape = Enum.PartType.Ball
+		node.Position = position
+		node.Parent = pathFolder
+		local attachment = Instance.new("Attachment")
+		attachment.Parent = node
+		attachments[i] = attachment
+	end
+	for i = 1, #attachments - 1 do
+		local beam = Instance.new("Beam")
+		beam.Name = "Heading"
+		beam.Attachment0 = attachments[i]
+		beam.Attachment1 = attachments[i + 1]
+		beam.Width0 = 0.45
+		beam.Width1 = 0.45
+		beam.Color = ColorSequence.new(Color3.fromRGB(0, 255, 80))
+		beam.FaceCamera = true
+		beam.LightEmission = 1
+		beam.Segments = 1
+		beam.Parent = pathFolder
+	end
+	log("green heading line drawn,", #points, "points (only you can see it)")
+end
+
+local function stickLineToPlayer(root: BasePart)
+	local startNode = pathFolder:FindFirstChild("Start")
+	if startNode and startNode:IsA("BasePart") then
+		startNode.Position = root.Position
+	end
+end
+
 local function markUnreachable(server: BasePart, reason: string)
 	unreachableUntil[server] = os.clock() + Config.UnreachableCooldown
 	log("no path to", server:GetFullName(), "—", reason)
 end
 
-local function computePath(from: Vector3, to: Vector3): (number?, { PathWaypoint }?, string)
-	local path = PathfindingService:CreatePath({
-		AgentRadius = Config.AgentRadius,
-		AgentHeight = Config.AgentHeight,
-		AgentCanJump = Config.AgentCanJump,
-		WaypointSpacing = Config.WaypointSpacing,
-	})
-	local ok, err = pcall(function()
-		path:ComputeAsync(from, to)
-	end)
-	if not ok then
-		return nil, nil, tostring(err)
+-- Our own pathfinder. Raycasts around walls. Does not use PathfindingService.
+local rayParams = RaycastParams.new()
+rayParams.FilterType = Enum.RaycastFilterType.Exclude
+
+local function refreshRayFilter()
+	local filter = {}
+	if player.Character then
+		table.insert(filter, player.Character)
 	end
-	if path.Status ~= Enum.PathStatus.Success then
-		return nil, nil, tostring(path.Status)
+	for part in tracked do
+		if part.Parent then
+			table.insert(filter, part)
+		end
 	end
-	local waypoints = path:GetWaypoints()
-	if #waypoints == 0 then
-		return nil, nil, "empty waypoints"
-	end
-	local length = 0
-	for i = 2, #waypoints do
-		length += (waypoints[i].Position - waypoints[i - 1].Position).Magnitude
-	end
-	return length, waypoints, "ok"
+	rayParams.FilterDescendantsInstances = filter
 end
 
-local function pickBestTarget(origin: Vector3): (BasePart?, { PathWaypoint }?)
+local function flatDir(a: Vector3, b: Vector3): Vector3
+	local delta = Vector3.new(b.X - a.X, 0, b.Z - a.Z)
+	if delta.Magnitude < 0.001 then
+		return Vector3.zero
+	end
+	return delta.Unit
+end
+
+local function segmentBlocked(a: Vector3, b: Vector3): boolean
+	local delta = b - a
+	if delta.Magnitude < 0.05 then
+		return false
+	end
+	local side = flatDir(a, b):Cross(Vector3.yAxis) * Config.AgentRadius
+	local lifts = { 2, 4 }
+	local offsets = { Vector3.zero, side, -side }
+	for _, lift in lifts do
+		for _, offset in offsets do
+			local origin = a + Vector3.new(0, lift, 0) + offset
+			local hit = Workspace:Raycast(origin, delta, rayParams)
+			if hit then
+				return true
+			end
+		end
+	end
+	return false
+end
+
+local function groundAt(x: number, z: number, hintY: number): Vector3?
+	local origin = Vector3.new(x, hintY + 12, z)
+	local hit = Workspace:Raycast(origin, Vector3.new(0, -80, 0), rayParams)
+	if not hit then
+		return nil
+	end
+	return hit.Position + Vector3.new(0, 3, 0)
+end
+
+local function simplify(points: { Vector3 }): { Vector3 }
+	if #points <= 2 then
+		return points
+	end
+	local simplified = { points[1] }
+	local anchor = 1
+	for i = 3, #points do
+		if segmentBlocked(points[anchor], points[i]) then
+			table.insert(simplified, points[i - 1])
+			anchor = i - 1
+		end
+	end
+	table.insert(simplified, points[#points])
+	return simplified
+end
+
+local function pathLength(points: { Vector3 }): number
+	local length = 0
+	for i = 2, #points do
+		length += (points[i] - points[i - 1]).Magnitude
+	end
+	return length
+end
+
+local function computePath(from: Vector3, to: Vector3): (number?, { Vector3 }?, string)
+	refreshRayFilter()
+	local goal = groundAt(to.X, to.Z, to.Y) or to
+	local start = groundAt(from.X, from.Z, from.Y) or from
+	if not segmentBlocked(start, goal) then
+		local direct = { start, goal }
+		return pathLength(direct), direct, "direct"
+	end
+
+	local span = (Vector3.new(goal.X, 0, goal.Z) - Vector3.new(start.X, 0, start.Z)).Magnitude
+	local cell = math.clamp(math.ceil(span / 40), Config.CellSize, 12)
+	local pad = cell * 3
+	local minX = math.min(start.X, goal.X) - pad
+	local minZ = math.min(start.Z, goal.Z) - pad
+	local maxX = math.max(start.X, goal.X) + pad
+	local maxZ = math.max(start.Z, goal.Z) + pad
+	local cols = math.floor((maxX - minX) / cell) + 1
+	local rows = math.floor((maxZ - minZ) / cell) + 1
+	if cols < 2 or rows < 2 or cols * rows > 8000 then
+		return nil, nil, "area too large for the grid"
+	end
+
+	local function pack(ix: number, iz: number): number
+		return ix * 100000 + iz
+	end
+	local function worldOf(ix: number, iz: number, hintY: number): Vector3?
+		return groundAt(minX + ix * cell, minZ + iz * cell, hintY)
+	end
+
+	local startIx = math.clamp(math.floor((start.X - minX) / cell + 0.5), 0, cols - 1)
+	local startIz = math.clamp(math.floor((start.Z - minZ) / cell + 0.5), 0, rows - 1)
+	local goalIx = math.clamp(math.floor((goal.X - minX) / cell + 0.5), 0, cols - 1)
+	local goalIz = math.clamp(math.floor((goal.Z - minZ) / cell + 0.5), 0, rows - 1)
+
+	local startPos = worldOf(startIx, startIz, start.Y)
+	local goalPos = worldOf(goalIx, goalIz, goal.Y)
+	if not startPos or not goalPos then
+		return nil, nil, "no floor at the start or the coin"
+	end
+
+	local dirs = {
+		{ 1, 0, 1 },
+		{ -1, 0, 1 },
+		{ 0, 1, 1 },
+		{ 0, -1, 1 },
+		{ 1, 1, 1.414 },
+		{ 1, -1, 1.414 },
+		{ -1, 1, 1.414 },
+		{ -1, -1, 1.414 },
+	}
+
+	local open = { { ix = startIx, iz = startIz, f = 0 } }
+	local function heapUp(i: number)
+		while i > 1 do
+			local parent = math.floor(i / 2)
+			if open[parent].f <= open[i].f then
+				break
+			end
+			open[parent], open[i] = open[i], open[parent]
+			i = parent
+		end
+	end
+	local function heapDown(i: number)
+		while true do
+			local left = i * 2
+			local right = left + 1
+			local smallest = i
+			if left <= #open and open[left].f < open[smallest].f then
+				smallest = left
+			end
+			if right <= #open and open[right].f < open[smallest].f then
+				smallest = right
+			end
+			if smallest == i then
+				break
+			end
+			open[smallest], open[i] = open[i], open[smallest]
+			i = smallest
+		end
+	end
+	local function push(ix: number, iz: number, f: number)
+		table.insert(open, { ix = ix, iz = iz, f = f })
+		heapUp(#open)
+	end
+	local function pop()
+		local top = open[1]
+		local last = table.remove(open)
+		if #open > 0 and last then
+			open[1] = last
+			heapDown(1)
+		end
+		return top
+	end
+
+	local came: { [number]: number } = {}
+	local cost: { [number]: number } = { [pack(startIx, startIz)] = 0 }
+	local seen = 0
+	local found = false
+
+	while #open > 0 and seen < Config.MaxSearchNodes do
+		local node = pop()
+		seen += 1
+		if node.ix == goalIx and node.iz == goalIz then
+			found = true
+			break
+		end
+		local nodeKey = pack(node.ix, node.iz)
+		if node.f > (cost[nodeKey] or 0) + math.abs(goalIx - node.ix) + math.abs(goalIz - node.iz) then
+			-- stale heap entry
+		else
+			local here = worldOf(node.ix, node.iz, start.Y)
+			if here then
+				for _, dir in dirs do
+					local nix = node.ix + dir[1]
+					local niz = node.iz + dir[2]
+					if nix >= 0 and niz >= 0 and nix < cols and niz < rows then
+						local nxt = worldOf(nix, niz, here.Y)
+						if nxt and math.abs(nxt.Y - here.Y) <= Config.MaxStepUp and not segmentBlocked(here, nxt) then
+							local nextKey = pack(nix, niz)
+							local nextCost = (cost[nodeKey] or 0) + dir[3]
+							if cost[nextKey] == nil or nextCost < cost[nextKey] then
+								cost[nextKey] = nextCost
+								came[nextKey] = nodeKey
+								local heuristic = math.abs(goalIx - nix) + math.abs(goalIz - niz)
+								push(nix, niz, nextCost + heuristic)
+							end
+						end
+					end
+				end
+			end
+		end
+	end
+
+	if not found then
+		return nil, nil, string.format("custom grid found no opening (%d cells checked)", seen)
+	end
+
+	local cells = {}
+	local cursor = pack(goalIx, goalIz)
+	local startKey = pack(startIx, startIz)
+	local guard = 0
+	while cursor ~= startKey and guard < 5000 do
+		local ix = math.floor(cursor / 100000)
+		local iz = cursor - ix * 100000
+		local pos = worldOf(ix, iz, goal.Y)
+		if pos then
+			table.insert(cells, 1, pos)
+		end
+		cursor = came[cursor]
+		if cursor == nil then
+			break
+		end
+		guard += 1
+	end
+	table.insert(cells, 1, start)
+	table.insert(cells, goal)
+	local points = simplify(cells)
+	return pathLength(points), points, "grid"
+end
+
+local function pickBestTarget(origin: Vector3): (BasePart?, { Vector3 }?)
 	local coins = listAvailableCoins(origin)
 	if #coins == 0 then
 		return nil, nil
@@ -213,7 +484,7 @@ local function pickBestTarget(origin: Vector3): (BasePart?, { PathWaypoint }?)
 	end)
 
 	local bestServer: BasePart? = nil
-	local bestWaypoints: { PathWaypoint }? = nil
+	local bestWaypoints: { Vector3 }? = nil
 	local bestLength = math.huge
 	local limit = math.min(Config.MaxPathCandidates, #coins)
 
@@ -236,57 +507,88 @@ local function pickBestTarget(origin: Vector3): (BasePart?, { PathWaypoint }?)
 	end
 
 	if bestServer and bestWaypoints then
-		log(string.format("walking to %s (%d studs, %d waypoints)", bestServer:GetFullName(), math.floor(bestLength), #bestWaypoints))
+		showPathLine(bestWaypoints)
+		log(string.format("walking to %s (%d studs, %d waypoints, custom path)", bestServer:GetFullName(), math.floor(bestLength), #bestWaypoints))
+	else
+		clearPathLine()
 	end
 	return bestServer, bestWaypoints
 end
 
-local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BasePart, waypoints: { PathWaypoint })
+-- Real walking via Humanoid:Move, applied after the default controls so it is not cancelled.
+-- Not MoveTo, and not a position tween. Uses WalkSpeed, walk animation, and collisions.
+local walkHumanoid: Humanoid? = nil
+local walkDirection = Vector3.zero
+
+RunService:BindToRenderStep("AutoCollectWalk", Enum.RenderPriority.Input.Value + 5, function()
+	local humanoid = walkHumanoid
+	if humanoid and humanoid.Parent and walkDirection.Magnitude > 0.05 then
+		humanoid:Move(walkDirection, false)
+	end
+end)
+
+local function stopWalking()
+	walkDirection = Vector3.zero
+	local humanoid = walkHumanoid
+	walkHumanoid = nil
+	if humanoid and humanoid.Parent then
+		humanoid:Move(Vector3.zero, false)
+	end
+end
+
+local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BasePart, waypoints: { Vector3 })
 	if humanoid.Sit then
 		humanoid.Sit = false
 	end
 	humanoid.PlatformStand = false
 	humanoid.AutoRotate = true
+	walkHumanoid = humanoid
 
-	for i, waypoint in waypoints do
-		if i == 1 then
-			continue
-		end
+	local index = 2
+	local stuckSince = os.clock()
+	local bestDistance = math.huge
+
+	while index <= #waypoints do
 		if not isAvailable(target) then
+			stopWalking()
+			clearPathLine()
 			log("coin gone or already transparent, picking another")
 			return
 		end
 		if humanoid.Parent ~= player.Character then
+			stopWalking()
 			return
 		end
-		if waypoint.Action == Enum.PathWaypointAction.Jump then
+
+		local position = waypoints[index]
+		local flat = Vector3.new(position.X - root.Position.X, 0, position.Z - root.Position.Z)
+		local distance = flat.Magnitude
+		if distance <= Config.ArriveDistance then
+			index += 1
+			stuckSince = os.clock()
+			bestDistance = math.huge
+			continue
+		end
+
+		if distance < bestDistance - 0.25 then
+			bestDistance = distance
+			stuckSince = os.clock()
+		elseif os.clock() - stuckSince > Config.StuckTimeout then
+			stopWalking()
+			markUnreachable(target, "walk stalled before the next path point")
+			return
+		end
+
+		if Config.AgentCanJump and position.Y > root.Position.Y + 2.5 then
 			humanoid.Jump = true
 		end
-		humanoid:MoveTo(waypoint.Position)
 
-		local finished = false
-		local conn = humanoid.MoveToFinished:Connect(function()
-			finished = true
-		end)
-		local deadline = os.clock() + Config.MoveToTimeout
-		local nextPulse = os.clock()
-		while not finished and os.clock() < deadline do
-			if not isAvailable(target) or humanoid.Parent ~= player.Character then
-				conn:Disconnect()
-				return
-			end
-			if os.clock() >= nextPulse then
-				humanoid:MoveTo(waypoint.Position)
-				nextPulse = os.clock() + Config.MoveToRepulse
-			end
-			task.wait(0.1)
-		end
-		conn:Disconnect()
-		if not finished then
-			markUnreachable(target, "MoveTo timed out (character did not arrive)")
-			return
-		end
+		walkDirection = flat.Unit
+		stickLineToPlayer(root)
+		RunService.Heartbeat:Wait()
 	end
+
+	stopWalking()
 end
 
 local function runOnce()
@@ -311,6 +613,7 @@ local function runOnce()
 	end)
 	busy = false
 	if not ok then
+		stopWalking()
 		warn("[AutoCollect] error:", err)
 	end
 end

@@ -9,3 +9,5 @@ Walks to coins named `Coin_Server` anywhere in Workspace. The ReplicatedStorage 
 3. Paste `auto-collect/AutoCollect.lua`.
 
 The F9 developer console only shows output. It does not run code.
+
+A green line and dots are drawn along the path. They are created on your client only. The character walks with normal Humanoid movement, not MoveTo.
