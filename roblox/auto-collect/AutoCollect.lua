@@ -1,6 +1,7 @@
 -- Script: ServerScriptService/AutoCollect
--- Free AFK auto-collect for every player. Pathfinds around walls to the nearest
--- reachable coin. Coins: Workspace.<MapName>.CoinContainer.Coin_Server.CoinVisual
+-- Free AFK auto-collect for every player (PC / mobile / tablet / console).
+-- Fully server-driven: no client UI or device input required.
+-- Coins: Workspace.<MapName>.CoinContainer.Coin_Server.CoinVisual
 -- Collected coins fade (Transparency = 1) then destroy — those are skipped.
 
 local PathfindingService = game:GetService("PathfindingService")
@@ -11,7 +12,8 @@ local Workspace = game:GetService("Workspace")
 -- Config (edit here)
 ----------------------------------------------------------------
 local Config = {
-	CollectRadius = 8,
+	-- Studs. High value = strong AFK magnet / pickup range around the character.
+	CollectRadius = 1000,
 	ReplanInterval = 0.35,
 
 	CoinContainerName = "CoinContainer",
@@ -24,11 +26,13 @@ local Config = {
 	CoinValueAttribute = "Value",
 	DefaultCoinValue = 1,
 
+	-- Pathfinding agent (R6 + R15). Lower AgentRadius if stuck in tight halls.
 	AgentRadius = 2,
 	AgentHeight = 5,
 	AgentCanJump = true,
 	WaypointSpacing = 4,
-	MoveToTimeout = 2,
+	MoveToTimeout = 3, -- slightly forgiving for high-latency mobile / console
+	MoveToRepulse = 0.35, -- re-issue MoveTo so client input cannot cancel walking
 	MaxPathCandidates = 12,
 	UnreachableCooldown = 4,
 }
@@ -138,13 +142,8 @@ local function tryCollect(player: Player, coin: Instance): boolean
 end
 
 ----------------------------------------------------------------
--- Pathfinding AFK loop (all players)
+-- Character helpers (all devices / R6 / R15)
 ----------------------------------------------------------------
-type Candidate = { server: BasePart, pos: Vector3, straightDist: number }
-
-local busy: { [Player]: boolean } = {}
-local unreachableUntil: { [Player]: { [BasePart]: number } } = {}
-
 local function rootAndHumanoid(character: Model): (BasePart?, Humanoid?)
 	local root = character:FindFirstChild("HumanoidRootPart")
 	local humanoid = character:FindFirstChildOfClass("Humanoid")
@@ -153,6 +152,45 @@ local function rootAndHumanoid(character: Model): (BasePart?, Humanoid?)
 	end
 	return nil, nil
 end
+
+-- Server must own the root or MoveTo is ignored when the client owns physics
+-- (common on mobile / console when any thumbstick / touch input is active).
+local function takeServerControl(root: BasePart)
+	pcall(function()
+		root:SetNetworkOwner(nil)
+	end)
+end
+
+local function releaseServerControl(player: Player)
+	local character = player.Character
+	if not character then
+		return
+	end
+	local root = character:FindFirstChild("HumanoidRootPart")
+	if root and root:IsA("BasePart") then
+		pcall(function()
+			root:SetNetworkOwner(player)
+		end)
+	end
+end
+
+local function prepareHumanoid(humanoid: Humanoid)
+	if humanoid.Sit then
+		humanoid.Sit = false
+	end
+	if humanoid.PlatformStand then
+		humanoid.PlatformStand = false
+	end
+	humanoid.AutoRotate = true
+end
+
+----------------------------------------------------------------
+-- Pathfinding AFK loop (all players, all devices)
+----------------------------------------------------------------
+type Candidate = { server: BasePart, pos: Vector3, straightDist: number }
+
+local busy: { [Player]: boolean } = {}
+local unreachableUntil: { [Player]: { [BasePart]: number } } = {}
 
 local function listAvailableCoins(): { Candidate }
 	local list: { Candidate } = {}
@@ -274,6 +312,9 @@ local function tryVacuumNearby(player: Player, origin: Vector3)
 end
 
 local function followWaypoints(player: Player, humanoid: Humanoid, root: BasePart, target: BasePart, waypoints: { PathWaypoint })
+	takeServerControl(root)
+	prepareHumanoid(humanoid)
+
 	for i, waypoint in waypoints do
 		if i == 1 then
 			continue
@@ -302,6 +343,7 @@ local function followWaypoints(player: Player, humanoid: Humanoid, root: BasePar
 		end)
 
 		local deadline = os.clock() + Config.MoveToTimeout
+		local nextPulse = os.clock()
 		while not finished and os.clock() < deadline do
 			if not isAvailable(target) then
 				if conn then
@@ -309,6 +351,20 @@ local function followWaypoints(player: Player, humanoid: Humanoid, root: BasePar
 				end
 				return
 			end
+			if not player.Character or humanoid.Parent ~= player.Character then
+				if conn then
+					conn:Disconnect()
+				end
+				return
+			end
+
+			-- Keep server ownership + re-assert MoveTo (touch/gamepad can cancel it).
+			takeServerControl(root)
+			if os.clock() >= nextPulse then
+				humanoid:MoveTo(waypoint.Position)
+				nextPulse = os.clock() + Config.MoveToRepulse
+			end
+
 			tryVacuumNearby(player, root.Position)
 			local targetPos = getVisualPosition(target) or waypoint.Position
 			if (root.Position - targetPos).Magnitude <= Config.CollectRadius then
@@ -363,6 +419,7 @@ local function runPlayer(player: Player)
 		followWaypoints(player, humanoid, root, target, waypoints)
 	end)
 	busy[player] = false
+	releaseServerControl(player)
 	if not ok then
 		warn("[AutoCollect] error for", player.Name, err)
 	end
@@ -371,6 +428,12 @@ end
 Players.PlayerRemoving:Connect(function(player)
 	busy[player] = nil
 	unreachableUntil[player] = nil
+end)
+
+Players.PlayerAdded:Connect(function(player)
+	player.CharacterAdded:Connect(function()
+		-- Fresh character starts with normal client ownership; loop takes over when walking.
+	end)
 end)
 
 task.spawn(function()
