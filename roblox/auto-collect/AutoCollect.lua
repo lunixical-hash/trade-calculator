@@ -1,408 +1,267 @@
--- LocalScript: StarterPlayer.StarterPlayerScripts/AutoCollect
--- ONE file: config + pathfinding + MoveTo + collect/award.
---
--- WARNING: Awards run on the client. Exploiters can grant themselves coins
--- unless you later add a thin server validator. Chosen for simplicity/smoothness.
+-- Entirely local. Press Play, set the command bar to Client, paste this.
+-- Finds CoinVisual, steers around walls, and moves your character on this client.
+-- The green line is parented to the camera, so only you see it.
 
-local PathfindingService = game:GetService("PathfindingService")
-local Players = game:GetService("Players")
-local Workspace = game:GetService("Workspace")
+local player = game.Players.LocalPlayer
+if not player then
+	warn("[AutoCollect] Switch the command bar to Client, then paste again.")
+	return
+end
 
-local player = Players.LocalPlayer
+local camera = workspace.CurrentCamera
+if not camera then
+	warn("[AutoCollect] No camera. Press Play and paste this on the Client command bar.")
+	return
+end
+local VISUAL = "CoinVisual"
+local SERVER = "Coin_Server"
 
-----------------------------------------------------------------
--- Config (edit here)
-----------------------------------------------------------------
-local Config = {
-	CollectRadius = 1000, -- studs
-	ReplanInterval = 0.35,
+local coins = {}
+local params = RaycastParams.new()
+params.FilterType = Enum.RaycastFilterType.Exclude
 
-	CoinContainerName = "CoinContainer",
-	CoinServerName = "Coin_Server",
-	CoinVisualName = "CoinVisual",
-
-	CollectedTransparency = 1,
-	DestroyAfterSeconds = 2,
-
-	CoinValueAttribute = "Value",
-	DefaultCoinValue = 1,
-
-	AgentRadius = 2,
-	AgentHeight = 5,
-	AgentCanJump = true,
-	WaypointSpacing = 4,
-	MoveToTimeout = 3,
-	MoveToRepulse = 0.35,
-	MaxPathCandidates = 12,
-	UnreachableCooldown = 4,
-}
-
-----------------------------------------------------------------
--- Collect / award (client-side — see warning at top)
-----------------------------------------------------------------
-local collecting: { [Instance]: boolean } = {}
-
-local function getCoinServer(coin: Instance): BasePart?
-	if coin.Name == Config.CoinServerName and coin:IsA("BasePart") then
-		return coin
+local function worldPosition(inst)
+	if inst:IsA("BasePart") then
+		return inst.Position
 	end
-	local server = coin:FindFirstChild(Config.CoinServerName)
-	if server and server:IsA("BasePart") then
-		return server
+	if inst:IsA("Model") then
+		return inst:GetPivot().Position
 	end
-	if coin:IsA("BasePart") then
-		return coin
+	if inst:IsA("Attachment") then
+		return inst.WorldPosition
+	end
+	if inst.Parent and inst.Parent:IsA("BasePart") then
+		return inst.Parent.Position
+	end
+	local child = inst:FindFirstChildWhichIsA("BasePart", true)
+	if child then
+		return child.Position
 	end
 	return nil
 end
 
-local function getVisualPosition(coin: Instance): Vector3?
-	local server = getCoinServer(coin)
-	if not server then
-		return nil
-	end
-	local visual = server:FindFirstChild(Config.CoinVisualName)
-	if visual and visual:IsA("BasePart") then
-		return visual.Position
-	end
-	return server.Position
-end
-
-local function isAvailable(coin: Instance): boolean
-	if collecting[coin] or not coin.Parent then
-		return false
-	end
-	local server = getCoinServer(coin)
-	if not server or not server.Parent then
-		return false
-	end
-	if server.Transparency >= Config.CollectedTransparency then
-		return false
-	end
-	return true
-end
-
-local function coinValue(coin: Instance): number
-	local server = getCoinServer(coin) or coin
-	local v = server:GetAttribute(Config.CoinValueAttribute)
-	if typeof(v) == "number" then
-		return v
-	end
-	return Config.DefaultCoinValue
-end
-
--- Replace if your economy is not leaderstats.Coins (still client-side).
-local function award(amount: number)
-	local stats = player:FindFirstChild("leaderstats")
-	local coins = stats and stats:FindFirstChild("Coins")
-	if coins and coins:IsA("IntValue") then
-		coins.Value += amount
+local function watch(inst)
+	if inst.Name == VISUAL and worldPosition(inst) then
+		coins[inst] = true
 	end
 end
 
-local function tryCollect(coin: Instance): boolean
-	if not isAvailable(coin) then
-		return false
+for _, inst in workspace:GetDescendants() do
+	if inst:IsDescendantOf(workspace) then
+		watch(inst)
+	end
+end
+workspace.DescendantAdded:Connect(watch)
+workspace.DescendantRemoving:Connect(function(inst)
+	coins[inst] = nil
+end)
+
+local function taken(inst)
+	if inst:IsA("BasePart") and inst.Transparency >= 1 then
+		return true
+	end
+	local server = inst:FindFirstAncestor(SERVER)
+	if server and server:IsA("BasePart") and server.Transparency >= 1 then
+		return true
+	end
+	return false
+end
+
+local function nearest(origin)
+	local best, bestPos, bestDist = nil, nil, 1000
+	for inst in coins do
+		if inst.Parent and not taken(inst) then
+			local pos = worldPosition(inst)
+			if pos then
+				local flat = Vector3.new(pos.X - origin.X, 0, pos.Z - origin.Z)
+				if flat.Magnitude < bestDist then
+					best, bestPos, bestDist = inst, pos, flat.Magnitude
+				end
+			end
+		end
+	end
+	return best, bestPos
+end
+
+local function refreshIgnore()
+	local ignore = {}
+	if player.Character then
+		table.insert(ignore, player.Character)
+	end
+	table.insert(ignore, camera)
+	for inst in coins do
+		table.insert(ignore, inst)
+		local server = inst:FindFirstAncestor(SERVER)
+		if server then
+			table.insert(ignore, server)
+		end
+	end
+	params.FilterDescendantsInstances = ignore
+end
+
+local function wayIsOpen(fromPos, dir, distance)
+	local hit = workspace:Raycast(fromPos + Vector3.new(0, 2, 0), dir * distance, params)
+	return hit == nil
+end
+
+local function steer(fromPos, toPos)
+	local flat = Vector3.new(toPos.X - fromPos.X, 0, toPos.Z - fromPos.Z)
+	if flat.Magnitude < 0.05 then
+		return Vector3.zero
+	end
+	local forward = flat.Unit
+	if wayIsOpen(fromPos, forward, 4) then
+		return forward
+	end
+	local right = forward:Cross(Vector3.yAxis)
+	for _, turn in { 35, -35, 70, -70, 110, -110, 160, -160 } do
+		local dir = CFrame.Angles(0, math.rad(turn), 0):VectorToWorldSpace(forward)
+		if wayIsOpen(fromPos, dir, 4) then
+			return dir.Unit
+		end
+	end
+	return forward
+end
+
+local folder = camera:FindFirstChild("AutoCollectPath")
+if folder then
+	folder:Destroy()
+end
+folder = Instance.new("Folder")
+folder.Name = "AutoCollectPath"
+folder.Parent = camera
+
+local function place(part, worldPos)
+	part.CFrame = camera.CFrame:ToObjectSpace(CFrame.new(worldPos))
+end
+
+local function makeNode(name, size)
+	local part = Instance.new("Part")
+	part.Name = name
+	part.Anchored = true
+	part.CanCollide = false
+	part.CanQuery = false
+	part.CanTouch = false
+	part.Material = Enum.Material.Neon
+	part.Color = Color3.fromRGB(0, 255, 80)
+	part.Shape = Enum.PartType.Ball
+	part.Size = size
+	part.Parent = folder
+	local attachment = Instance.new("Attachment")
+	attachment.Parent = part
+	return part, attachment
+end
+
+local startNode, startAtt = makeNode("Start", Vector3.new(0.6, 0.6, 0.6))
+local goalNode, goalAtt = makeNode("Goal", Vector3.new(1.3, 1.3, 1.3))
+local beam = Instance.new("Beam")
+beam.Attachment0 = startAtt
+beam.Attachment1 = goalAtt
+beam.Width0 = 0.35
+beam.Width1 = 0.35
+beam.FaceCamera = true
+beam.LightEmission = 1
+beam.Color = ColorSequence.new(Color3.fromRGB(0, 255, 80))
+beam.Parent = folder
+
+pcall(function()
+	local module = player.PlayerScripts:FindFirstChild("PlayerModule")
+	if module then
+		require(module):GetControls():Disable()
+	end
+end)
+
+local mover
+local moverAttachment
+local function ensureMover(root)
+	if mover and mover.Parent and moverAttachment and moverAttachment.Parent == root then
+		return
+	end
+	if mover then
+		mover:Destroy()
+	end
+	if moverAttachment then
+		moverAttachment:Destroy()
+	end
+	moverAttachment = Instance.new("Attachment")
+	moverAttachment.Name = "AutoCollectAttachment"
+	moverAttachment.Parent = root
+	mover = Instance.new("LinearVelocity")
+	mover.Name = "AutoCollectVelocity"
+	mover.Attachment0 = moverAttachment
+	mover.RelativeTo = Enum.ActuatorRelativeTo.World
+	mover.VelocityConstraintMode = Enum.VelocityConstraintMode.Vector
+	mover.ForceLimitMode = Enum.ForceLimitMode.PerAxis
+	mover.MaxAxesForce = Vector3.new(1e5, 0, 1e5)
+	mover.VectorVelocity = Vector3.zero
+	mover.Parent = root
+end
+
+local seen = 0
+local sample
+for inst in coins do
+	seen += 1
+	sample = inst
+end
+print("[AutoCollect] local, CoinVisual found:", seen, sample and sample:GetFullName() or "")
+
+local lastPos
+local lastReport = 0
+local warnedStuck = false
+
+game:GetService("RunService").RenderStepped:Connect(function()
+	camera = workspace.CurrentCamera
+	if camera and folder.Parent ~= camera then
+		folder.Parent = camera
 	end
 	local character = player.Character
-	if not character then
-		return false
-	end
-	local root = character:FindFirstChild("HumanoidRootPart")
-	if not (root and root:IsA("BasePart")) then
-		return false
-	end
-	local pos = getVisualPosition(coin)
-	if not pos or (pos - root.Position).Magnitude > Config.CollectRadius then
-		return false
-	end
-
-	local server = getCoinServer(coin)
-	if not server then
-		return false
-	end
-
-	collecting[coin] = true
-	collecting[server] = true
-
-	local amount = coinValue(coin)
-	server.Transparency = Config.CollectedTransparency
-	local visual = server:FindFirstChild(Config.CoinVisualName)
-	if visual and visual:IsA("BasePart") then
-		visual.Transparency = Config.CollectedTransparency
-	end
-	server.CanTouch = false
-	server.CanQuery = false
-
-	award(amount)
-
-	task.delay(Config.DestroyAfterSeconds, function()
-		collecting[coin] = nil
-		collecting[server] = nil
-		if server.Parent then
-			server:Destroy()
-		elseif coin.Parent then
-			coin:Destroy()
+	local humanoid = character and character:FindFirstChildOfClass("Humanoid")
+	local root = humanoid and humanoid.RootPart
+	if not root or not humanoid or humanoid.Health <= 0 or not camera then
+		beam.Enabled = false
+		if mover then
+			mover.VectorVelocity = Vector3.zero
 		end
-	end)
-
-	return true
-end
-
-----------------------------------------------------------------
--- Pathfinding + MoveTo (smooth on all devices)
-----------------------------------------------------------------
-type Candidate = { server: BasePart, pos: Vector3, straightDist: number }
-
-local busy = false
-local unreachableUntil: { [BasePart]: number } = {}
-
-local function rootAndHumanoid(character: Model): (BasePart?, Humanoid?)
-	local root = character:FindFirstChild("HumanoidRootPart")
-	local humanoid = character:FindFirstChildOfClass("Humanoid")
-	if root and root:IsA("BasePart") and humanoid then
-		return root, humanoid
+		return
 	end
-	return nil, nil
-end
 
-local function listAvailableCoins(): { Candidate }
-	local list: { Candidate } = {}
-	for _, map in Workspace:GetChildren() do
-		local container = map:FindFirstChild(Config.CoinContainerName)
-		if not container then
-			continue
+	refreshIgnore()
+	local coin, goal = nearest(root.Position)
+	if not coin or not goal then
+		beam.Enabled = false
+		if mover then
+			mover.VectorVelocity = Vector3.zero
 		end
-		for _, child in container:GetChildren() do
-			local server: BasePart? = nil
-			if child.Name == Config.CoinServerName and child:IsA("BasePart") then
-				server = child
-			elseif child:IsA("Model") then
-				local nested = child:FindFirstChild(Config.CoinServerName)
-				if nested and nested:IsA("BasePart") then
-					server = nested
-				end
-			end
-			if server and isAvailable(server) then
-				local pos = getVisualPosition(server)
-				if pos then
-					table.insert(list, { server = server, pos = pos, straightDist = 0 })
-				end
-			end
-		end
-	end
-	return list
-end
-
-local function isOnCooldown(server: BasePart): boolean
-	local untilTime = unreachableUntil[server]
-	return untilTime ~= nil and os.clock() < untilTime
-end
-
-local function markUnreachable(server: BasePart)
-	unreachableUntil[server] = os.clock() + Config.UnreachableCooldown
-end
-
-local function tryVacuumNearby(origin: Vector3)
-	local radiusSq = Config.CollectRadius * Config.CollectRadius
-	for _, c in listAvailableCoins() do
-		local offset = c.pos - origin
-		if offset:Dot(offset) <= radiusSq then
-			tryCollect(c.server)
-		end
-	end
-end
-
-local function createPath()
-	return PathfindingService:CreatePath({
-		AgentRadius = Config.AgentRadius,
-		AgentHeight = Config.AgentHeight,
-		AgentCanJump = Config.AgentCanJump,
-		WaypointSpacing = Config.WaypointSpacing,
-	})
-end
-
-local function computePathLength(from: Vector3, to: Vector3): (number?, { PathWaypoint }?)
-	local path = createPath()
-	local ok = pcall(function()
-		path:ComputeAsync(from, to)
-	end)
-	if not ok or path.Status ~= Enum.PathStatus.Success then
-		return nil, nil
-	end
-	local waypoints = path:GetWaypoints()
-	if #waypoints == 0 then
-		return nil, nil
-	end
-	local length = 0
-	for i = 2, #waypoints do
-		length += (waypoints[i].Position - waypoints[i - 1].Position).Magnitude
-	end
-	return length, waypoints
-end
-
-local function pickBestTarget(origin: Vector3): (BasePart?, { PathWaypoint }?)
-	local coins = listAvailableCoins()
-	if #coins == 0 then
-		return nil, nil
+		return
 	end
 
-	for _, c in coins do
-		c.straightDist = (c.pos - origin).Magnitude
-	end
-	table.sort(coins, function(a, b)
-		return a.straightDist < b.straightDist
-	end)
-
-	local bestServer: BasePart? = nil
-	local bestWaypoints: { PathWaypoint }? = nil
-	local bestLength = math.huge
-	local limit = math.min(Config.MaxPathCandidates, #coins)
-
-	for i = 1, limit do
-		local c = coins[i]
-		if not isOnCooldown(c.server) and isAvailable(c.server) then
-			if c.straightDist <= Config.CollectRadius then
-				return c.server, {}
-			end
-			local length, waypoints = computePathLength(origin, c.pos)
-			if length and waypoints and length < bestLength then
-				bestLength = length
-				bestServer = c.server
-				bestWaypoints = waypoints
-			elseif not length then
-				markUnreachable(c.server)
-			end
-		end
+	local dir = steer(root.Position, goal)
+	beam.Enabled = true
+	place(startNode, root.Position)
+	place(goalNode, goal)
+	if dir.Magnitude < 0.05 then
+		return
 	end
 
-	return bestServer, bestWaypoints
-end
-
-local function prepareHumanoid(humanoid: Humanoid)
-	if humanoid.Sit then
-		humanoid.Sit = false
-	end
-	if humanoid.PlatformStand then
-		humanoid.PlatformStand = false
-	end
+	local speed = math.max(humanoid.WalkSpeed, 16)
 	humanoid.AutoRotate = true
-end
+	humanoid.PlatformStand = false
+	humanoid:Move(dir, false)
+	ensureMover(root)
+	mover.VectorVelocity = Vector3.new(dir.X * speed, 0, dir.Z * speed)
 
-local function followWaypoints(humanoid: Humanoid, root: BasePart, target: BasePart, waypoints: { PathWaypoint })
-	prepareHumanoid(humanoid)
-
-	for i, waypoint in waypoints do
-		if i == 1 then
-			continue
-		end
-		if not isAvailable(target) then
-			return
-		end
-		local character = player.Character
-		if not character or humanoid.Parent ~= character then
-			return
-		end
-
-		tryVacuumNearby(root.Position)
-		if not isAvailable(target) then
-			return
-		end
-
-		if waypoint.Action == Enum.PathWaypointAction.Jump then
-			humanoid.Jump = true
-		end
-
-		humanoid:MoveTo(waypoint.Position)
-		local finished = false
-		local conn: RBXScriptConnection?
-		conn = humanoid.MoveToFinished:Connect(function()
-			finished = true
-		end)
-
-		local deadline = os.clock() + Config.MoveToTimeout
-		local nextPulse = os.clock()
-		while not finished and os.clock() < deadline do
-			if not isAvailable(target) then
-				if conn then
-					conn:Disconnect()
-				end
-				return
-			end
-			character = player.Character
-			if not character or humanoid.Parent ~= character then
-				if conn then
-					conn:Disconnect()
-				end
-				return
-			end
-
-			if os.clock() >= nextPulse then
-				humanoid:MoveTo(waypoint.Position)
-				nextPulse = os.clock() + Config.MoveToRepulse
-			end
-
-			tryVacuumNearby(root.Position)
-			local targetPos = getVisualPosition(target) or waypoint.Position
-			if (root.Position - targetPos).Magnitude <= Config.CollectRadius then
-				if conn then
-					conn:Disconnect()
-				end
-				tryCollect(target)
-				return
-			end
-			task.wait(0.1)
-		end
-		if conn then
-			conn:Disconnect()
-		end
-		if not finished then
-			markUnreachable(target)
-			return
-		end
+	local now = os.clock()
+	if not lastPos then
+		lastPos = root.Position
 	end
-
-	if isAvailable(target) then
-		tryCollect(target)
-	end
-end
-
-local function runOnce()
-	if busy then
-		return
-	end
-	local character = player.Character
-	if not character then
-		return
-	end
-	local root, humanoid = rootAndHumanoid(character)
-	if not root or not humanoid or humanoid.Health <= 0 then
-		return
-	end
-
-	busy = true
-	local ok, err = pcall(function()
-		tryVacuumNearby(root.Position)
-
-		local target, waypoints = pickBestTarget(root.Position)
-		if not target then
-			return
+	if now - lastReport > 2 then
+		local moved = (Vector3.new(root.Position.X, 0, root.Position.Z) - Vector3.new(lastPos.X, 0, lastPos.Z)).Magnitude
+		print(string.format("[AutoCollect] chasing %s, %.0f studs away, moved %.1f studs", coin:GetFullName(), (goal - root.Position).Magnitude, moved))
+		if moved < 0.2 and not warnedStuck then
+			warnedStuck = true
+			warn("[AutoCollect] The character position is not changing. The server is probably the network owner, so this client cannot move it.")
 		end
-		if not waypoints or #waypoints == 0 then
-			tryCollect(target)
-			return
-		end
-		followWaypoints(humanoid, root, target, waypoints)
-	end)
-	busy = false
-	if not ok then
-		warn("[AutoCollect] error", err)
-	end
-end
-
-task.spawn(function()
-	while true do
-		runOnce()
-		task.wait(Config.ReplanInterval)
+		lastPos = root.Position
+		lastReport = now
 	end
 end)
